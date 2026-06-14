@@ -4,9 +4,6 @@ FROM eclipse-temurin:21-jdk AS build
 
 WORKDIR /app
 
-# Create .gradle directory with proper permissions
-RUN mkdir -p /home/app/.gradle && chmod -R 777 /home/app/.gradle
-
 # Copy the Gradle wrapper, build.gradle and settings.gradle
 COPY gradlew .
 COPY gradle gradle
