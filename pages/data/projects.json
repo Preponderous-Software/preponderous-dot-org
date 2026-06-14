@@ -8,6 +8,14 @@
       "technology": "Python"
     },
     {
+      "id": "barony",
+      "title": "Barony",
+      "description": "Command armies to capture villages and castles against an AI opponent.",
+      "githubLink": "https://github.com/Preponderous-Software/barony",
+      "technology": "Java",
+      "websiteLink": "https://barony.preponderous.org"
+    },
+    {
       "id": "beyond-nations",
       "title": "Beyond-Nations",
       "description": "Sandbox Nation Simulation RPG",
