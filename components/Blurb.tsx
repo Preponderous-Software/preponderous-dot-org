@@ -75,7 +75,7 @@ const Blurb: React.FC = () => (
                 color="text.secondary"
                 sx={{maxWidth: 640, mx: 'auto', fontWeight: 400}}
             >
-                Free and open-source games and assets — built in the open,
+                Free, source-available games and assets — built in the open,
                 and easy to run, extend, and contribute to.
             </Typography>
             <Stack
@@ -112,7 +112,7 @@ const Blurb: React.FC = () => (
             <InfoCard
                 icon={<GitHubIcon sx={infoCardIconSizeStyle}/>}
                 title="Contribute"
-                content="Join our open-source community on GitHub. Each project welcomes issues and pull requests."
+                content="Join our community on GitHub. Each project welcomes issues and pull requests."
                 href={ORG_URL}
             />
             <InfoCard
@@ -123,7 +123,7 @@ const Blurb: React.FC = () => (
             />
             <InfoCard
                 icon={<FavoriteIcon sx={infoCardIconSizeStyle}/>}
-                title="Free & Open Source"
+                title="Source Available"
                 content="Everything we make is free to use, modify, and self-host for non-commercial purposes."
             />
         </Grid>

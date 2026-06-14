@@ -6,7 +6,7 @@ import React from 'react';
 // social) all show meaningful information. Render once near the top of each page.
 const SITE_NAME = 'Preponderous Software';
 const DEFAULT_DESCRIPTION =
-    'Free and open-source games and assets — built in the open and free to use.';
+    'Free, source-available games and assets — built in the open and free to use.';
 
 interface SeoProps {
     // Page-specific title; the site name is appended automatically. Omit on the
