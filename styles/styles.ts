@@ -114,3 +114,160 @@ export const flexContainerStyle = (theme: Theme, options?: {
     gap: theme.spacing(options?.gap || 2),
     flexWrap: options?.flexWrap || 'wrap',
 });
+
+/**
+ * Main page layout: a clean themed background that fills the viewport.
+ */
+export const pageStyle = (theme: Theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    backgroundColor: theme.palette.background.default,
+});
+
+/**
+ * Section heading: text in the standard colour with a short primary accent bar.
+ */
+export const sectionHeaderStyle = (theme: Theme) => ({
+    fontWeight: 700,
+    letterSpacing: '-0.01em',
+    display: 'inline-block',
+    marginBottom: theme.spacing(3),
+    '&::after': {
+        content: '""',
+        display: 'block',
+        width: '44px',
+        height: '3px',
+        marginTop: theme.spacing(1),
+        borderRadius: '2px',
+        backgroundColor: theme.palette.primary.main,
+    },
+});
+
+/**
+ * Clean hairline divider between sections.
+ */
+export const sectionDividerStyle = (theme: Theme) => ({
+    height: '1px',
+    border: 0,
+    backgroundColor: theme.palette.divider,
+    marginY: theme.spacing(6),
+});
+
+/**
+ * Hover lift applied to each card in the project grid.
+ */
+export const cardWrapperStyle = {
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 6px 20px rgba(0,0,0,0.12)',
+    },
+};
+
+/**
+ * Responsive grid container spacing for the project grid.
+ */
+export const gridContainerStyle = {spacing: {xs: 2, md: 3}, pb: 4};
+
+/**
+ * Responsive grid item breakpoints — capped at 4 columns (lg) for readability.
+ */
+export const gridItemStyle = {
+    xs: 12, sm: 6, md: 4, lg: 3,
+    sx: cardWrapperStyle,
+};
+
+/**
+ * Projects section container layout.
+ */
+export const projectsBoxStyle = {flexGrow: 1, marginBottom: 2};
+
+/**
+ * Project card with a fixed height so the grid stays even.
+ */
+export const projectCardStyle = {
+    height: '16rem',
+    display: 'flex',
+    flexDirection: 'column',
+};
+
+/**
+ * Content area of a project card.
+ */
+export const projectCardContentStyle = {
+    flexGrow: 1,
+};
+
+/**
+ * Action area of a project card.
+ */
+export const projectCardActionsStyle = {
+    flexGrow: 0,
+    paddingX: 2,
+    paddingBottom: 2,
+};
+
+/**
+ * Blurb (hero) section container.
+ */
+export const blurbBoxStyle = (theme: Theme) => ({
+    flexGrow: 1,
+    paddingY: theme.spacing(4),
+});
+
+/**
+ * Centered blurb title.
+ */
+export const blurbTitleStyle = (theme: Theme) => ({
+    fontWeight: 700,
+    letterSpacing: '-0.02em',
+    marginBottom: theme.spacing(4),
+    textAlign: 'center',
+});
+
+/**
+ * Spacing above the blurb info-card grid.
+ */
+export const blurbGridContainerStyle = (theme: Theme) => ({
+    marginTop: theme.spacing(2),
+});
+
+/**
+ * Info card: centered content with a hover lift.
+ */
+export const infoCardStyle = (theme: Theme) => ({
+    padding: theme.spacing(3),
+    height: '100%',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 6px 20px rgba(0,0,0,0.12)',
+    },
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+});
+
+/**
+ * Icon wrapper for info cards.
+ */
+export const infoCardIconStyle = (theme: Theme) => ({
+    marginBottom: theme.spacing(2),
+    color: theme.palette.primary.main,
+});
+
+/**
+ * Bold title for info cards.
+ */
+export const infoCardTitleStyle = () => ({
+    fontWeight: 'bold',
+});
+
+/**
+ * Standard icon size for info cards.
+ */
+export const infoCardIconSizeStyle = {
+    fontSize: 40,
+};
