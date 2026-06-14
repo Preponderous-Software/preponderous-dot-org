@@ -1,17 +1,7 @@
-version: '3.8'
-
 services:
-  app:
+  preponderous-website:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: spring-htmx-app
     ports:
-      - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      - "3000:3000"
     restart: unless-stopped
-
-volumes:
-  gradle-cache:
-    name: gradle-cache
