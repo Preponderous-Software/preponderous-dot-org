@@ -16,6 +16,6 @@ describe('Blurb', () => {
         render(<Blurb />);
         expect(screen.getByText('Contribute')).toBeInTheDocument();
         expect(screen.getByText('Explore the Code')).toBeInTheDocument();
-        expect(screen.getByText('Free & Open Source')).toBeInTheDocument();
+        expect(screen.getByText('Source Available')).toBeInTheDocument();
     });
 });
