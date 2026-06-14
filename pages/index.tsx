@@ -42,6 +42,7 @@ const ProjectsSection: React.FC<{projects: Project[]}> = ({projects}) => (
                         description={project.description}
                         githubLink={project.githubLink}
                         technology={project.technology}
+                        websiteLink={project.websiteLink}
                     />
                 </Grid>
             ))}

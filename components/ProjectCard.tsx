@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Box, Button, Card, CardActions, CardContent, Chip, Link, Stack, Typography} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CodeIcon from '@mui/icons-material/Code';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
     projectCardStyle,
     projectCardContentStyle,
@@ -13,6 +14,9 @@ interface ProjectCardProps {
     description: string;
     githubLink: string;
     technology: string;
+    // Optional link to a live/hosted version of the project; when set, the card
+    // shows a "Visit Site" button as the primary action.
+    websiteLink?: string;
 }
 
 // A small, fixed palette of muted brand-ish colours. Each project gets a stable
@@ -28,7 +32,7 @@ const colorForTitle = (title: string): string => {
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink}) => {
     return (
         <Card sx={projectCardStyle}>
             <CardContent sx={projectCardContentStyle}>
@@ -79,8 +83,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
 
             <CardActions sx={projectCardActionsStyle}>
                 <Box sx={{flexGrow: 1}}/>
+                {websiteLink ? (
+                    <Button
+                        variant="contained"
+                        size="small"
+                        startIcon={<OpenInNewIcon/>}
+                        component={Link}
+                        href={websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visit Site
+                    </Button>
+                ) : null}
                 <Button
-                    variant="contained"
+                    variant={websiteLink ? 'outlined' : 'contained'}
                     size="small"
                     startIcon={<GitHubIcon/>}
                     component={Link}

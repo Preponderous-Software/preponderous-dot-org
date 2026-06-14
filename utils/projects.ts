@@ -7,6 +7,8 @@ export interface Project {
     description: string;
     githubLink: string;
     technology: string;
+    // Optional link to a live/hosted version of the project.
+    websiteLink?: string;
 }
 
 // Sort projects alphabetically by title, case-insensitively. Returns a new
