@@ -1,74 +1,97 @@
 # Preponderous Software Website
 
-This is a Spring Boot application for the Preponderous Software website, built with Java 21, Gradle, and Docker support.
+## Description
 
-## About Preponderous Software
+The Preponderous Software website is a [Next.js](https://nextjs.org/) web application that serves as the public face of Preponderous Software. It showcases the projects — free and open-source games, simulations, and libraries — and links out to their source on GitHub. Built with React and [Material UI](https://mui.com/), it mirrors the structure of the [Dan's Plugins Community website](https://github.com/Dans-Plugins/dansplugins-dot-com).
 
-At Preponderous Software, we develop free and open-source games and assets, focusing on projects like Beyond Nations and Viron. Through these initiatives, we aim to provide valuable resources to the developer community, fostering collaboration and innovation in open-source software development.
+## Installation
 
-## Key Projects
+### First Time Installation
 
-### Beyond Nations
-A sandbox nation simulation RPG that allows players to explore a procedurally generated world, collect resources, and interact with various entities.
+1. Ensure [Node.js](https://nodejs.org/en/) (v18 or later) is installed on your machine.
+2. Clone this repository: `git clone https://github.com/Preponderous-Software/preponderous-dot-org.git`
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Build the project:
+   ```bash
+   npm run build
+   ```
+5. Start the server:
+   ```bash
+   npm run start
+   ```
 
-### Viron
-A tool for creating and managing virtual environments and entities within those environments, intended for game development and other applications.
+The site will be available at `http://localhost:3000`.
 
-## Our Commitment to Open Source
-- Free and open-source software
-- Community-driven development
-- Innovative game development tools
-- Engaging sandbox experiences
+### Development Server
 
-## Prerequisites
-- Java Development Kit (JDK) 21
-- Docker and Docker Compose
-- Gradle (or use the included Gradle wrapper)
+For local development with hot-reloading:
 
-## Building the Project
-### Build with Gradle:
+```bash
+npm run dev
+```
 
-./gradlew build
+## Usage
 
-### Build with Docker:
-docker build -t preponderous-website .
+### Documentation
 
-## Running the Application
-### Run with Gradle:
-./gradlew bootRun
+- [User Guide](USER_GUIDE.md) – Getting started and common scenarios
+- [Configuration Guide](CONFIG.md) – Configuration and the project showcase data
+- [Contributing](CONTRIBUTING.md) – How to contribute
+- [Changelog](CHANGELOG.md) – Release history
 
-### Run with Docker:
-docker run -p 8080:8080 preponderous-website
+## Support
 
-### Run with Docker Compose:
-docker compose up
+### Experiencing a bug?
 
-#### Or in detached mode
-docker compose up -d
+Please file a bug report [here](https://github.com/Preponderous-Software/preponderous-dot-org/issues/new).
+
+- [Known Bugs](https://github.com/Preponderous-Software/preponderous-dot-org/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Testing
-Run the tests:
 
-./gradlew test
+### Lint
+
+```bash
+npm run lint
+```
+
+If you see no errors, the lint check has passed.
+
+### Unit Tests
+
+The site uses [Vitest](https://vitest.dev/) for unit tests. Run the suite with:
+
+```bash
+npm test
+```
+
+Test files live in the `__tests__/` directory. If all tests pass, the suite has succeeded.
 
 ## Technologies Used
-- Java 21
-- Spring Boot with Thymeleaf templating
-- HTMX for dynamic content loading
-- Bootstrap for responsive styling
-- Lombok for reducing boilerplate code
-- Docker for containerization
 
-## Access the Application
-After starting the application, access it at: http://localhost:8080
+- [Next.js](https://nextjs.org/) (React)
+- [Material UI](https://mui.com/) with [Emotion](https://emotion.sh/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vitest](https://vitest.dev/) for unit testing
 
 ## 📄 License
 
-This project is licensed under the **Preponderous Non-Commercial License (Preponderous-NC)**.  
+This project is licensed under the **Preponderous Non-Commercial License (Preponderous-NC)**.
 It is free to use, modify, and self-host for **non-commercial** purposes, but **commercial use requires a separate license**.
 
-> **Disclaimer:** *Preponderous Software is not a legal entity.*  
+> **Disclaimer:** *Preponderous Software is not a legal entity.*
 > All rights to works published under this license are reserved by the copyright holder, **Daniel McCoy Stephenson**.
 
-Full license text:  
+Full license text:
 [https://github.com/Preponderous-Software/preponderous-nc-license/blob/main/LICENSE.md](https://github.com/Preponderous-Software/preponderous-nc-license/blob/main/LICENSE.md)
+
+## Project Status
+
+This project is in active development. It is being redesigned from its original Spring Boot + Thymeleaf implementation to the Next.js stack described above; containerized build and deploy are tracked in [#40](https://github.com/Preponderous-Software/preponderous-dot-org/issues/40).
