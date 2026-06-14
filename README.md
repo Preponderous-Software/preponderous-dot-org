@@ -94,4 +94,4 @@ Full license text:
 
 ## Project Status
 
-This project is in active development. It is being redesigned from its original Spring Boot + Thymeleaf implementation to the Next.js stack described above; containerized build and deploy are tracked in [#40](https://github.com/Preponderous-Software/preponderous-dot-org/issues/40).
+This project is in active development. It has been redesigned from its original Spring Boot + Thymeleaf implementation to the Next.js stack described above.

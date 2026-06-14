@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-The site is being redesigned from Spring Boot + Thymeleaf to Next.js + React + MUI, mirroring [dansplugins-dot-com](https://github.com/Dans-Plugins/dansplugins-dot-com) (epic #31).
+The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + MUI, mirroring [dansplugins-dot-com](https://github.com/Dans-Plugins/dansplugins-dot-com) (epic #31, static first pass).
 
 ### Added
 
@@ -18,7 +18,9 @@ The site is being redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - Friendly themed `404` and `500` error pages within the standard chrome (#37).
 - GitHub Actions CI: test + build on pull requests, with a Docker image build on `main` (#27).
 - Documentation set: `README`, `CONFIG.md`, `USER_GUIDE.md`, `CONTRIBUTING.md`, and this changelog (#39).
+- Component-render test coverage for `ProjectCard` and `Blurb` using React Testing Library + jsdom (#38).
+- Node-based `Dockerfile`, `compose.yaml`, and dev container; CI switched to npm (#40).
 
-### Planned
+### Removed
 
-- Component-render test coverage (#38) and a containerized build/deploy cutover that retires the legacy Spring Boot app (#40).
+- The legacy Spring Boot + Thymeleaf application (`src/`, Gradle build, and wrapper) — the site is now served entirely by the Next.js app (#40).

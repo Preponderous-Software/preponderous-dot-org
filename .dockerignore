@@ -7,12 +7,3 @@ __tests__
 *.md
 Dockerfile
 .dockerignore
-# legacy Spring Boot artifacts (removed in a follow-up cutover PR)
-src
-build
-.gradle
-gradle
-gradlew
-gradlew.bat
-build.gradle
-settings.gradle
