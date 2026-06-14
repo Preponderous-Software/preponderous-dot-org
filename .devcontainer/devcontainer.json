@@ -1,0 +1,11 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+	"name": "Preponderous Software Website",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"remoteUser": "node",
+
+	// forward the Next.js dev/start port
+	"forwardPorts": [3000]
+}
