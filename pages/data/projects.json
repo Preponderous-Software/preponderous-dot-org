@@ -34,7 +34,8 @@
       "title": "microbiome",
       "description": "Witness the activity of a virtual microbial community.",
       "githubLink": "https://github.com/Preponderous-Software/microbiome",
-      "technology": "C++"
+      "technology": "C++",
+      "websiteLink": "https://microbiome.preponderous.org"
     },
     {
       "id": "ophidian",
@@ -62,7 +63,8 @@
       "title": "Roam",
       "description": "Explore a procedurally-generated 2D world and interact with your surroundings.",
       "githubLink": "https://github.com/Preponderous-Software/Roam",
-      "technology": "Python"
+      "technology": "Python",
+      "websiteLink": "https://roam.preponderous.org"
     },
     {
       "id": "viron",
@@ -70,6 +72,22 @@
       "description": "Viron is a flexible simulation framework for building and managing 2D virtual environments.",
       "githubLink": "https://github.com/Preponderous-Software/Viron",
       "technology": "Java"
+    },
+    {
+      "id": "daniel-stephenson",
+      "title": "Daniel Stephenson",
+      "description": "The personal portfolio site of Daniel McCoy Stephenson, the developer behind Preponderous Software.",
+      "githubLink": "https://github.com/Stephenson-Software/danielstephenson-dot-dev",
+      "technology": "TypeScript / Next.js",
+      "websiteLink": "https://danielstephenson.dev"
+    },
+    {
+      "id": "dans-plugins-community",
+      "title": "Dan's Plugins Community",
+      "description": "A Minecraft plugin community and showcase site, also run by the developer behind Preponderous Software.",
+      "githubLink": "https://github.com/Dans-Plugins/dansplugins-dot-com",
+      "technology": "TypeScript / Next.js",
+      "websiteLink": "https://dansplugins.com"
     }
   ]
 }
