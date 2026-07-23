@@ -23,6 +23,7 @@ The file contains a single `projects` array. Each entry supports these fields:
 | `description` | yes | Short description. Clamped to three lines on the card. |
 | `githubLink` | yes | URL to the project's source repository (opens in a new tab). |
 | `technology` | yes | Primary language/technology, shown as a chip (e.g. `Python`, `Java`, `C++`). |
+| `websiteLink` | no | URL to a live/hosted version of the project. When set, the card shows a "Visit Site" button as its primary action, opening in a new tab. |
 
 Projects are sorted alphabetically by title at render time (see `utils/projects.ts`), so entries may be listed in any order.
 
@@ -30,11 +31,12 @@ Projects are sorted alphabetically by title at render time (see `utils/projects.
 
 ```json
 {
-  "id": "viron",
-  "title": "Viron",
-  "description": "Viron is a flexible simulation framework for building and managing 2D virtual environments.",
-  "githubLink": "https://github.com/Preponderous-Software/Viron",
-  "technology": "Java"
+  "id": "roam",
+  "title": "Roam",
+  "description": "Explore a procedurally-generated 2D world and interact with your surroundings.",
+  "githubLink": "https://github.com/Preponderous-Software/Roam",
+  "technology": "Python",
+  "websiteLink": "https://roam.preponderous.org"
 }
 ```
 
