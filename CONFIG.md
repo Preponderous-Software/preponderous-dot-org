@@ -4,7 +4,13 @@ This document describes the configuration options for the Preponderous Software 
 
 ## Environment Variables
 
-The site is a static project showcase and currently requires **no environment variables** to build or run. If configurable values are added in the future, create a `.env.local` file in the project root (it is excluded from version control) and document the variables here.
+The site is a static project showcase and requires **no environment variables** to build or run. If configurable values are added in the future, create a `.env.local` file in the project root (it is excluded from version control) and document the variables here.
+
+One value is injected automatically by `next.config.js` and does not need to be set by hand:
+
+| Variable | Set by | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_BUILD_YEAR` | `next.config.js`, at build time | The year the site was built, used for the copyright range in the footer and on `/legal`. Baked in at build time so the pre-rendered HTML and the client hydration pass always agree; reading the clock during render would disagree across a New Year boundary. If it is ever missing, `utils/copyright.ts` falls back to the current year. |
 
 ## Project Showcase Data
 

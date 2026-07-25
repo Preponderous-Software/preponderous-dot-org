@@ -20,6 +20,8 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - Documentation set: `README`, `CONFIG.md`, `USER_GUIDE.md`, `CONTRIBUTING.md`, and this changelog (#39).
 - Component-render test coverage for `ProjectCard` and `Blurb` using React Testing Library + jsdom (#38).
 - Node-based `Dockerfile`, `compose.yaml`, and dev container; CI switched to npm (#40).
+- `/legal` page covering the license, copyright, disclaimer, privacy (what is stored on the visitor's device), and third-party component notices (#21).
+- Footer copyright notice with a license link, plus **Home** and **Legal** navigation links; the copyright year is baked in at build time via `NEXT_PUBLIC_BUILD_YEAR` (#20).
 
 ### Removed
 

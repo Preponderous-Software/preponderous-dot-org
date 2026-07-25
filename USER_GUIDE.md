@@ -32,6 +32,12 @@ You can also reach the full GitHub organization via the **GitHub** link in the t
 1. Use the sun/moon toggle in the top (or bottom) navigation bar.
 2. Your choice is remembered for future visits. If you've never chosen, the site follows your operating system's light/dark preference.
 
+### Viewing Licensing and Privacy Information
+
+1. Click **Legal** in the footer, or the license name next to the copyright notice.
+2. The **/legal** page covers the license the projects are published under, the copyright and disclaimer, what the site stores on your device (only your light/dark preference), and the third-party components the site is built with.
+3. Links to the full license text open in a new tab.
+
 ### Reporting a Website Bug
 
 If you find a bug on the website itself:
