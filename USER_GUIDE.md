@@ -18,7 +18,7 @@ No special software is required to use the website — just a modern web browser
 
 1. Open the home page.
 2. Scroll to the **Projects** section, or click **Browse Projects** in the hero.
-3. Each card shows the project's name, a short description, and its primary technology.
+3. Each card shows the project's name, a short description, and its primary technology, along with a **GitHub** button and — for projects with a live version — a **Visit Site** button.
 
 ### Opening a Project's Source Code
 
@@ -26,6 +26,16 @@ No special software is required to use the website — just a modern web browser
 2. Click the **GitHub** button on the card to open its repository in a new tab.
 
 You can also reach the full GitHub organization via the **GitHub** link in the top navigation bar or **View on GitHub** in the hero.
+
+### Visiting a Project's Live Site
+
+Some projects are hosted and can be used straight from the browser.
+
+1. Find the project's card on the home page.
+2. If the project has a live version, the card shows a **Visit Site** button next to the **GitHub** button.
+3. Click **Visit Site** to open it in a new tab.
+
+Cards without a **Visit Site** button have no hosted version — use the **GitHub** button to get the source and run it yourself.
 
 ### Switching Between Light and Dark Mode
 
