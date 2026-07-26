@@ -20,3 +20,27 @@ export const resolveInitialColorMode = (
     }
     return prefersDark ? 'dark' : 'light';
 };
+
+// Read the saved color-mode choice. Merely touching window.localStorage throws
+// a SecurityError in browsers configured to block site data, so the access is
+// guarded: a failure (and a server-side call, where `window` is undefined) is
+// reported as "nothing saved" and the caller falls back to the OS preference.
+export const readStoredColorMode = (): string | null => {
+    try {
+        return window.localStorage.getItem(COLOR_MODE_STORAGE_KEY);
+    } catch {
+        return null;
+    }
+};
+
+// Persist an explicit color-mode choice. Best-effort by design: writing throws
+// when storage is blocked or full (QuotaExceededError), and a visitor who
+// cannot have the choice remembered should still be able to switch modes for
+// the current session.
+export const storeColorMode = (mode: ColorMode): void => {
+    try {
+        window.localStorage.setItem(COLOR_MODE_STORAGE_KEY, mode);
+    } catch {
+        // Ignored: persistence is a nice-to-have, switching modes is not.
+    }
+};

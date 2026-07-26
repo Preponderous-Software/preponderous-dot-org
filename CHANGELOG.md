@@ -19,7 +19,7 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - Friendly themed `404` and `500` error pages within the standard chrome (#37).
 - GitHub Actions CI: lint, test, and build on pull requests and `main` (#27, #53).
 - Documentation set: `README`, `CONFIG.md`, `USER_GUIDE.md`, `CONTRIBUTING.md`, and this changelog (#39).
-- Component-render test coverage for `ProjectCard` and `Blurb` using React Testing Library + jsdom (#38), extended to the shared chrome — `TopBar`, `BottomBar`, `Seo`, and `ErrorPage` (#58).
+- Component-render test coverage for `ProjectCard` and `Blurb` using React Testing Library + jsdom (#38), extended to the shared chrome — `TopBar`, `BottomBar`, `Seo`, and `ErrorPage` (#58) — and to the color-mode wiring in `_app` (#62).
 - Node-based `Dockerfile`, `compose.yaml`, and dev container; CI switched to npm (#40).
 - `/legal` page covering the license, copyright, disclaimer, privacy (what is stored on the visitor's device), and third-party component notices (#21).
 - Footer copyright notice with a license link, plus **Home** and **Legal** navigation links; the copyright year is baked in at build time via `NEXT_PUBLIC_BUILD_YEAR` (#20).
@@ -29,6 +29,10 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 ### Changed
 
 - The site now describes its projects as "source-available" rather than "open source", both in the home-page blurb and in the default page description (#49).
+
+### Fixed
+
+- The light/dark toggle no longer stops working in browsers that block site data: reading and writing the saved preference is now guarded, so the mode still switches when it cannot be persisted (#61).
 
 ### Removed
 
