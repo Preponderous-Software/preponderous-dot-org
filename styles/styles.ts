@@ -271,3 +271,24 @@ export const infoCardTitleStyle = () => ({
 export const infoCardIconSizeStyle = {
     fontSize: 40,
 };
+
+/**
+ * Extra styling for the linking variant of an info card. It renders as a real
+ * anchor, so the browser's default link colour and underline have to be undone
+ * to keep it looking like the non-linking card next to it.
+ */
+export const infoCardLinkStyle = {
+    textDecoration: 'none',
+    color: 'inherit',
+    cursor: 'pointer',
+};
+
+/**
+ * The external-link affordance on a linking info card, matching the
+ * OpenInNewIcon the top bar and hero already put on their outbound links.
+ */
+export const infoCardExternalIconStyle = {
+    fontSize: '1rem',
+    marginLeft: '0.35rem',
+    verticalAlign: 'middle',
+};

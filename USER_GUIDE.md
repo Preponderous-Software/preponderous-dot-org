@@ -25,7 +25,7 @@ No special software is required to use the website — just a modern web browser
 1. Find the project's card on the home page.
 2. Click the **GitHub** button on the card to open its repository in a new tab.
 
-You can also reach the full GitHub organization via the **GitHub** link in the top navigation bar or **View on GitHub** in the hero.
+You can also reach the full GitHub organization via the **GitHub** link in the top navigation bar, **View on GitHub** in the hero, or the **Contribute** and **Explore the Code** cards in the *Get involved* row. All of these open in a new tab.
 
 ### Visiting a Project's Live Site
 

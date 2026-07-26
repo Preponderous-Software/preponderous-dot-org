@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Preponderous Software">
+    <!--
+      A "P" mark in the site's primary blue. The glyph is drawn as a path rather
+      than set in Space Grotesk because favicons are rendered without the page's
+      webfonts, so a text element would fall back to whatever the browser has.
+      A favicon also cannot read the site's own color-mode state, so it follows
+      the OS scheme instead and shifts to the dark-theme blue there.
+    -->
+    <style>
+        .bg { fill: #4263eb; }
+        @media (prefers-color-scheme: dark) {
+            .bg { fill: #5c7cfa; }
+        }
+    </style>
+    <rect class="bg" width="64" height="64" rx="14"/>
+    <path
+        fill="#ffffff"
+        fill-rule="evenodd"
+        d="M19 14 H34 a11 11 0 0 1 0 22 H26 V50 H19 Z M26 21 H34 a4 4 0 0 1 0 8 H26 Z"
+    />
+</svg>

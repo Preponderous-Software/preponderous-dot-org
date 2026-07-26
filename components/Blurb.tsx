@@ -12,7 +12,9 @@ import {
     infoCardStyle,
     infoCardIconStyle,
     infoCardTitleStyle,
-    infoCardIconSizeStyle
+    infoCardIconSizeStyle,
+    infoCardLinkStyle,
+    infoCardExternalIconStyle
 } from '../styles/styles';
 
 const ORG_URL = 'https://github.com/Preponderous-Software';
@@ -22,42 +24,49 @@ const InfoCard: React.FC<{
     title: string;
     content: string;
     href?: string
-}> = ({icon, title, content, href}) => (
-    <Grid item xs={12} md={4}>
-        <Paper
-            elevation={0}
-            // When the card links somewhere, expose it as a focusable, keyboard-
-            // operable control: a mouse-only onClick left keyboard and screen-
-            // reader users unable to reach or activate these cards.
-            role={href ? 'link' : undefined}
-            tabIndex={href ? 0 : undefined}
-            sx={(theme) => ({
-                ...infoCardStyle(theme),
-                cursor: href ? 'pointer' : 'default',
-                '&:hover': href ? {
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 20px rgba(0,0,0,0.12)',
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-                } : {}
-            })}
-            onClick={() => href && window.open(href, '_blank', 'noopener,noreferrer')}
-            onKeyDown={(e) => {
-                if (href && (e.key === 'Enter' || e.key === ' ')) {
-                    e.preventDefault();
-                    window.open(href, '_blank', 'noopener,noreferrer');
-                }
-            }}
-        >
+}> = ({icon, title, content, href}) => {
+    const body = (
+        <>
             <Box sx={(theme) => infoCardIconStyle(theme)}>
                 {icon}
             </Box>
             <Typography variant="h6" gutterBottom sx={(theme) => infoCardTitleStyle()}>
                 {title}
+                {href ? <OpenInNewIcon sx={infoCardExternalIconStyle}/> : null}
             </Typography>
             <Typography variant="body1" color="text.secondary">{content}</Typography>
-        </Paper>
-    </Grid>
-);
+        </>
+    );
+
+    // A card that links somewhere is a real anchor rather than a div wired up
+    // with role="link" and a window.open handler: that keeps "open in new tab",
+    // middle-click, and "copy link address" working, and survives the popup
+    // blockers that would otherwise swallow window.open.
+    return (
+        <Grid item xs={12} md={4}>
+            {href ? (
+                <Paper
+                    elevation={0}
+                    component="a"
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={(theme) => ({...infoCardStyle(theme), ...infoCardLinkStyle})}
+                >
+                    {body}
+                </Paper>
+            ) : (
+                // Nothing to activate here, so no pointer and no hover lift.
+                <Paper
+                    elevation={0}
+                    sx={(theme) => ({...infoCardStyle(theme), cursor: 'default', '&:hover': {}})}
+                >
+                    {body}
+                </Paper>
+            )}
+        </Grid>
+    );
+};
 
 const Blurb: React.FC = () => (
     <Box sx={(theme) => blurbBoxStyle(theme)}>
