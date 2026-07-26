@@ -41,6 +41,7 @@ Cards without a **Visit Site** button have no hosted version — use the **GitHu
 
 1. Use the sun/moon toggle in the top (or bottom) navigation bar.
 2. Your choice is remembered for future visits. If you've never chosen, the site follows your operating system's light/dark preference.
+3. If your browser is set to block site data, the toggle still switches the mode for as long as you're on the page — the choice simply isn't remembered.
 
 ### Viewing Licensing and Privacy Information
 

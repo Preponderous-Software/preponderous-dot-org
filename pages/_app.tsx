@@ -2,7 +2,7 @@ import type {AppProps} from 'next/app'
 import React, {useEffect, useMemo, useState} from 'react';
 import {Box, createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import {ColorModeContext} from '../utils/ColorModeContext';
-import {COLOR_MODE_STORAGE_KEY, ColorMode, resolveInitialColorMode} from '../utils/colorMode';
+import {ColorMode, readStoredColorMode, resolveInitialColorMode, storeColorMode} from '../utils/colorMode';
 import '../styles/globals.css';
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -13,25 +13,27 @@ function MyApp({Component, pageProps}: AppProps) {
     const [mode, setMode] = useState<ColorMode>('dark');
 
     useEffect(() => {
-        const stored = window.localStorage.getItem(COLOR_MODE_STORAGE_KEY);
+        const stored = readStoredColorMode();
         const prefersDark = window.matchMedia
             ? window.matchMedia('(prefers-color-scheme: dark)').matches
             : true;
         setMode(resolveInitialColorMode(stored, prefersDark));
     }, []);
 
+    // Derived from the current mode rather than a state updater so that the
+    // (side-effecting, best-effort) write stays outside React's render path —
+    // under StrictMode an updater is invoked twice, and a persistence failure
+    // must never be able to interfere with the mode actually flipping.
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
-                setMode((prevMode) => {
-                    const nextMode: ColorMode = prevMode === 'light' ? 'dark' : 'light';
-                    // Persist the explicit choice so it survives navigation and reloads.
-                    window.localStorage.setItem(COLOR_MODE_STORAGE_KEY, nextMode);
-                    return nextMode;
-                });
+                const nextMode: ColorMode = mode === 'light' ? 'dark' : 'light';
+                setMode(nextMode);
+                // Persist the explicit choice so it survives navigation and reloads.
+                storeColorMode(nextMode);
             }
         }),
-        [],
+        [mode],
     );
 
     const theme = useMemo(
