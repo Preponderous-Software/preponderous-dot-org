@@ -7,6 +7,11 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
+                {/*
+                  Next 12 serves no icon of its own, so without this every page
+                  load 404s on /favicon.ico and the tab shows a placeholder.
+                */}
+                <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
                 <link
