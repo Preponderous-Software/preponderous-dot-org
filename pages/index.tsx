@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     const projects = sortProjectsByTitle(projectData.projects)
     return (
         <Box sx={(theme) => pageStyle(theme)}>
-            <Seo/>
+            <Seo path="/"/>
             <TopBar/>
             <Container component="main" id="main" maxWidth="xl" sx={{py: 4, flexGrow: 1}}>
                 <Blurb/>
