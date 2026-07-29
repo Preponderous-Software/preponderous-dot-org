@@ -49,6 +49,30 @@ describe('Seo', () => {
         }
         expect(metaContent(container, 'meta[property="og:site_name"]')).toBe('Preponderous Software');
         expect(metaContent(container, 'meta[property="og:type"]')).toBe('website');
-        expect(metaContent(container, 'meta[name="twitter:card"]')).toBe('summary');
+        expect(metaContent(container, 'meta[name="twitter:card"]')).toBe('summary_large_image');
+    });
+
+    it('emits an absolute canonical link and og:url when given a path', () => {
+        const { container } = render(<Seo title="Legal" path="/legal"/>);
+        expect(container.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+            'https://preponderous.org/legal'
+        );
+        expect(metaContent(container, 'meta[property="og:url"]')).toBe('https://preponderous.org/legal');
+    });
+
+    it('omits the canonical link and og:url when no path is given', () => {
+        const { container } = render(<Seo title="404 — Page not found"/>);
+        expect(container.querySelector('link[rel="canonical"]')).toBeNull();
+        expect(container.querySelector('meta[property="og:url"]')).toBeNull();
+    });
+
+    it('always includes an absolute og:image and twitter:image', () => {
+        const { container } = render(<Seo/>);
+        expect(metaContent(container, 'meta[property="og:image"]')).toBe(
+            'https://preponderous.org/og-image.png'
+        );
+        expect(metaContent(container, 'meta[name="twitter:image"]')).toBe(
+            'https://preponderous.org/og-image.png'
+        );
     });
 });

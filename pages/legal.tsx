@@ -49,6 +49,7 @@ const LegalPage: NextPage = () => (
         <Seo
             title="Legal"
             description="Licensing, copyright, and privacy information for Preponderous Software."
+            path="/legal"
         />
         <TopBar/>
         <Container component="main" id="main" maxWidth="md" sx={{py: 4, flexGrow: 1}}>
