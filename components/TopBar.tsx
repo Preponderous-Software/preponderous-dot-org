@@ -1,6 +1,7 @@
 import {AppBar, Box, Button, Link, Toolbar, Typography, useTheme} from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {useRouter} from 'next/router';
+import NextLink from 'next/link';
 import React, {useContext} from 'react';
 import {ColorModeToggleSwitch} from './ColorModeToggleSwitch';
 import {ColorModeContext} from '../utils/ColorModeContext';
@@ -20,7 +21,7 @@ import {
 // visually distinguishable from the in-site navigation they sit beside.
 const NavButton: React.FC<{ href: string; active?: boolean; children: React.ReactNode }> = ({href, active = false, children}) => {
     const isExternal = href.startsWith('http');
-    return (
+    const button = (
         <Button
             color="inherit"
             href={href}
@@ -42,21 +43,31 @@ const NavButton: React.FC<{ href: string; active?: boolean; children: React.Reac
             {children}
         </Button>
     );
+
+    // Internal routes go through next/link so navigation is a client-side
+    // transition rather than a full document reload; external links stay plain
+    // anchors (they leave the app anyway).
+    return isExternal ? button : (
+        <NextLink href={href} passHref>
+            {button}
+        </NextLink>
+    );
 };
 
 const BrandName: React.FC = () => (
     // The wordmark links home — the near-universal "click the logo to return to
     // the home page" convention.
-    <Link
-        href="/"
-        underline="none"
-        color="inherit"
-        sx={(theme) => ({...brandNameStyle(theme), display: 'inline-block'})}
-    >
-        <Typography variant="h6" color="inherit" component="span">
-            Preponderous Software
-        </Typography>
-    </Link>
+    <NextLink href="/" passHref>
+        <Link
+            underline="none"
+            color="inherit"
+            sx={(theme) => ({...brandNameStyle(theme), display: 'inline-block'})}
+        >
+            <Typography variant="h6" color="inherit" component="span">
+                Preponderous Software
+            </Typography>
+        </Link>
+    </NextLink>
 );
 
 const TopBar: React.FC = () => {

@@ -30,7 +30,7 @@ const InfoCard: React.FC<{
             <Box sx={(theme) => infoCardIconStyle(theme)}>
                 {icon}
             </Box>
-            <Typography variant="h6" gutterBottom sx={(theme) => infoCardTitleStyle()}>
+            <Typography variant="h6" component="h3" gutterBottom sx={(theme) => infoCardTitleStyle()}>
                 {title}
                 {href ? <OpenInNewIcon sx={infoCardExternalIconStyle}/> : null}
             </Typography>
@@ -111,6 +111,7 @@ const Blurb: React.FC = () => (
 
         <Typography
             variant="overline"
+            component="h2"
             color="text.secondary"
             sx={{display: 'block', textAlign: 'center', letterSpacing: '0.1em'}}
         >

@@ -36,7 +36,7 @@ describe('Home page', () => {
         // Blurb's "Browse Projects" button is href="#projects"; losing this id
         // would silently turn that button into a no-op.
         expect(projectsSection).not.toBeNull();
-        expect(within(projectsSection).getByText('Projects')).toBeInTheDocument();
+        expect(within(projectsSection).getByRole('heading', { level: 2, name: 'Projects' })).toBeInTheDocument();
         expect(screen.getByRole('link', { name: /browse projects/i })).toHaveAttribute('href', '#projects');
     });
 

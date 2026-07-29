@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                     >
                         {title.charAt(0).toUpperCase()}
                     </Avatar>
-                    <Typography variant="h6" component="div" sx={{fontWeight: 600, lineHeight: 1.2}}>
+                    <Typography variant="h6" component="h3" sx={{fontWeight: 600, lineHeight: 1.2}}>
                         {title}
                     </Typography>
                 </Stack>

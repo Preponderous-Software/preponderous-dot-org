@@ -13,7 +13,7 @@ describe('ProjectCard', () => {
                 technology="Java"
             />
         );
-        expect(screen.getByText('Viron')).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 3, name: 'Viron' })).toBeInTheDocument();
         expect(screen.getByText('A flexible simulation framework.')).toBeInTheDocument();
         expect(screen.getByText('Java')).toBeInTheDocument();
     });

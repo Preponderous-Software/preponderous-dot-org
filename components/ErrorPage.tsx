@@ -1,6 +1,7 @@
 import React from 'react';
 import {Box, Button, Container, Typography} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import NextLink from 'next/link';
 import TopBar from './TopBar';
 import Seo from './Seo';
 import BottomBar from './BottomBar';
@@ -19,18 +20,20 @@ const ErrorPage: React.FC<{code: string; title: string; message: string}> = ({co
         <Seo title={`${code} — ${title}`} description={message}/>
         <TopBar/>
         <Container component="main" id="main" maxWidth="sm" sx={{py: 8, textAlign: 'center', flexGrow: 1}}>
-            <Typography variant="h1" color="primary" sx={{fontWeight: 700}}>
+            <Typography variant="h1" component="p" color="primary" sx={{fontWeight: 700}}>
                 {code}
             </Typography>
-            <Typography variant="h4" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
+            <Typography variant="h4" component="h1" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
                 {title}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{mb: 3}}>
                 {message}
             </Typography>
-            <Button variant="contained" startIcon={<HomeIcon/>} href="/">
-                Back to home
-            </Button>
+            <NextLink href="/" passHref>
+                <Button variant="contained" startIcon={<HomeIcon/>}>
+                    Back to home
+                </Button>
+            </NextLink>
         </Container>
         <BottomBar version={version}/>
     </Box>

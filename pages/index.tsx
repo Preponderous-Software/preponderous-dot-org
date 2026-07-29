@@ -30,8 +30,8 @@ const SectionDivider: React.FC = () => (
 )
 
 const ProjectsSection: React.FC<{projects: Project[]}> = ({projects}) => (
-    <Box id="projects" sx={projectsBoxStyle}>
-        <Typography variant="h3" component="div" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
+    <Box id="projects" component="section" aria-labelledby="projects-heading" sx={projectsBoxStyle}>
+        <Typography id="projects-heading" variant="h3" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
             Projects
         </Typography>
         <Grid container {...gridContainerStyle}>
