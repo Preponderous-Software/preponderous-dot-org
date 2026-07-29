@@ -1,4 +1,5 @@
 import {AppBar, Box, Button, Link, Toolbar, Typography, useTheme} from '@mui/material';
+import NextLink from 'next/link';
 import React, {useContext} from 'react';
 import {ColorModeToggleSwitch} from './ColorModeToggleSwitch';
 import {ColorModeContext} from '../utils/ColorModeContext';
@@ -25,7 +26,7 @@ const FooterButton: React.FC<{ href: string; icon: React.ReactNode; children: Re
     children,
 }) => {
     const isExternal = href.startsWith('http');
-    return (
+    const button = (
         <Button
             color="inherit"
             href={href}
@@ -36,6 +37,15 @@ const FooterButton: React.FC<{ href: string; icon: React.ReactNode; children: Re
         >
             {children}
         </Button>
+    );
+
+    // Internal routes go through next/link so navigation is a client-side
+    // transition rather than a full document reload; external links stay plain
+    // anchors (they leave the app anyway).
+    return isExternal ? button : (
+        <NextLink href={href} passHref>
+            {button}
+        </NextLink>
     );
 };
 
@@ -51,9 +61,11 @@ const CopyrightNotice: React.FC = () => (
     <Typography variant="body2" color="inherit" component="div" sx={{opacity: 0.85}}>
         {formatCopyright()}
         {' · '}
-        <Link href="/legal" color="inherit" underline="always">
-            {LICENSE_SHORT_NAME}
-        </Link>
+        <NextLink href="/legal" passHref>
+            <Link color="inherit" underline="always">
+                {LICENSE_SHORT_NAME}
+            </Link>
+        </NextLink>
     </Typography>
 );
 

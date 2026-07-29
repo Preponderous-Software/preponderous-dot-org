@@ -21,6 +21,14 @@ describe('Blurb', () => {
         expect(screen.getByText('Source Available')).toBeInTheDocument();
     });
 
+    it('gives "Get involved" a heading level 2 and each info-card title a heading level 3', () => {
+        render(<Blurb />);
+        expect(screen.getByRole('heading', { level: 2, name: 'Get involved' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 3, name: 'Contribute' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 3, name: 'Explore the Code' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 3, name: 'Source Available' })).toBeInTheDocument();
+    });
+
     it('renders the linking info cards as real anchors that open in a new tab', () => {
         render(<Blurb />);
         for (const name of [/^contribute/i, /^explore the code/i]) {

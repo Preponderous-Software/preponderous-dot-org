@@ -1,7 +1,7 @@
 export type ColorMode = 'light' | 'dark';
 
 // localStorage key under which the user's explicit color-mode choice is saved,
-// so the selection survives navigation (full page loads) and return visits.
+// so the selection survives page reloads and return visits.
 export const COLOR_MODE_STORAGE_KEY = 'preponderous-color-mode';
 
 const isColorMode = (value: string | null): value is ColorMode =>
