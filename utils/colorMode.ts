@@ -57,4 +57,4 @@ export const storeColorMode = (mode: ColorMode): void => {
 // falls back to 'dark', matching resolveInitialColorMode's own default.
 export const COLOR_MODE_BOOTSTRAP_SCRIPT = `(function(){try{var k=${JSON.stringify(
     COLOR_MODE_STORAGE_KEY
-)};var s=window.localStorage.getItem(k);var m=(s==='light'||s==='dark')?s:((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-color-mode',m);document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-color-mode','dark');document.documentElement.style.colorScheme='dark';}})();`;
+)};var s=window.localStorage.getItem(k);var p=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)').matches:true;var m=(s==='light'||s==='dark')?s:(p?'dark':'light');document.documentElement.setAttribute('data-color-mode',m);document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-color-mode','dark');document.documentElement.style.colorScheme='dark';}})();`;
