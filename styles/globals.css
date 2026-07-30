@@ -4,6 +4,27 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* Matches pages/_app.tsx's SSR-default 'dark' theme, so a visitor whose
+     JS hasn't run yet (or who has it disabled) still gets a themed page
+     instead of a flash of unstyled white. */
+  background-color: #0e1117 !important;
+  color-scheme: dark;
+}
+
+/* pages/_document.tsx's blocking bootstrap script stamps this attribute onto
+   <html> before the body is parsed/painted, once it has resolved the
+   visitor's actual stored/OS color-mode preference (see
+   utils/colorMode.ts#COLOR_MODE_BOOTSTRAP_SCRIPT). The !important beats MUI's
+   CssBaseline (which sets an unqualified, non-important `body` background
+   from the theme once it mounts) so the background painted here is never
+   overwritten by the SSR-default 'dark' theme flashing in before
+   pages/_app.tsx's own effect corrects it — this rule is what prevents that
+   flash for light-mode visitors.
+*/
+html[data-color-mode='light'],
+html[data-color-mode='light'] body {
+  background-color: #f6f8fa !important;
+  color-scheme: light;
 }
 
 a {

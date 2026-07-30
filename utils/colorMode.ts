@@ -44,3 +44,17 @@ export const storeColorMode = (mode: ColorMode): void => {
         // Ignored: persistence is a nice-to-have, switching modes is not.
     }
 };
+
+// A blocking inline script, rendered by pages/_document.tsx into <head>, that
+// runs before the browser parses/paints <body> — before any bundle (and so
+// before resolveInitialColorMode/readStoredColorMode) has loaded. It
+// duplicates their "stored choice, else prefers-color-scheme" logic in plain
+// JS and stamps the result onto <html data-color-mode>, so the
+// [data-color-mode] rules in styles/globals.css can paint the right
+// background on the very first paint. pages/_app.tsx's own effect (which
+// does use resolveInitialColorMode) then resolves to the same value, so its
+// correction is visually a no-op. A thrown SecurityError (blocked site data)
+// falls back to 'dark', matching resolveInitialColorMode's own default.
+export const COLOR_MODE_BOOTSTRAP_SCRIPT = `(function(){try{var k=${JSON.stringify(
+    COLOR_MODE_STORAGE_KEY
+)};var s=window.localStorage.getItem(k);var p=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)').matches:true;var m=(s==='light'||s==='dark')?s:(p?'dark':'light');document.documentElement.setAttribute('data-color-mode',m);document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-color-mode','dark');document.documentElement.style.colorScheme='dark';}})();`;
