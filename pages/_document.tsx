@@ -1,5 +1,4 @@
 import {Html, Head, Main, NextScript} from 'next/document';
-import {COLOR_MODE_BOOTSTRAP_SCRIPT} from '../utils/colorMode';
 
 // Load the brand fonts (Inter for body, Space Grotesk for headings) from Google
 // Fonts. Next 12 predates next/font, so they are linked here in the document
@@ -8,16 +7,6 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
-                {/*
-                  Resolves the visitor's color mode and stamps it onto
-                  <html data-color-mode> before the body is parsed/painted, so
-                  the [data-color-mode] rules in styles/globals.css apply
-                  immediately instead of a dark flash. Must run first (as a
-                  blocking, non-deferred inline script) and before any CSS that
-                  depends on the attribute. See
-                  utils/colorMode.ts#COLOR_MODE_BOOTSTRAP_SCRIPT.
-                */}
-                <script dangerouslySetInnerHTML={{__html: COLOR_MODE_BOOTSTRAP_SCRIPT}}/>
                 {/*
                   Next 12 serves no icon of its own, so without this every page
                   load 404s on /favicon.ico and the tab shows a placeholder.
