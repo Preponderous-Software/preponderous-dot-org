@@ -28,6 +28,7 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - A favicon: an SVG "P" mark in the brand blue that follows the OS light/dark preference (#67).
 - A PNG favicon and apple-touch-icon fallback (rendered from the SVG mark) so Safari and "Add to Home Screen" no longer show a placeholder (#69).
 - `Seo` now emits a canonical `<link>`, `og:url`, and an `og:image`/`twitter:image` (with `twitter:card` upgraded to `summary_large_image`), documented in `CONFIG.md` (#65).
+- `/about` page covering the mission, values, and who runs Preponderous Software, and `/contact` page covering how to reach out (report a bug, or a project's own repository); both linked from the top navigation bar (#18, #19).
 
 ### Changed
 
