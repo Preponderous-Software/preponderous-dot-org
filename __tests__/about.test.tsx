@@ -23,7 +23,8 @@ describe('About page', () => {
     });
 
     it('names who runs Preponderous Software', () => {
-        expect(screen.getByText(new RegExp(COPYRIGHT_HOLDER))).toBeInTheDocument();
+        // The footer's copyright notice also names the same holder.
+        expect(screen.getAllByText(new RegExp(COPYRIGHT_HOLDER)).length).toBeGreaterThan(0);
     });
 
     it('links to the Legal page for license and privacy details, in the same tab', () => {
