@@ -24,12 +24,14 @@ describe('TopBar', () => {
         expect(screen.getByRole('link', { name: 'Preponderous Software' })).toHaveAttribute('href', '/');
     });
 
-    it('keeps the internal nav link in the same tab', () => {
+    it('keeps internal nav links in the same tab', () => {
         render(<TopBar/>);
-        const home = screen.getByRole('link', { name: 'Home' });
-        expect(home).toHaveAttribute('href', '/');
-        expect(home).not.toHaveAttribute('target');
-        expect(home).not.toHaveAttribute('rel');
+        for (const [name, href] of [['Home', '/'], ['About', '/about'], ['Contact', '/contact']] as const) {
+            const link = screen.getByRole('link', { name });
+            expect(link).toHaveAttribute('href', href);
+            expect(link).not.toHaveAttribute('target');
+            expect(link).not.toHaveAttribute('rel');
+        }
     });
 
     it('opens the external nav link in a new tab with rel="noopener noreferrer"', () => {
@@ -49,7 +51,15 @@ describe('TopBar', () => {
         router.pathname = '/legal';
         render(<TopBar/>);
         expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current');
+        expect(screen.getByRole('link', { name: 'About' })).not.toHaveAttribute('aria-current');
+        expect(screen.getByRole('link', { name: 'Contact' })).not.toHaveAttribute('aria-current');
         expect(screen.getByRole('link', { name: 'GitHub' })).not.toHaveAttribute('aria-current');
+    });
+
+    it('marks the About link as current on the About page', () => {
+        router.pathname = '/about';
+        render(<TopBar/>);
+        expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
     });
 
     it('leaves the color-mode toggle unchecked in light mode', () => {

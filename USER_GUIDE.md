@@ -49,6 +49,11 @@ Cards without a **Visit Site** button have no hosted version — use the **GitHu
 2. The **/legal** page covers the license the projects are published under, the copyright and disclaimer, what the site stores on your device (only your light/dark preference), and the third-party components the site is built with.
 3. Links to the full license text open in a new tab.
 
+### Learning About Preponderous Software
+
+1. Click **About** in the top navigation bar.
+2. The **/about** page covers the mission, values, and who runs Preponderous Software, with links to the **Legal** and **Contact** pages for more detail.
+
 ### Reporting a Website Bug
 
 If you find a bug on the website itself:
@@ -57,4 +62,4 @@ If you find a bug on the website itself:
 2. Click **New Issue**.
 3. Describe the problem and include steps to reproduce it.
 
-You can also use the **Report a Bug** link in the footer.
+You can also use the **Report a Bug** link in the footer, or visit the **/contact** page (reachable via **Contact** in the top navigation bar) for the same link plus where to go for project-specific questions.
