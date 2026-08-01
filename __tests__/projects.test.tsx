@@ -42,7 +42,10 @@ describe('Projects page', () => {
     });
 
     it('renders a card for every project in projects.json', () => {
-        const allCards = within(container).getAllByRole('link', { name: /github/i });
+        // Scoped to <main>, not the whole page — TopBar has its own "GitHub"
+        // nav link that would otherwise inflate this count by one.
+        const main = container.querySelector('main') as HTMLElement;
+        const allCards = within(main).getAllByRole('link', { name: /github/i });
         expect(allCards.length).toBe(projects.length);
     });
 
