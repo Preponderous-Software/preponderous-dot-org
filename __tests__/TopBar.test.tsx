@@ -26,7 +26,7 @@ describe('TopBar', () => {
 
     it('keeps internal nav links in the same tab', () => {
         render(<TopBar/>);
-        for (const [name, href] of [['Home', '/'], ['About', '/about'], ['Contact', '/contact']] as const) {
+        for (const [name, href] of [['Home', '/'], ['Projects', '/projects'], ['About', '/about'], ['Contact', '/contact']] as const) {
             const link = screen.getByRole('link', { name });
             expect(link).toHaveAttribute('href', href);
             expect(link).not.toHaveAttribute('target');
@@ -51,6 +51,7 @@ describe('TopBar', () => {
         router.pathname = '/legal';
         render(<TopBar/>);
         expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current');
+        expect(screen.getByRole('link', { name: 'Projects' })).not.toHaveAttribute('aria-current');
         expect(screen.getByRole('link', { name: 'About' })).not.toHaveAttribute('aria-current');
         expect(screen.getByRole('link', { name: 'Contact' })).not.toHaveAttribute('aria-current');
         expect(screen.getByRole('link', { name: 'GitHub' })).not.toHaveAttribute('aria-current');
@@ -60,6 +61,12 @@ describe('TopBar', () => {
         router.pathname = '/about';
         render(<TopBar/>);
         expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('marks the Projects link as current on the Projects page', () => {
+        router.pathname = '/projects';
+        render(<TopBar/>);
+        expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
     });
 
     it('leaves the color-mode toggle unchecked in light mode', () => {

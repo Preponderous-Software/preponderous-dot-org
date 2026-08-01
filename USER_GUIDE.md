@@ -18,7 +18,13 @@ No special software is required to use the website — just a modern web browser
 
 1. Open the home page.
 2. Scroll to the **Projects** section, or click **Browse Projects** in the hero.
-3. Each card shows the project's name, a short description, and its primary technology, along with a **GitHub** button and — for projects with a live version — a **Visit Site** button.
+3. Each card shows the project's name, a short description, its primary technology, and — where set — a maintenance status (e.g. **Active**, **Maintenance**), along with a **GitHub** button and — for projects with a live version — a **Visit Site** button.
+
+### Browsing Projects by Category
+
+1. Click **Projects** in the top navigation bar.
+2. The **/projects** page lists the same projects as the home page, grouped under category headings (e.g. **Games**, **Simulations**, **Libraries**).
+3. Each card behaves the same as on the home page — the same **GitHub**/**Visit Site** buttons and status chip.
 
 ### Opening a Project's Source Code
 

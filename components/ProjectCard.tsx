@@ -17,7 +17,17 @@ interface ProjectCardProps {
     // Optional link to a live/hosted version of the project; when set, the card
     // shows a "Visit Site" button as the primary action.
     websiteLink?: string;
+    // Optional maintenance status (e.g. "Active", "Maintenance"), shown as a
+    // colour-coded chip next to the technology chip.
+    status?: string;
 }
+
+// Colour for a status chip, keyed case-insensitively; unrecognized values fall
+// back to the default (grey) chip styling rather than guessing a colour.
+const STATUS_COLORS: Record<string, 'success' | 'warning'> = {
+    active: 'success',
+    maintenance: 'warning',
+};
 
 // A small, fixed palette of muted brand-ish colours. Each project gets a stable
 // colour derived from its title so cards have a bit of visual identity without
@@ -32,7 +42,7 @@ const colorForTitle = (title: string): string => {
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink, status}) => {
     return (
         <Card sx={projectCardStyle}>
             <CardContent sx={projectCardContentStyle}>
@@ -70,15 +80,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                 </Typography>
             </CardContent>
 
-            {technology ? (
-                <Box sx={{px: 2, pb: 1}}>
-                    <Chip
-                        size="small"
-                        variant="outlined"
-                        icon={<CodeIcon/>}
-                        label={technology}
-                    />
-                </Box>
+            {technology || status ? (
+                <Stack direction="row" spacing={1} sx={{px: 2, pb: 1}}>
+                    {technology ? (
+                        <Chip
+                            size="small"
+                            variant="outlined"
+                            icon={<CodeIcon/>}
+                            label={technology}
+                        />
+                    ) : null}
+                    {status ? (
+                        <Chip
+                            size="small"
+                            color={STATUS_COLORS[status.toLowerCase()]}
+                            variant={STATUS_COLORS[status.toLowerCase()] ? 'filled' : 'outlined'}
+                            label={status}
+                        />
+                    ) : null}
+                </Stack>
             ) : null}
 
             <CardActions sx={projectCardActionsStyle}>

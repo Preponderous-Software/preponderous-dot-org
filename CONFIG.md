@@ -15,7 +15,7 @@ One value is injected automatically by `next.config.js` and does not need to be 
 
 ## Project Showcase Data
 
-The list of projects shown on the home page is data-driven, not hard-coded. It lives in:
+The list of projects shown on the home page and the `/projects` page is data-driven, not hard-coded. It lives in:
 
 ```
 pages/data/projects.json
@@ -31,8 +31,10 @@ The file contains a single `projects` array. Each entry supports these fields:
 | `githubLink` | yes | URL to the project's source repository (opens in a new tab). |
 | `technology` | yes | Primary language/technology, shown as a chip (e.g. `Python`, `Java`, `C++`). |
 | `websiteLink` | no | URL to a live/hosted version of the project. When set, the card shows a "Visit Site" button as its primary action, opening in a new tab. |
+| `category` | no | Grouping shown as a section heading on the `/projects` page (e.g. `Games`, `Simulations`, `Libraries`, `Tools`, `Websites`). Entries with no `category` are filed under "Other" (see `groupProjectsByCategory` in `utils/projects.ts`); they still appear on the home page either way. |
+| `status` | no | Maintenance state shown as a colour-coded chip on the card (e.g. `Active`, `Maintenance`). Any other value renders as a plain outlined chip. Omit it to show no status chip. |
 
-Projects are sorted alphabetically by title at render time (see `utils/projects.ts`), so entries may be listed in any order.
+Projects are sorted alphabetically by title at render time (see `utils/projects.ts`), so entries may be listed in any order. The home page lists every project in one flat, alphabetical grid; `/projects` groups the same data by `category`, each category's projects sorted alphabetically within it.
 
 **Example entry:**
 
@@ -43,7 +45,9 @@ Projects are sorted alphabetically by title at render time (see `utils/projects.
   "description": "Explore a procedurally-generated 2D world and interact with your surroundings.",
   "githubLink": "https://github.com/Preponderous-Software/Roam",
   "technology": "Python",
-  "websiteLink": "https://roam.preponderous.org"
+  "websiteLink": "https://roam.preponderous.org",
+  "category": "Games",
+  "status": "Active"
 }
 ```
 
