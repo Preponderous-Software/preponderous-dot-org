@@ -39,7 +39,7 @@ export const groupProjectsByCategory = (projects: Project[]): ProjectCategory[] 
         const category = project.category ?? 'Other';
         byCategory.set(category, [...(byCategory.get(category) ?? []), project]);
     }
-    return [...byCategory.entries()]
+    return Array.from(byCategory.entries())
         .sort(([a], [b]) => a.toLowerCase().localeCompare(b.toLowerCase()))
         .map(([category, categoryProjects]) => ({
             category,
