@@ -86,6 +86,7 @@ const TopBar: React.FC = () => {
 
                     <Box sx={(theme) => flexContainerStyle(theme, {gap: 1})}>
                         <NavButton href="/" active={isActiveNavLink(pathname, '/')}>Home</NavButton>
+                        <NavButton href="/projects" active={isActiveNavLink(pathname, '/projects')}>Projects</NavButton>
                         <NavButton href="/about" active={isActiveNavLink(pathname, '/about')}>About</NavButton>
                         <NavButton href="/contact" active={isActiveNavLink(pathname, '/contact')}>Contact</NavButton>
                         <NavButton href="https://github.com/Preponderous-Software">GitHub</NavButton>

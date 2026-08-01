@@ -45,6 +45,32 @@ describe('ProjectCard', () => {
         expect(screen.queryByRole('link', { name: /visit site/i })).toBeNull();
     });
 
+    it('omits the status chip when no status is given', () => {
+        render(
+            <ProjectCard
+                title="Roam"
+                description="Explore a procedurally-generated 2D world."
+                githubLink="https://github.com/Preponderous-Software/Roam"
+                technology="Python"
+            />
+        );
+        expect(screen.queryByText('Active')).toBeNull();
+        expect(screen.queryByText('Maintenance')).toBeNull();
+    });
+
+    it('renders a status chip when status is given', () => {
+        render(
+            <ProjectCard
+                title="Roam"
+                description="Explore a procedurally-generated 2D world."
+                githubLink="https://github.com/Preponderous-Software/Roam"
+                technology="Python"
+                status="Active"
+            />
+        );
+        expect(screen.getByText('Active')).toBeInTheDocument();
+    });
+
     it('renders a Visit Site button linking to the live site in a new tab when websiteLink is set', () => {
         render(
             <ProjectCard
