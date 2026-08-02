@@ -1,7 +1,9 @@
 import React from 'react';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { ThemeProvider, createTheme } from '@mui/material';
 import BottomBar from '../components/BottomBar';
+import { ColorModeContext } from '../utils/ColorModeContext';
 import { formatCopyright, LICENSE_SHORT_NAME } from '../utils/copyright';
 
 describe('BottomBar', () => {
@@ -42,5 +44,31 @@ describe('BottomBar', () => {
 
     it('renders the color-mode toggle', () => {
         expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).toBeInTheDocument();
+    });
+
+    it('leaves the color-mode toggle unchecked in light mode', () => {
+        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).not.toBeChecked();
+    });
+});
+
+describe('BottomBar color mode', () => {
+    it('checks the color-mode toggle in dark mode', () => {
+        render(
+            <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
+                <BottomBar version="1.2.3"/>
+            </ThemeProvider>
+        );
+        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).toBeChecked();
+    });
+
+    it('toggles the color mode when the switch is clicked', () => {
+        const toggleColorMode = vi.fn();
+        render(
+            <ColorModeContext.Provider value={{ toggleColorMode }}>
+                <BottomBar version="1.2.3"/>
+            </ColorModeContext.Provider>
+        );
+        fireEvent.click(screen.getByRole('checkbox', { name: /toggle dark mode/i }));
+        expect(toggleColorMode).toHaveBeenCalledTimes(1);
     });
 });
