@@ -30,6 +30,8 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - `Seo` now emits a canonical `<link>`, `og:url`, and an `og:image`/`twitter:image` (with `twitter:card` upgraded to `summary_large_image`), documented in `CONFIG.md` (#65).
 - `/about` page covering the mission, values, and who runs Preponderous Software, and `/contact` page covering how to reach out (report a bug, or a project's own repository); both linked from the top navigation bar (#18, #19).
 - `/projects` page listing every showcased project grouped by category, plus an optional `status` chip (e.g. `Active`, `Maintenance`) on `ProjectCard`; both driven by new optional `category`/`status` fields on `pages/data/projects.json` entries, documented in `CONFIG.md` (#17).
+- Test coverage for the `404`/`500` error pages and `BottomBar`'s color-mode toggle (#79).
+- A project card for Artificial-Consciousness-Simulation-Framework, including its `category`/`status` fields (#80, #81).
 
 ### Changed
 
@@ -42,6 +44,7 @@ The site has been redesigned from Spring Boot + Thymeleaf to Next.js + React + M
 - Internal navigation (Home, brand wordmark, footer **Home**/**Legal**, error page "Back to home") now does a client-side route transition via `next/link` instead of a full document reload (#71).
 - The heading outline is now contiguous on every page: the **Projects** section, "Get involved", and each card title use the correct heading level, and each error page's `<h1>` is its human-readable title rather than the status code (#72).
 - Light-mode visitors no longer see a dark theme flash before hydration: a blocking script resolves the color mode before first paint and stamps it onto `<html data-color-mode>`, which `styles/globals.css` uses to paint the right background immediately (#73).
+- `LICENSE`'s copyright range is now open-ended (`2022–present`) instead of a fixed end year, so it no longer drifts behind the footer/`/legal` page's build-time-computed range (#84).
 
 ### Removed
 
