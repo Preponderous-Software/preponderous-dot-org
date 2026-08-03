@@ -10,6 +10,13 @@
       "status": "Active"
     },
     {
+      "id": "artificial-consciousness-simulation-framework",
+      "title": "Artificial-Consciousness-Simulation-Framework",
+      "description": "An autonomous AI agent with persistent identity, memory, and recursive self-reflection, grounded in consciousness science theory.",
+      "githubLink": "https://github.com/Preponderous-Software/artificial-consciousness-simulation-framework",
+      "technology": "Python"
+    },
+    {
       "id": "barony",
       "title": "Barony",
       "description": "Command armies to capture villages and castles against an AI opponent.",
