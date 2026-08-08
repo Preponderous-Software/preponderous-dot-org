@@ -1,6 +1,6 @@
 {
   "name": "preponderous-website",
-  "version": "0.1.0",
+  "version": "0.2.0-SNAPSHOT-8-8-2026",
   "private": true,
   "scripts": {
     "dev": "next dev",
