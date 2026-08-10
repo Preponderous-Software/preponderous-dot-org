@@ -53,8 +53,15 @@ export const storeColorMode = (mode: ColorMode): void => {
 // [data-color-mode] rules in styles/globals.css can paint the right
 // background on the very first paint. pages/_app.tsx's own effect (which
 // does use resolveInitialColorMode) then resolves to the same value, so its
-// correction is visually a no-op. A thrown SecurityError (blocked site data)
-// falls back to 'dark', matching resolveInitialColorMode's own default.
-export const COLOR_MODE_BOOTSTRAP_SCRIPT = `(function(){try{var k=${JSON.stringify(
+// correction is visually a no-op.
+//
+// The two lookups are guarded separately so that one failing does not discard
+// the other's answer: a browser that blocks site data throws a SecurityError on
+// the storage read, and that visitor's prefers-color-scheme is still the best
+// available signal — the same fallback resolveInitialColorMode makes when
+// readStoredColorMode reports "nothing saved". Only when the media query is
+// unavailable too does the script settle on 'dark', matching the SSR-default
+// theme in pages/_app.tsx and the unqualified rule in styles/globals.css.
+export const COLOR_MODE_BOOTSTRAP_SCRIPT = `(function(){var m='dark';try{var p=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)').matches:true;m=p?'dark':'light';}catch(e){}try{var s=window.localStorage.getItem(${JSON.stringify(
     COLOR_MODE_STORAGE_KEY
-)};var s=window.localStorage.getItem(k);var p=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)').matches:true;var m=(s==='light'||s==='dark')?s:(p?'dark':'light');document.documentElement.setAttribute('data-color-mode',m);document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-color-mode','dark');document.documentElement.style.colorScheme='dark';}})();`;
+)});if(s==='light'||s==='dark'){m=s;}}catch(e){}document.documentElement.setAttribute('data-color-mode',m);document.documentElement.style.colorScheme=m;})();`;
