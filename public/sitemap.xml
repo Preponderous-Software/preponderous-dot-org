@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Every route the site serves, so search engines can discover all of them
+  rather than only what they reach by following links. The URLs match the
+  canonical links components/Seo.tsx emits, origin included. The shared
+  404/500 error pages are deliberately absent: they have no canonical URL of
+  their own and should not be indexed.
+
+  This file is written by hand — adding a page under pages/ means adding it
+  here too. __tests__/sitemap.test.ts fails when the two disagree.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://preponderous.org/</loc>
+  </url>
+  <url>
+    <loc>https://preponderous.org/about</loc>
+  </url>
+  <url>
+    <loc>https://preponderous.org/contact</loc>
+  </url>
+  <url>
+    <loc>https://preponderous.org/legal</loc>
+  </url>
+  <url>
+    <loc>https://preponderous.org/projects</loc>
+  </url>
+</urlset>

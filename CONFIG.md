@@ -70,6 +70,22 @@ mark ever changes, regenerate these with an SVG rasterizer (e.g. `sharp`,
 `resvg`, or ImageMagick); there is no rasterization step in this repo's own
 build.
 
+## Crawler Files
+
+Two static files under `public/` tell search engines what to crawl and index:
+
+| File | Purpose |
+|---|---|
+| `public/robots.txt` | Allows every crawler the whole site and points at the sitemap's absolute URL. |
+| `public/sitemap.xml` | Lists every indexable route (`/`, `/about`, `/contact`, `/legal`, `/projects`) as an absolute URL, matching the canonical links `components/Seo.tsx` emits. The shared `404`/`500` error pages are deliberately excluded — they have no canonical URL of their own. |
+
+Both are hand-written and hard-code the origin, because a file served straight
+out of `public/` is not templated at build time and so cannot read
+`NEXT_PUBLIC_SITE_URL`. `__tests__/sitemap.test.ts` is the guard against that
+duplication drifting: it fails if the sitemap's routes stop matching the pages
+under `pages/`, or if either file's origin stops matching `next.config.js`. When
+adding a page, add it to `public/sitemap.xml` in the same change.
+
 ## next.config.js
 
 Additional Next.js configuration lives in `next.config.js` in the project root. Refer to the [Next.js documentation](https://nextjs.org/docs/api-reference/next.config.js/introduction) for all available options.

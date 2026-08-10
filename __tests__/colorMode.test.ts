@@ -148,10 +148,34 @@ describe('COLOR_MODE_BOOTSTRAP_SCRIPT', () => {
         expect(document.documentElement.getAttribute('data-color-mode')).toBe('dark');
     });
 
-    it('falls back to dark instead of throwing when storage access is blocked', () => {
+    it('falls back to the OS preference instead of throwing when storage access is blocked', () => {
         stubThrowingStorage();
+        vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: true })));
 
         expect(() => runBootstrapScript()).not.toThrow();
+        expect(document.documentElement.getAttribute('data-color-mode')).toBe('dark');
+        expect(document.documentElement.style.colorScheme).toBe('dark');
+    });
+
+    // A light-preferring visitor with blocked site data used to be stamped
+    // 'dark' regardless, leaving the !important background rule in
+    // styles/globals.css dark under MUI's light theme.
+    it('stamps "light" for a light-preferring OS when storage access is blocked', () => {
+        stubThrowingStorage();
+        vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: false })));
+
+        runBootstrapScript();
+
+        expect(document.documentElement.getAttribute('data-color-mode')).toBe('light');
+        expect(document.documentElement.style.colorScheme).toBe('light');
+    });
+
+    it('falls back to dark when storage is blocked and matchMedia is unavailable', () => {
+        stubThrowingStorage();
+        vi.stubGlobal('matchMedia', undefined);
+
+        runBootstrapScript();
+
         expect(document.documentElement.getAttribute('data-color-mode')).toBe('dark');
         expect(document.documentElement.style.colorScheme).toBe('dark');
     });
