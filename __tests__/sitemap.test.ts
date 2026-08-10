@@ -17,6 +17,9 @@ const publicFile = (name: string) =>
 // canonical URL (see components/Seo.tsx), so neither belongs in a sitemap.
 const NON_ROUTE_PAGES = ['_app', '_document', '404', '500'];
 
+// Every route the site has is a single file directly under pages/, so this
+// reads one level only. Nested route directories would need recursion here
+// before this guard covered them.
 const routePathsFromPagesDirectory = (): string[] =>
     fs
         .readdirSync(path.join(__dirname, '..', 'pages'))
@@ -28,16 +31,16 @@ const routePathsFromPagesDirectory = (): string[] =>
         .map((name) => (name === 'index' ? '/' : `/${name}`));
 
 const sitemapLocations = (): string[] => {
-    const document = new DOMParser().parseFromString(
+    const parsed = new DOMParser().parseFromString(
         publicFile('sitemap.xml'),
         'application/xml'
     );
-    expect(document.getElementsByTagName('parsererror')).toHaveLength(0);
-    expect(document.documentElement.tagName).toBe('urlset');
-    expect(document.documentElement.getAttribute('xmlns')).toBe(
+    expect(parsed.getElementsByTagName('parsererror')).toHaveLength(0);
+    expect(parsed.documentElement.tagName).toBe('urlset');
+    expect(parsed.documentElement.getAttribute('xmlns')).toBe(
         'http://www.sitemaps.org/schemas/sitemap/0.9'
     );
-    return Array.from(document.getElementsByTagName('loc')).map(
+    return Array.from(parsed.getElementsByTagName('loc')).map(
         (loc) => loc.textContent ?? ''
     );
 };
@@ -65,7 +68,12 @@ describe('public/robots.txt', () => {
 
         expect(robots).toContain('User-agent: *');
         expect(robots).toContain('Allow: /');
-        expect(robots).not.toContain('Disallow: /');
+        // Compared line by line rather than as a substring, so that a future
+        // narrow rule (`Disallow: /some-path`) does not read as a site-wide
+        // block; only a bare `Disallow: /` is one.
+        expect(robots.split('\n').map((line) => line.trim())).not.toContain(
+            'Disallow: /'
+        );
     });
 
     it('points crawlers at the sitemap on the configured origin', () => {
