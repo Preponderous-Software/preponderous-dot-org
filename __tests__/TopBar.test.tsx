@@ -24,6 +24,14 @@ describe('TopBar', () => {
         expect(screen.getByRole('link', { name: 'Preponderous Software' })).toHaveAttribute('href', '/');
     });
 
+    it('labels the primary link group as navigation', () => {
+        render(<TopBar/>);
+        const nav = screen.getByRole('navigation', { name: /primary/i });
+        for (const name of ['Home', 'Projects', 'About', 'Contact', 'GitHub']) {
+            expect(nav).toContainElement(screen.getByRole('link', { name }));
+        }
+    });
+
     it('keeps internal nav links in the same tab', () => {
         render(<TopBar/>);
         for (const [name, href] of [['Home', '/'], ['Projects', '/projects'], ['About', '/about'], ['Contact', '/contact']] as const) {

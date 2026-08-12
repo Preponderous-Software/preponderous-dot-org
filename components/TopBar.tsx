@@ -84,7 +84,11 @@ const TopBar: React.FC = () => {
                 <Box sx={(theme) => flexContainerStyle(theme, {flexWrap: 'wrap'})}>
                     <BrandName/>
 
-                    <Box sx={(theme) => flexContainerStyle(theme, {gap: 1})}>
+                    {/* A named landmark, matching BottomBar's "Footer" nav, so
+                        assistive technology can list the site's primary
+                        navigation — and so the skip link in pages/_app.tsx has
+                        an actual landmark to skip past. */}
+                    <Box component="nav" aria-label="Primary" sx={(theme) => flexContainerStyle(theme, {gap: 1})}>
                         <NavButton href="/" active={isActiveNavLink(pathname, '/')}>Home</NavButton>
                         <NavButton href="/projects" active={isActiveNavLink(pathname, '/projects')}>Projects</NavButton>
                         <NavButton href="/about" active={isActiveNavLink(pathname, '/about')}>About</NavButton>
