@@ -45,9 +45,9 @@ describe('Document', () => {
 
     it('renders the bootstrap script before the page content', () => {
         const { getByTestId } = renderDocument();
-        const head = getByTestId('head');
+        const script = getByTestId('head').querySelector('script') as HTMLScriptElement;
         const main = getByTestId('main');
-        expect(head.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(script.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     });
 
     it('links the icon assets that ship under public/', () => {
