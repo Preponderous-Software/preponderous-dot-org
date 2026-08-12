@@ -1,3 +1,4 @@
+import React from 'react';
 import {Html, Head, Main, NextScript} from 'next/document';
 import {COLOR_MODE_BOOTSTRAP_SCRIPT} from '../utils/colorMode';
 
