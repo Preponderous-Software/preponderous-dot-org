@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar'
 import BottomBar from '../components/BottomBar'
 import Seo from '../components/Seo'
 import ProjectCard from '../components/ProjectCard'
-import {groupProjectsByCategory, type Project} from '../utils/projects'
+import {categoryHeadingId, groupProjectsByCategory, type Project} from '../utils/projects'
 import {
     pageStyle,
     sectionHeaderStyle,
@@ -24,27 +24,33 @@ const projectData = require('./data/projects.json') as ProjectData
 // pull the displayed version from package.json so the footer stays in sync
 const version = require('../package.json').version
 
-const CategorySection: React.FC<{category: string; projects: Project[]}> = ({category, projects}) => (
-    <Box component="section" aria-labelledby={`category-${category}`} sx={projectsBoxStyle}>
-        <Typography id={`category-${category}`} variant="h4" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
-            {category}
-        </Typography>
-        <Grid container {...gridContainerStyle}>
-            {projects.map((project) => (
-                <Grid item {...gridItemStyle} key={project.id}>
-                    <ProjectCard
-                        title={project.title}
-                        description={project.description}
-                        githubLink={project.githubLink}
-                        technology={project.technology}
-                        websiteLink={project.websiteLink}
-                        status={project.status}
-                    />
-                </Grid>
-            ))}
-        </Grid>
-    </Box>
-)
+const CategorySection: React.FC<{category: string; projects: Project[]}> = ({category, projects}) => {
+    // Slugified rather than interpolated raw: category names are free-form data
+    // and one containing a space would produce an invalid id and an
+    // aria-labelledby pointing at two ids that do not exist.
+    const headingId = categoryHeadingId(category)
+    return (
+        <Box component="section" aria-labelledby={headingId} sx={projectsBoxStyle}>
+            <Typography id={headingId} variant="h4" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
+                {category}
+            </Typography>
+            <Grid container {...gridContainerStyle}>
+                {projects.map((project) => (
+                    <Grid item {...gridItemStyle} key={project.id}>
+                        <ProjectCard
+                            title={project.title}
+                            description={project.description}
+                            githubLink={project.githubLink}
+                            technology={project.technology}
+                            websiteLink={project.websiteLink}
+                            status={project.status}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
+        </Box>
+    )
+}
 
 const ProjectsPage: NextPage = () => {
     const categories = groupProjectsByCategory(projectData.projects)

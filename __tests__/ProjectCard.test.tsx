@@ -88,4 +88,39 @@ describe('ProjectCard', () => {
         // GitHub button still present alongside it
         expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
     });
+
+    it('names both actions after their project so they are distinguishable out of context', () => {
+        render(
+            <ProjectCard
+                title="Barony"
+                description="Command armies to capture villages and castles against an AI opponent."
+                githubLink="https://github.com/Preponderous-Software/barony"
+                technology="Java"
+                websiteLink="https://barony.preponderous.org"
+            />
+        );
+        expect(screen.getByRole('link', { name: 'Barony on GitHub' })).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: 'Barony: Visit Site' })).toBeInTheDocument();
+    });
+
+    it('keeps the visible button text inside each accessible name', () => {
+        render(
+            <ProjectCard
+                title="Barony"
+                description="Command armies to capture villages and castles against an AI opponent."
+                githubLink="https://github.com/Preponderous-Software/barony"
+                technology="Java"
+                websiteLink="https://barony.preponderous.org"
+            />
+        );
+        // WCAG 2.5.3: speaking what is on screen has to match the link.
+        for (const [visibleText, accessibleName] of [
+            ['GitHub', 'Barony on GitHub'],
+            ['Visit Site', 'Barony: Visit Site'],
+        ] as const) {
+            const link = screen.getByRole('link', { name: accessibleName });
+            expect(link).toHaveTextContent(visibleText);
+            expect(accessibleName).toContain(visibleText);
+        }
+    });
 });
