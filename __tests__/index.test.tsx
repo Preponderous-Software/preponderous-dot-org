@@ -15,11 +15,13 @@ vi.mock('next/router', () => ({
 const projects = projectData.projects as Project[];
 
 // Each card's only stable, class-free handle on which project it is showing is
-// its "GitHub" action, so read those in DOM order to recover the card order.
+// its GitHub action ("<title> on GitHub"), so read those in DOM order to
+// recover the card order. Matched on the label's shape rather than an exact
+// name so this stays about ordering, not about how a card is labelled.
 const renderedTitlesInOrder = (section: HTMLElement): string[] => {
     const byGithubLink = new Map(projects.map((p) => [p.githubLink, p.title]));
     return within(section)
-        .getAllByRole('link', { name: 'GitHub' })
+        .getAllByRole('link', { name: /\bon GitHub$/ })
         .map((link) => byGithubLink.get(link.getAttribute('href') ?? '') ?? '<unknown>');
 };
 
@@ -54,7 +56,7 @@ describe('Home page', () => {
 
     it('links each card that has one to the project\'s own site', () => {
         const withSites = projects.filter((p) => p.websiteLink);
-        const visitLinks = within(projectsSection).getAllByRole('link', { name: 'Visit Site' });
+        const visitLinks = within(projectsSection).getAllByRole('link', { name: /: Visit Site$/ });
         expect(visitLinks.map((link) => link.getAttribute('href')).sort()).toEqual(
             withSites.map((p) => p.websiteLink).sort()
         );
