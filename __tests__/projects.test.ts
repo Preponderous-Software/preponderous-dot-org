@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { groupProjectsByCategory, sortProjectsByTitle, type Project } from '../utils/projects';
+import { categoryHeadingId, groupProjectsByCategory, sortProjectsByTitle, type Project } from '../utils/projects';
 
 const make = (title: string, category?: string): Project => ({
     id: title.toLowerCase(),
@@ -71,5 +71,31 @@ describe('groupProjectsByCategory', () => {
 
     it('returns an empty array for no projects', () => {
         expect(groupProjectsByCategory([])).toEqual([]);
+    });
+});
+
+describe('categoryHeadingId', () => {
+    it('leaves a single-word category as a lowercase slug', () => {
+        expect(categoryHeadingId('Games')).toBe('category-games');
+    });
+
+    it('produces a whitespace-free id for a multi-word category', () => {
+        const id = categoryHeadingId('Developer Tools');
+        expect(id).toBe('category-developer-tools');
+        expect(id).not.toMatch(/\s/);
+    });
+
+    it('collapses punctuation and runs of separators', () => {
+        expect(categoryHeadingId('Games & Simulations')).toBe('category-games-simulations');
+        expect(categoryHeadingId('  Web   Apps  ')).toBe('category-web-apps');
+    });
+
+    it('never emits a leading or trailing separator', () => {
+        expect(categoryHeadingId('!Tools!')).toBe('category-tools');
+    });
+
+    it('falls back to a usable id when a category has nothing sluggable', () => {
+        expect(categoryHeadingId('!!!')).toBe('category-unnamed');
+        expect(categoryHeadingId('')).toBe('category-unnamed');
     });
 });

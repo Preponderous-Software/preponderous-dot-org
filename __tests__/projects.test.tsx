@@ -4,7 +4,7 @@ import { render, screen, within } from '@testing-library/react';
 import ProjectsPage from '../pages/projects';
 import projectData from '../pages/data/projects.json';
 import packageJson from '../package.json';
-import { groupProjectsByCategory, type Project } from '../utils/projects';
+import { categoryHeadingId, groupProjectsByCategory, type Project } from '../utils/projects';
 
 // The page renders TopBar, which reads the current route from next/router; there
 // is no router provider in a bare render, so stand one in.
@@ -54,6 +54,20 @@ describe('Projects page', () => {
             const heading = screen.getByRole('heading', { level: 2, name: category });
             const section = heading.closest('section') as HTMLElement;
             expect(renderedTitlesInOrder(section)).toEqual(categoryProjects.map((p) => p.title));
+        }
+    });
+
+    it('labels each category section with its own heading', () => {
+        for (const { category } of categories) {
+            const heading = screen.getByRole('heading', { level: 2, name: category });
+            const section = heading.closest('section') as HTMLElement;
+            const labelledBy = section.getAttribute('aria-labelledby');
+            // A single, whitespace-free id reference — aria-labelledby is a
+            // space-separated list, so a raw category name with a space in it
+            // would silently point at ids that do not exist.
+            expect(labelledBy).toBe(categoryHeadingId(category));
+            expect(labelledBy).not.toMatch(/\s/);
+            expect(section.querySelector(`#${labelledBy}`)).toBe(heading);
         }
     });
 

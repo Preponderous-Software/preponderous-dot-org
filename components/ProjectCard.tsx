@@ -101,6 +101,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                 </Stack>
             ) : null}
 
+            {/* The visible button text stays short so every card reads the
+                same, but a page full of cards would otherwise expose a dozen
+                links named only "GitHub". aria-label prefixes the project each
+                action belongs to, so the links stay distinguishable when a
+                screen reader lists them away from their card, while still
+                containing the visible text verbatim so voice control can
+                activate them by what is on screen (WCAG 2.5.3). Both actions
+                also carry the site's external-link icon, matching TopBar,
+                BottomBar, and Blurb. */}
             <CardActions sx={projectCardActionsStyle}>
                 <Box sx={{flexGrow: 1}}/>
                 {websiteLink ? (
@@ -112,6 +121,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                         href={websiteLink}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${title}: Visit Site`}
                     >
                         Visit Site
                     </Button>
@@ -120,10 +130,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                     variant={websiteLink ? 'outlined' : 'contained'}
                     size="small"
                     startIcon={<GitHubIcon/>}
+                    endIcon={<OpenInNewIcon fontSize="small"/>}
                     component={Link}
                     href={githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${title} on GitHub`}
                 >
                     GitHub
                 </Button>

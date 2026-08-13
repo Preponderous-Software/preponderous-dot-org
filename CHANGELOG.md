@@ -9,9 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - `public/robots.txt` and `public/sitemap.xml`, listing every indexable route so search engines can discover all of them, documented in `CONFIG.md` (#83).
+- Test coverage for `ColorModeToggleSwitch`, the last component without a test file, including a guard that the `public/colormode/*.svg` icons its styles reference still exist (#94).
 
 ### Fixed
 
+- Each project card's **GitHub** and **Visit Site** buttons are now named after their project for assistive technology, so a page of cards no longer presents a dozen links called only "GitHub"; the **GitHub** button also carries the external-link icon the rest of the site uses for off-site links. The visible button text is unchanged (#92).
+- Category sections on `/projects` now derive their heading id from a slug of the category name, so a category containing a space (or punctuation) keeps its accessible name instead of pointing `aria-labelledby` at ids that do not exist (#93).
 - The top bar's link group is now a named `navigation` landmark ("Primary"), matching the footer's, so assistive technology can list the site's primary navigation and the skip link has a landmark to skip past (#89).
 - The color-mode bootstrap script no longer stamps `dark` on every visitor whose browser blocks site data: the stored-choice and `prefers-color-scheme` lookups are now guarded separately, so a light-preferring visitor with blocked storage gets a light page instead of MUI's light theme on a permanently dark background (#82).
 
