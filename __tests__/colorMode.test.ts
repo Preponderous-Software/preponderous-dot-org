@@ -95,6 +95,10 @@ describe('storeColorMode', () => {
 
 describe('applyColorModeToDocument', () => {
     afterEach(() => {
+        // Unstubbed before `document` is touched below: the SSR case stubs
+        // `document` away, and a failing assertion there would otherwise leave
+        // it stubbed for the rest of the file.
+        vi.unstubAllGlobals();
         document.documentElement.removeAttribute('data-color-mode');
         document.documentElement.style.colorScheme = '';
     });
@@ -121,8 +125,6 @@ describe('applyColorModeToDocument', () => {
         vi.stubGlobal('document', undefined);
 
         expect(() => applyColorModeToDocument('light')).not.toThrow();
-
-        vi.unstubAllGlobals();
     });
 });
 
