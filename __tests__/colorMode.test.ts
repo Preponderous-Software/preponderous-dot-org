@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+    applyColorModeToDocument,
     COLOR_MODE_BOOTSTRAP_SCRIPT,
     COLOR_MODE_STORAGE_KEY,
     readStoredColorMode,
@@ -89,6 +90,39 @@ describe('storeColorMode', () => {
     it('does not throw when the write is rejected', () => {
         stubThrowingStorage();
         expect(() => storeColorMode('dark')).not.toThrow();
+    });
+});
+
+describe('applyColorModeToDocument', () => {
+    afterEach(() => {
+        document.documentElement.removeAttribute('data-color-mode');
+        document.documentElement.style.colorScheme = '';
+    });
+
+    it('stamps the mode onto <html>', () => {
+        applyColorModeToDocument('light');
+
+        expect(document.documentElement.getAttribute('data-color-mode')).toBe('light');
+        expect(document.documentElement.style.colorScheme).toBe('light');
+    });
+
+    // The point of the helper: the bootstrap script stamps the document once
+    // per load, so a later switch has to overwrite what it left behind rather
+    // than leaving styles/globals.css describing the boot-time mode.
+    it('overwrites a mode already stamped on <html>', () => {
+        applyColorModeToDocument('dark');
+        applyColorModeToDocument('light');
+
+        expect(document.documentElement.getAttribute('data-color-mode')).toBe('light');
+        expect(document.documentElement.style.colorScheme).toBe('light');
+    });
+
+    it('does nothing when there is no document, as during server rendering', () => {
+        vi.stubGlobal('document', undefined);
+
+        expect(() => applyColorModeToDocument('light')).not.toThrow();
+
+        vi.unstubAllGlobals();
     });
 });
 

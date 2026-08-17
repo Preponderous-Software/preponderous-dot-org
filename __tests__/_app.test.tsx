@@ -29,6 +29,10 @@ const renderApp = () =>
 
 const currentMode = () => screen.getByTestId('mode').textContent;
 
+// What styles/globals.css keys its !important background rules off, and what
+// the browser paints scrollbars and the overscroll area from.
+const stampedMode = () => document.documentElement.getAttribute('data-color-mode');
+
 // jsdom's matchMedia support is not something these tests should depend on, so
 // every case states the OS preference explicitly — including its absence.
 const stubPrefersDark = (prefersDark: boolean) => {
@@ -58,6 +62,8 @@ describe('MyApp', () => {
     });
 
     afterEach(() => {
+        document.documentElement.removeAttribute('data-color-mode');
+        document.documentElement.style.colorScheme = '';
         vi.unstubAllGlobals();
     });
 
@@ -120,6 +126,42 @@ describe('MyApp', () => {
 
         expect(currentMode()).toBe('light');
         expect(window.localStorage.getItem(COLOR_MODE_STORAGE_KEY)).toBe('light');
+    });
+
+    it('stamps the resolved mode onto <html> on first render', () => {
+        window.localStorage.setItem(COLOR_MODE_STORAGE_KEY, 'light');
+        stubPrefersDark(true);
+        renderApp();
+
+        expect(stampedMode()).toBe('light');
+        expect(document.documentElement.style.colorScheme).toBe('light');
+    });
+
+    // The document-level values used to be stamped once by the bootstrap script
+    // in pages/_document.tsx and never again, leaving the !important background
+    // rules in styles/globals.css — and the browser-painted scrollbars — on the
+    // boot-time mode until the next reload.
+    it('restamps <html> when the mode is toggled', () => {
+        stubPrefersDark(true);
+        renderApp();
+        expect(stampedMode()).toBe('dark');
+
+        fireEvent.click(screen.getByRole('button', { name: 'Toggle' }));
+
+        expect(currentMode()).toBe('light');
+        expect(stampedMode()).toBe('light');
+        expect(document.documentElement.style.colorScheme).toBe('light');
+    });
+
+    it('restamps <html> again when toggled back', () => {
+        stubPrefersDark(false);
+        renderApp();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Toggle' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Toggle' }));
+
+        expect(currentMode()).toBe('light');
+        expect(stampedMode()).toBe('light');
     });
 
     it('still follows the OS preference when storage reads are blocked', () => {

@@ -1,10 +1,23 @@
 import React from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider, createTheme } from '@mui/material';
 import BottomBar from '../components/BottomBar';
 import { ColorModeContext } from '../utils/ColorModeContext';
 import { formatCopyright, LICENSE_SHORT_NAME } from '../utils/copyright';
+
+// BottomBar reads the current route from next/router to decide which footer
+// link is the active one; a bare render has no router provider, so stand one in
+// with a pathname the individual tests can set.
+const router = vi.hoisted(() => ({ pathname: '/' }));
+
+vi.mock('next/router', () => ({
+    useRouter: () => ({ pathname: router.pathname }),
+}));
+
+afterEach(() => {
+    router.pathname = '/';
+});
 
 describe('BottomBar', () => {
     beforeEach(() => {
@@ -48,6 +61,29 @@ describe('BottomBar', () => {
 
     it('leaves the color-mode toggle unchecked in light mode', () => {
         expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).not.toBeChecked();
+    });
+});
+
+describe('BottomBar active page', () => {
+    it('marks the footer link for the current page with aria-current="page"', () => {
+        router.pathname = '/legal';
+        render(<BottomBar version="1.2.3"/>);
+        expect(screen.getByRole('link', { name: /legal/i })).toHaveAttribute('aria-current', 'page');
+        expect(screen.getByRole('link', { name: /home/i })).not.toHaveAttribute('aria-current');
+    });
+
+    it('marks the footer Home link on the home page', () => {
+        router.pathname = '/';
+        render(<BottomBar version="1.2.3"/>);
+        expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('marks no footer link on a page the footer does not link to', () => {
+        router.pathname = '/about';
+        render(<BottomBar version="1.2.3"/>);
+        for (const name of [/home/i, /legal/i, /source code/i, /report a bug/i]) {
+            expect(screen.getByRole('link', { name })).not.toHaveAttribute('aria-current');
+        }
     });
 });
 

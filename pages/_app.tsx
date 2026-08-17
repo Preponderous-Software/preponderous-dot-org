@@ -2,7 +2,13 @@ import type {AppProps} from 'next/app'
 import React, {useEffect, useMemo, useState} from 'react';
 import {Box, createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import {ColorModeContext} from '../utils/ColorModeContext';
-import {ColorMode, readStoredColorMode, resolveInitialColorMode, storeColorMode} from '../utils/colorMode';
+import {
+    applyColorModeToDocument,
+    ColorMode,
+    readStoredColorMode,
+    resolveInitialColorMode,
+    storeColorMode
+} from '../utils/colorMode';
 import '../styles/globals.css';
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -17,7 +23,17 @@ function MyApp({Component, pageProps}: AppProps) {
         const prefersDark = window.matchMedia
             ? window.matchMedia('(prefers-color-scheme: dark)').matches
             : true;
-        setMode(resolveInitialColorMode(stored, prefersDark));
+        const initialMode = resolveInitialColorMode(stored, prefersDark);
+        setMode(initialMode);
+        // Normally a no-op — the bootstrap script in pages/_document.tsx has
+        // already stamped this same value — but it keeps <html> in step with
+        // the theme even where that script never ran (a CSP blocking inline
+        // scripts, say). Stamping the *resolved* mode rather than reacting to
+        // `mode` in its own effect matters: an effect keyed on `mode` would
+        // first fire with the SSR default of 'dark' and briefly restamp the
+        // document dark for a light-mode visitor, which is the exact flash the
+        // bootstrap script exists to prevent.
+        applyColorModeToDocument(initialMode);
     }, []);
 
     // Derived from the current mode rather than a state updater so that the
@@ -31,6 +47,12 @@ function MyApp({Component, pageProps}: AppProps) {
                 setMode(nextMode);
                 // Persist the explicit choice so it survives navigation and reloads.
                 storeColorMode(nextMode);
+                // Keep <html data-color-mode> and its color-scheme in step: the
+                // !important background rules in styles/globals.css are keyed
+                // off that attribute, so the document background and the
+                // browser-painted scrollbars would otherwise stay on the mode
+                // the page booted with until the next reload.
+                applyColorModeToDocument(nextMode);
             }
         }),
         [mode],

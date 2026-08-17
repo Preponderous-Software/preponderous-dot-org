@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Switching the color mode now updates `<html data-color-mode>` and its `color-scheme` as well as the theme, so the document background, the scrollbars, and the overscroll area follow the switch instead of staying on the mode the page was loaded with until the next reload (#96).
+- The footer's **Home** and **Legal** links now carry `aria-current="page"` when they point at the page being viewed, matching the top bar, so a screen reader announces which of them leads nowhere new (#97).
 - Each project card's **GitHub** and **Visit Site** buttons are now named after their project for assistive technology, so a page of cards no longer presents a dozen links called only "GitHub"; the **GitHub** button also carries the external-link icon the rest of the site uses for off-site links. The visible button text is unchanged (#92).
 - Category sections on `/projects` now derive their heading id from a slug of the category name, so a category containing a space (or punctuation) keeps its accessible name instead of pointing `aria-labelledby` at ids that do not exist (#93).
 - The top bar's link group is now a named `navigation` landmark ("Primary"), matching the footer's, so assistive technology can list the site's primary navigation and the skip link has a landmark to skip past (#89).
