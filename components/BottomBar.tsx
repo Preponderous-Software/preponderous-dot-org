@@ -1,8 +1,10 @@
 import {AppBar, Box, Button, Link, Toolbar, Typography, useTheme} from '@mui/material';
+import {useRouter} from 'next/router';
 import NextLink from 'next/link';
 import React, {useContext} from 'react';
 import {ColorModeToggleSwitch} from './ColorModeToggleSwitch';
 import {ColorModeContext} from '../utils/ColorModeContext';
+import {isActiveNavLink} from '../utils/nav';
 import CodeIcon from '@mui/icons-material/Code';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import GavelIcon from '@mui/icons-material/Gavel';
@@ -20,9 +22,10 @@ import {
 
 // Internal routes (e.g. /legal) navigate in the same tab; off-site links open in
 // a new tab with rel="noopener noreferrer", matching TopBar's NavButton.
-const FooterButton: React.FC<{ href: string; icon: React.ReactNode; children: React.ReactNode }> = ({
+const FooterButton: React.FC<{ href: string; icon: React.ReactNode; active?: boolean; children: React.ReactNode }> = ({
     href,
     icon,
+    active = false,
     children,
 }) => {
     const isExternal = href.startsWith('http');
@@ -33,6 +36,9 @@ const FooterButton: React.FC<{ href: string; icon: React.ReactNode; children: Re
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             startIcon={icon}
+            // Tells assistive technology which of these links refers to the
+            // page already being read, the same cue TopBar's NavButton gives.
+            aria-current={active ? 'page' : undefined}
             sx={(theme) => footerButtonStyle(theme)}
         >
             {children}
@@ -76,6 +82,7 @@ interface BottomBarProps {
 const BottomBar: React.FC<BottomBarProps> = ({version}) => {
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
+    const {pathname} = useRouter();
 
     return (
         <AppBar position="static" component="footer" sx={(theme) => bottomAppBarStyle(theme)}>
@@ -87,10 +94,10 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                     </Box>
 
                     <Box component="nav" aria-label="Footer" sx={(theme) => flexContainerStyle(theme, {gap: 1})}>
-                        <FooterButton href="/" icon={<HomeIcon/>}>
+                        <FooterButton href="/" icon={<HomeIcon/>} active={isActiveNavLink(pathname, '/')}>
                             Home
                         </FooterButton>
-                        <FooterButton href="/legal" icon={<GavelIcon/>}>
+                        <FooterButton href="/legal" icon={<GavelIcon/>} active={isActiveNavLink(pathname, '/legal')}>
                             Legal
                         </FooterButton>
                         <FooterButton

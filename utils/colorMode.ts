@@ -45,6 +45,21 @@ export const storeColorMode = (mode: ColorMode): void => {
     }
 };
 
+// Stamp the mode now in effect onto <html>, exactly as
+// COLOR_MODE_BOOTSTRAP_SCRIPT does before first paint. That script runs once
+// per document load, so without this the [data-color-mode] rules in
+// styles/globals.css — and the `color-scheme` the browser paints scrollbars,
+// form controls, and the overscroll area with — would keep describing the mode
+// the page booted with once the visitor toggles. Guarded like the storage
+// helpers above: `document` does not exist during server rendering.
+export const applyColorModeToDocument = (mode: ColorMode): void => {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    document.documentElement.setAttribute('data-color-mode', mode);
+    document.documentElement.style.colorScheme = mode;
+};
+
 // A blocking inline script, rendered by pages/_document.tsx into <head>, that
 // runs before the browser parses/paints <body> — before any bundle (and so
 // before resolveInitialColorMode/readStoredColorMode) has loaded. It
