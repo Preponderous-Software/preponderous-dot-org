@@ -49,6 +49,10 @@ Cards without a **Visit Site** button have no hosted version — use the **GitHu
 2. Your choice is remembered for future visits. If you've never chosen, the site follows your operating system's light/dark preference.
 3. If your browser is set to block site data, the toggle still switches the mode for as long as you're on the page — the choice simply isn't remembered.
 
+### Reducing Motion
+
+Buttons and cards lift or zoom slightly when you point at them. If your operating system is set to reduce motion (for example, **Settings → Accessibility → Display → Reduce motion**), the site follows that setting and drops those effects — the colour and shadow changes that show what you're pointing at stay, so nothing becomes harder to use.
+
 ### Viewing Licensing and Privacy Information
 
 1. Click **Legal** in the footer, or the license name next to the copyright notice.

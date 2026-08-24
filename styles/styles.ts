@@ -1,6 +1,33 @@
 import {Theme} from '@mui/material/styles';
 
 /**
+ * Media query matching a visitor who has asked their operating system to
+ * reduce motion. Exported so the tests can assert the styles below honour it
+ * without restating the query string.
+ */
+export const REDUCED_MOTION_QUERY = '@media (prefers-reduced-motion: reduce)';
+
+/**
+ * Cancels a hover effect's movement for reduced-motion visitors, leaving the
+ * colour and shadow feedback of that same hover intact — those are feedback
+ * rather than motion, and dropping them would cost the affordance without
+ * benefiting anyone.
+ *
+ * The global rule in styles/globals.css collapses transition durations, but a
+ * zero-duration transform still teleports the element to its lifted position;
+ * the transform itself has to be undone here. Spread this **last** into a
+ * style object: Emotion serializes keys in insertion order, and the nested
+ * `&:hover` below carries the same specificity as the one it overrides, so it
+ * only wins while it comes later in the generated stylesheet.
+ */
+const withoutHoverMotion = {
+    [REDUCED_MOTION_QUERY]: {
+        transition: 'none',
+        '&:hover': {transform: 'none'},
+    },
+};
+
+/**
  * Standard animation transition for interactive elements.
  */
 const commonTransition = {
@@ -33,6 +60,7 @@ export const navButtonStyle = (theme: Theme) => ({
         transform: 'translateY(-2px)',
         ...commonHoverBg(theme),
     },
+    ...withoutHoverMotion,
 });
 
 /**
@@ -63,6 +91,7 @@ export const toggleSwitchBoxStyle = {
     flexGrow: 0,
     ...commonTransition,
     '&:hover': {transform: 'scale(1.1)'},
+    ...withoutHoverMotion,
 };
 
 /**
@@ -99,6 +128,7 @@ export const versionNumberStyle = (theme: Theme) => ({
         backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
         transform: 'scale(1.05)',
     },
+    ...withoutHoverMotion,
 });
 
 /**
@@ -163,6 +193,7 @@ export const cardWrapperStyle = {
         transform: 'translateY(-2px)',
         boxShadow: '0 6px 20px rgba(0,0,0,0.12)',
     },
+    ...withoutHoverMotion,
 };
 
 /**
@@ -248,6 +279,7 @@ export const infoCardStyle = (theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
+    ...withoutHoverMotion,
 });
 
 /**
