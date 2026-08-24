@@ -27,6 +27,25 @@ html[data-color-mode='light'] body {
   color-scheme: light;
 }
 
+/* A visitor who has asked their operating system to reduce motion still gets
+   every state change the site expresses — just without the travel. Durations
+   collapse to an imperceptible 0.01ms rather than to `none` so that
+   transitionend/animationend still fire and anything waiting on one is not
+   left hanging. This covers the motion the site does not author itself: MUI's
+   ripples and Switch thumb travel, and the skip link in pages/_app.tsx, whose
+   transform is how it hides rather than decoration. The authored hover lifts
+   in styles/styles.ts are cancelled there instead — a zero-duration transform
+   would still teleport the element to its lifted position. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
