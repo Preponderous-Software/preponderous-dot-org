@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - `public/robots.txt` and `public/sitemap.xml`, listing every indexable route so search engines can discover all of them, documented in `CONFIG.md` (#83).
 - Test coverage for `ColorModeToggleSwitch`, the last component without a test file, including a guard that the `public/colormode/*.svg` icons its styles reference still exist (#94).
+- Test coverage for `pages/_document.tsx`, pinning down the parts that would regress silently: the color-mode bootstrap script stays inline, render-blocking, and ahead of the page content; the icon links keep pointing at the assets shipped under `public/`; and the document keeps declaring `lang="en"` (#90).
+
+### Changed
+
+- The project-card grid shown on the home page and on `/projects` is now a single `ProjectGrid` component rather than a copy in each page, so a field added to a project card is wired up once and appears on both pages instead of having to be threaded through two identical call sites. What renders is unchanged (#101).
 
 ### Fixed
 

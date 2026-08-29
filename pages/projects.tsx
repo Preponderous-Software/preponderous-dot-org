@@ -1,18 +1,16 @@
 import type {NextPage} from 'next'
-import {Box, Container, Grid, Typography} from '@mui/material'
+import {Box, Container, Typography} from '@mui/material'
 import React from 'react'
 import TopBar from '../components/TopBar'
 import BottomBar from '../components/BottomBar'
 import Seo from '../components/Seo'
-import ProjectCard from '../components/ProjectCard'
+import ProjectGrid from '../components/ProjectGrid'
 import {categoryHeadingId, groupProjectsByCategory, type Project} from '../utils/projects'
 import {
     pageStyle,
     sectionHeaderStyle,
     sectionDividerStyle,
     projectsBoxStyle,
-    gridContainerStyle,
-    gridItemStyle,
 } from '../styles/styles'
 
 interface ProjectData {
@@ -34,20 +32,7 @@ const CategorySection: React.FC<{category: string; projects: Project[]}> = ({cat
             <Typography id={headingId} variant="h4" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
                 {category}
             </Typography>
-            <Grid container {...gridContainerStyle}>
-                {projects.map((project) => (
-                    <Grid item {...gridItemStyle} key={project.id}>
-                        <ProjectCard
-                            title={project.title}
-                            description={project.description}
-                            githubLink={project.githubLink}
-                            technology={project.technology}
-                            websiteLink={project.websiteLink}
-                            status={project.status}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+            <ProjectGrid projects={projects}/>
         </Box>
     )
 }
