@@ -8,7 +8,9 @@ out/
 ### VS Code ###
 .vscode/
 
+### Local environment files (see CONFIG.md) ###
 .env
+.env*.local
 
 ### Node / Next.js ###
 node_modules/

@@ -15,9 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - The project-card grid shown on the home page and on `/projects` is now a single `ProjectGrid` component rather than a copy in each page, so a field added to a project card is wired up once and appears on both pages instead of having to be threaded through two identical call sites. What renders is unchanged (#101).
+- `README.md` now has a Development section, mirroring `dansplugins-dot-com`'s, covering every way the repository can be run: the hot-reloading dev server, the production build under Docker Compose (`compose.yaml`/`Dockerfile`), and the dev container under `.devcontainer/` — the latter two had shipped since #40 without being documented. `CONTRIBUTING.md` points at it.
 
 ### Fixed
 
+- `.gitignore` now excludes `.env*.local` as well as `.env`, so the `.env.local` file that `CONFIG.md` has always described as "excluded from version control" actually is.
 - The site's hover and focus animations now honour the operating system's "reduce motion" setting: the lift on navigation buttons and project cards, the zoom on the color-mode toggle and version badge, and the transitions MUI supplies of its own are all suppressed for visitors who have asked for less motion. The hover colour and shadow changes are kept, so the feedback those effects give is unchanged (#99).
 - Switching the color mode now updates `<html data-color-mode>` and its `color-scheme` as well as the theme, so the document background, the scrollbars, and the overscroll area follow the switch instead of staying on the mode the page was loaded with until the next reload (#96).
 - The footer's **Home** and **Legal** links now carry `aria-current="page"` when they point at the page being viewed, matching the top bar, so a screen reader announces which of them leads nowhere new (#97).

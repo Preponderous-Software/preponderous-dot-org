@@ -27,6 +27,8 @@ Thank you for your interest in contributing to the Preponderous Software website
 6. Start the development server: `npm run dev`
    If you encounter errors, please open an issue.
 
+If you would rather not install Node.js on your machine, the repository ships a dev container (`.devcontainer/`) with Node.js 18 pre-installed — open the project in it and run steps 5–6 inside. See [Development](README.md#development) in the README for that and for running the production build with Docker Compose.
+
 ## Identifying What to Work On
 
 Work items are tracked as [GitHub issues](https://github.com/Preponderous-Software/preponderous-dot-org/issues).
