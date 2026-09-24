@@ -22,6 +22,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
+  0.2.0 (tag `0.2.0`, commit 69b494b), which checks `TRACE_USAGE_REPORTING` / `DO_NOT_TRACK` itself
+  and exposes `disabledReason`. `utils/usage-reporting.ts` now uses the client's
+  `TraceClient.environmentOptsOut` for that check instead of its own copy, and hands the client the
+  same two values explicitly so it never falls back to `process.env`; the switches, their order and
+  the logged reasons are unchanged.
+
 - The project-card grid shown on the home page and on `/projects` is now a single `ProjectGrid` component rather than a copy in each page, so a field added to a project card is wired up once and appears on both pages instead of having to be threaded through two identical call sites. What renders is unchanged (#101).
 - `README.md` now has a Development section, mirroring `dansplugins-dot-com`'s, covering every way the repository can be run: the hot-reloading dev server, the production build under Docker Compose (`compose.yaml`/`Dockerfile`), and the dev container under `.devcontainer/` — the latter two had shipped since #40 without being documented. `CONTRIBUTING.md` points at it.
 
