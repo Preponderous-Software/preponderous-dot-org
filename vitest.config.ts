@@ -7,5 +7,8 @@ export default defineConfig({
         environment: 'jsdom',
         include: ['__tests__/**/*.test.{ts,tsx}'],
         setupFiles: ['./vitest.setup.ts'],
+        // No test ever reports to trace: the ones that exercise reporting build
+        // their own client against a stub.
+        env: { USAGE_REPORTING_ENABLED: 'false' },
     },
 });

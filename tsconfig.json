@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "pages/**/*.ts", "pages/**/*.tsx", "components/**/*.ts", "components/**/*.tsx", "utils/**/*.ts", "styles/**/*.ts"],
+  "include": ["next-env.d.ts", "middleware.ts", "pages/**/*.ts", "pages/**/*.tsx", "components/**/*.ts", "components/**/*.tsx", "utils/**/*.ts", "styles/**/*.ts"],
   "exclude": ["node_modules", "__tests__", "vitest.config.ts"]
 }

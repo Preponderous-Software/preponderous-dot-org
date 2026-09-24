@@ -12,6 +12,7 @@ COPY pages ./pages
 COPY public ./public
 COPY styles ./styles
 COPY utils ./utils
+COPY middleware.ts ./
 COPY next-env.d.ts ./
 COPY next.config.js ./
 COPY tsconfig.json ./
