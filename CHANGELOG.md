@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
+  `preponderous-dot-org`: one `page-view` event per HTML page served, tagged with the path and the site version
+  only, sent server-side from `middleware.ts` (trace decision 0002). Crawlers, monitors,
+  prefetches, assets and 404s are skipped; nothing about the visitor is sent. The key is read from
+  `USAGE_REPORTING_KEY` only, and reporting is off without it, with `USAGE_REPORTING_ENABLED=false`,
+  `TRACE_USAGE_REPORTING=off` or `DO_NOT_TRACK=1`. The client is `trace-client.ts` 0.1.0 vendored
+  unmodified from `Stephenson-Software/trace-client-js`.
+
 - `public/robots.txt` and `public/sitemap.xml`, listing every indexable route so search engines can discover all of them, documented in `CONFIG.md` (#83).
 - Test coverage for `ColorModeToggleSwitch`, the last component without a test file, including a guard that the `public/colormode/*.svg` icons its styles reference still exist (#94).
 - Test coverage for `pages/_document.tsx`, pinning down the parts that would regress silently: the color-mode bootstrap script stays inline, render-blocking, and ahead of the page content; the icon links keep pointing at the assets shipped under `public/`; and the document keeps declaring `lang="en"` (#90).

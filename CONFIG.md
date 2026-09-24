@@ -4,7 +4,17 @@ This document describes the configuration options for the Preponderous Software 
 
 ## Environment Variables
 
-The site is a static project showcase and requires **no environment variables** to build or run. If configurable values are added in the future, create a `.env.local` file in the project root (it is excluded from version control) and document the variables here.
+The site is a static project showcase and requires **no environment variables** to build or run. Three optional ones, read by the server at runtime only, control [usage reporting](README.md#usage-reporting):
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `USAGE_REPORTING_KEY` | unset — nothing is reported | The [trace](https://trace.danielstephenson.dev) write key for the `preponderous-dot-org` program. Read by `middleware.ts` only: never inlined into the browser bundle and never committed; keep it in the deployment's environment. |
+| `USAGE_REPORTING_ENABLED` | `true` | Set to `false` to stop reporting page views even when a key is set. `TRACE_USAGE_REPORTING=off` and `DO_NOT_TRACK=1` do the same and win over it. |
+| `USAGE_REPORTING_ENDPOINT` | `https://trace.danielstephenson.dev` | The trace server page views are sent to. |
+
+A new page under `pages/` must also be added to `PAGE_ROUTES` in [`utils/page-view-policy.ts`](utils/page-view-policy.ts) to be counted; a test fails until it is.
+
+If other configurable values are added in the future, create a `.env.local` file in the project root (it is excluded from version control) and document the variables here.
 
 One value is injected automatically by `next.config.js` and does not need to be set by hand:
 

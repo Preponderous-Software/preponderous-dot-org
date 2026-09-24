@@ -46,6 +46,29 @@ Please file a bug report [here](https://github.com/Preponderous-Software/prepond
 
 - [Known Bugs](https://github.com/Preponderous-Software/preponderous-dot-org/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
+## Usage reporting
+
+When the server is given a trace key in `USAGE_REPORTING_KEY`, it reports one `page-view` event per
+HTML page it serves to [trace](https://trace.danielstephenson.dev), as the program `preponderous-dot-org`,
+carrying the page's path (for example `/about` — never a query string or fragment) and the site
+version. Nothing about the visitor is sent: no IP address, user agent, cookie, session, account or
+referrer. No script is added to any page — the report is made by the server (Next.js middleware),
+so the key never reaches the browser — and crawlers, uptime monitors, prefetches, API calls,
+assets and 404s are not counted.
+
+Reporting is off unless a key is set, and any of these turns it off:
+
+- `USAGE_REPORTING_ENABLED=false` in the server's environment
+- `TRACE_USAGE_REPORTING=off` in the environment (also `false`, `0`, `no`; shared by every program
+  that reports to trace, and it wins over the setting above)
+- `DO_NOT_TRACK=1` in the environment (also `true`, `yes`; see
+  [consoledonottrack.com](https://consoledonottrack.com))
+- leaving `USAGE_REPORTING_KEY` unset
+
+`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. With a key set, the
+server logs one line on its first request saying whether reporting is on and, if it is off, which
+switch turned it off. Details: https://github.com/Stephenson-Software/trace#usage-reporting
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
