@@ -28,6 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   `TraceClient.environmentOptsOut` for that check instead of its own copy, and hands the client the
   same two values explicitly so it never falls back to `process.env`; the switches, their order and
   the logged reasons are unchanged.
+- The Privacy section of `/legal` now discloses page-view reporting: what the server records (path
+  and site version), what it does not, that it is sent server-side to trace with no script in the
+  browser, and a link to trace's details. It previously described the colour preference as the
+  only data involved; `USER_GUIDE.md` is updated to match (#108).
 
 - The project-card grid shown on the home page and on `/projects` is now a single `ProjectGrid` component rather than a copy in each page, so a field added to a project card is wired up once and appears on both pages instead of having to be threaded through two identical call sites. What renders is unchanged (#101).
 - `README.md` now has a Development section, mirroring `dansplugins-dot-com`'s, covering every way the repository can be run: the hot-reloading dev server, the production build under Docker Compose (`compose.yaml`/`Dockerfile`), and the dev container under `.devcontainer/` — the latter two had shipped since #40 without being documented. `CONTRIBUTING.md` points at it.

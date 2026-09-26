@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import LegalPage from '../pages/legal';
 import { COLOR_MODE_STORAGE_KEY } from '../utils/colorMode';
 import { COPYRIGHT_HOLDER, LICENSE_URL, formatCopyright } from '../utils/copyright';
+import { DEFAULT_ENDPOINT, DETAILS_URL } from '../utils/usage-reporting';
 
 // The page renders TopBar, which reads the current route from next/router; there
 // is no router provider in a bare render, so stand one in.
@@ -41,6 +42,18 @@ describe('Legal page', () => {
 
     it('names the only value stored on the visitor\'s device', () => {
         expect(screen.getByText(COLOR_MODE_STORAGE_KEY)).toBeInTheDocument();
+    });
+
+    it('discloses page-view reporting, linking to where the reports go', () => {
+        expect(screen.getByText(/the server counts page views/i)).toBeInTheDocument();
+        // The page hard-codes these rather than importing the server-only module,
+        // so pin them to the values the reporting code actually uses.
+        const trace = screen.getByRole('link', { name: 'trace' });
+        expect(trace).toHaveAttribute('href', DEFAULT_ENDPOINT);
+        expect(trace).toHaveAttribute('target', '_blank');
+        const details = screen.getByRole('link', { name: /what is and is not sent/i });
+        expect(details).toHaveAttribute('href', DETAILS_URL);
+        expect(details).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('credits the third-party components the site is built on', () => {

@@ -19,6 +19,11 @@ const version = require('../package.json').version;
 
 const REPO_URL = 'https://github.com/Preponderous-Software/preponderous-dot-org';
 
+// Where page views go (middleware.ts). Not imported from utils/usage-reporting.ts,
+// which is kept out of the browser bundle.
+const TRACE_URL = 'https://trace.danielstephenson.dev';
+const USAGE_REPORTING_DETAILS_URL = 'https://github.com/Stephenson-Software/trace#usage-reporting';
+
 const LegalSection: React.FC<{title: string; children: React.ReactNode}> = ({title, children}) => (
     <Box component="section" sx={{mb: 5}}>
         <Typography variant="h5" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
@@ -111,8 +116,19 @@ const LegalPage: NextPage = () => (
 
             <LegalSection title="Privacy">
                 <Paragraph>
-                    This website has no accounts, no advertising, and no analytics or tracking
-                    scripts. It does not collect personal information and sets no cookies.
+                    This website has no accounts, no advertising, and no tracking scripts. It does
+                    not collect personal information and sets no cookies.
+                </Paragraph>
+                <Paragraph>
+                    When usage reporting is switched on, the server counts page views: for each page
+                    it serves, it records the page&apos;s path and the site&apos;s version, and nothing
+                    else — no IP address, browser details, cookies, referrer, query string, or
+                    identity. The count is sent from the server to{' '}
+                    <Link href={TRACE_URL} target="_blank" rel="noopener noreferrer">trace</Link>;
+                    no script runs in your browser for it, and crawlers are not counted.{' '}
+                    <Link href={USAGE_REPORTING_DETAILS_URL} target="_blank" rel="noopener noreferrer">
+                        What is and is not sent
+                    </Link>.
                 </Paragraph>
                 <Paragraph>
                     The only data stored on your device is your light/dark mode preference, saved in
