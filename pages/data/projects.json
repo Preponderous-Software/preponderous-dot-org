@@ -47,6 +47,16 @@
       "status": "Maintenance"
     },
     {
+      "id": "fishe",
+      "title": "FishE",
+      "description": "Explore a fishing village and perform actions in it. The text game that tak was extracted from.",
+      "githubLink": "https://github.com/Stephenson-Software/FishE",
+      "technology": "Python",
+      "websiteLink": "https://fishe.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active"
+    },
+    {
       "id": "microbiome",
       "title": "microbiome",
       "description": "Witness the activity of a virtual microbial community.",
@@ -62,6 +72,16 @@
       "description": "Control an ever-increasingly growing ophidian in a virtual environment.",
       "githubLink": "https://github.com/Preponderous-Software/Ophidian",
       "technology": "Python",
+      "category": "Games",
+      "status": "Active"
+    },
+    {
+      "id": "overwinter",
+      "title": "Overwinter",
+      "description": "Four people, one weather station, twenty days until a plane. A text adventure on tak.",
+      "githubLink": "https://github.com/Stephenson-Software/Overwinter",
+      "technology": "Python",
+      "websiteLink": "https://overwinter.danielstephenson.dev",
       "category": "Games",
       "status": "Active"
     },
@@ -90,6 +110,25 @@
       "githubLink": "https://github.com/Preponderous-Software/Roam",
       "technology": "Python",
       "websiteLink": "https://roam.preponderous.org",
+      "category": "Games",
+      "status": "Active"
+    },
+    {
+      "id": "tak",
+      "title": "tak",
+      "description": "A text-adventure kit: console and in-browser front-ends, save slots, and NPC dialogue.",
+      "githubLink": "https://github.com/Stephenson-Software/tak",
+      "technology": "Python",
+      "category": "Libraries",
+      "status": "Active"
+    },
+    {
+      "id": "tidewater",
+      "title": "Tidewater",
+      "description": "A time-loop text adventure in FishE's village: the day resets at the bell, what you know does not.",
+      "githubLink": "https://github.com/Stephenson-Software/Tidewater",
+      "technology": "Python",
+      "websiteLink": "https://tidewater.danielstephenson.dev",
       "category": "Games",
       "status": "Active"
     },

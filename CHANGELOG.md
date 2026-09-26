@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- `Games` gains FishE, Tidewater and Overwinter, the text games built on `tak`, each with a live link to its in-browser build on danielstephenson.dev, and `Libraries` gains `tak` itself.
+
 - Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
   `preponderous-dot-org`: one `page-view` event per HTML page served, tagged with the path and the site version
   only, sent server-side from `middleware.ts` (trace decision 0002). Crawlers, monitors,
