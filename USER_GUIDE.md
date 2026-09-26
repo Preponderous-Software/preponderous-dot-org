@@ -56,7 +56,7 @@ Buttons and cards lift or zoom slightly when you point at them. If your operatin
 ### Viewing Licensing and Privacy Information
 
 1. Click **Legal** in the footer, or the license name next to the copyright notice.
-2. The **/legal** page covers the license the projects are published under, the copyright and disclaimer, what the site stores on your device (only your light/dark preference), and the third-party components the site is built with.
+2. The **/legal** page covers the license the projects are published under, the copyright and disclaimer, what the site stores on your device (only your light/dark preference), what the server counts when usage reporting is on (each page served, by path and site version only — nothing about you), and the third-party components the site is built with.
 3. Links to the full license text open in a new tab.
 
 ### Learning About Preponderous Software
