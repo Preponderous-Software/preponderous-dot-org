@@ -40,6 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- The home page no longer scrolls sideways on a 390px phone: the hero title's fixed 3.75rem size rendered "Preponderous" wider than the content column, so it steps down to 2.5rem on xs. Project cards take a minimum rather than a fixed height, so a card whose title wraps (Artificial Consciousness Simulation Framework at 1280px) grows with its row instead of clipping its GitHub button.
 - `.gitignore` now excludes `.env*.local` as well as `.env`, so the `.env.local` file that `CONFIG.md` has always described as "excluded from version control" actually is.
 - The site's hover and focus animations now honour the operating system's "reduce motion" setting: the lift on navigation buttons and project cards, the zoom on the color-mode toggle and version badge, and the transitions MUI supplies of its own are all suppressed for visitors who have asked for less motion. The hover colour and shadow changes are kept, so the feedback those effects give is unchanged (#99).
 - Switching the color mode now updates `<html data-color-mode>` and its `color-scheme` as well as the theme, so the document background, the scrollbars, and the overscroll area follow the switch instead of staying on the mode the page was loaded with until the next reload (#96).
