@@ -215,10 +215,13 @@ export const gridItemStyle = {
 export const projectsBoxStyle = {flexGrow: 1, marginBottom: 2};
 
 /**
- * Project card with a fixed height so the grid stays even.
+ * Project card with a minimum height so the grid stays even. `height: 100%`
+ * stretches every card to its grid row, so a card whose title wraps onto extra
+ * lines grows (and its row-mates with it) instead of clipping its actions.
  */
 export const projectCardStyle = {
-    height: '16rem',
+    minHeight: '16rem',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
 };
@@ -251,6 +254,10 @@ export const blurbBoxStyle = (theme: Theme) => ({
  * Centered blurb title.
  */
 export const blurbTitleStyle = (theme: Theme) => ({
+    // The h2 variant's fixed 3.75rem renders "Preponderous" wider than a phone's
+    // content column, which scrolled the whole page sideways; step it down on xs.
+    fontSize: {xs: '2.5rem', sm: '3.75rem'},
+    overflowWrap: 'break-word',
     fontWeight: 700,
     letterSpacing: '-0.02em',
     marginBottom: theme.spacing(4),

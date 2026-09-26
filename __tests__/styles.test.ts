@@ -4,11 +4,13 @@ import { createTheme } from '@mui/material';
 import { describe, expect, it } from 'vitest';
 import {
     REDUCED_MOTION_QUERY,
+    blurbTitleStyle,
     cardWrapperStyle,
     footerButtonStyle,
     gridItemStyle,
     infoCardStyle,
     navButtonStyle,
+    projectCardStyle,
     toggleSwitchBoxStyle,
     versionNumberStyle,
 } from '../styles/styles';
@@ -85,5 +87,23 @@ describe('globals.css', () => {
         expect(block).not.toBeNull();
         expect(block?.[0]).toMatch(/animation-duration:\s*0\.01ms\s*!important/);
         expect(block?.[0]).toMatch(/transition-duration:\s*0\.01ms\s*!important/);
+    });
+});
+
+describe('layout overflow guards', () => {
+    // A fixed height clipped any card whose title wrapped to extra lines (the
+    // Artificial Consciousness Simulation Framework card at 1280px), pushing
+    // its GitHub button out of the box. The card must be free to grow.
+    it('gives the project card a minimum height rather than a fixed one', () => {
+        expect(projectCardStyle).toMatchObject({ minHeight: '16rem', height: '100%' });
+    });
+
+    // At the h2 variant's 3.75rem, "Preponderous" alone is wider than a 390px
+    // phone's content column and scrolled the whole home page sideways.
+    it('steps the hero title down on the smallest breakpoint', () => {
+        const title = blurbTitleStyle(theme) as StyleObject;
+        const fontSize = title.fontSize as { xs: string; sm: string };
+        expect(parseFloat(fontSize.xs)).toBeLessThan(parseFloat(fontSize.sm));
+        expect(title.overflowWrap).toBe('break-word');
     });
 });
