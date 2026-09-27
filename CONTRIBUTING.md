@@ -46,12 +46,15 @@ Work items are tracked as [GitHub issues](https://github.com/Preponderous-Softwa
 
 ## Testing
 
-Lint and run the unit tests before opening a pull request:
+Lint, run the unit tests, and build before opening a pull request — CI runs the same three steps on every pull request and fails if any of them does:
 
 ```bash
 npm run lint
 npm test
+npm run build
 ```
+
+Stop `npm run dev` before running `npm run build`: both write to `.next`, and the build breaks a running dev server.
 
 For manual testing, start the development server:
 
