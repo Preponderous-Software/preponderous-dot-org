@@ -1,6 +1,7 @@
 import React from 'react';
-import {Box, Button, Container, Typography} from '@mui/material';
+import {Box, Button, Container, Stack, Typography} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import NextLink from 'next/link';
 import TopBar from './TopBar';
 import Seo from './Seo';
@@ -15,7 +16,38 @@ const version = require('../package.json').version;
  * thrown or missing route still looks like the rest of the MUI-themed site
  * instead of Next.js's unstyled default.
  */
-const ErrorPage: React.FC<{code: string; title: string; message: string}> = ({code, title, message}) => (
+// A second way forward suited to the error, beside "Back to home" — e.g. the
+// project list from a 404, or a bug report from a 500. Off-site targets open
+// in a new tab with the external-link icon, like the rest of the site.
+export interface ErrorPageAction {
+    href: string;
+    label: string;
+    icon?: React.ReactNode;
+}
+
+const SecondaryAction: React.FC<{action: ErrorPageAction}> = ({action}) => {
+    const isExternal = action.href.startsWith('http');
+    const button = (
+        <Button
+            variant="outlined"
+            href={action.href}
+            startIcon={action.icon}
+            endIcon={isExternal ? <OpenInNewIcon fontSize="small"/> : undefined}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+        >
+            {action.label}
+        </Button>
+    );
+    return isExternal ? button : <NextLink href={action.href} passHref>{button}</NextLink>;
+};
+
+const ErrorPage: React.FC<{code: string; title: string; message: string; secondaryAction?: ErrorPageAction}> = ({
+    code,
+    title,
+    message,
+    secondaryAction,
+}) => (
     <Box sx={(theme) => pageStyle(theme)}>
         <Seo title={`${code} — ${title}`} description={message}/>
         <TopBar/>
@@ -29,11 +61,14 @@ const ErrorPage: React.FC<{code: string; title: string; message: string}> = ({co
             <Typography variant="body1" color="text.secondary" sx={{mb: 3}}>
                 {message}
             </Typography>
-            <NextLink href="/" passHref>
-                <Button variant="contained" startIcon={<HomeIcon/>}>
-                    Back to home
-                </Button>
-            </NextLink>
+            <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} justifyContent="center">
+                <NextLink href="/" passHref>
+                    <Button variant="contained" startIcon={<HomeIcon/>}>
+                        Back to home
+                    </Button>
+                </NextLink>
+                {secondaryAction ? <SecondaryAction action={secondaryAction}/> : null}
+            </Stack>
         </Container>
         <BottomBar version={version}/>
     </Box>

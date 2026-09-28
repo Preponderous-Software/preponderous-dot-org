@@ -25,4 +25,10 @@ describe('404 page', () => {
     it('offers a way back to the home page', () => {
         expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
     });
+
+    it('offers the project list as a second way forward, in the same tab', () => {
+        const link = screen.getByRole('link', { name: /browse projects/i });
+        expect(link).toHaveAttribute('href', '/projects');
+        expect(link).not.toHaveAttribute('target');
+    });
 });
