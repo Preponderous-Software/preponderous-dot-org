@@ -4,6 +4,8 @@ import { render, screen } from '@testing-library/react';
 import Blurb from '../components/Blurb';
 
 const ORG_URL = 'https://github.com/Preponderous-Software';
+const REPOSITORIES_URL = 'https://github.com/orgs/Preponderous-Software/repositories';
+const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software+is%3Aissue+is%3Aopen&type=issues';
 
 describe('Blurb', () => {
     it('renders the hero heading and call-to-action links', () => {
@@ -31,18 +33,18 @@ describe('Blurb', () => {
 
     it('renders the linking info cards as real anchors that open in a new tab', () => {
         render(<Blurb />);
-        for (const name of [/^contribute/i, /^explore the code/i]) {
+        for (const [name, href] of [[/^contribute/i, OPEN_ISSUES_URL], [/^explore the code/i, REPOSITORIES_URL]] as const) {
             const card = screen.getByRole('link', { name });
-            expect(card).toHaveAttribute('href', ORG_URL);
+            expect(card).toHaveAttribute('href', href);
             expect(card).toHaveAttribute('target', '_blank');
             expect(card).toHaveAttribute('rel', 'noopener noreferrer');
         }
     });
 
-    it('leaves the non-linking info card as plain, unfocusable content', () => {
+    it('links the Source Available card to the license on /legal, in the same tab', () => {
         render(<Blurb />);
-        const card = screen.getByText('Source Available').closest('a');
-        expect(card).toBeNull();
-        expect(screen.queryByRole('link', { name: /source available/i })).not.toBeInTheDocument();
+        const card = screen.getByRole('link', { name: /^source available/i });
+        expect(card).toHaveAttribute('href', '/legal');
+        expect(card).not.toHaveAttribute('target');
     });
 });

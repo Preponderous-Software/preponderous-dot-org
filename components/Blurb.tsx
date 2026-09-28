@@ -4,6 +4,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import CodeIcon from '@mui/icons-material/Code';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import NextLink from 'next/link';
 
 import {
     blurbBoxStyle,
@@ -18,6 +19,13 @@ import {
 } from '../styles/styles';
 
 const ORG_URL = 'https://github.com/Preponderous-Software';
+// Every open issue across the organization's repositories — somewhere to pick
+// up work, which is what "Contribute" promises, rather than the org overview
+// that "View on GitHub" already opens.
+const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software+is%3Aissue+is%3Aopen&type=issues';
+// The organization's repository list, so "Explore the Code" lands straight on
+// the code instead of the org overview's pinned-repository summary.
+const REPOSITORIES_URL = 'https://github.com/orgs/Preponderous-Software/repositories';
 
 const InfoCard: React.FC<{
     icon: React.ReactNode;
@@ -25,6 +33,9 @@ const InfoCard: React.FC<{
     content: string;
     href?: string
 }> = ({icon, title, content, href}) => {
+    // Off-site cards open in a new tab and carry the external-link icon; an
+    // in-site card (e.g. /legal) navigates in place like the top bar's links.
+    const isExternal = !!href && href.startsWith('http');
     const body = (
         <>
             <Box sx={(theme) => infoCardIconStyle(theme)}>
@@ -32,7 +43,7 @@ const InfoCard: React.FC<{
             </Box>
             <Typography variant="h6" component="h3" gutterBottom sx={(theme) => infoCardTitleStyle()}>
                 {title}
-                {href ? <OpenInNewIcon sx={infoCardExternalIconStyle}/> : null}
+                {isExternal ? <OpenInNewIcon sx={infoCardExternalIconStyle}/> : null}
             </Typography>
             <Typography variant="body1" color="text.secondary">{content}</Typography>
         </>
@@ -44,7 +55,7 @@ const InfoCard: React.FC<{
     // blockers that would otherwise swallow window.open.
     return (
         <Grid item xs={12} md={4}>
-            {href ? (
+            {isExternal ? (
                 <Paper
                     elevation={0}
                     component="a"
@@ -55,6 +66,16 @@ const InfoCard: React.FC<{
                 >
                     {body}
                 </Paper>
+            ) : href ? (
+                <NextLink href={href} passHref>
+                    <Paper
+                        elevation={0}
+                        component="a"
+                        sx={(theme) => ({...infoCardStyle(theme), ...infoCardLinkStyle})}
+                    >
+                        {body}
+                    </Paper>
+                </NextLink>
             ) : (
                 // Nothing to activate here, so no pointer and no hover lift.
                 <Paper
@@ -122,19 +143,20 @@ const Blurb: React.FC = () => (
             <InfoCard
                 icon={<GitHubIcon sx={infoCardIconSizeStyle}/>}
                 title="Contribute"
-                content="Join our community on GitHub. Each project welcomes issues and pull requests."
-                href={ORG_URL}
+                content="Pick up an open issue on any project. Each one welcomes issues and pull requests."
+                href={OPEN_ISSUES_URL}
             />
             <InfoCard
                 icon={<CodeIcon sx={infoCardIconSizeStyle}/>}
                 title="Explore the Code"
                 content="Browse the source for our games, simulations, and libraries across many languages."
-                href={ORG_URL}
+                href={REPOSITORIES_URL}
             />
             <InfoCard
                 icon={<FavoriteIcon sx={infoCardIconSizeStyle}/>}
                 title="Source Available"
-                content="Everything we make is free to use, modify, and self-host for non-commercial purposes."
+                content="Everything we make is free to use, modify, and self-host for non-commercial purposes. Read the license."
+                href="/legal"
             />
         </Grid>
     </Box>
