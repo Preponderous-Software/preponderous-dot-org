@@ -255,157 +255,41 @@ export const projectCardActionsStyle = {
  * the icon grid's section heading, which screen readers need but the minimal
  * grid deliberately does not show.
  */
-export const visuallyHiddenStyle = {
-    // Pixel strings, not numbers: in sx a width of 1 means 100%, and a margin
-    // of -1 means one theme spacing unit.
-    position: 'absolute',
-    width: '1px',
-    height: '1px',
-    padding: 0,
-    margin: '-1px',
-    overflow: 'hidden',
-    clip: 'rect(0 0 0 0)',
-    whiteSpace: 'nowrap',
-    border: 0,
-} as const;
-
 /**
  * The home page's icon grid: no cards, no borders, just as many fixed-width
  * columns as fit. Narrower columns on phones keep four across at 390px.
  */
-export const iconGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: {
-        xs: 'repeat(auto-fill, minmax(76px, 1fr))',
-        sm: 'repeat(auto-fill, minmax(96px, 1fr))',
-    },
-    gap: {xs: 2, sm: 3},
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-};
-
 /**
  * Size of a tile's icon, in px per breakpoint.
  */
-export const projectTileIconSize = {xs: 56, sm: 64};
-
 // A project glyph drawn on its tile, about half the tile so it reads at a
 // glance without crowding the rounded corners.
-export const projectTileGlyphSize = {xs: 30, sm: 34};
-
 /**
  * A tile in the icon grid: an unstyled button holding the icon and a one-line
  * caption. Hover and keyboard focus grow the icon slightly and lift the
  * caption to the primary text colour; reduced-motion visitors keep the colour
  * change but not the scale.
  */
-export const projectTileButtonStyle = (theme: Theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 1,
-    width: '100%',
-    padding: 0,
-    border: 0,
-    background: 'none',
-    cursor: 'pointer',
-    font: 'inherit',
-    color: 'inherit',
-    '& .project-tile-icon': {
-        transition: 'transform 0.15s ease',
-    },
-    '& .project-tile-caption': {
-        color: theme.palette.text.secondary,
-        transition: 'color 0.15s ease',
-    },
-    '&:hover .project-tile-icon, &:focus-visible .project-tile-icon, &[aria-expanded="true"] .project-tile-icon': {
-        transform: 'scale(1.06)',
-    },
-    '&:hover .project-tile-caption, &:focus-visible .project-tile-caption, &[aria-expanded="true"] .project-tile-caption': {
-        color: theme.palette.text.primary,
-    },
-    '&:focus-visible': {
-        outline: `2px solid ${theme.palette.primary.main}`,
-        outlineOffset: 4,
-        borderRadius: '14px',
-    },
-    [REDUCED_MOTION_QUERY]: {
-        '& .project-tile-icon': {transition: 'none'},
-        '&:hover .project-tile-icon, &:focus-visible .project-tile-icon, &[aria-expanded="true"] .project-tile-icon': {
-            transform: 'none',
-        },
-    },
-});
-
 /**
  * The tile's icon: a rounded square, image or initials.
  */
-export const projectTileIconStyle = {
-    width: projectTileIconSize,
-    height: projectTileIconSize,
-    borderRadius: '14px',
-    fontFamily: '"Space Grotesk", sans-serif',
-    fontWeight: 700,
-    fontSize: {xs: '1.5rem', sm: '1.75rem'},
-};
-
 /**
  * The tile's caption, centred. On a phone's narrow columns one line cut most
  * names to a few letters ("Apex-Ecos…"), so there it wraps to two lines before
  * the ellipsis; wider screens keep the single line.
  */
-export const projectTileCaptionStyle = {
-    fontSize: '0.75rem',
-    lineHeight: 1.3,
-    textAlign: 'center',
-    width: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: {xs: 'normal', sm: 'nowrap'},
-    display: {xs: '-webkit-box', sm: 'block'},
-    WebkitLineClamp: {xs: 2, sm: 'none'},
-    WebkitBoxOrient: 'vertical',
-    overflowWrap: 'anywhere',
-} as const;
-
 /**
  * The details panel a tile opens on hover, focus, or tap. Never wider than the
  * viewport less its gutters, so it cannot scroll a phone sideways.
  */
-export const projectPanelStyle = {
-    width: 320,
-    maxWidth: 'calc(100vw - 32px)',
-    padding: 2,
-};
-
 /**
  * The bottom sheet a tap opens on a touch screen: full width, rounded top
  * corners, never taller than most of the screen (the rest scrolls), and padded
  * clear of the home indicator on phones that have one.
  */
-export const projectSheetPaperStyle = {
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    maxHeight: '80vh',
-    overflowY: 'auto',
-    paddingX: 2,
-    paddingTop: 1,
-    paddingBottom: 'calc(16px + env(safe-area-inset-bottom))',
-};
-
 /**
  * The grab handle at the top of the bottom sheet — the cue that it swipes down.
  */
-export const projectSheetHandleStyle = (theme: Theme) => ({
-    width: 36,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: theme.palette.divider,
-    marginX: 'auto',
-    marginBottom: 1.5,
-});
-
 /**
  * Blurb (hero) section container.
  */
