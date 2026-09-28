@@ -32,12 +32,15 @@ describe('Home page', () => {
         projectsSection = container.querySelector('#projects') as HTMLElement;
     });
 
-    it('gives the Projects section the #projects id the hero button scrolls to', () => {
-        // Blurb's "Browse Projects" button is href="#projects"; losing this id
-        // would silently turn that button into a no-op.
+    it('gives the Projects section its #projects id and a Projects heading', () => {
         expect(projectsSection).not.toBeNull();
         expect(within(projectsSection).getByRole('heading', { level: 2, name: 'Projects' })).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /browse projects/i })).toHaveAttribute('href', '#projects');
+    });
+
+    it('sends the hero\'s Browse Projects button to the full /projects page', () => {
+        // The grid now sits directly above the hero, so a #projects jump
+        // would scroll back up to what the visitor has just passed.
+        expect(screen.getByRole('link', { name: /browse projects/i })).toHaveAttribute('href', '/projects');
     });
 
     it('puts the project grid before the blurb', () => {

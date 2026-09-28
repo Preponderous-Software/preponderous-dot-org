@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { ThemeProvider, createTheme } from '@mui/material';
 import TopBar from '../components/TopBar';
 import { ColorModeContext } from '../utils/ColorModeContext';
@@ -100,5 +100,28 @@ describe('TopBar', () => {
         );
         fireEvent.click(screen.getByRole('checkbox', { name: /toggle dark mode/i }));
         expect(toggleColorMode).toHaveBeenCalledTimes(1);
+    });
+});
+
+describe('TopBar on a phone', () => {
+    it('opens the navigation drawer from the menu button', () => {
+        render(<TopBar/>);
+        const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });
+        expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+        fireEvent.click(menuButton);
+        expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+        const drawer = screen.getByRole('presentation');
+        for (const [name, href] of [['Home', '/'], ['Projects', '/projects'], ['About', '/about'], ['Contact', '/contact']] as const) {
+            expect(within(drawer).getByRole('link', { name })).toHaveAttribute('href', href);
+        }
+        expect(within(drawer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('target', '_blank');
+    });
+
+    it('marks the current page in the drawer', () => {
+        router.pathname = '/about';
+        render(<TopBar/>);
+        fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
+        const drawer = screen.getByRole('presentation');
+        expect(within(drawer).getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
     });
 });

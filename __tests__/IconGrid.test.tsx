@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import IconGrid from '../components/IconGrid';
 import { OPEN_DELAY_MS, CLOSE_DELAY_MS } from '../components/ProjectTile';
 import { type Project } from '../utils/projects';
@@ -120,5 +120,82 @@ describe('IconGrid', () => {
         render(<IconGrid projects={PROJECTS}/>);
         fireEvent.click(tile('Roam'));
         expect(panel('Roam')).toHaveAttribute('id', tile('Roam').getAttribute('aria-controls'));
+    });
+});
+
+// A touch-only screen, as useMediaQuery sees it: "(hover: none)" matches.
+const mockHoverNone = (matches: boolean) => {
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+        matches: query.includes('hover: none') ? matches : false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+    }));
+};
+
+describe('IconGrid on a touch-only screen', () => {
+    const originalMatchMedia = window.matchMedia;
+
+    beforeEach(() => {
+        mockHoverNone(true);
+    });
+
+    afterEach(() => {
+        window.matchMedia = originalMatchMedia;
+    });
+
+    const sheet = (title: string) => screen.queryByRole('dialog', { name: title });
+
+    it('opens a bottom sheet with the project\'s details and links when a tile is tapped', () => {
+        render(<IconGrid projects={PROJECTS}/>);
+        expect(sheet('Roam')).toBeNull();
+        fireEvent.click(tile('Roam'));
+        const dialog = sheet('Roam') as HTMLElement;
+        expect(dialog).toBeInTheDocument();
+        expect(dialog).toHaveTextContent(PROJECTS[0].description);
+        expect(within(dialog).getByRole('link', { name: 'Roam: Visit Site' })).toHaveAttribute('href', 'https://roam.preponderous.org');
+        expect(within(dialog).getByRole('link', { name: 'Roam on GitHub' })).toBeInTheDocument();
+        // The hover panel is not used on a touch screen.
+        expect(screen.queryByRole('region', { name: 'Roam' })).toBeNull();
+    });
+
+    it('does not open on hover or focus, which a touch screen only fakes', () => {
+        vi.useFakeTimers();
+        render(<IconGrid projects={PROJECTS}/>);
+        fireEvent.mouseEnter(tile('Roam').parentElement as HTMLElement);
+        fireEvent.focus(tile('Roam'));
+        act(() => { vi.advanceTimersByTime(OPEN_DELAY_MS * 2); });
+        expect(sheet('Roam')).toBeNull();
+        vi.useRealTimers();
+    });
+
+    it('closes from its close button and hands focus back to the tile', async () => {
+        render(<IconGrid projects={PROJECTS}/>);
+        fireEvent.click(tile('Roam'));
+        fireEvent.click(screen.getByRole('button', { name: 'Close Roam' }));
+        await waitFor(() => expect(sheet('Roam')).toBeNull());
+        expect(tile('Roam')).toHaveAttribute('aria-expanded', 'false');
+        // Focus moves once the sheet has finished sliding away.
+        await waitFor(() => expect(tile('Roam')).toHaveFocus());
+    });
+
+    it('closes on Escape', async () => {
+        render(<IconGrid projects={PROJECTS}/>);
+        fireEvent.click(tile('Roam'));
+        fireEvent.keyDown(sheet('Roam') as HTMLElement, { key: 'Escape' });
+        await waitFor(() => expect(sheet('Roam')).toBeNull());
+        await waitFor(() => expect(tile('Roam')).toHaveFocus());
+    });
+
+    it('closes when the backdrop is tapped', async () => {
+        render(<IconGrid projects={PROJECTS}/>);
+        fireEvent.click(tile('Roam'));
+        const backdrop = document.querySelector('.MuiBackdrop-root') as HTMLElement;
+        fireEvent.click(backdrop);
+        await waitFor(() => expect(sheet('Roam')).toBeNull());
     });
 });
