@@ -93,7 +93,7 @@ const Blurb: React.FC = () => (
                 justifyContent="center"
                 sx={{mt: 4}}
             >
-                <Button variant="contained" size="large" href="#projects">
+                <Button variant="contained" size="large" href="/projects">
                     Browse Projects
                 </Button>
                 <Button

@@ -1,15 +1,16 @@
 import React from 'react';
-import {Avatar, Box, Button, Chip, Link, Paper, Popper, Stack, Typography} from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import CodeIcon from '@mui/icons-material/Code';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import {Avatar, Box, IconButton, Paper, Popper, SwipeableDrawer} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import ProjectDetails from './ProjectDetails';
 import {type Project} from '../utils/projects';
-import {colorForTitle, statusChipColor} from '../utils/projectColors';
+import {colorForTitle} from '../utils/projectColors';
 import {
     projectTileButtonStyle,
     projectTileIconStyle,
     projectTileCaptionStyle,
     projectPanelStyle,
+    projectSheetPaperStyle,
+    projectSheetHandleStyle,
 } from '../styles/styles';
 
 // Delays that keep the panel from flickering: a pointer crossing the grid on
@@ -26,15 +27,22 @@ interface ProjectTileProps {
     open: boolean;
     onOpen: (id: string) => void;
     onClose: (id: string) => void;
+    // A touch-only screen (no hover): a tap opens the details in a bottom
+    // sheet instead of the hover panel, which on a phone covered the tiles
+    // beside it and could run past the bottom of the screen.
+    touch?: boolean;
 }
 
-// One icon in the home page's grid, and the details panel it opens. The panel
-// opens on hover, on keyboard focus, and on click (the only way in on a touch
-// screen), and is rendered in place (disablePortal) so that tabbing from the
+// One icon in the home page's grid, and the details it opens. With a mouse or
+// keyboard, a panel opens on hover, on keyboard focus, and on click, and is
+// rendered in place (disablePortal) so that tabbing from the
 // tile moves straight into its links, and so that pointer and focus movement
-// between tile and panel stays inside the one wrapper these handlers watch.
-const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose}) => {
-    const {id, title, description, githubLink, technology, websiteLink, status, icon} = project;
+// between tile and panel stays inside the one wrapper these handlers watch. On
+// a touch-only screen a tap opens a bottom sheet instead; none of the hover
+// and focus handling applies there, since the sheet takes focus away from the
+// wrapper by design and closes only on its own terms.
+const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose, touch = false}) => {
+    const {id, title, icon} = project;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -46,6 +54,7 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
     // immediately reopen the panel it just closed.
     const suppressFocusOpen = React.useRef(false);
     const panelId = `project-panel-${id}`;
+    const titleId = `project-title-${id}`;
 
     const clearTimer = () => {
         if (timer.current) {
@@ -95,6 +104,13 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
         }
     };
 
+    // Closing the sheet hands focus back to the tile that opened it, once the
+    // sheet has slid away (until then its focus trap would take focus straight
+    // back). MUI's own focus restore is off: a tap does not focus a button in
+    // every mobile browser, so there may be nothing for it to restore to.
+    const closeSheet = () => onClose(id);
+    const focusTile = () => buttonRef.current?.focus({preventScroll: true});
+
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Escape' && open) {
             event.stopPropagation();
@@ -110,11 +126,13 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
         <Box
             component="li"
             ref={wrapperRef}
-            onMouseEnter={scheduleOpen}
-            onMouseLeave={scheduleClose}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
+            {...(touch ? {} : {
+                onMouseEnter: scheduleOpen,
+                onMouseLeave: scheduleClose,
+                onFocus: handleFocus,
+                onBlur: handleBlur,
+                onKeyDown: handleKeyDown,
+            })}
             sx={{minWidth: 0}}
         >
             <Box
@@ -126,7 +144,7 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
                 onPointerDown={(event: React.PointerEvent) => {
                     pointerType.current = event.pointerType || 'mouse';
                 }}
-                onClick={handleClick}
+                onClick={touch ? () => onOpen(id) : handleClick}
                 sx={(theme) => projectTileButtonStyle(theme)}
             >
                 <Avatar
@@ -141,74 +159,52 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
                     {title}
                 </Box>
             </Box>
-            <Popper
-                open={open}
-                anchorEl={buttonRef.current}
-                placement="bottom"
-                disablePortal
-                modifiers={[
-                    {name: 'offset', options: {offset: [0, 8]}},
-                    {name: 'flip', enabled: true},
-                    {name: 'preventOverflow', options: {padding: 16}},
-                ]}
-                sx={{zIndex: (theme) => theme.zIndex.tooltip}}
-            >
-                <Paper id={panelId} role="region" aria-label={title} elevation={8} sx={projectPanelStyle}>
-                    <Typography variant="h6" component="h3" sx={{fontWeight: 600, lineHeight: 1.2, mb: 1}}>
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{mb: 1.5}}>
-                        {description}
-                    </Typography>
-                    {technology || status ? (
-                        <Stack direction="row" spacing={1} sx={{mb: 1.5, flexWrap: 'wrap', rowGap: 1}}>
-                            {technology ? (
-                                <Chip size="small" variant="outlined" icon={<CodeIcon/>} label={technology}/>
-                            ) : null}
-                            {status ? (
-                                <Chip
-                                    size="small"
-                                    color={statusChipColor(status)}
-                                    variant={statusChipColor(status) ? 'filled' : 'outlined'}
-                                    label={status}
-                                />
-                            ) : null}
-                        </Stack>
-                    ) : null}
-                    {/* Same actions and accessible names as ProjectCard, so a
-                        project's links read the same on the home page as on
-                        /projects. */}
-                    <Stack direction="row" spacing={1} justifyContent="flex-end">
-                        {websiteLink ? (
-                            <Button
-                                variant="contained"
-                                size="small"
-                                startIcon={<OpenInNewIcon/>}
-                                component={Link}
-                                href={websiteLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`${title}: Visit Site`}
-                            >
-                                Visit Site
-                            </Button>
-                        ) : null}
-                        <Button
-                            variant={websiteLink ? 'outlined' : 'contained'}
-                            size="small"
-                            startIcon={<GitHubIcon/>}
-                            endIcon={<OpenInNewIcon fontSize="small"/>}
-                            component={Link}
-                            href={githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`${title} on GitHub`}
-                        >
-                            GitHub
-                        </Button>
-                    </Stack>
-                </Paper>
-            </Popper>
+            {touch ? (
+                <SwipeableDrawer
+                    anchor="bottom"
+                    open={open}
+                    onOpen={() => onOpen(id)}
+                    onClose={closeSheet}
+                    disableSwipeToOpen
+                    disableRestoreFocus
+                    SlideProps={{onExited: focusTile}}
+                    PaperProps={{
+                        id: panelId,
+                        role: 'dialog',
+                        'aria-modal': true,
+                        'aria-labelledby': titleId,
+                        sx: projectSheetPaperStyle,
+                    }}
+                >
+                    <Box aria-hidden sx={projectSheetHandleStyle}/>
+                    <ProjectDetails
+                        project={project}
+                        titleId={titleId}
+                        titleAction={(
+                            <IconButton size="small" edge="end" aria-label={`Close ${title}`} onClick={closeSheet}>
+                                <CloseIcon fontSize="small"/>
+                            </IconButton>
+                        )}
+                    />
+                </SwipeableDrawer>
+            ) : (
+                <Popper
+                    open={open}
+                    anchorEl={buttonRef.current}
+                    placement="bottom"
+                    disablePortal
+                    modifiers={[
+                        {name: 'offset', options: {offset: [0, 8]}},
+                        {name: 'flip', enabled: true},
+                        {name: 'preventOverflow', options: {padding: 16}},
+                    ]}
+                    sx={{zIndex: (theme) => theme.zIndex.tooltip}}
+                >
+                    <Paper id={panelId} role="region" aria-label={title} elevation={8} sx={projectPanelStyle}>
+                        <ProjectDetails project={project}/>
+                    </Paper>
+                </Popper>
+            )}
         </Box>
     );
 };

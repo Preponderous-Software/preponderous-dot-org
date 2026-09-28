@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box} from '@mui/material';
+import {Box, useMediaQuery} from '@mui/material';
 import ProjectTile from './ProjectTile';
 import {type Project} from '../utils/projects';
 import {iconGridStyle} from '../styles/styles';
@@ -9,6 +9,10 @@ import {iconGridStyle} from '../styles/styles';
 // other. The grid does not sort; callers pass the order they want shown.
 const IconGrid: React.FC<{projects: Project[]}> = ({projects}) => {
     const [openId, setOpenId] = React.useState<string | null>(null);
+    // Touch-only screens get a bottom sheet per tap rather than hover panels.
+    // False on the server and until the first client render, so the markup
+    // matches and a desktop visitor never sees the touch path.
+    const touch = useMediaQuery('(hover: none)');
 
     const handleOpen = React.useCallback((id: string) => setOpenId(id), []);
     // Only close if the closing tile is still the open one: a tile's delayed
@@ -27,6 +31,7 @@ const IconGrid: React.FC<{projects: Project[]}> = ({projects}) => {
                     open={openId === project.id}
                     onOpen={handleOpen}
                     onClose={handleClose}
+                    touch={touch}
                 />
             ))}
         </Box>

@@ -95,6 +95,14 @@ export const toggleSwitchBoxStyle = {
 };
 
 /**
+ * The phone navigation drawer, in the app bar's colours.
+ */
+export const navDrawerPaperStyle = (theme: Theme) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#161b22' : theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+});
+
+/**
  * Bottom app bar with a top border and bottom positioning.
  */
 export const bottomAppBarStyle = (theme: Theme) => ({
@@ -339,7 +347,9 @@ export const projectTileIconStyle = {
 };
 
 /**
- * The tile's caption: one centred line, cut with an ellipsis.
+ * The tile's caption, centred. On a phone's narrow columns one line cut most
+ * names to a few letters ("Apex-Ecos…"), so there it wraps to two lines before
+ * the ellipsis; wider screens keep the single line.
  */
 export const projectTileCaptionStyle = {
     fontSize: '0.75rem',
@@ -348,7 +358,11 @@ export const projectTileCaptionStyle = {
     width: '100%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+    whiteSpace: {xs: 'normal', sm: 'nowrap'},
+    display: {xs: '-webkit-box', sm: 'block'},
+    WebkitLineClamp: {xs: 2, sm: 'none'},
+    WebkitBoxOrient: 'vertical',
+    overflowWrap: 'anywhere',
 } as const;
 
 /**
@@ -360,6 +374,33 @@ export const projectPanelStyle = {
     maxWidth: 'calc(100vw - 32px)',
     padding: 2,
 };
+
+/**
+ * The bottom sheet a tap opens on a touch screen: full width, rounded top
+ * corners, never taller than most of the screen (the rest scrolls), and padded
+ * clear of the home indicator on phones that have one.
+ */
+export const projectSheetPaperStyle = {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    maxHeight: '80vh',
+    overflowY: 'auto',
+    paddingX: 2,
+    paddingTop: 1,
+    paddingBottom: 'calc(16px + env(safe-area-inset-bottom))',
+};
+
+/**
+ * The grab handle at the top of the bottom sheet — the cue that it swipes down.
+ */
+export const projectSheetHandleStyle = (theme: Theme) => ({
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: theme.palette.divider,
+    marginX: 'auto',
+    marginBottom: 1.5,
+});
 
 /**
  * Blurb (hero) section container.
