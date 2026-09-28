@@ -16,6 +16,9 @@ export interface Project {
     // Current maintenance state (e.g. "Active", "Maintenance"), shown on the
     // /projects page as a status indicator. Optional for the same reason.
     status?: string;
+    // Optional icon, a path under public/ (e.g. "/icons/roam.png"). Projects
+    // without one fall back to an initials avatar in their title colour.
+    icon?: string;
 }
 
 // A category and the projects filed under it.
