@@ -22,6 +22,9 @@ const ORG_URL = 'https://github.com/Preponderous-Software';
 // up work, which is what "Contribute" promises, rather than the org overview
 // that "View on GitHub" already opens.
 const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software+is%3Aissue+is%3Aopen&type=issues';
+// The organization's repository list, so "Explore the Code" lands straight on
+// the code instead of the org overview's pinned-repository summary.
+const REPOSITORIES_URL = 'https://github.com/orgs/Preponderous-Software/repositories';
 
 const InfoCard: React.FC<{
     icon: React.ReactNode;
@@ -133,7 +136,7 @@ const Blurb: React.FC = () => (
                 icon={<CodeIcon sx={infoCardIconSizeStyle}/>}
                 title="Explore the Code"
                 content="Browse the source for our games, simulations, and libraries across many languages."
-                href={ORG_URL}
+                href={REPOSITORIES_URL}
             />
             <InfoCard
                 icon={<FavoriteIcon sx={infoCardIconSizeStyle}/>}
