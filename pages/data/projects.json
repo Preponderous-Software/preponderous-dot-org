@@ -7,7 +7,8 @@
       "githubLink": "https://github.com/Preponderous-Software/Apex-Ecosystem-Simulator",
       "technology": "Python",
       "category": "Simulations",
-      "status": "Active"
+      "status": "Active",
+      "icon": "/icons/apex.png"
     },
     {
       "id": "artificial-consciousness-simulation-framework",
@@ -16,7 +17,8 @@
       "githubLink": "https://github.com/Preponderous-Software/artificial-consciousness-simulation-framework",
       "technology": "Python",
       "category": "Simulations",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Psychology"
     },
     {
       "id": "barony",
@@ -26,7 +28,8 @@
       "technology": "Java",
       "websiteLink": "https://barony.preponderous.org",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Castle"
     },
     {
       "id": "beyond-nations",
@@ -35,7 +38,8 @@
       "githubLink": "https://github.com/Preponderous-Software/Beyond-Nations",
       "technology": "C#",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Public"
     },
     {
       "id": "env-lib-cpp",
@@ -44,7 +48,8 @@
       "githubLink": "https://github.com/Preponderous-Software/env-lib-cpp",
       "technology": "C++",
       "category": "Libraries",
-      "status": "Maintenance"
+      "status": "Maintenance",
+      "glyph": "GridOn"
     },
     {
       "id": "fishe",
@@ -54,7 +59,8 @@
       "technology": "Python",
       "websiteLink": "https://fishe.danielstephenson.dev",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Phishing"
     },
     {
       "id": "microbiome",
@@ -64,7 +70,8 @@
       "technology": "C++",
       "websiteLink": "https://microbiome.preponderous.org",
       "category": "Simulations",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Biotech"
     },
     {
       "id": "ophidian",
@@ -73,7 +80,8 @@
       "githubLink": "https://github.com/Preponderous-Software/Ophidian",
       "technology": "Python",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "icon": "/icons/ophidian.png"
     },
     {
       "id": "overwinter",
@@ -83,7 +91,8 @@
       "technology": "Python",
       "websiteLink": "https://overwinter.danielstephenson.dev",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "AcUnit"
     },
     {
       "id": "patchwork",
@@ -92,7 +101,8 @@
       "githubLink": "https://github.com/Preponderous-Software/Patchwork",
       "technology": "Python",
       "category": "Tools",
-      "status": "Maintenance"
+      "status": "Maintenance",
+      "glyph": "ViewQuilt"
     },
     {
       "id": "py-env-lib",
@@ -101,7 +111,8 @@
       "githubLink": "https://github.com/Preponderous-Software/py_env_lib",
       "technology": "Python",
       "category": "Libraries",
-      "status": "Maintenance"
+      "status": "Maintenance",
+      "glyph": "GridOn"
     },
     {
       "id": "roam",
@@ -111,7 +122,8 @@
       "technology": "Python",
       "websiteLink": "https://roam.preponderous.org",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "icon": "/icons/roam.png"
     },
     {
       "id": "tak",
@@ -120,7 +132,8 @@
       "githubLink": "https://github.com/Stephenson-Software/tak",
       "technology": "Python",
       "category": "Libraries",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Terminal"
     },
     {
       "id": "tidewater",
@@ -130,7 +143,8 @@
       "technology": "Python",
       "websiteLink": "https://tidewater.danielstephenson.dev",
       "category": "Games",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Waves"
     },
     {
       "id": "viron",
@@ -139,7 +153,8 @@
       "githubLink": "https://github.com/Preponderous-Software/Viron",
       "technology": "Java",
       "category": "Libraries",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Hub"
     },
     {
       "id": "daniel-stephenson",
@@ -149,7 +164,8 @@
       "technology": "TypeScript / Next.js",
       "websiteLink": "https://danielstephenson.dev",
       "category": "Websites",
-      "status": "Active"
+      "status": "Active",
+      "icon": "/icons/daniel-stephenson.svg"
     },
     {
       "id": "dans-plugins-community",
@@ -159,7 +175,8 @@
       "technology": "TypeScript / Next.js",
       "websiteLink": "https://dansplugins.com",
       "category": "Websites",
-      "status": "Active"
+      "status": "Active",
+      "glyph": "Extension"
     }
   ]
 }

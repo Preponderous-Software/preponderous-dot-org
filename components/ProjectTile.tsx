@@ -1,12 +1,13 @@
 import React from 'react';
-import {Avatar, Box, IconButton, Paper, Popper, SwipeableDrawer} from '@mui/material';
+import {Box, IconButton, Paper, Popper, SwipeableDrawer} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ProjectDetails from './ProjectDetails';
+import ProjectIcon from './ProjectIcon';
 import {type Project} from '../utils/projects';
-import {colorForTitle} from '../utils/projectColors';
 import {
     projectTileButtonStyle,
     projectTileIconStyle,
+    projectTileGlyphSize,
     projectTileCaptionStyle,
     projectPanelStyle,
     projectSheetPaperStyle,
@@ -42,7 +43,7 @@ interface ProjectTileProps {
 // and focus handling applies there, since the sheet takes focus away from the
 // wrapper by design and closes only on its own terms.
 const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose, touch = false}) => {
-    const {id, title, icon} = project;
+    const {id, title} = project;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -147,14 +148,12 @@ const ProjectTile: React.FC<ProjectTileProps> = ({project, open, onOpen, onClose
                 onClick={touch ? () => onOpen(id) : handleClick}
                 sx={(theme) => projectTileButtonStyle(theme)}
             >
-                <Avatar
+                <ProjectIcon
                     className="project-tile-icon"
-                    variant="rounded"
-                    {...(icon ? {src: icon, alt: ''} : {'aria-hidden': true})}
-                    sx={{...projectTileIconStyle, bgcolor: colorForTitle(title)}}
-                >
-                    {title.charAt(0).toUpperCase()}
-                </Avatar>
+                    project={project}
+                    sx={projectTileIconStyle}
+                    glyphSize={projectTileGlyphSize}
+                />
                 <Box component="span" className="project-tile-caption" sx={projectTileCaptionStyle}>
                     {title}
                 </Box>

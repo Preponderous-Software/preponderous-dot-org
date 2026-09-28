@@ -19,6 +19,10 @@ export interface Project {
     // Optional icon, a path under public/ (e.g. "/icons/roam.png"). Projects
     // without one fall back to an initials avatar in their title colour.
     icon?: string;
+    // Optional Material icon name (see utils/projectGlyphs.ts) drawn on the
+    // title colour for a project with no artwork, so its tile carries a symbol
+    // of what it is rather than a letter shared with half the grid.
+    glyph?: string;
 }
 
 // A category and the projects filed under it.

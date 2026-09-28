@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Box, Button, Card, CardActions, CardContent, Chip, Link, Stack, Typography} from '@mui/material';
+import {Box, Button, Card, CardActions, CardContent, Chip, Link, Stack, Typography} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CodeIcon from '@mui/icons-material/Code';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -8,7 +8,8 @@ import {
     projectCardContentStyle,
     projectCardActionsStyle,
 } from '../styles/styles';
-import {colorForTitle, statusChipColor} from '../utils/projectColors';
+import {statusChipColor} from '../utils/projectColors';
+import ProjectIcon from './ProjectIcon';
 
 interface ProjectCardProps {
     title: string;
@@ -21,26 +22,22 @@ interface ProjectCardProps {
     // Optional maintenance status (e.g. "Active", "Maintenance"), shown as a
     // colour-coded chip next to the technology chip.
     status?: string;
+    // Optional artwork path and Material glyph name, as in projects.json; see
+    // ProjectIcon for how they are chosen between.
+    icon?: string;
+    glyph?: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink, status}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink, status, icon, glyph}) => {
     return (
         <Card sx={projectCardStyle}>
             <CardContent sx={projectCardContentStyle}>
                 <Stack direction="row" spacing={1.5} alignItems="center" sx={{mb: 1.5}}>
-                    <Avatar
-                        variant="rounded"
-                        aria-hidden
-                        sx={{
-                            bgcolor: colorForTitle(title),
-                            width: 40,
-                            height: 40,
-                            fontFamily: '"Space Grotesk", sans-serif',
-                            fontWeight: 700,
-                        }}
-                    >
-                        {title.charAt(0).toUpperCase()}
-                    </Avatar>
+                    <ProjectIcon
+                        project={{title, icon, glyph}}
+                        sx={{width: 40, height: 40, fontFamily: '"Space Grotesk", sans-serif', fontWeight: 700}}
+                        glyphSize={24}
+                    />
                     <Typography variant="h6" component="h3" sx={{fontWeight: 600, lineHeight: 1.2}}>
                         {title}
                     </Typography>
