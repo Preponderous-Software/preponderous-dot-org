@@ -24,6 +24,8 @@ const ProjectGrid: React.FC<{projects: Project[]}> = ({projects}) => (
                     technology={project.technology}
                     websiteLink={project.websiteLink}
                     status={project.status}
+                    icon={project.icon}
+                    glyph={project.glyph}
                 />
             </Grid>
         ))}

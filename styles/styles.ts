@@ -290,6 +290,10 @@ export const iconGridStyle = {
  */
 export const projectTileIconSize = {xs: 56, sm: 64};
 
+// A project glyph drawn on its tile, about half the tile so it reads at a
+// glance without crowding the rounded corners.
+export const projectTileGlyphSize = {xs: 30, sm: 34};
+
 /**
  * A tile in the icon grid: an unstyled button holding the icon and a one-line
  * caption. Hover and keyboard focus grow the icon slightly and lift the
