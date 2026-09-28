@@ -31,6 +31,7 @@ const SecondaryAction: React.FC<{action: ErrorPageAction}> = ({action}) => {
         <Button
             variant="outlined"
             href={action.href}
+            LinkComponent={isExternal ? undefined : NextLink}
             startIcon={action.icon}
             endIcon={isExternal ? <OpenInNewIcon fontSize="small"/> : undefined}
             target={isExternal ? '_blank' : undefined}
@@ -39,7 +40,7 @@ const SecondaryAction: React.FC<{action: ErrorPageAction}> = ({action}) => {
             {action.label}
         </Button>
     );
-    return isExternal ? button : <NextLink href={action.href} passHref>{button}</NextLink>;
+    return button;
 };
 
 const ErrorPage: React.FC<{code: string; title: string; message: string; secondaryAction?: ErrorPageAction}> = ({
@@ -62,11 +63,9 @@ const ErrorPage: React.FC<{code: string; title: string; message: string; seconda
                 {message}
             </Typography>
             <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} justifyContent="center">
-                <NextLink href="/" passHref>
-                    <Button variant="contained" startIcon={<HomeIcon/>}>
-                        Back to home
-                    </Button>
-                </NextLink>
+                <Button variant="contained" href="/" LinkComponent={NextLink} startIcon={<HomeIcon/>}>
+                    Back to home
+                </Button>
                 {secondaryAction ? <SecondaryAction action={secondaryAction}/> : null}
             </Stack>
         </Container>

@@ -16,9 +16,7 @@ const ORG_URL = 'https://github.com/Preponderous-Software';
 // Internal routes navigate via next/link so they get a client-side transition
 // rather than a full reload, matching TopBar/BottomBar's NavButton/FooterButton.
 const InternalLink: React.FC<{href: string; children: React.ReactNode}> = ({href, children}) => (
-    <NextLink href={href} passHref>
-        <Link>{children}</Link>
-    </NextLink>
+    <Link component={NextLink} href={href}>{children}</Link>
 );
 
 const AboutSection: React.FC<{title: string; children: React.ReactNode}> = ({title, children}) => (

@@ -36,6 +36,10 @@ const NavButton: React.FC<{ href: string; active?: boolean; children: React.Reac
         <Button
             color="inherit"
             href={href}
+            // Internal routes render through next/link, so navigation is a
+            // client-side transition rather than a full document reload;
+            // external links stay plain anchors (they leave the app anyway).
+            LinkComponent={isExternal ? undefined : NextLink}
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             endIcon={isExternal ? <OpenInNewIcon fontSize="small"/> : undefined}
@@ -55,30 +59,23 @@ const NavButton: React.FC<{ href: string; active?: boolean; children: React.Reac
         </Button>
     );
 
-    // Internal routes go through next/link so navigation is a client-side
-    // transition rather than a full document reload; external links stay plain
-    // anchors (they leave the app anyway).
-    return isExternal ? button : (
-        <NextLink href={href} passHref>
-            {button}
-        </NextLink>
-    );
+    return button;
 };
 
 const BrandName: React.FC = () => (
     // The wordmark links home — the near-universal "click the logo to return to
     // the home page" convention.
-    <NextLink href="/" passHref>
-        <Link
-            underline="none"
-            color="inherit"
-            sx={(theme) => ({...brandNameStyle(theme), display: 'inline-block'})}
-        >
-            <Typography variant="h6" color="inherit" component="span">
-                Preponderous Software
-            </Typography>
-        </Link>
-    </NextLink>
+    <Link
+        component={NextLink}
+        href="/"
+        underline="none"
+        color="inherit"
+        sx={(theme) => ({...brandNameStyle(theme), display: 'inline-block'})}
+    >
+        <Typography variant="h6" color="inherit" component="span">
+            Preponderous Software
+        </Typography>
+    </Link>
 );
 
 // Below the `md` breakpoint the inline links wrapped onto two more rows and
@@ -96,15 +93,15 @@ const NavDrawer: React.FC<{open: boolean; onClose: () => void; pathname: string}
                             <OpenInNewIcon fontSize="small"/>
                         </ListItemButton>
                     ) : (
-                        <NextLink key={link.href} href={link.href} passHref>
-                            <ListItemButton
-                                component="a"
-                                selected={isActiveNavLink(pathname, link.href)}
-                                aria-current={isActiveNavLink(pathname, link.href) ? 'page' : undefined}
-                            >
-                                <ListItemText primary={link.label}/>
-                            </ListItemButton>
-                        </NextLink>
+                        <ListItemButton
+                            key={link.href}
+                            component={NextLink}
+                            href={link.href}
+                            selected={isActiveNavLink(pathname, link.href)}
+                            aria-current={isActiveNavLink(pathname, link.href) ? 'page' : undefined}
+                        >
+                            <ListItemText primary={link.label}/>
+                        </ListItemButton>
                     );
                 })}
             </List>

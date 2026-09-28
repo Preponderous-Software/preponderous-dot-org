@@ -70,9 +70,9 @@ const ContactPage: NextPage = () => (
                     it among every repository. */}
                 <List dense disablePadding>
                     <ListItem disableGutters>
-                        <NextLink href="/projects" passHref>
-                            <Link>Find the project&apos;s repository on the Projects page</Link>
-                        </NextLink>
+                        <Link component={NextLink} href="/projects">
+                            Find the project&apos;s repository on the Projects page
+                        </Link>
                     </ListItem>
                     <ListItem disableGutters>
                         <Link href={ORG_URL} target="_blank" rel="noopener noreferrer">
