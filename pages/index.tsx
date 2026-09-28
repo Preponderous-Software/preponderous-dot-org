@@ -5,13 +5,13 @@ import TopBar from '../components/TopBar'
 import BottomBar from '../components/BottomBar'
 import Seo from '../components/Seo'
 import Blurb from '../components/Blurb'
-import ProjectGrid from '../components/ProjectGrid'
+import IconGrid from '../components/IconGrid'
 import {sortProjectsByTitle, type Project} from '../utils/projects'
 import {
     pageStyle,
-    sectionHeaderStyle,
     sectionDividerStyle,
     projectsBoxStyle,
+    visuallyHiddenStyle,
 } from '../styles/styles'
 
 interface ProjectData {
@@ -27,12 +27,15 @@ const SectionDivider: React.FC = () => (
     <Box sx={(theme) => sectionDividerStyle(theme)}/>
 )
 
+// The first thing on the page: every project as an icon, details on hover.
+// The heading is there for screen readers only; the grid itself is kept bare.
+// Keeps the #projects id Blurb's "Browse Projects" button points at.
 const ProjectsSection: React.FC<{projects: Project[]}> = ({projects}) => (
     <Box id="projects" component="section" aria-labelledby="projects-heading" sx={projectsBoxStyle}>
-        <Typography id="projects-heading" variant="h3" component="h2" gutterBottom sx={(theme) => sectionHeaderStyle(theme)}>
+        <Typography id="projects-heading" variant="h3" component="h2" sx={visuallyHiddenStyle}>
             Projects
         </Typography>
-        <ProjectGrid projects={projects}/>
+        <IconGrid projects={projects}/>
     </Box>
 )
 
@@ -43,9 +46,9 @@ const Home: NextPage = () => {
             <Seo path="/"/>
             <TopBar/>
             <Container component="main" id="main" maxWidth="xl" sx={{py: 4, flexGrow: 1}}>
-                <Blurb/>
-                <SectionDivider/>
                 <ProjectsSection projects={projects}/>
+                <SectionDivider/>
+                <Blurb/>
             </Container>
             <BottomBar version={version}/>
         </Box>

@@ -243,6 +243,125 @@ export const projectCardActionsStyle = {
 };
 
 /**
+ * Hides an element visually while leaving it in the accessibility tree — for
+ * the icon grid's section heading, which screen readers need but the minimal
+ * grid deliberately does not show.
+ */
+export const visuallyHiddenStyle = {
+    // Pixel strings, not numbers: in sx a width of 1 means 100%, and a margin
+    // of -1 means one theme spacing unit.
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: 0,
+    margin: '-1px',
+    overflow: 'hidden',
+    clip: 'rect(0 0 0 0)',
+    whiteSpace: 'nowrap',
+    border: 0,
+} as const;
+
+/**
+ * The home page's icon grid: no cards, no borders, just as many fixed-width
+ * columns as fit. Narrower columns on phones keep four across at 390px.
+ */
+export const iconGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: {
+        xs: 'repeat(auto-fill, minmax(76px, 1fr))',
+        sm: 'repeat(auto-fill, minmax(96px, 1fr))',
+    },
+    gap: {xs: 2, sm: 3},
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+};
+
+/**
+ * Size of a tile's icon, in px per breakpoint.
+ */
+export const projectTileIconSize = {xs: 56, sm: 64};
+
+/**
+ * A tile in the icon grid: an unstyled button holding the icon and a one-line
+ * caption. Hover and keyboard focus grow the icon slightly and lift the
+ * caption to the primary text colour; reduced-motion visitors keep the colour
+ * change but not the scale.
+ */
+export const projectTileButtonStyle = (theme: Theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 1,
+    width: '100%',
+    padding: 0,
+    border: 0,
+    background: 'none',
+    cursor: 'pointer',
+    font: 'inherit',
+    color: 'inherit',
+    '& .project-tile-icon': {
+        transition: 'transform 0.15s ease',
+    },
+    '& .project-tile-caption': {
+        color: theme.palette.text.secondary,
+        transition: 'color 0.15s ease',
+    },
+    '&:hover .project-tile-icon, &:focus-visible .project-tile-icon, &[aria-expanded="true"] .project-tile-icon': {
+        transform: 'scale(1.06)',
+    },
+    '&:hover .project-tile-caption, &:focus-visible .project-tile-caption, &[aria-expanded="true"] .project-tile-caption': {
+        color: theme.palette.text.primary,
+    },
+    '&:focus-visible': {
+        outline: `2px solid ${theme.palette.primary.main}`,
+        outlineOffset: 4,
+        borderRadius: '14px',
+    },
+    [REDUCED_MOTION_QUERY]: {
+        '& .project-tile-icon': {transition: 'none'},
+        '&:hover .project-tile-icon, &:focus-visible .project-tile-icon, &[aria-expanded="true"] .project-tile-icon': {
+            transform: 'none',
+        },
+    },
+});
+
+/**
+ * The tile's icon: a rounded square, image or initials.
+ */
+export const projectTileIconStyle = {
+    width: projectTileIconSize,
+    height: projectTileIconSize,
+    borderRadius: '14px',
+    fontFamily: '"Space Grotesk", sans-serif',
+    fontWeight: 700,
+    fontSize: {xs: '1.5rem', sm: '1.75rem'},
+};
+
+/**
+ * The tile's caption: one centred line, cut with an ellipsis.
+ */
+export const projectTileCaptionStyle = {
+    fontSize: '0.75rem',
+    lineHeight: 1.3,
+    textAlign: 'center',
+    width: '100%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+} as const;
+
+/**
+ * The details panel a tile opens on hover, focus, or tap. Never wider than the
+ * viewport less its gutters, so it cannot scroll a phone sideways.
+ */
+export const projectPanelStyle = {
+    width: 320,
+    maxWidth: 'calc(100vw - 32px)',
+    padding: 2,
+};
+
+/**
  * Blurb (hero) section container.
  */
 export const blurbBoxStyle = (theme: Theme) => ({

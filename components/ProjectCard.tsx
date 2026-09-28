@@ -8,6 +8,7 @@ import {
     projectCardContentStyle,
     projectCardActionsStyle,
 } from '../styles/styles';
+import {colorForTitle, statusChipColor} from '../utils/projectColors';
 
 interface ProjectCardProps {
     title: string;
@@ -21,26 +22,6 @@ interface ProjectCardProps {
     // colour-coded chip next to the technology chip.
     status?: string;
 }
-
-// Colour for a status chip, keyed case-insensitively; unrecognized values fall
-// back to the default (grey) chip styling rather than guessing a colour.
-const STATUS_COLORS: Record<string, 'success' | 'warning'> = {
-    active: 'success',
-    maintenance: 'warning',
-};
-
-// A small, fixed palette of muted brand-ish colours. Each project gets a stable
-// colour derived from its title so cards have a bit of visual identity without
-// being random on every render.
-const AVATAR_COLORS = ['#4263eb', '#7048e8', '#1098ad', '#f59f00', '#e8590c', '#0ca678'];
-
-const colorForTitle = (title: string): string => {
-    let hash = 0;
-    for (let i = 0; i < title.length; i++) {
-        hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
-    }
-    return AVATAR_COLORS[hash % AVATAR_COLORS.length];
-};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink, technology, websiteLink, status}) => {
     return (
@@ -93,8 +74,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                     {status ? (
                         <Chip
                             size="small"
-                            color={STATUS_COLORS[status.toLowerCase()]}
-                            variant={STATUS_COLORS[status.toLowerCase()] ? 'filled' : 'outlined'}
+                            color={statusChipColor(status)}
+                            variant={statusChipColor(status) ? 'filled' : 'outlined'}
                             label={status}
                         />
                     ) : null}
