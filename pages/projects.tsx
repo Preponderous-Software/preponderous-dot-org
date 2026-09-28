@@ -1,5 +1,5 @@
 import type {NextPage} from 'next'
-import {Box, Container, Typography} from '@mui/material'
+import {Box, Chip, Container, Stack, Typography} from '@mui/material'
 import React from 'react'
 import TopBar from '../components/TopBar'
 import BottomBar from '../components/BottomBar'
@@ -51,6 +51,29 @@ const ProjectsPage: NextPage = () => {
                 <Typography variant="h3" component="h1" gutterBottom sx={{fontWeight: 700, letterSpacing: '-0.01em'}}>
                     Projects
                 </Typography>
+                {/* On a phone the full list runs to several screens, and the
+                    later categories (Tools, Websites) sat out of sight with
+                    nothing to say they exist. These jump links name every
+                    category and its size up front and go straight to it. */}
+                <Stack
+                    component="nav"
+                    aria-label="Project categories"
+                    direction="row"
+                    useFlexGap
+                    flexWrap="wrap"
+                    spacing={1}
+                >
+                    {categories.map(({category, projects}) => (
+                        <Chip
+                            key={category}
+                            component="a"
+                            href={`#${categoryHeadingId(category)}`}
+                            clickable
+                            variant="outlined"
+                            label={`${category} (${projects.length})`}
+                        />
+                    ))}
+                </Stack>
                 <Box sx={(theme) => sectionDividerStyle(theme)}/>
                 {categories.map(({category, projects}) => (
                     <CategorySection key={category} category={category} projects={projects}/>

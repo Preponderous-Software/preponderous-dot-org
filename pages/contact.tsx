@@ -1,5 +1,6 @@
 import type {NextPage} from 'next';
 import {Box, Container, Link, List, ListItem, Typography} from '@mui/material';
+import NextLink from 'next/link';
 import React from 'react';
 import TopBar from '../components/TopBar';
 import BottomBar from '../components/BottomBar';
@@ -64,7 +65,15 @@ const ContactPage: NextPage = () => (
                     Each project has its own repository — open an issue or pull request directly
                     on the project you&apos;re asking about.
                 </Paragraph>
+                {/* The Projects page is where each project's own repository is
+                    one click away; the org overview makes the visitor hunt for
+                    it among every repository. */}
                 <List dense disablePadding>
+                    <ListItem disableGutters>
+                        <NextLink href="/projects" passHref>
+                            <Link>Find the project&apos;s repository on the Projects page</Link>
+                        </NextLink>
+                    </ListItem>
                     <ListItem disableGutters>
                         <Link href={ORG_URL} target="_blank" rel="noopener noreferrer">
                             Preponderous Software on GitHub

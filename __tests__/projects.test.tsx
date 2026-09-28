@@ -35,6 +35,18 @@ describe('Projects page', () => {
         expect(screen.getByRole('heading', { level: 1, name: 'Projects' })).toBeInTheDocument();
     });
 
+    it('links to every category section from a jump list under the heading', () => {
+        const nav = screen.getByRole('navigation', { name: 'Project categories' });
+        const links = within(nav).getAllByRole('link');
+        expect(links.map((link) => link.getAttribute('href'))).toEqual(
+            categories.map(({ category }) => `#${categoryHeadingId(category)}`)
+        );
+        for (const { category, projects: inCategory } of categories) {
+            expect(within(nav).getByRole('link', { name: `${category} (${inCategory.length})` })).toBeInTheDocument();
+            expect(container.querySelector(`#${categoryHeadingId(category)}`)).not.toBeNull();
+        }
+    });
+
     it('renders a section heading for every category', () => {
         for (const { category } of categories) {
             expect(screen.getByRole('heading', { level: 2, name: category })).toBeInTheDocument();

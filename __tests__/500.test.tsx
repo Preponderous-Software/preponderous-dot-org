@@ -25,4 +25,11 @@ describe('500 page', () => {
     it('offers a way back to the home page', () => {
         expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
     });
+
+    it('offers to report the problem on the website repository, in a new tab', () => {
+        const link = screen.getByRole('link', { name: /report the problem/i });
+        expect(link).toHaveAttribute('href', 'https://github.com/Preponderous-Software/preponderous-dot-org/issues/new');
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
 });
