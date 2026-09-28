@@ -41,10 +41,10 @@ describe('Blurb', () => {
         }
     });
 
-    it('leaves the non-linking info card as plain, unfocusable content', () => {
+    it('links the Source Available card to the license on /legal, in the same tab', () => {
         render(<Blurb />);
-        const card = screen.getByText('Source Available').closest('a');
-        expect(card).toBeNull();
-        expect(screen.queryByRole('link', { name: /source available/i })).not.toBeInTheDocument();
+        const card = screen.getByRole('link', { name: /^source available/i });
+        expect(card).toHaveAttribute('href', '/legal');
+        expect(card).not.toHaveAttribute('target');
     });
 });
