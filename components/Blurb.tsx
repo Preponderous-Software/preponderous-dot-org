@@ -18,6 +18,10 @@ import {
 } from '../styles/styles';
 
 const ORG_URL = 'https://github.com/Preponderous-Software';
+// Every open issue across the organization's repositories — somewhere to pick
+// up work, which is what "Contribute" promises, rather than the org overview
+// that "View on GitHub" already opens.
+const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software+is%3Aissue+is%3Aopen&type=issues';
 
 const InfoCard: React.FC<{
     icon: React.ReactNode;
@@ -122,8 +126,8 @@ const Blurb: React.FC = () => (
             <InfoCard
                 icon={<GitHubIcon sx={infoCardIconSizeStyle}/>}
                 title="Contribute"
-                content="Join our community on GitHub. Each project welcomes issues and pull requests."
-                href={ORG_URL}
+                content="Pick up an open issue on any project. Each one welcomes issues and pull requests."
+                href={OPEN_ISSUES_URL}
             />
             <InfoCard
                 icon={<CodeIcon sx={infoCardIconSizeStyle}/>}

@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Blurb from '../components/Blurb';
 
 const ORG_URL = 'https://github.com/Preponderous-Software';
+const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software+is%3Aissue+is%3Aopen&type=issues';
 
 describe('Blurb', () => {
     it('renders the hero heading and call-to-action links', () => {
@@ -31,9 +32,9 @@ describe('Blurb', () => {
 
     it('renders the linking info cards as real anchors that open in a new tab', () => {
         render(<Blurb />);
-        for (const name of [/^contribute/i, /^explore the code/i]) {
+        for (const [name, href] of [[/^contribute/i, OPEN_ISSUES_URL], [/^explore the code/i, ORG_URL]] as const) {
             const card = screen.getByRole('link', { name });
-            expect(card).toHaveAttribute('href', ORG_URL);
+            expect(card).toHaveAttribute('href', href);
             expect(card).toHaveAttribute('target', '_blank');
             expect(card).toHaveAttribute('rel', 'noopener noreferrer');
         }
