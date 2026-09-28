@@ -31,6 +31,12 @@ describe('Contact page', () => {
         expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
+    it('points project questions at the Projects page, where each repository is linked', () => {
+        const link = screen.getByRole('link', { name: /find the project's repository on the projects page/i });
+        expect(link).toHaveAttribute('href', '/projects');
+        expect(link).not.toHaveAttribute('target');
+    });
+
     it('links to the GitHub organization for project-specific contact', () => {
         const link = screen.getByRole('link', { name: /preponderous software on github/i });
         expect(link).toHaveAttribute('href', 'https://github.com/Preponderous-Software');
