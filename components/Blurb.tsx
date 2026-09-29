@@ -67,15 +67,14 @@ const InfoCard: React.FC<{
                     {body}
                 </Paper>
             ) : href ? (
-                <NextLink href={href} passHref>
-                    <Paper
-                        elevation={0}
-                        component="a"
-                        sx={(theme) => ({...infoCardStyle(theme), ...infoCardLinkStyle})}
-                    >
-                        {body}
-                    </Paper>
-                </NextLink>
+                <Paper
+                    elevation={0}
+                    component={NextLink}
+                    href={href}
+                    sx={(theme) => ({...infoCardStyle(theme), ...infoCardLinkStyle})}
+                >
+                    {body}
+                </Paper>
             ) : (
                 // Nothing to activate here, so no pointer and no hover lift.
                 <Paper

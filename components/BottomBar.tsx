@@ -33,6 +33,10 @@ const FooterButton: React.FC<{ href: string; icon: React.ReactNode; active?: boo
         <Button
             color="inherit"
             href={href}
+            // Internal routes render through next/link, so navigation is a
+            // client-side transition rather than a full document reload;
+            // external links stay plain anchors (they leave the app anyway).
+            LinkComponent={isExternal ? undefined : NextLink}
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             startIcon={icon}
@@ -45,14 +49,7 @@ const FooterButton: React.FC<{ href: string; icon: React.ReactNode; active?: boo
         </Button>
     );
 
-    // Internal routes go through next/link so navigation is a client-side
-    // transition rather than a full document reload; external links stay plain
-    // anchors (they leave the app anyway).
-    return isExternal ? button : (
-        <NextLink href={href} passHref>
-            {button}
-        </NextLink>
-    );
+    return button;
 };
 
 const VersionNumber: React.FC<{ version: string }> = ({version}) => (
@@ -67,11 +64,9 @@ const CopyrightNotice: React.FC = () => (
     <Typography variant="body2" color="inherit" component="div" sx={{opacity: 0.85}}>
         {formatCopyright()}
         {' · '}
-        <NextLink href="/legal" passHref>
-            <Link color="inherit" underline="always">
-                {LICENSE_SHORT_NAME}
-            </Link>
-        </NextLink>
+        <Link component={NextLink} href="/legal" color="inherit" underline="always">
+            {LICENSE_SHORT_NAME}
+        </Link>
     </Typography>
 );
 

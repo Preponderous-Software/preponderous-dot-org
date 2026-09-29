@@ -3,8 +3,9 @@ import {Html, Head, Main, NextScript} from 'next/document';
 import {COLOR_MODE_BOOTSTRAP_SCRIPT} from '../utils/colorMode';
 
 // Load the brand fonts (Inter for body, Space Grotesk for headings) from Google
-// Fonts. Next 12 predates next/font, so they are linked here in the document
-// head; preconnect hints keep the extra round-trip cheap.
+// Fonts. They are linked here in the document head, with preconnect hints to
+// keep the extra round-trip cheap. next/font is available now that the site is
+// on Next 14; moving to it is a separate change.
 export default function Document() {
     return (
         <Html lang="en">
@@ -20,7 +21,7 @@ export default function Document() {
                 */}
                 <script dangerouslySetInnerHTML={{__html: COLOR_MODE_BOOTSTRAP_SCRIPT}}/>
                 {/*
-                  Next 12 serves no icon of its own, so without this every page
+                  Next serves no icon of its own, so without this every page
                   load 404s on /favicon.ico and the tab shows a placeholder.
                   Safari ignores the SVG icon (type="image/svg+xml") and falls
                   back to requesting /favicon.ico, so a PNG fallback is listed
