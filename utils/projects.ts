@@ -1,3 +1,5 @@
+import {compareTitles, type CatalogueFacet, type CatalogueSortOption} from '@kingdom-community/community-site-kit/catalogue';
+
 // A showcased project, as stored in pages/data/projects.json (seeded from the
 // legacy application.yaml). Kept framework-free so the sort/filter helpers below
 // stay pure and unit-testable.
@@ -62,3 +64,24 @@ export const groupProjectsByCategory = (projects: Project[]): ProjectCategory[] 
             projects: sortProjectsByTitle(categoryProjects),
         }));
 };
+
+// The home page's search and filters, as community-site-kit's catalogue helpers
+// take them. Technology is free text such as "TypeScript / Next.js"; each part
+// is its own value, so "TypeScript" finds the Next.js sites too.
+export const projectFacets: CatalogueFacet<Project>[] = [
+    {key: 'category', label: 'Category', values: (project) => project.category},
+    {key: 'technology', label: 'Technology', values: (project) => project.technology.split(' / ').map((part) => part.trim())},
+    {key: 'status', label: 'Status', values: (project) => project.status},
+];
+
+// A–Z is the order the grid has always had, so it stays the default.
+export const projectSortOptions: CatalogueSortOption<Project>[] = [
+    {key: 'title', label: 'A–Z', compare: compareTitles},
+    {
+        key: 'category',
+        label: 'By category',
+        compare: (a, b) =>
+            (a.category ?? 'Other').localeCompare(b.category ?? 'Other', undefined, {sensitivity: 'base'}) ||
+            compareTitles(a, b),
+    },
+];

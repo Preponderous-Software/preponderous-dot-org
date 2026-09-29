@@ -1,41 +1,40 @@
 import React from 'react';
-import {Box, useMediaQuery} from '@mui/material';
-import ProjectTile from './ProjectTile';
+import {CatalogueGrid} from '@kingdom-community/community-site-kit';
+import ProjectDetails from './ProjectDetails';
+import ProjectIcon from './ProjectIcon';
 import {type Project} from '../utils/projects';
-import {iconGridStyle} from '../styles/styles';
+import {projectsBoxStyle} from '../styles/styles';
 
-// The home page's minimal project listing: one icon per project, details on
-// hover, focus, or tap. Owns which panel is open so opening one closes any
-// other. The grid does not sort; callers pass the order they want shown.
-const IconGrid: React.FC<{projects: Project[]}> = ({projects}) => {
-    const [openId, setOpenId] = React.useState<string | null>(null);
-    // Touch-only screens get a bottom sheet per tap rather than hover panels.
-    // False on the server and until the first client render, so the markup
-    // matches and a desktop visitor never sees the touch path.
-    const touch = useMediaQuery('(hover: none)');
+// The home page's project listing: one icon per project, details on hover,
+// focus or click, or in a bottom sheet on tap where there is no hover. The
+// grid itself — tiles, panels, sheet, timings — is community-site-kit's
+// CatalogueGrid, shared with danielstephenson.dev and dansplugins.com; this
+// file only says what a project's icon and details look like. The section
+// keeps the #projects id Blurb's "Browse Projects" button points at.
+interface IconGridProps {
+    projects: Project[];
+    // Controls shown above the grid, inside its section (the search and filters).
+    toolbar?: React.ReactNode;
+    // Shown in place of the grid when there are no projects to lay out.
+    empty?: React.ReactNode;
+}
 
-    const handleOpen = React.useCallback((id: string) => setOpenId(id), []);
-    // Only close if the closing tile is still the open one: a tile's delayed
-    // close must not shut the panel of a tile opened after it.
-    const handleClose = React.useCallback(
-        (id: string) => setOpenId((current) => (current === id ? null : current)),
-        [],
-    );
+const fill = {width: '100%', height: '100%', borderRadius: 'inherit', fontSize: {xs: '1.4rem', sm: '1.6rem'}};
 
-    return (
-        <Box component="ul" sx={iconGridStyle}>
-            {projects.map((project) => (
-                <ProjectTile
-                    key={project.id}
-                    project={project}
-                    open={openId === project.id}
-                    onOpen={handleOpen}
-                    onClose={handleClose}
-                    touch={touch}
-                />
-            ))}
-        </Box>
-    );
-};
+const IconGrid: React.FC<IconGridProps> = ({projects, toolbar, empty}) => (
+    <CatalogueGrid
+        items={projects}
+        heading="Projects"
+        sectionId="projects"
+        idPrefix="project"
+        renderIcon={(project) => (
+            <ProjectIcon className="project-tile-icon" project={project} sx={fill} glyphSize={{xs: 30, sm: 34}}/>
+        )}
+        renderDetails={(project, {titleId}) => <ProjectDetails project={project} titleId={titleId}/>}
+        toolbar={toolbar}
+        empty={empty}
+        sx={projectsBoxStyle}
+    />
+);
 
 export default IconGrid;

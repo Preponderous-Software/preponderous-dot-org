@@ -2,7 +2,7 @@ import React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import IconGrid from '../components/IconGrid';
-import { OPEN_DELAY_MS, CLOSE_DELAY_MS } from '../components/ProjectTile';
+import { CATALOGUE_OPEN_DELAY_MS as OPEN_DELAY_MS, CATALOGUE_CLOSE_DELAY_MS as CLOSE_DELAY_MS } from '@kingdom-community/community-site-kit';
 import { type Project } from '../utils/projects';
 
 // A project carrying only the required fields, so each test below can opt into
@@ -22,7 +22,7 @@ const PROJECTS = [
 ];
 
 const tile = (title: string) => screen.getByRole('button', { name: title });
-const panel = (title: string) => screen.queryByRole('region', { name: title });
+const panel = (title: string) => screen.queryByRole('group', { name: title });
 
 describe('IconGrid', () => {
     beforeEach(() => {
@@ -35,10 +35,10 @@ describe('IconGrid', () => {
 
     it('renders one tile per project, in the order given, with no panel open', () => {
         render(<IconGrid projects={PROJECTS}/>);
-        const tiles = screen.getAllByRole('button');
-        expect(tiles.map((t) => t.querySelector('.project-tile-caption')?.textContent)).toEqual(['Roam', 'Viron']);
+        const tiles = screen.getAllByTestId('catalogue-tile');
+        expect(tiles.map((t) => t.querySelector('.catalogue-tile-caption')?.textContent)).toEqual(['Roam', 'Viron']);
         tiles.forEach((t) => expect(t).toHaveAttribute('aria-expanded', 'false'));
-        expect(screen.queryByRole('region')).toBeNull();
+        expect(screen.queryByRole('group')).toBeNull();
         expect(screen.queryByText(PROJECTS[0].description)).toBeNull();
     });
 
