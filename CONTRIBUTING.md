@@ -13,7 +13,7 @@ Thank you for your interest in contributing to the Preponderous Software website
 
 - A GitHub account
 - Git installed on your local machine
-- [Node.js](https://nodejs.org/en/) (v18 or later, to match CI)
+- [Node.js](https://nodejs.org/en/) (v18.17 or later, to match `engines` in `package.json` and the Node 18 line CI runs on)
 - A code editor (e.g. VS Code)
 - A basic understanding of TypeScript and React
 

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- The home page's project grid has a folded **Search & filter** panel: free-text search over each project's name, description, category, technology and status; filter chips for category, technology (split on ` / `) and status; an *A–Z* (default) or *By category* sort; a "Showing N of M projects" count while filtering; and a **Clear filters** way back from an empty result (#118).
+- On touch screens, tapping a project on the home grid opens its details in a bottom sheet rather than the hover panel, closed by its button, the backdrop or Escape, with focus returned to the tile. Below the `md` breakpoint the top bar's links fold behind a menu button that opens a drawer (#114).
+- `/projects` has a row of category jump links with counts (e.g. **Games (7)**) under its heading; the 404 page gains a **Browse projects** button and the 500 page a **Report the problem** button (#115).
+- Projects can name their own artwork (`icon`) or a Material symbol (`glyph`) in `pages/data/projects.json`, and every showcased project now has one or the other; the initial is only a last fallback. Both fields are documented in `CONFIG.md` (#113, #116).
 - `Games` gains FishE, Tidewater and Overwinter, the text games built on `tak`, each with a live link to its in-browser build on danielstephenson.dev, and `Libraries` gains `tak` itself.
 
 - Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
@@ -24,6 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- The home page now opens with every project as a captioned icon, its details shown in a panel on hover, focus or click; the introduction and *Get involved* cards move below the grid, and **Browse Projects** goes to `/projects`. `/projects` keeps its categorized cards (#113, #114). The grid and its search and filters come from `@kingdom-community/community-site-kit`, shared with dansplugins.com and danielstephenson.dev (#118).
+- The *Get involved* cards now lead somewhere distinct: **Contribute** opens every open issue across the organization, **Explore the Code** its repository list, and **Source Available** the license on `/legal` (#115).
+- Next.js is upgraded from 12.2.2 to 14.2.35 (React 18.3.1, TypeScript 5.4), raising the minimum Node.js version to 18.17 (`engines` in `package.json`) (#117). `README.md`, `CONTRIBUTING.md`, `CONFIG.md` and `USER_GUIDE.md` are brought up to date with this and the home-page changes above.
+- `utils/trace-client.ts` is re-vendored from trace-client-js 0.3.0, which tags every event with the program version itself; what a `page-view` sends (`page` and `version`) is unchanged (#119).
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
   0.2.0 (tag `0.2.0`, commit 69b494b), which checks `TRACE_USAGE_REPORTING` / `DO_NOT_TRACK` itself
   and exposes `disabledReason`. `utils/usage-reporting.ts` now uses the client's
