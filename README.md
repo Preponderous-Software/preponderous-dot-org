@@ -8,7 +8,7 @@ The Preponderous Software website is a [Next.js](https://nextjs.org/) web applic
 
 ### First Time Installation
 
-1. Ensure [Node.js](https://nodejs.org/en/) (v18 or later) is installed on your machine.
+1. Ensure [Node.js](https://nodejs.org/en/) (v18.17 or later, the minimum Next.js 14 supports) is installed on your machine.
 2. Clone this repository: `git clone https://github.com/Preponderous-Software/preponderous-dot-org.git`
 3. Install dependencies:
    ```bash
@@ -128,8 +128,9 @@ The image is built from `package-lock.json` with `npm ci`, and `.dockerignore` k
 
 ## Technologies Used
 
-- [Next.js](https://nextjs.org/) (React)
+- [Next.js](https://nextjs.org/) 14 (React 18)
 - [Material UI](https://mui.com/) with [Emotion](https://emotion.sh/)
+- [community-site-kit](https://github.com/kingdom-community/community-site-kit) for the home page's project grid and its search and filters, shared with dansplugins.com and danielstephenson.dev (installed from GitHub at a pinned commit; see `package.json`)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/) for unit testing
 

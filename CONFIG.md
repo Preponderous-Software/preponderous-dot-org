@@ -43,8 +43,10 @@ The file contains a single `projects` array. Each entry supports these fields:
 | `websiteLink` | no | URL to a live/hosted version of the project. When set, the card shows a "Visit Site" button as its primary action, opening in a new tab. |
 | `category` | no | Grouping shown as a section heading on the `/projects` page (e.g. `Games`, `Simulations`, `Libraries`, `Tools`, `Websites`). Entries with no `category` are filed under "Other" (see `groupProjectsByCategory` in `utils/projects.ts`); they still appear on the home page either way. |
 | `status` | no | Maintenance state shown as a colour-coded chip on the card (e.g. `Active`, `Maintenance`). Any other value renders as a plain outlined chip. Omit it to show no status chip. |
+| `icon` | no | Path under `public/` to the project's own artwork (e.g. `/icons/roam.png`), shown as its icon on the home grid and on its `/projects` card. Takes precedence over `glyph`. |
+| `glyph` | no | Name of a Material icon (e.g. `Castle`, `Terminal`) drawn on the project's title colour when it has no `icon`. Only the names mapped in `PROJECT_GLYPHS` in `utils/projectGlyphs.ts` are available; add a new one there first. A project with neither field, or with a name missing from that map, shows its initial instead (see `components/ProjectIcon.tsx`). |
 
-Projects are sorted alphabetically by title at render time (see `utils/projects.ts`), so entries may be listed in any order. The home page lists every project in one flat, alphabetical grid; `/projects` groups the same data by `category`, each category's projects sorted alphabetically within it.
+Entries may be listed in any order. The home page shows every project as an icon in one grid, sorted alphabetically by title by default, with search, filter chips (category, technology and status), and an optional *By category* sort (see `projectFacets` and `projectSortOptions` in `utils/projects.ts`). A `technology` value such as `TypeScript / Next.js` is split on ` / `, so each part is its own filter chip. `/projects` groups the same data by `category`, each category's projects sorted alphabetically within it.
 
 **Example entry:**
 
