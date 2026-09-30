@@ -17,7 +17,7 @@ No special software is required to use the website — just a modern web browser
 ### Browsing the Projects
 
 1. Open the home page. The **Projects** grid at the top shows one icon per project, captioned with its name, in alphabetical order.
-2. Point at an icon, or move to it with the keyboard, to open a small panel with the project's details. On a touch screen, tap the icon instead: the details open in a sheet at the bottom of the screen, which closes from its close button, by tapping outside it, or by swiping it down.
+2. Point at an icon, or move to it with the keyboard, to open a small panel with the project's details. On a touch screen, tap the icon instead: the details open in a sheet at the bottom of the screen, which closes from its close button or by tapping outside it.
 3. The details show the project's name, a short description, its primary technology, and — where set — a maintenance status (e.g. **Active**, **Maintenance**), along with a **GitHub** button and — for projects with a live version — a **Visit Site** button.
 
 ### Searching and Filtering the Projects
