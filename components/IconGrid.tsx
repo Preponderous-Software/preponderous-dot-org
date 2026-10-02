@@ -10,7 +10,8 @@ import {projectsBoxStyle} from '../styles/styles';
 // grid itself — tiles, panels, sheet, timings — is community-site-kit's
 // CatalogueGrid, shared with danielstephenson.dev and dansplugins.com; this
 // file only says what a project's icon and details look like. The section
-// keeps the #projects id Blurb's "Browse Projects" button points at.
+// carries the #projects id; nothing on the site links to it any more, since
+// Blurb's "Browse Projects" button goes to the full /projects page.
 interface IconGridProps {
     projects: Project[];
     // Controls shown above the grid, inside its section (the search and filters).
