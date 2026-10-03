@@ -51,6 +51,19 @@ describe('BottomBar', () => {
         }
     });
 
+    it('carries the same-tab backlink to danielstephenson.dev and its browser-game arcade', () => {
+        const home = screen.getByRole('link', { name: 'danielstephenson.dev' });
+        expect(home).toHaveAttribute('href', 'https://danielstephenson.dev');
+        expect(home).not.toHaveAttribute('target');
+        expect(home.parentElement?.textContent).toBe(
+            'More by Daniel Stephenson → danielstephenson.dev · Play his games in your browser',
+        );
+
+        const play = screen.getByRole('link', { name: 'Play his games in your browser' });
+        expect(play).toHaveAttribute('href', 'https://danielstephenson.dev/play');
+        expect(play).not.toHaveAttribute('target');
+    });
+
     it('labels the footer link group as navigation', () => {
         expect(screen.getByRole('navigation', { name: /footer/i })).toBeInTheDocument();
     });
