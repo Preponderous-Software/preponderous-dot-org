@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- The footer carries a small "More by Daniel Stephenson → danielstephenson.dev" backlink, as dansplugins.com's does, plus a "Play his games in your browser" link to the browser-game arcade at [danielstephenson.dev/play](https://danielstephenson.dev/play).
 - The home page's project grid has a folded **Search & filter** panel: free-text search over each project's name, description, category, technology and status; filter chips for category, technology (split on ` / `) and status; an *A–Z* (default) or *By category* sort; a "Showing N of M projects" count while filtering; and a **Clear filters** way back from an empty result (#118).
 - On touch screens, tapping a project on the home grid opens its details in a bottom sheet rather than the hover panel, closed by its button, the backdrop or Escape, with focus returned to the tile. Below the `md` breakpoint the top bar's links fold behind a menu button that opens a drawer (#114).
 - `/projects` has a row of category jump links with counts (e.g. **Games (7)**) under its heading; the 404 page gains a **Browse projects** button and the 500 page a **Report the problem** button (#115).

@@ -118,6 +118,16 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                     />
                 </Box>
             </Toolbar>
+            <Typography variant="caption" component="p" color="inherit" sx={{textAlign: 'center', opacity: 0.8, pb: 1, px: 2, m: 0}}>
+                More by Daniel Stephenson →{' '}
+                <Link href="https://danielstephenson.dev" color="inherit" underline="hover">
+                    danielstephenson.dev
+                </Link>
+                {' · '}
+                <Link href="https://danielstephenson.dev/play" color="inherit" underline="hover">
+                    Play his games in your browser
+                </Link>
+            </Typography>
         </AppBar>
     );
 }
