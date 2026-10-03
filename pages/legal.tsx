@@ -121,9 +121,10 @@ const LegalPage: NextPage = () => (
                 </Paragraph>
                 <Paragraph>
                     When usage reporting is switched on, the server counts page views: for each page
-                    it serves, it records the page&apos;s path and the site&apos;s version, and nothing
-                    else — no IP address, browser details, cookies, referrer, query string, or
-                    identity. The count is sent from the server to{' '}
+                    it serves, it records the page&apos;s path, the site&apos;s version and a random
+                    ID for the server itself (the same for every visitor, so it says nothing about
+                    you), and nothing else — no IP address, browser details, cookies, referrer, query
+                    string, or identity. The count is sent from the server to{' '}
                     <Link href={TRACE_URL} target="_blank" rel="noopener noreferrer">trace</Link>;
                     no script runs in your browser for it, and crawlers are not counted.{' '}
                     <Link href={USAGE_REPORTING_DETAILS_URL} target="_blank" rel="noopener noreferrer">
