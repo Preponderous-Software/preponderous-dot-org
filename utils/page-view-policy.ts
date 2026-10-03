@@ -18,7 +18,7 @@ import { isBot, pagePath } from './trace-client';
  * pages themselves (404, 500) are not listed. __tests__/page-view-policy.test.ts
  * fails when this list and the pages/ directory disagree.
  */
-export const PAGE_ROUTES: readonly string[] = ['/', '/about', '/contact', '/legal', '/projects'];
+export const PAGE_ROUTES: readonly string[] = ['/', '/about', '/contact', '/legal', '/projects', '/usage'];
 
 /**
  * Dynamic routes whose variable segment would name a person (a profile's

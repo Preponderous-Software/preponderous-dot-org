@@ -69,6 +69,12 @@ Reporting is off unless a key is set, and any of these turns it off:
 server logs one line on its first request saying whether reporting is on and, if it is off, which
 switch turned it off. Details: https://github.com/Stephenson-Software/trace#usage-reporting
 
+The other direction — how much the projects themselves are used — is read from trace's public
+figures and shown on `/usage` and in each reporting project's details on the home grid. Those
+figures are starts (a game launched, a program run), never presented as people or installs;
+"active installs" is shown only once trace counts distinct installs. See [CONFIG.md](CONFIG.md)
+(`TRACE_PUBLIC_URL`).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

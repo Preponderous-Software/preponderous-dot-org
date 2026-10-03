@@ -3,6 +3,7 @@ import {CatalogueGrid} from '@kingdom-community/community-site-kit';
 import ProjectDetails from './ProjectDetails';
 import ProjectIcon from './ProjectIcon';
 import {type Project} from '../utils/projects';
+import {type ProjectUsageMap} from '../utils/projectUsage';
 import {projectsBoxStyle} from '../styles/styles';
 
 // The home page's project listing: one icon per project, details on hover,
@@ -18,11 +19,16 @@ interface IconGridProps {
     toolbar?: React.ReactNode;
     // Shown in place of the grid when there are no projects to lay out.
     empty?: React.ReactNode;
+    // trace's usage figures by project id, and the visitor's clock (null
+    // until the page has mounted), shown as a usage line in each reporting
+    // project's details.
+    usage?: ProjectUsageMap;
+    now?: Date | null;
 }
 
 const fill = {width: '100%', height: '100%', borderRadius: 'inherit', fontSize: {xs: '1.4rem', sm: '1.6rem'}};
 
-const IconGrid: React.FC<IconGridProps> = ({projects, toolbar, empty}) => (
+const IconGrid: React.FC<IconGridProps> = ({projects, toolbar, empty, usage, now}) => (
     <CatalogueGrid
         items={projects}
         heading="Projects"
@@ -31,7 +37,14 @@ const IconGrid: React.FC<IconGridProps> = ({projects, toolbar, empty}) => (
         renderIcon={(project) => (
             <ProjectIcon className="project-tile-icon" project={project} sx={fill} glyphSize={{xs: 30, sm: 34}}/>
         )}
-        renderDetails={(project, {titleId}) => <ProjectDetails project={project} titleId={titleId}/>}
+        renderDetails={(project, {titleId}) => (
+            <ProjectDetails
+                project={project}
+                titleId={titleId}
+                usage={usage?.[project.id]}
+                now={now ? now.getTime() : null}
+            />
+        )}
         toolbar={toolbar}
         empty={empty}
         sx={projectsBoxStyle}

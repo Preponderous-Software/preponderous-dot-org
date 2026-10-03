@@ -5,6 +5,9 @@ import CodeIcon from '@mui/icons-material/Code';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {type Project} from '../utils/projects';
 import {statusChipColor} from '../utils/projectColors';
+import {traceProgramFor} from '../utils/traceNames';
+import type {ProgramUsage} from '../utils/traceUsage';
+import UsageLine from './UsageLine';
 
 interface ProjectDetailsProps {
     project: Project;
@@ -13,13 +16,18 @@ interface ProjectDetailsProps {
     titleId?: string;
     // Rendered beside the title — the bottom sheet's close button.
     titleAction?: React.ReactNode;
+    // The project's trace figures, when it reports and they have arrived,
+    // and the visitor's clock to date them by; shown as one usage line.
+    usage?: ProgramUsage;
+    now?: number | null;
 }
 
 // What a tile reveals about its project: title, description, technology and
 // status, and the project's links. Shared by the desktop hover panel and the
 // bottom sheet a tap opens on a touch screen, so both always show the same.
-const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleAction}) => {
+const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleAction, usage, now}) => {
     const {title, description, githubLink, technology, websiteLink, status} = project;
+    const traceProgram = traceProgramFor(project.id);
     return (
         <>
             <Stack direction="row" alignItems="flex-start" spacing={1} sx={{mb: 1}}>
@@ -45,6 +53,9 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleA
                         />
                     ) : null}
                 </Stack>
+            ) : null}
+            {usage && traceProgram && typeof now === 'number' ? (
+                <UsageLine usage={usage} kind={traceProgram.kind} now={now}/>
             ) : null}
             {/* Same actions and accessible names as ProjectCard, so a
                 project's links read the same on the home page as on

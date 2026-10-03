@@ -9,6 +9,8 @@ import IconGrid from '../components/IconGrid'
 import {CatalogueFilterBar} from '@kingdom-community/community-site-kit'
 import {filterCatalogue, sortCatalogue, type CatalogueQuery} from '@kingdom-community/community-site-kit/catalogue'
 import {projectFacets, projectSortOptions, type Project} from '../utils/projects'
+import {useProjectUsage} from '../utils/useProjectUsage'
+import {useNow} from '../utils/useNow'
 import {pageStyle, sectionDividerStyle} from '../styles/styles'
 
 interface ProjectData {
@@ -39,9 +41,15 @@ const ProjectsSection: React.FC = () => {
     const sort = projectSortOptions.find((option) => option.key === sortKey) ?? projectSortOptions[0]
     const all = projectData.projects
     const shown = filterCatalogue(sortCatalogue(all, sort), projectFacets, query)
+    // trace's usage figures, fetched after the page has rendered (the page
+    // itself stays static), and the visitor's clock to date them by.
+    const usage = useProjectUsage()
+    const now = useNow()
     return (
         <IconGrid
             projects={shown}
+            usage={usage}
+            now={now}
             toolbar={
                 <CatalogueFilterBar
                     items={all}

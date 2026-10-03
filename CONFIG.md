@@ -11,6 +11,9 @@ The site is a static project showcase and requires **no environment variables** 
 | `USAGE_REPORTING_KEY` | unset — nothing is reported | The [trace](https://trace.danielstephenson.dev) write key for the `preponderous-dot-org` program. Read by `middleware.ts` only: never inlined into the browser bundle and never committed; keep it in the deployment's environment. |
 | `USAGE_REPORTING_ENABLED` | `true` | Set to `false` (or `0`, `no`, `off`; case and surrounding space do not matter) to stop reporting page views even when a key is set. `TRACE_USAGE_REPORTING=off` and `DO_NOT_TRACK=1` do the same and win over it. |
 | `USAGE_REPORTING_ENDPOINT` | `https://trace.danielstephenson.dev` | The trace server page views are sent to. |
+| `TRACE_PUBLIC_URL` | `https://trace.danielstephenson.dev` | The trace server project usage is read from, server side, for `/usage` and `/api/usage` (the home grid's usage lines) — `utils/traceUsage.ts`. Only trace's public, unauthenticated endpoints are read, so no key is needed; point it at a local stub to try the pages against made-up figures. When trace can't be reached, or has no figures for a project, the usage line is left out and `/usage` says the figures are unavailable; no page fails. |
+
+Which project reports to trace as which program, and whether its starts are worded as launches or starts, is the map in `utils/traceNames.ts`, keyed by the `id` in `pages/data/projects.json` (a test fails if a key is not a project).
 
 A new page under `pages/` must also be added to `PAGE_ROUTES` in [`utils/page-view-policy.ts`](utils/page-view-policy.ts) to be counted; a test fails until it is.
 
