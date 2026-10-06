@@ -1,5 +1,5 @@
 // Which trace program each project on this site reports as, and what one of
-// its "starts" is. trace (https://github.com/Stephenson-Software/trace) names
+// its "starts" is. trace (https://danielstephenson.dev/usage-reporting) names
 // a program by the `application` its client sends, which is the program's own
 // name rather than this site's project id, so the two are paired here. The
 // registered names are listed in trace's docs/CONSUMERS.md.

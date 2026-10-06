@@ -79,7 +79,7 @@ describe('/usage', () => {
         expect(within(items[1]).getByRole('link', {name: 'Roam on GitHub'}).getAttribute('href'))
             .toBe('https://github.com/Preponderous-Software/Roam');
         expect(screen.getByRole('link', {name: /how it works/}).getAttribute('href'))
-            .toBe('https://github.com/Stephenson-Software/trace#usage-reporting');
+            .toBe('https://danielstephenson.dev/usage-reporting');
         expect(screen.getByTestId('trace-attribution').textContent).toContain('Test and CI runs are excluded');
         expect(screen.queryByTestId('usage-unavailable')).toBeNull();
         expect(screen.getAllByRole('img').some((img) => /^Launches per day from Sep 4 to Oct 3/.test(img.getAttribute('aria-label') ?? ''))).toBe(true);
