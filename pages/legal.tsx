@@ -22,7 +22,7 @@ const REPO_URL = 'https://github.com/Preponderous-Software/preponderous-dot-org'
 // Where page views go (middleware.ts). Not imported from utils/usage-reporting.ts,
 // which is kept out of the browser bundle.
 const TRACE_URL = 'https://trace.danielstephenson.dev';
-const USAGE_REPORTING_DETAILS_URL = 'https://github.com/Stephenson-Software/trace#usage-reporting';
+const USAGE_REPORTING_DETAILS_URL = 'https://danielstephenson.dev/usage-reporting';
 
 const LegalSection: React.FC<{title: string; children: React.ReactNode}> = ({title, children}) => (
     <Box component="section" sx={{mb: 5}}>

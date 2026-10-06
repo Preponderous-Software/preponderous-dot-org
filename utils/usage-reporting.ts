@@ -2,8 +2,9 @@
 // One event is reported: `page-view`, from middleware.ts, once per HTML page
 // served, tagged with the path, the site version and this server's random
 // installation ID (`install`), and nothing else. What a
-// page view records, and why it is reported server-side, is trace decision 0002:
-// https://github.com/Stephenson-Software/trace/blob/main/docs/decisions/0002-website-page-views.md
+// page view records, and why it is reported server-side, is trace decision 0002
+// (kept in the private trace repository; public summary at
+// https://danielstephenson.dev/usage-reporting).
 //
 // The key is read from USAGE_REPORTING_KEY and nowhere else: it is never
 // committed and never reaches the browser (this module is only imported by
@@ -21,7 +22,7 @@ export const PROGRAM_NAME = 'preponderous-dot-org';
 export const DEFAULT_ENDPOINT = 'https://trace.danielstephenson.dev';
 
 /** What is and is not sent, and every way to turn it off. */
-export const DETAILS_URL = 'https://github.com/Stephenson-Software/trace#usage-reporting';
+export const DETAILS_URL = 'https://danielstephenson.dev/usage-reporting';
 
 /**
  * The build the events are tagged with: `version` from package.json, passed to

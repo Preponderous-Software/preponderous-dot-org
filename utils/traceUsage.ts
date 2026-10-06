@@ -1,5 +1,5 @@
 /**
- * Project usage as trace (https://github.com/Stephenson-Software/trace)
+ * Project usage as trace (https://danielstephenson.dev/usage-reporting)
  * reports it, read from trace's public, unauthenticated endpoints:
  *
  *   GET /api/public/programs/{name}  one program's last 30 days

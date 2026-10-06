@@ -2,8 +2,8 @@
 // reporting to trace, and what path is recorded for it. Pure and runtime-
 // agnostic, so middleware.ts stays thin and the rules are unit-tested directly.
 //
-// A page view is one HTML page served to a person (trace decision 0002,
-// https://github.com/Stephenson-Software/trace/blob/main/docs/decisions/0002-website-page-views.md):
+// A page view is one HTML page served to a person (trace decision 0002, kept in the private trace
+// repository; public summary at https://danielstephenson.dev/usage-reporting):
 // a GET for a document, on a route this site actually serves, from a browser
 // rather than a crawler, a monitor or a script, and not a prefetch or a
 // client-side data fetch. The user agent is consulted for the bot check here

@@ -110,7 +110,7 @@ const Usage: NextPage<UsagePageProps> = ({rows, renderedAt}) => {
                 </Typography>
                 <Typography gutterBottom>
                     Our games, simulations and tools report when they start, through{' '}
-                    <Link href="https://github.com/Stephenson-Software/trace" target="_blank" rel="noopener noreferrer">trace</Link>:
+                    <Link href="https://danielstephenson.dev/usage-reporting" target="_blank" rel="noopener noreferrer">trace</Link>:
                     a game when someone launches it, and any other program when it is run. These are the last 30
                     days of those reports.
                 </Typography>
