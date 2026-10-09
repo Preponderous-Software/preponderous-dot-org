@@ -18,7 +18,7 @@ No special software is required to use the website — just a modern web browser
 
 1. Open the home page. The **Projects** grid at the top shows one icon per project, captioned with its name, in alphabetical order.
 2. Point at an icon, or move to it with the keyboard, to open a small panel with the project's details. On a touch screen, tap the icon instead: the details open in a sheet at the bottom of the screen, which closes from its close button or by tapping outside it.
-3. The details show the project's name, a short description, its primary technology, and — where set — a maintenance status (e.g. **Active**, **Maintenance**), along with a **GitHub** button and — for projects with a live version — a **Visit Site** button.
+3. The details show the project's name, a short description, its primary technology, and — where set — a maintenance status (e.g. **Active**, **Maintenance**), along with a **GitHub** button and — for projects with a live version — a **Visit Site** button. Projects that report their usage also show a line such as "Last used 3 days ago" (see [Seeing How Much a Project Is Used](#seeing-how-much-a-project-is-used)).
 
 ### Searching and Filtering the Projects
 
@@ -51,6 +51,16 @@ Some projects are hosted and can be used straight from the browser.
 3. Click **Visit Site** to open it in a new tab.
 
 Projects without a **Visit Site** button have no hosted version — use the **GitHub** button to get the source and run it yourself.
+
+### Seeing How Much a Project Is Used
+
+Many of the games, simulations and tools report when they start to [trace](https://danielstephenson.dev/usage-reporting).
+
+1. Open a project's details on the home page. If it reports, the details show when it was last used and how many times it started in the last 30 days (e.g. "12 launches in the last 30 days" for a game), or its active installs once trace can count them.
+2. Click **About these figures** under that line to open the **/usage** page.
+3. **/usage** lists every reporting project with the same figures over the last 30 days, ranked by active installs where known, then by how recently each was used.
+
+A start is not a person: one player launching a game every evening counts thirty times. If trace can't be reached, the usage lines are simply left out and **/usage** says the figures are unavailable.
 
 ### Navigating on a Phone
 

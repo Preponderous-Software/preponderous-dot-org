@@ -54,6 +54,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- The docs now cover the project usage figures: `USER_GUIDE.md` describes the usage line in a project's details and the `/usage` page it links to; `CONFIG.md` counts all five optional environment variables (it said three) and lists `/usage` among the sitemap's routes; and the README no longer calls the site a static showcase with no back end, naming the server-side parts that run inside the Next.js server instead.
 - The home page no longer scrolls sideways on a 390px phone: the hero title's fixed 3.75rem size rendered "Preponderous" wider than the content column, so it steps down to 2.5rem on xs. Project cards take a minimum rather than a fixed height, so a card whose title wraps (Artificial Consciousness Simulation Framework at 1280px) grows with its row instead of clipping its GitHub button.
 - `README.md` and `CONFIG.md` now list every value `USAGE_REPORTING_ENABLED` accepts to turn reporting off (`false`, `0`, `no`, `off`), not just `false`; `CONTRIBUTING.md` now asks contributors to run `npm run build` as well as lint and tests, matching the three steps CI runs on every pull request.
 - `.gitignore` now excludes `.env*.local` as well as `.env`, so the `.env.local` file that `CONFIG.md` has always described as "excluded from version control" actually is.

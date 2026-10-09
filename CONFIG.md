@@ -4,7 +4,7 @@ This document describes the configuration options for the Preponderous Software 
 
 ## Environment Variables
 
-The site is a static project showcase and requires **no environment variables** to build or run. Three optional ones, read by the server at runtime only, control [usage reporting](README.md#usage-reporting):
+The site requires **no environment variables** to build or run. Five optional ones are read by the server at runtime only: the first four control [usage reporting](README.md#usage-reporting) of the site's own page views, and `TRACE_PUBLIC_URL` sets where the projects' usage figures are read from:
 
 | Variable | Default | Purpose |
 |---|---|---|
@@ -93,7 +93,7 @@ Two static files under `public/` tell search engines what to crawl and index:
 | File | Purpose |
 |---|---|
 | `public/robots.txt` | Allows every crawler the whole site and points at the sitemap's absolute URL. |
-| `public/sitemap.xml` | Lists every indexable route (`/`, `/about`, `/contact`, `/legal`, `/projects`) as an absolute URL, matching the canonical links `components/Seo.tsx` emits. The shared `404`/`500` error pages are deliberately excluded — they have no canonical URL of their own. |
+| `public/sitemap.xml` | Lists every indexable route (`/`, `/about`, `/contact`, `/legal`, `/projects`, `/usage`) as an absolute URL, matching the canonical links `components/Seo.tsx` emits. The shared `404`/`500` error pages are deliberately excluded — they have no canonical URL of their own. |
 
 Both are hand-written and hard-code the origin, because a file served straight
 out of `public/` is not templated at build time and so cannot read

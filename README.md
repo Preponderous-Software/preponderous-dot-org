@@ -120,7 +120,7 @@ Test files live in the `__tests__/` directory. If all tests pass, the suite has 
 npm run dev
 ```
 
-The site is a static project showcase with no back end, so this is the whole stack; there is nothing else to start. It requires no environment variables (see [CONFIG.md](CONFIG.md)).
+The site has no separate back end: the only server-side parts — the `/usage` page, `GET /api/usage`, `GET /version.json`, and the page-view middleware — run inside the same Next.js server, so this is the whole stack; there is nothing else to start. It requires no environment variables (see [CONFIG.md](CONFIG.md)); without them, nothing is reported and the usage figures are read from the public trace server.
 
 ### Docker Compose
 
