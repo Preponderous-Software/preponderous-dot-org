@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   unmodified from `Stephenson-Software/trace-client-js`.
 
 - `public/robots.txt` and `public/sitemap.xml`, listing every indexable route so search engines can discover all of them, documented in `CONFIG.md` (#83).
+- Test coverage for `utils/relativeTime.ts` (the "3 days ago" wording behind the usage line, including its rounding at unit boundaries, future timestamps and unparseable input) and `utils/projectColors.ts` (the title-hashed avatar colour and the case-insensitive status-chip colour), the two pure utilities that had no spec of their own.
 - Test coverage for `ColorModeToggleSwitch`, the last component without a test file, including a guard that the `public/colormode/*.svg` icons its styles reference still exist (#94).
 - Test coverage for `pages/_document.tsx`, pinning down the parts that would regress silently: the color-mode bootstrap script stays inline, render-blocking, and ahead of the page content; the icon links keep pointing at the assets shipped under `public/`; and the document keeps declaring `lang="en"` (#90).
 
