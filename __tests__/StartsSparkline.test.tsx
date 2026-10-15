@@ -1,6 +1,6 @@
 // Characterizes the 30-day sparkline drawn on /usage: its accessible summary,
-// its visible labels, and the line it plots, including the edge cases (no
-// days, a window of zeros, a single day) the usage page itself never shows.
+// its visible labels, and the line it plots, including the windows the usage
+// page filters out before drawing (no days, nothing but zeros).
 import React from 'react';
 import {describe, expect, it} from 'vitest';
 import {render, screen} from '@testing-library/react';
