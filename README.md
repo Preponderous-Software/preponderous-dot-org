@@ -4,6 +4,14 @@
 
 The Preponderous Software website is a [Next.js](https://nextjs.org/) web application that serves as the public face of Preponderous Software. It showcases the projects — free, source-available games, simulations, and libraries — and links out to their source on GitHub. Built with React and [Material UI](https://mui.com/), it mirrors the structure of the [Dan's Plugins Community website](https://github.com/Dans-Plugins/dansplugins-dot-com).
 
+<p align="center">
+  <img src="docs/images/home-desktop.png" alt="The preponderous.org home page: an icon grid of every project (Barony, Roam, Tidewater, Viron and more) above the Preponderous Software hero" width="640">
+  <img src="docs/images/home-mobile.png" alt="The same icon grid at phone width, four icons per row" width="160">
+</p>
+<p align="center"><em>The live site at <a href="https://preponderous.org">preponderous.org</a>, desktop and phone width.</em></p>
+
+<sub>How these were captured: headless Chromium (Playwright) against the live public site on 2026-10-18 at 1280×800 and 390×844.</sub>
+
 ## Installation
 
 ### First Time Installation
