@@ -34,4 +34,4 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
 };
 
 export const glyphFor = (name?: string): typeof SvgIcon | undefined =>
-    name ? PROJECT_GLYPHS[name] : undefined;
+    name && Object.prototype.hasOwnProperty.call(PROJECT_GLYPHS, name) ? PROJECT_GLYPHS[name] : undefined;
