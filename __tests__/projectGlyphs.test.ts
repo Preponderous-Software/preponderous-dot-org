@@ -33,6 +33,12 @@ describe('glyphFor', () => {
         expect(glyphFor('NoSuchIcon')).toBeUndefined();
     });
 
+    it('returns undefined for a name inherited from Object.prototype', () => {
+        expect(glyphFor('constructor')).toBeUndefined();
+        expect(glyphFor('toString')).toBeUndefined();
+        expect(glyphFor('hasOwnProperty')).toBeUndefined();
+    });
+
     it('matches names case-sensitively', () => {
         expect(glyphFor('castle')).toBeUndefined();
     });
