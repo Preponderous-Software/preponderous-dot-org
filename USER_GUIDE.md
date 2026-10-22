@@ -95,4 +95,13 @@ If you find a bug on the website itself:
 2. Click **New Issue**.
 3. Describe the problem and include steps to reproduce it.
 
-You can also use the **Report a Bug** link in the footer, or visit the **/contact** page (reachable via **Contact** in the top navigation bar) for the same link plus where to go for project-specific questions.
+You can also use the **Report a Bug** link in the footer, or visit the **/contact** page (reachable via **Contact** in the top navigation bar) for the same link plus where to go for project-specific questions. The footer's **Source Code** link opens the website's own repository in a new tab.
+
+### Finding More by Daniel Stephenson
+
+The last line of the footer links to Daniel Stephenson's personal site:
+
+1. Click **danielstephenson.dev** to visit it.
+2. Click **Play his games in your browser** to open the browser-game arcade at danielstephenson.dev/play.
+
+Both open in the same tab.
