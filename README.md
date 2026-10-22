@@ -2,7 +2,7 @@
 
 ## Description
 
-The Preponderous Software website is a [Next.js](https://nextjs.org/) web application that serves as the public face of Preponderous Software. It showcases the projects — free, source-available games, simulations, and libraries — and links out to their source on GitHub. Built with React and [Material UI](https://mui.com/), it mirrors the structure of the [Dan's Plugins Community website](https://github.com/Dans-Plugins/dansplugins-dot-com).
+The Preponderous Software website is a [Next.js](https://nextjs.org/) web application that serves as the public face of Preponderous Software. It showcases the projects — free, source-available games, simulations, libraries, tools, and websites — and links out to their source on GitHub. Built with React and [Material UI](https://mui.com/), it mirrors the structure of the [Dan's Plugins Community website](https://github.com/Dans-Plugins/dansplugins-dot-com).
 
 <p align="center">
   <img src="docs/images/home-desktop.png" alt="The preponderous.org home page: an icon grid of every project (Barony, Roam, Tidewater, Viron and more) above the Preponderous Software hero" width="640">
