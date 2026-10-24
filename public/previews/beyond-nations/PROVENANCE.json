@@ -1,0 +1,13 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/beyond-nations",
+ "commit": "19aad657aaaaf07ddc39dbd9e9fef4909f39d718",
+ "replay": "https://danielstephenson.dev/3d/beyond-nations/ (usd-web bundle; its PROVENANCE.json says how it was recorded)",
+ "tool": "replay-player --headless --frames",
+ "tool_url": "https://github.com/Preponderous-Software/replay-player",
+ "tool_commit": "70424e809818b01c0d4c78b73ce1cdfde0e6957f",
+ "commands": [
+  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j16",
+  "LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe build/replay-player <this directory> --headless --width 1440 --height 960 --frames frames/ --count 120 --fps 15 --at 240000 --speed 1 --zoom 0.55 --spin 6",
+  "each frame cropped to its top 1440x900, frames scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 15 fps; poster.jpg is one frame of the clip"
+ ]
+}

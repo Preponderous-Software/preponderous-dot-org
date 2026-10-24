@@ -1,0 +1,23 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/viron-strata",
+ "commit": "b73cdd9266d6cab5208605c6f9b3e103f25a9f11",
+ "tool": "viron-strata --headless --frames (live, against a throwaway local Viron driven by tools/driver.py)",
+ "tool_url": "https://github.com/Preponderous-Software/viron-strata",
+ "commands": [
+  "cmake -S src/viron-strata -B work-b/vs-build -DCMAKE_BUILD_TYPE=Release && cmake --build work-b/vs-build -j8  # cmake 4",
+  "git clone https://github.com/Preponderous-Software/viron work-b/viron && git -C work-b/viron checkout bd4a1f82a460a2888042880a68347c91cb84c2c5  # CI's VIRON_COMMIT",
+  "JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 ./mvnw -q -B -DskipTests package  # in work-b/viron",
+  "runuser -u postgres -- initdb -D work-b/pg/data -U postgres --auth=trust; pg_ctl start -o '-p 55432 -c listen_addresses=127.0.0.1'  # throwaway PostgreSQL 12 in scratch",
+  "psql -h 127.0.0.1 -p 55432 -U postgres -f db-scripts/setup/create_sequences.sql; ... -f db-scripts/setup/create_tables.sql",
+  "head -c 48 /dev/urandom | base64 > work-b/viron-jwt.secret",
+  "JWT_SECRET=$(cat work-b/viron-jwt.secret) USAGE_REPORTING_ENABLED=false java -jar viron/target/viron-*.jar --server.port=19999 '--database.dbUrl=jdbc:postgresql://127.0.0.1:55432/postgres?stringtype=unspecified'",
+  "export VIRON_TOKEN=$(python3 tools/mint_dev_token.py work-b/viron-jwt.secret)",
+  "export LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe",
+  "python3 tools/driver.py --viron-url http://127.0.0.1:19999 --name meadow-walk --ticks 60 --tps 3 --start-delay 1.0 --env-file work-b/env &",
+  "build/viron-strata --viron-url http://127.0.0.1:19999 --environment 3 --headless --duration 13 --fps 15 --width 960 --height 600 --yaw 12 --pitch 50 --zoom 0.97 --frames work-b/vs-frames",
+  "build/viron-strata --viron-url http://127.0.0.1:19999 --environment 3 --headless --duration 2 --verify  # -> verify: ok, 16 placements match",
+  "frames/0000..0134.png = vs-frames/frame-00030..00164.png (skips the first 2 s; copy only)",
+  "frames scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 15 fps; poster.jpg is one frame of the clip"
+ ],
+ "notes": "Recorded live, not from the committed GIF: a throwaway Viron (bd4a1f8, CI's pin) on a scratch PostgreSQL 12 cluster, per docs/LOCAL_VIRON.md, with ports moved (Viron 19999 via --server.port, PostgreSQL 55432) to avoid defaults. No Docker. The client has no offline/fixture mode (--verify needs a live Viron too). Camera tweaked from the default (--yaw 12 --pitch 50 --zoom 0.97) for a more 3D 16:10 framing. The random walk does not loop seamlessly (cut at the end). The HUD's third line ('polled every 250 ms; not tick-exact') is the tool's small font and is not legible at 800 px; the first two HUD lines are."
+}
