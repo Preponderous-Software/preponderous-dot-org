@@ -1,0 +1,13 @@
+{
+ "source_repo": "https://github.com/Stephenson-Software/FishE",
+ "commit": "b3c4903477c0ce2c864a56321c576c3f60964d05",
+ "tool": "strata-golden (Strata v0.6.0 release tarball, strata-0.6.0-linux-x64.tar.gz, sha256 4fea4eaaefcc35e122b66a70cf5559c1dfa3ba57eff966f9dd5da2f49cba9499)",
+ "tool_url": "https://github.com/Stephenson-Software/FishE/blob/b3c4903477c0ce2c864a56321c576c3f60964d05/art/render.py",
+ "commands": [
+  "gh release download v0.6.0 -R Preponderous-Software/strata -p strata-0.6.0-linux-x64.tar.gz && tar -xzf strata-0.6.0-linux-x64.tar.gz -C strata",
+  "for each of docks, shop, home, bank, tavern: copy FishE's art/<place>.scene beside itself with 'size 640 360' -> 'size 960 600' and art/stills.json's 'sun date' line appended, then LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe LD_LIBRARY_PATH=strata/lib strata/bin/strata-golden render <copy> <place>.png --surface headless (the copy is removed afterwards)",
+  "ffmpeg: docks, shop, home, bank, tavern, docks, 2.0 s each at 15 fps, joined with 0.5 s fades (xfade), 960x600, 9.5 s",
+  "scaled to 640x400 (Lanczos) for the 320 px panel; clip.webm: VP9 two-pass yuv420p, crf 36; clip.mp4: H.264 high, crf 24, faststart; poster.jpg = the docks still (the clip's first frame)"
+ ],
+ "notes": "The same five location stills FishE shows above each place's menu (RFC 0025, FishE#235), drawn again at the site's 16:10 size: art/render.py's recipe with only the scene's size line changed, so the same camera shows slightly more vertically. Each place at the hour its manifest gives (docks 08:00, shop 10:00, home 13:00, bank 11:00, tavern 20:00) on the provisional setting FishE shares with Tidewater (54.5 N, 0.6 W, UTC+1, 2023-09-21). Ends on the docks again so the loop wraps without a cut. The same render as danielstephenson.dev's FishE preview, encoded at 640x400."
+}

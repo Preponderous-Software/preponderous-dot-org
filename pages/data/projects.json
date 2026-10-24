@@ -100,7 +100,21 @@
       "websiteLink": "https://danielstephenson.dev/play/fishe",
       "category": "Games",
       "status": "Active",
-      "glyph": "Phishing"
+      "glyph": "Phishing",
+      "preview": {
+        "poster": "/previews/fishe/poster.jpg",
+        "clip": {
+          "webm": "/previews/fishe/clip.webm",
+          "mp4": "/previews/fishe/clip.mp4"
+        },
+        "alt": "FishE's five places drawn in flat-coloured 3D, one after another: the docks at eight in the morning with a pier, boats and a bell tower; the shop with its counter and rack of fishing poles; a rented room with a bunk and stove; the bank's counter and safe; and the tavern after dark, lit by its fire.",
+        "madeWith": {
+          "name": "strata-golden",
+          "url": "https://github.com/Preponderous-Software/strata/tree/main/tools/strata-golden"
+        },
+        "more": "https://danielstephenson.dev/play/fishe",
+        "moreLabel": "Play it in the browser"
+      }
     },
     {
       "id": "microbiome",
