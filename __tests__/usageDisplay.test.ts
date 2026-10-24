@@ -1,5 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import {
+    activeInstallsLabel,
     perDayHeading,
     percentLabel,
     rankUsage,
@@ -49,6 +50,15 @@ describe('usageHeadline', () => {
         expect(perDayHeading('game')).toBe('Launches per day');
         expect(perDayHeading('plugin')).toBe('Server starts per day');
         expect(perDayHeading('program')).toBe('Starts per day');
+    });
+});
+
+describe('activeInstallsLabel', () => {
+    it('is singular for one install and plural otherwise, with thousands separated', () => {
+        expect(activeInstallsLabel(1)).toBe('1 active install');
+        expect(activeInstallsLabel(0)).toBe('0 active installs');
+        expect(activeInstallsLabel(57)).toBe('57 active installs');
+        expect(activeInstallsLabel(1500)).toBe('1,500 active installs');
     });
 });
 
