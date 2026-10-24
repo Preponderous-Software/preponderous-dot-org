@@ -1,0 +1,13 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/acsf-usd-env",
+ "commit": "2f5318aa8a27e79412b139e5de311d15352f481c",
+ "tool": "acsf-usd view (Strata viewer), driven by scripts/render_view.py",
+ "tool_url": "https://github.com/Preponderous-Software/acsf-usd-env/blob/2f5318aa8a27e79412b139e5de311d15352f481c/scripts/render_view.py",
+ "commands": [
+  "uv venv -p python3.12 venv-acsf && uv pip install '<acsf-usd-env>[view]' imageio-ffmpeg",
+  "LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe ACSF_USD_STRATA_LIB=libstrata-0.6.0-linux-x64.so python work-c/run_keep.py scripts/render_view.py --out acsf-out2 --work acsf-work2 --size 1280x800 --fps 15 --step 2 --gif-width 960   (run_keep.py only stops the script deleting its PNG frames)",
+  "Lanczos downscale each 1280x800 frame to 960x600 -> frames/0000.png..0145.png",
+  "frames scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 15 fps; poster.jpg is one frame of the clip"
+ ],
+ "notes": "view-echo is acsf-usd-env's (acsf-usd view), so the id is acsf-usd-env. Echo golden run (tests/fixtures/golden/Echo), cycles 1-200 at 2 cycles/frame, then a 3 s hold on cycle 200: 146 frames = 9.7 s at 15 fps. Loops by cutting from the full spiral back to an empty one (same as the README GIF). Rendered at 1280x800 rather than 960x600 because the viewer's HUD overlaps at 960 wide; downscaled. Strata 0.6.0 (ABI 1.12) on llvmpipe. Keep the project's caveat: synthetic schematic layout, not a body or a place."
+}

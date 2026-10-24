@@ -8,6 +8,7 @@ import {statusChipColor} from '../utils/projectColors';
 import {traceProgramFor} from '../utils/traceNames';
 import type {ProgramUsage} from '../utils/traceUsage';
 import UsageLine from './UsageLine';
+import ProjectPreview from './ProjectPreview';
 
 interface ProjectDetailsProps {
     project: Project;
@@ -36,6 +37,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleA
                 </Typography>
                 {titleAction}
             </Stack>
+            {project.preview ? <ProjectPreview preview={project.preview}/> : null}
             <Typography variant="body2" color="text.secondary" sx={{mb: 1.5}}>
                 {description}
             </Typography>

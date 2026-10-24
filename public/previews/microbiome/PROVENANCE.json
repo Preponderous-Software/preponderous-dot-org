@@ -1,0 +1,13 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/microbiome",
+ "commit": "a9a548d3c5b8d7774bfc1e58c5a3238f58c61c3d",
+ "replay": "https://danielstephenson.dev/3d/microbiome/ (usd-web bundle; its PROVENANCE.json says how it was recorded)",
+ "tool": "replay-player --headless --frames",
+ "tool_url": "https://github.com/Preponderous-Software/replay-player",
+ "tool_commit": "70424e809818b01c0d4c78b73ce1cdfde0e6957f",
+ "commands": [
+  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j16",
+  "LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe build/replay-player <this directory> --headless --width 1440 --height 960 --frames frames/ --count 120 --fps 15 --at 0 --speed 4 --spin 8",
+  "each frame cropped to its top 1440x900, frames scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 15 fps; poster.jpg is one frame of the clip"
+ ]
+}

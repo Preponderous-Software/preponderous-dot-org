@@ -18,7 +18,19 @@
       "technology": "Python",
       "category": "Simulations",
       "status": "Active",
-      "glyph": "Psychology"
+      "glyph": "Psychology",
+      "preview": {
+        "poster": "/previews/artificial-consciousness-simulation-framework/poster.jpg",
+        "clip": {
+          "webm": "/previews/artificial-consciousness-simulation-framework/clip.webm",
+          "mp4": "/previews/artificial-consciousness-simulation-framework/clip.mp4"
+        },
+        "alt": "ACSF's Echo golden run drawn by acsf-usd-env's viewer: a glowing spiral of thought nodes grows cycle by cycle around a sphere that flashes green on perception cycles, with mood bars and the journaled thought printed below.",
+        "madeWith": {
+          "name": "acsf-usd view",
+          "url": "https://github.com/Preponderous-Software/acsf-usd-env"
+        }
+      }
     },
     {
       "id": "barony",
@@ -39,7 +51,21 @@
       "technology": "C#",
       "category": "Games",
       "status": "Active",
-      "glyph": "Public"
+      "glyph": "Public",
+      "preview": {
+        "poster": "/previews/beyond-nations/poster.jpg",
+        "clip": {
+          "webm": "/previews/beyond-nations/clip.webm",
+          "mp4": "/previews/beyond-nations/clip.mp4"
+        },
+        "alt": "Beyond Nations seed 12 drawn by replay-player: coloured nation territories with settlement cubes, pawns and trees, the camera slowly circling, the run's stats and state hash in a panel.",
+        "madeWith": {
+          "name": "replay-player",
+          "url": "https://github.com/Preponderous-Software/replay-player"
+        },
+        "more": "https://danielstephenson.dev/projects/beyond-nations",
+        "moreLabel": "Play the replay in 3D"
+      }
     },
     {
       "id": "env-lib-cpp",
@@ -49,7 +75,21 @@
       "technology": "C++",
       "category": "Libraries",
       "status": "Maintenance",
-      "glyph": "GridOn"
+      "glyph": "GridOn",
+      "preview": {
+        "poster": "/previews/env-lib-cpp/poster.jpg",
+        "clip": {
+          "webm": "/previews/env-lib-cpp/clip.webm",
+          "mp4": "/previews/env-lib-cpp/clip.mp4"
+        },
+        "alt": "A 3D view of a 20 by 20 meadow grid where white sheep and dark wolves move between cells, flowers dot the grass and grazed patches turn brown over time.",
+        "madeWith": {
+          "name": "envlib_strata_demo",
+          "url": "https://github.com/Preponderous-Software/env-lib-cpp/blob/master/docs/capture-3d.sh"
+        },
+        "more": "https://danielstephenson.dev/play/env-lib-cpp",
+        "moreLabel": "Run it in the browser"
+      }
     },
     {
       "id": "fishe",
@@ -71,7 +111,21 @@
       "websiteLink": "https://microbiome.preponderous.org",
       "category": "Simulations",
       "status": "Active",
-      "glyph": "Biotech"
+      "glyph": "Biotech",
+      "preview": {
+        "poster": "/previews/microbiome/poster.jpg",
+        "clip": {
+          "webm": "/previews/microbiome/clip.webm",
+          "mp4": "/previews/microbiome/clip.mp4"
+        },
+        "alt": "The microbiome chamber from seed 1 drawn by replay-player: thousands of small coloured cells of three species spreading over a nutrient field, the camera slowly circling.",
+        "madeWith": {
+          "name": "replay-player",
+          "url": "https://github.com/Preponderous-Software/replay-player"
+        },
+        "more": "https://danielstephenson.dev/projects/microbiome",
+        "moreLabel": "Play the replay in 3D"
+      }
     },
     {
       "id": "ophidian",
@@ -154,7 +208,19 @@
       "technology": "Java",
       "category": "Libraries",
       "status": "Active",
-      "glyph": "Hub"
+      "glyph": "Hub",
+      "preview": {
+        "poster": "/previews/viron/poster.jpg",
+        "clip": {
+          "webm": "/previews/viron/clip.webm",
+          "mp4": "/previews/viron/clip.mp4"
+        },
+        "alt": "A live Viron environment drawn by viron-strata: two 10 by 10 grids where 16 coloured cubes step between cells as a driver script moves them through Viron's API.",
+        "madeWith": {
+          "name": "viron-strata",
+          "url": "https://github.com/Preponderous-Software/viron-strata"
+        }
+      }
     },
     {
       "id": "daniel-stephenson",

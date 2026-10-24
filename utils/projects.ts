@@ -25,6 +25,25 @@ export interface Project {
     // title colour for a project with no artwork, so its tile carries a symbol
     // of what it is rather than a letter shared with half the grid.
     glyph?: string;
+    // Optional 3D preview shown at the top of the project's details: a still
+    // and usually a short clip, drawn by one of the project's own tools.
+    preview?: ProjectPreviewData;
+}
+
+// A project's preview: files under public/previews/<id>/, 16:10.
+export interface ProjectPreviewData {
+    // The still: what loads first, and all a visitor who asks for reduced
+    // motion sees.
+    poster: string;
+    // A short, muted, looping clip of the same view (at least one format).
+    clip?: {webm?: string; mp4?: string};
+    // What the pictures show, for screen readers.
+    alt: string;
+    // The tool that drew them, credited and linked under them.
+    madeWith: {name: string; url: string};
+    // Optional link to more (e.g. the interactive version on another site).
+    more?: string;
+    moreLabel?: string;
 }
 
 // A category and the projects filed under it.

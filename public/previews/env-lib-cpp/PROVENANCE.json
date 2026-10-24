@@ -1,0 +1,14 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/env-lib-cpp",
+ "commit": "38213f2e56b7fc4aaff7538888bd4b959590d90f",
+ "tool": "env-lib-cpp docs/capture-3d.sh (envlib_strata_demo, Strata v0.6.0 c2d7ee4 per strata/strata.ref)",
+ "tool_url": "https://github.com/Preponderous-Software/env-lib-cpp/blob/38213f2e56b7fc4aaff7538888bd4b959590d90f/docs/capture-3d.sh",
+ "commands": [
+  "cmake -S src/env-lib-cpp/strata -B work-a/elc-build -DCMAKE_BUILD_TYPE=Release",
+  "cmake --build work-a/elc-build -j8",
+  "LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe work-a/elc-build/envlib_strata_demo --world meadow --headless --ticks 40 --frames-per-tick 3 --frames work-a/elc-media/m --width 960 --height 600 --zoom 1.15 --yaw 20 --pitch 48",
+  "renumber work-a/elc-media/m/frame-NNNNN.png -> media/env-lib-cpp/frames/NNNN.png (sorted order)",
+  "frames scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 15 fps; poster.jpg is one frame of the clip"
+ ],
+ "notes": "Ran the meadow frames line of docs/capture-3d.sh directly (same MEADOW_VIEW --zoom 1.15 --yaw 20 --pitch 48, same --frames-per-tick 3) with two changes: --width 960 --height 600 instead of 640x400, and --ticks 40 instead of 60 so the clip is 121 frames = 8.07 s at 15 fps (the script's GIF uses 8 cs/frame, ~12.5 fps, 181 frames). The ImageMagick GIF step was skipped. HUD line ('Meadow tick N entities 45 grid 20x20') is kept as in the repo GIF; it is legible at 960 and small but readable at 800 (--no-hud exists if wanted). The simulation does not return to its start state, so the loop wrap shows a jump in entity positions; Strata fetched at the strata.ref pin (v0.6.0), not a local checkout."
+}
