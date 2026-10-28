@@ -11,10 +11,9 @@ describe('PROJECT_GLYPHS', () => {
         expect(PROJECT_GLYPHS.Waves).toBe(WavesIcon);
     });
 
-    it('carries exactly the twelve glyphs the bundle is meant to include', () => {
+    it('carries exactly the glyphs the bundle is meant to include', () => {
         expect(Object.keys(PROJECT_GLYPHS).sort()).toEqual([
-            'AcUnit', 'Biotech', 'Castle', 'Extension', 'GridOn', 'Hub',
-            'Phishing', 'Psychology', 'Public', 'Terminal', 'ViewQuilt', 'Waves',
+            'AcUnit', 'Biotech', 'Castle', 'DataArray', 'Extension', 'Fireplace', 'GridOn', 'Hub', 'Language', 'Layers', 'Map', 'NightsStay', 'Phishing', 'PhotoLibrary', 'Psychology', 'Public', 'Replay', 'Rule', 'SmartToy', 'Terminal', 'Terrain', 'Timeline', 'Videocam', 'ViewInAr', 'ViewQuilt', 'Waves', 'WbTwilight', 'Yard',
         ]);
     });
 });

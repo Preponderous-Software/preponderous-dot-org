@@ -24,7 +24,7 @@
         "latestStable": "3.0.0"
     },
     "microbiome": {
-        "releases": 1,
+        "releases": 2,
         "latestStable": null
     },
     "ophidian": {
@@ -60,11 +60,83 @@
         "latestStable": "0.5.0"
     },
     "daniel-stephenson": {
-        "releases": 18,
+        "releases": 20,
         "latestStable": null
     },
     "dans-plugins-community": {
-        "releases": 19,
+        "releases": 20,
         "latestStable": "0.14.0"
+    },
+    "acsf-usd-env": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "asn1-viz": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "atman": {
+        "releases": 5,
+        "latestStable": null
+    },
+    "familiar": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "kindling": {
+        "releases": 3,
+        "latestStable": "0.1.2"
+    },
+    "orrery": {
+        "releases": 6,
+        "latestStable": "0.6.0"
+    },
+    "playtester": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "replay-player": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "roam-usd": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "sisyphus": {
+        "releases": 2,
+        "latestStable": null
+    },
+    "steading": {
+        "releases": 1,
+        "latestStable": null
+    },
+    "strata": {
+        "releases": 9,
+        "latestStable": "v0.6.0"
+    },
+    "usd-asset-gate": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "usd-recorder": {
+        "releases": 2,
+        "latestStable": "v0.2.0"
+    },
+    "usd-synth-data": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "usd-web": {
+        "releases": 4,
+        "latestStable": "v0.2.2"
+    },
+    "viron-strata": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "viron-usd": {
+        "releases": 0,
+        "latestStable": null
     }
 }

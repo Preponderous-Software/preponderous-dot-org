@@ -267,6 +267,200 @@
       "category": "Websites",
       "status": "Active",
       "glyph": "Extension"
+    },
+    {
+      "id": "acsf-usd-env",
+      "title": "acsf-usd-env",
+      "description": "A read-only exporter that turns Artificial Consciousness Simulation Framework runs into OpenUSD stages with cycle-indexed time samples, for inspecting and replaying a run in usdview or Blender. The spatial layout is synthetic.",
+      "githubLink": "https://github.com/Preponderous-Software/acsf-usd-env",
+      "technology": "Python / OpenUSD",
+      "category": "Simulations",
+      "status": "Active",
+      "glyph": "ViewInAr"
+    },
+    {
+      "id": "asn1-viz",
+      "title": "asn1-viz",
+      "description": "3D views of ASN.1 encodings and schemas, drawn from what the asn1c compiler actually does. The UPER and APER encodings of one value stand side by side as strips with one block per bit, each a field you can pick to see its path, kind and bits; a whole specification becomes a city, one district per module and one building per type, with references and recursion drawn as lines. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/asn1-viz",
+      "technology": "C++",
+      "websiteLink": "https://asn1-viz.play.danielstephenson.dev",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "DataArray"
+    },
+    {
+      "id": "atman",
+      "title": "Atman",
+      "description": "A small first-person game about Advaita Vedanta, the teaching that the self is the absolute and that liberation is a recognition, not a reward. Do the chores in a river village, see a snake on the path at dusk turn out to be a rope by lamplight, throw and name pots that a clay lens shows are all clay, and read a codex of cited verses in Devanagari, IAST and English, with how other schools read them. Nothing is scored. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/atman",
+      "technology": "C++",
+      "websiteLink": "https://atman.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "WbTwilight",
+      "tier": "complete"
+    },
+    {
+      "id": "familiar",
+      "title": "Familiar",
+      "description": "Halloween night in a small New England town: trick-or-treat, light lanterns for Samhain, and turn into a cat. Wren, twelve, is out trick-or-treating and helping her grandmother keep Samhain: lighting lanterns for the town's beloved dead, brewing her cider and bringing her old cat's spirit home by midnight. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/familiar",
+      "technology": "C++",
+      "websiteLink": "https://familiar.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "NightsStay",
+      "tier": "growing"
+    },
+    {
+      "id": "kindling",
+      "title": "Kindling",
+      "description": "A cozy first-person frontier homestead game: restore a ruined cabin for the settler coming to live in it. Survey the damage, sweep and scrub it clean, mend the floor, roof and window, furnish it to her wishes, and light the first fire in the hearth before the first frost. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/kindling",
+      "technology": "C++",
+      "websiteLink": "https://kindling.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Fireplace",
+      "tier": "complete"
+    },
+    {
+      "id": "orrery",
+      "title": "Orrery",
+      "description": "The whole solar system from real NASA/JPL data: the Sun, planets, dwarf planets, 25 moons, Saturn's rings, three comets, the Voyagers and New Horizons, and 12,584 asteroids and Kuiper belt objects, placed at any instant from JPL ephemerides. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/orrery",
+      "technology": "C++",
+      "websiteLink": "https://orrery.play.danielstephenson.dev",
+      "category": "Simulations",
+      "status": "Active",
+      "glyph": "Public"
+    },
+    {
+      "id": "playtester",
+      "title": "Playtester",
+      "description": "A Python toolkit for AI playtesting: any number of agents play the real game at once, each headless and toward its own goal, by looking at screenshots and pressing keys, and their reports merge into one summary of grouped findings and timings. Games are described by profiles (Beyond Nations, Kindling and Atman are bundled), with an optional probe for precise steering and a Strata driver that steps a game's clock frame by frame.",
+      "githubLink": "https://github.com/Preponderous-Software/playtester",
+      "technology": "Python",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "SmartToy"
+    },
+    {
+      "id": "replay-player",
+      "title": "replay-player",
+      "description": "One player for every usd-replay/1 simulation replay, built on the Strata engine for the desktop and the browser. It needs no code for any particular simulation: the entity sets, colour fields, stats, legend and per-tick state hash all come from the replay, and the timeline plays, pauses, scrubs and changes speed. The browser page offers replays of steading, microbiome, Beyond Nations and Kindling.",
+      "githubLink": "https://github.com/Preponderous-Software/replay-player",
+      "technology": "C++",
+      "websiteLink": "https://replay-player.play.danielstephenson.dev",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "Replay"
+    },
+    {
+      "id": "roam-usd",
+      "title": "roam-usd",
+      "description": "Exports Roam worlds, from your own saves or freshly generated from a seed by Roam's own world generator, to OpenUSD stages of instanced tiles, terrain, creatures and structures that open in usdview and Blender.",
+      "githubLink": "https://github.com/Preponderous-Software/roam-usd",
+      "technology": "Python / OpenUSD",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "Map"
+    },
+    {
+      "id": "sisyphus",
+      "title": "Sisyphus",
+      "description": "Push the boulder that is your software up the hill. Every terrace ships a release and every release adds a module, so the boulder grows; every module rots (drifting dependencies, flaky tests, deprecated APIs, advisories that spread), and rot makes it heavy. At the summit the next major version ships, the platform reaches its end of life, and it all rolls back down. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/sisyphus",
+      "technology": "C++",
+      "websiteLink": "https://sisyphus.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Terrain",
+      "tier": "growing"
+    },
+    {
+      "id": "steading",
+      "title": "steading",
+      "description": "A small colony sim where OpenUSD is the world, save and mod format: settlers gather, build huts and live through the winters, saves are checksummed USD layers, and mods are USD sublayers. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/steading",
+      "technology": "C++ / OpenUSD",
+      "websiteLink": "https://steading.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Yard",
+      "tier": "growing"
+    },
+    {
+      "id": "strata",
+      "title": "Strata",
+      "description": "A small C++17 engine (SDL3 + OpenGL 4.5) behind a stable C ABI: cascaded sun shadows, point lights, terrain, static meshes, overlays, deterministic simulation fields and USD saves. It powers Beyond Nations, steading, orrery, Kindling, Atman, Familiar, Sisyphus, asn1-viz, replay-player and env-lib-cpp's 3D frontend, and also builds for the browser with WebGL 2.",
+      "githubLink": "https://github.com/Preponderous-Software/strata",
+      "technology": "C++ / SDL3 / OpenGL",
+      "category": "Libraries",
+      "status": "Active",
+      "glyph": "Layers"
+    },
+    {
+      "id": "usd-asset-gate",
+      "title": "usd-asset-gate",
+      "description": "A CI quality gate for OpenUSD assets: runs OpenUSD's own validators plus YAML-configured house rules (units, up axis, budgets, naming) on the .usd files a pull request changed, as a CLI or a GitHub Action, with one PR comment that is updated in place.",
+      "githubLink": "https://github.com/Preponderous-Software/usd-asset-gate",
+      "technology": "Python / OpenUSD / GitHub Actions",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "Rule"
+    },
+    {
+      "id": "usd-recorder",
+      "title": "usd-recorder",
+      "description": "A flight recorder for simulations: call record() once per tick and get a time-sampled OpenUSD stage you can scrub in usdview or Blender, with entity lifecycle, typed extras, event channels, chunked value clips and a flatten command.",
+      "githubLink": "https://github.com/Preponderous-Software/usd-recorder",
+      "technology": "Python / OpenUSD",
+      "category": "Libraries",
+      "status": "Active",
+      "glyph": "Videocam"
+    },
+    {
+      "id": "usd-synth-data",
+      "title": "usd-synth-data",
+      "description": "A procedural synthetic-dataset generator for computer vision: randomized OpenUSD scenes rendered headless with Blender Cycles into COCO-style images with exact boxes, masks and depth, fanned out as Kubernetes Jobs with measured throughput.",
+      "githubLink": "https://github.com/Preponderous-Software/usd-synth-data",
+      "technology": "Python / OpenUSD / Kubernetes",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "PhotoLibrary"
+    },
+    {
+      "id": "usd-web",
+      "title": "usd-web",
+      "description": "Puts an OpenUSD world on a web page: greedy-meshes a USD stage or heightmap into compact, content-addressed tiles and ships a dependency-free three.js viewer with touch controls, overlay layers and live tile hot-swapping.",
+      "githubLink": "https://github.com/Preponderous-Software/usd-web",
+      "technology": "Python / OpenUSD / JavaScript",
+      "category": "Libraries",
+      "status": "Active",
+      "glyph": "Language"
+    },
+    {
+      "id": "viron-strata",
+      "title": "viron-strata",
+      "description": "A live, read-only 3D view of a Viron environment, drawn with the Strata engine. Point it at a Viron URL, a token and an environment: it polls Viron's REST API several times a second and shows the grids and entities as a driver (a simulation, a script, a game) changes them, dims the world when Viron stops answering, and lists what is in a picked cell. A headless mode records frames and checks the view against the server. In the browser it plays a recorded run of a real Viron with no server, or watches your own Viron with a read-only token.",
+      "githubLink": "https://github.com/Preponderous-Software/viron-strata",
+      "technology": "C++ / Strata",
+      "websiteLink": "https://viron-strata.play.danielstephenson.dev",
+      "category": "Simulations",
+      "status": "Active",
+      "glyph": "ViewInAr"
+    },
+    {
+      "id": "viron-usd",
+      "title": "viron-usd",
+      "description": "Records a Viron simulation tick by tick as an OpenUSD stage with time-sampled entities, for playback in usdview or Blender.",
+      "githubLink": "https://github.com/Preponderous-Software/viron-usd",
+      "technology": "Python / OpenUSD",
+      "category": "Simulations",
+      "status": "Active",
+      "glyph": "Timeline"
     }
   ]
 }
