@@ -1,0 +1,12 @@
+{
+  "comment": "The link-preview card (public/og-image.png). Rendered by community-site-kit tools/og-card; see og-card/README.md.",
+  "output": "../public/og-image.png",
+  "scene": "orbit",
+  "seed": 2,
+  "wordmark": "Preponderous Software",
+  "title": "Preponderous Software",
+  "subtitle": "Free, source-available games and assets",
+  "url": "preponderous.org",
+  "accent": "#4263eb",
+  "alt": "A star lighting its planets on traced orbits under a field of stars, rendered in 3D with Strata. Over it: the name Preponderous Software, the tagline “Free, source-available games and assets”, and the address preponderous.org."
+}

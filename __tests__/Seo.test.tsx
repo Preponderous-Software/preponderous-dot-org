@@ -1,7 +1,9 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from '@testing-library/react';
-import Seo from '../components/Seo';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import Seo, { OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH } from '../components/Seo';
 
 // next/head only writes into document.head through Next's head manager, which a
 // bare render has no provider for; render its children inline instead so the
@@ -74,5 +76,27 @@ describe('Seo', () => {
         expect(metaContent(container, 'meta[name="twitter:image"]')).toBe(
             'https://preponderous.org/og-image.png'
         );
+    });
+
+    it('declares the share image\'s type, size and alt text', () => {
+        const { container } = render(<Seo/>);
+        expect(metaContent(container, 'meta[property="og:image:type"]')).toBe('image/png');
+        expect(metaContent(container, 'meta[property="og:image:width"]')).toBe('1200');
+        expect(metaContent(container, 'meta[property="og:image:height"]')).toBe('630');
+        expect(metaContent(container, 'meta[property="og:image:alt"]')).toBe(OG_IMAGE_ALT);
+        expect(metaContent(container, 'meta[name="twitter:image:alt"]')).toBe(OG_IMAGE_ALT);
+    });
+
+    it('points at a real PNG of the declared size, whose alt text is its card spec\'s', () => {
+        const root = join(__dirname, '..');
+        const bytes = readFileSync(join(root, 'public', OG_IMAGE_PATH));
+        expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+        expect({ width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) }).toEqual({
+            width: OG_IMAGE_WIDTH,
+            height: OG_IMAGE_HEIGHT,
+        });
+        const spec = JSON.parse(readFileSync(join(root, 'og-card', 'card.json'), 'utf8'));
+        expect(spec.output).toBe(`../public${OG_IMAGE_PATH}`);
+        expect(OG_IMAGE_ALT).toBe(spec.alt);
     });
 });
