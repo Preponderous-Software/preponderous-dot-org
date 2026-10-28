@@ -81,7 +81,9 @@ three PNG fallbacks for surfaces that can't use an SVG icon:
 | `public/apple-touch-icon.png` | 180×180 | iOS "Add to Home Screen" and Safari's tab/bookmark icon. |
 | `public/og-image.png` | 1200×630 | `og:image`/`twitter:image` in `components/Seo.tsx`, shown by link unfurlers (Discord, social) that don't render SVG. |
 
-All three use the light-theme blue (`#4263eb`) unconditionally — a static PNG
+`og-image.png` is not drawn from the favicon. It is a picture of planets on their orbits, rendered in 3D with [Strata](https://github.com/Preponderous-Software/strata), with the name, tagline and address over it. It is drawn from `og-card/card.json` by community-site-kit's `tools/og-card`, and [`og-card/README.md`](og-card/README.md) says how to redraw it. `OG_IMAGE_ALT` in `components/Seo.tsx` must match the spec's `alt`, and a test checks that it does.
+
+The two icons use the light-theme blue (`#4263eb`) unconditionally — a static PNG
 can't follow `prefers-color-scheme` the way the SVG does. If `favicon.svg`'s
 mark ever changes, regenerate these with an SVG rasterizer (e.g. `sharp`,
 `resvg`, or ImageMagick); there is no rasterization step in this repo's own
