@@ -8,7 +8,8 @@
       "technology": "Python",
       "category": "Simulations",
       "status": "Active",
-      "icon": "/icons/apex.png"
+      "icon": "/icons/apex.png",
+      "tier": "growing"
     },
     {
       "id": "artificial-consciousness-simulation-framework",
@@ -41,7 +42,8 @@
       "websiteLink": "https://barony.preponderous.org",
       "category": "Games",
       "status": "Active",
-      "glyph": "Castle"
+      "glyph": "Castle",
+      "tier": "growing"
     },
     {
       "id": "beyond-nations",
@@ -65,7 +67,8 @@
         },
         "more": "https://danielstephenson.dev/projects/beyond-nations",
         "moreLabel": "Play the replay in 3D"
-      }
+      },
+      "tier": "complete"
     },
     {
       "id": "env-lib-cpp",
@@ -89,7 +92,8 @@
         },
         "more": "https://danielstephenson.dev/play/env-lib-cpp",
         "moreLabel": "Run it in the browser"
-      }
+      },
+      "tier": "small"
     },
     {
       "id": "fishe",
@@ -114,7 +118,8 @@
         },
         "more": "https://danielstephenson.dev/play/fishe",
         "moreLabel": "Play it in the browser"
-      }
+      },
+      "tier": "complete"
     },
     {
       "id": "microbiome",
@@ -139,7 +144,8 @@
         },
         "more": "https://danielstephenson.dev/projects/microbiome",
         "moreLabel": "Play the replay in 3D"
-      }
+      },
+      "tier": "growing"
     },
     {
       "id": "ophidian",
@@ -149,7 +155,8 @@
       "technology": "Python",
       "category": "Games",
       "status": "Active",
-      "icon": "/icons/ophidian.png"
+      "icon": "/icons/ophidian.png",
+      "tier": "growing"
     },
     {
       "id": "overwinter",
@@ -160,7 +167,8 @@
       "websiteLink": "https://danielstephenson.dev/play/overwinter",
       "category": "Games",
       "status": "Active",
-      "glyph": "AcUnit"
+      "glyph": "AcUnit",
+      "tier": "complete"
     },
     {
       "id": "patchwork",
@@ -191,7 +199,8 @@
       "websiteLink": "https://roam.preponderous.org",
       "category": "Games",
       "status": "Active",
-      "icon": "/icons/roam.png"
+      "icon": "/icons/roam.png",
+      "tier": "complete"
     },
     {
       "id": "tak",
@@ -212,7 +221,8 @@
       "websiteLink": "https://danielstephenson.dev/play/tidewater",
       "category": "Games",
       "status": "Active",
-      "glyph": "Waves"
+      "glyph": "Waves",
+      "tier": "complete"
     },
     {
       "id": "viron",

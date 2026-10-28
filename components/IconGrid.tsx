@@ -1,5 +1,8 @@
 import React from 'react';
-import {CatalogueGrid} from '@kingdom-community/community-site-kit';
+import {TieredCatalogueGrid} from '@kingdom-community/community-site-kit';
+import {PROJECT_TIERS, projectTier, type ReleaseFacts} from '../utils/projectTiers';
+
+const releases = require('../pages/data/releases.json') as Record<string, ReleaseFacts>;
 import ProjectDetails from './ProjectDetails';
 import ProjectIcon from './ProjectIcon';
 import {type Project} from '../utils/projects';
@@ -29,11 +32,13 @@ interface IconGridProps {
 const fill = {width: '100%', height: '100%', borderRadius: 'inherit', fontSize: {xs: '1.4rem', sm: '1.6rem'}};
 
 const IconGrid: React.FC<IconGridProps> = ({projects, toolbar, empty, usage, now}) => (
-    <CatalogueGrid
+    <TieredCatalogueGrid
         items={projects}
+        // Most complete first; see utils/projectTiers.ts.
+        tiers={PROJECT_TIERS}
+        tierOf={(project) => projectTier(project, releases)}
         heading="Projects"
         sectionId="projects"
-        idPrefix="project"
         renderIcon={(project) => (
             <ProjectIcon className="project-tile-icon" project={project} sx={fill} glyphSize={{xs: 30, sm: 34}}/>
         )}
