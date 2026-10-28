@@ -40,12 +40,12 @@ describe('loadProjectUsage', () => {
     it('asks only about programs the summary has heard from, and keys the answers by project id', async () => {
         stub(
             [
-                {application: 'FishE', count: 5, lastSeen: '2026-10-03T00:00:00Z'},
+                {application: 'ophidian', count: 5, lastSeen: '2026-10-03T00:00:00Z'},
                 {application: 'apex', count: 900, lastSeen: '2026-10-02T00:00:00Z'},
                 {application: 'viron', count: 40, lastSeen: '2026-10-02T00:00:00Z'},
             ],
             {
-                FishE: usageWithoutInstalls('FishE'),
+                ophidian: usageWithoutInstalls('ophidian'),
                 apex: usageWithInstalls('apex'),
             },
         );
@@ -54,30 +54,30 @@ describe('loadProjectUsage', () => {
 
         // viron is in the summary but is a service, so not mapped and not asked.
         expect(programUrls().sort()).toEqual([
-            'https://trace.danielstephenson.dev/api/public/programs/FishE',
             'https://trace.danielstephenson.dev/api/public/programs/apex',
+            'https://trace.danielstephenson.dev/api/public/programs/ophidian',
         ]);
-        expect(Object.keys(usage).sort()).toEqual(['apex-ecosystem-simulator', 'fishe']);
-        expect(usage.fishe.activeInstalls30d).toBeNull();
+        expect(Object.keys(usage).sort()).toEqual(['apex-ecosystem-simulator', 'ophidian']);
+        expect(usage.ophidian.activeInstalls30d).toBeNull();
     });
 
     it('asks about every project when the summary is unavailable, and leaves out every 404', async () => {
         stub(undefined, {});
         expect(await loadProjectUsage()).toEqual({});
-        expect(programUrls()).toHaveLength(10);
+        expect(programUrls()).toHaveLength(7);
     });
 });
 
 describe('usageRows', () => {
     it('lists every reporting project with its kind, installs first, then recency, then the rest A–Z', () => {
         const rows = usageRows(projects, {
-            fishe: {...usageWithoutInstalls('FishE'), lastSeen: '2026-10-03T00:00:00Z'},
+            ophidian: {...usageWithoutInstalls('ophidian'), lastSeen: '2026-10-03T00:00:00Z'},
             roam: {...usageWithoutInstalls('roam'), lastSeen: '2026-09-12T20:00:00Z'},
             'apex-ecosystem-simulator': usageWithInstalls('apex'),
         });
-        expect(rows).toHaveLength(10);
+        expect(rows).toHaveLength(7);
         expect(rows.slice(0, 3).map((row) => [row.project.id, row.kind])).toEqual([
-            ['apex-ecosystem-simulator', 'program'], ['fishe', 'game'], ['roam', 'game'],
+            ['apex-ecosystem-simulator', 'program'], ['ophidian', 'game'], ['roam', 'game'],
         ]);
         const rest = rows.slice(3);
         expect(rest.every((row) => row.usage === null)).toBe(true);

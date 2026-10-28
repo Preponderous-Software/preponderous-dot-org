@@ -24,8 +24,8 @@ describe('the usage line in a project\'s details', () => {
     const openDetails = (title: string) => fireEvent.click(screen.getByRole('button', {name: title}));
 
     it('says when a reporting game was last used and how many launches, labelled as launches', () => {
-        render(<IconGrid projects={[project('fishe')]} usage={{fishe: usageWithoutInstalls('FishE')}} now={new Date(NOW)}/>);
-        openDetails('FishE');
+        render(<IconGrid projects={[project('ophidian')]} usage={{ophidian: usageWithoutInstalls('ophidian')}} now={new Date(NOW)}/>);
+        openDetails('Ophidian');
 
         const line = screen.getByTestId('usage-line');
         expect(within(line).getByTestId('usage-line-main').textContent).toBe('Last used 2 days ago');
@@ -47,15 +47,15 @@ describe('the usage line in a project\'s details', () => {
     });
 
     it('is left out for a project with no figures, one that does not report, and before the clock is read', () => {
-        const {unmount} = render(<IconGrid projects={[project('fishe'), project('viron')]} usage={{viron: usageWithoutInstalls('viron')}} now={new Date(NOW)}/>);
-        openDetails('FishE');
+        const {unmount} = render(<IconGrid projects={[project('ophidian'), project('viron')]} usage={{viron: usageWithoutInstalls('viron')}} now={new Date(NOW)}/>);
+        openDetails('Ophidian');
         expect(screen.queryByTestId('usage-line')).toBeNull();
         openDetails('Viron');
         expect(screen.queryByTestId('usage-line')).toBeNull();
         unmount();
 
-        render(<IconGrid projects={[project('fishe')]} usage={{fishe: usageWithoutInstalls('FishE')}} now={null}/>);
-        openDetails('FishE');
+        render(<IconGrid projects={[project('ophidian')]} usage={{ophidian: usageWithoutInstalls('ophidian')}} now={null}/>);
+        openDetails('Ophidian');
         expect(screen.queryByTestId('usage-line')).toBeNull();
     });
 });
@@ -69,7 +69,7 @@ describe('/usage', () => {
         render(<Usage rows={rows} renderedAt={NOW}/>);
 
         const items = screen.getAllByTestId('usage-row');
-        expect(items).toHaveLength(10);
+        expect(items).toHaveLength(7);
         expect(within(items[0]).getByTestId('usage-row-installs').textContent).toBe('57 active installs (30 days)');
         expect(within(items[0]).getByTestId('usage-row-starts').textContent).toBe('412 starts in the last 30 days');
         expect(within(items[1]).queryByTestId('usage-row-installs')).toBeNull();

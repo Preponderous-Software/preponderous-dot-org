@@ -9,9 +9,8 @@
 //    web client reports page views; trace's public figures exclude both, so
 //    they would only ever show "no figures";
 //  - the websites (danielstephenson.dev, dansplugins.com): page views too;
-//  - the libraries (env-lib-cpp, py-env-lib, tak), which run inside other
-//    programs and report nothing of their own. tak's games report as
-//    themselves (Tidewater, Overwinter).
+//  - the libraries (env-lib-cpp, py-env-lib), which run inside other
+//    programs and report nothing of their own.
 //
 // Same map, keyed by the same ids where they match, as danielstephenson.dev's
 // utils/traceNames.ts.
@@ -36,11 +35,8 @@ const program = (name: string): TraceProgram => ({name, kind: 'program'});
 // key here is not a project there.
 export const TRACE_PROGRAMS: Readonly<Record<string, TraceProgram>> = {
     'beyond-nations': game('beyond-nations'),
-    'fishe': game('FishE'),
     'ophidian': game('ophidian'),
-    'overwinter': game('Overwinter'),
     'roam': game('roam'),
-    'tidewater': game('Tidewater'),
 
     // The repository is now Preponderous-Software/apex; its program is `apex`.
     'apex-ecosystem-simulator': program('apex'),
