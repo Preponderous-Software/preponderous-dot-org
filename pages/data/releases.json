@@ -1,0 +1,70 @@
+{
+    "apex-ecosystem-simulator": {
+        "releases": 7,
+        "latestStable": null
+    },
+    "artificial-consciousness-simulation-framework": {
+        "releases": 2,
+        "latestStable": null
+    },
+    "barony": {
+        "releases": 3,
+        "latestStable": "1.0.1"
+    },
+    "beyond-nations": {
+        "releases": 10,
+        "latestStable": null
+    },
+    "env-lib-cpp": {
+        "releases": 3,
+        "latestStable": null
+    },
+    "fishe": {
+        "releases": 8,
+        "latestStable": "3.0.0"
+    },
+    "microbiome": {
+        "releases": 1,
+        "latestStable": null
+    },
+    "ophidian": {
+        "releases": 5,
+        "latestStable": null
+    },
+    "overwinter": {
+        "releases": 1,
+        "latestStable": null
+    },
+    "patchwork": {
+        "releases": 2,
+        "latestStable": "0.1.0"
+    },
+    "py-env-lib": {
+        "releases": 6,
+        "latestStable": null
+    },
+    "roam": {
+        "releases": 19,
+        "latestStable": null
+    },
+    "tak": {
+        "releases": 4,
+        "latestStable": "v0.4.2"
+    },
+    "tidewater": {
+        "releases": 1,
+        "latestStable": null
+    },
+    "viron": {
+        "releases": 6,
+        "latestStable": "0.5.0"
+    },
+    "daniel-stephenson": {
+        "releases": 18,
+        "latestStable": null
+    },
+    "dans-plugins-community": {
+        "releases": 19,
+        "latestStable": "0.14.0"
+    }
+}

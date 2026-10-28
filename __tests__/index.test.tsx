@@ -4,7 +4,9 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import Home from '../pages/index';
 import projectData from '../pages/data/projects.json';
 import packageJson from '../package.json';
+import releaseData from '../pages/data/releases.json';
 import { type Project } from '../utils/projects';
+import { PROJECT_TIERS, projectTier, type ReleaseFacts } from '../utils/projectTiers';
 
 // The page renders TopBar, which reads the current route from next/router; there
 // is no router provider in a bare render, so stand one in.
@@ -13,6 +15,13 @@ vi.mock('next/router', () => ({
 }));
 
 const projects = projectData.projects as Project[];
+const releases = releaseData as Record<string, ReleaseFacts>;
+const tierOfTitle = new Map(projects.map((p) => [p.title, projectTier(p, releases)]));
+const tierRank = (title: string) => PROJECT_TIERS.findIndex((tier) => tier.key === tierOfTitle.get(title));
+// Titles in tier order, each tier sorted by `compare`: the order the grid
+// should show for a sort that orders by `compare`.
+const byTierThen = (titles: string[], compare: (a: string, b: string) => number) =>
+    [...titles].sort((a, b) => tierRank(a) - tierRank(b) || compare(a, b));
 
 // Each project is a tile whose caption is its title, so the tiles in DOM order
 // give the grid's order. The kit marks its tiles with a test id, which keeps
@@ -53,10 +62,19 @@ describe('Home page', () => {
         );
     });
 
-    it('orders the tiles alphabetically by title, case-insensitively', () => {
+    it('orders the tiles by tier, most complete first, then by title, case-insensitively', () => {
         const titles = tileTitlesInOrder(projectsSection);
-        const alphabetical = [...titles].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-        expect(titles).toEqual(alphabetical);
+        expect(titles).toEqual(byTierThen(titles, (a, b) => a.toLowerCase().localeCompare(b.toLowerCase())));
+    });
+
+    it('heads each tier that has projects, in tier order', () => {
+        const shown = PROJECT_TIERS.filter((tier) => projects.some((p) => projectTier(p, releases) === tier.key));
+        for (const tier of shown) {
+            const section = within(projectsSection).getByRole('heading', { level: 2, name: tier.heading }).closest('section')!;
+            expect(within(section).getByText(tier.blurb!)).toBeTruthy();
+        }
+        const headings = within(projectsSection).getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+        expect(headings.filter((text) => shown.some((tier) => tier.heading === text))).toEqual(shown.map((tier) => tier.heading));
     });
 
     it('links each project that has one to its own site from its panel', () => {
@@ -137,14 +155,16 @@ describe('Home page search and filters', () => {
         expect(shownTitles()).toHaveLength(projects.length);
     });
 
-    it('sorts A–Z by default, and by category on request', () => {
+    it('sorts A–Z within each tier by default, and by category within each tier on request', () => {
         render(<Home />);
+        const base = (a: string, b: string) => a.localeCompare(b, undefined, { sensitivity: 'base' });
         const initial = shownTitles();
-        expect(initial).toEqual([...initial].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })));
+        expect(initial).toEqual(byTierThen(initial, base));
         openFilters();
         fireEvent.click(screen.getByRole('button', { name: 'By category' }));
         const categoryOf = new Map(projects.map((p) => [p.title, p.category ?? 'Other']));
-        const categories = shownTitles().map((title) => categoryOf.get(title)!);
-        expect(categories).toEqual([...categories].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })));
+        const titles = shownTitles();
+        const byCategory = byTierThen(titles, (a, b) => base(categoryOf.get(a)!, categoryOf.get(b)!));
+        expect(titles.map((t) => [tierRank(t), categoryOf.get(t)])).toEqual(byCategory.map((t) => [tierRank(t), categoryOf.get(t)]));
     });
 });

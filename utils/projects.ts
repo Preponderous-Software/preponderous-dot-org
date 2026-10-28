@@ -28,7 +28,13 @@ export interface Project {
     // Optional 3D preview shown at the top of the project's details: a still
     // and usually a short clip, drawn by one of the project's own tools.
     preview?: ProjectPreviewData;
+    // A hand-set tier for the home page, winning over the one derived from
+    // releases (see utils/projectTiers.ts). Games carry the tier they have on
+    // danielstephenson.dev/play.
+    tier?: ProjectTierKey;
 }
+
+export type ProjectTierKey = 'complete' | 'growing' | 'small';
 
 // A project's preview: files under public/previews/<id>/, 16:10.
 export interface ProjectPreviewData {
