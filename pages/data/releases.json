@@ -19,20 +19,12 @@
         "releases": 3,
         "latestStable": null
     },
-    "fishe": {
-        "releases": 8,
-        "latestStable": "3.0.0"
-    },
     "microbiome": {
         "releases": 2,
         "latestStable": null
     },
     "ophidian": {
         "releases": 5,
-        "latestStable": null
-    },
-    "overwinter": {
-        "releases": 1,
         "latestStable": null
     },
     "patchwork": {
@@ -45,14 +37,6 @@
     },
     "roam": {
         "releases": 19,
-        "latestStable": null
-    },
-    "tak": {
-        "releases": 4,
-        "latestStable": "v0.4.2"
-    },
-    "tidewater": {
-        "releases": 1,
         "latestStable": null
     },
     "viron": {
