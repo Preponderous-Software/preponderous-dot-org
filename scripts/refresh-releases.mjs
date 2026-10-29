@@ -1,5 +1,8 @@
 // Refreshes pages/data/releases.json: each project's release count and its
-// latest stable (non-prerelease) tag, read from GitHub with the gh CLI. These
+// latest stable (non-prerelease) tag, read from GitHub with the gh CLI. The
+// rolling `dev` prerelease, which many repositories rebuild from every push to
+// main, is not a release and is not counted: a repository whose only release
+// is `dev` has not released anything yet. These
 // are the facts a project's derived tier is worked out from (see
 // utils/projectTiers.ts). Run by hand when releases have moved:
 //
@@ -15,7 +18,7 @@ for (const project of projects) {
         const releases = JSON.parse(execFileSync('gh', [
             'api', `repos/${repo}/releases?per_page=100`, '-q', '[.[] | {tag: .tag_name, prerelease, draft}]',
         ], {encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']}));
-        const published = releases.filter((release) => !release.draft);
+        const published = releases.filter((release) => !release.draft && release.tag !== 'dev');
         const stable = published.find((release) => !release.prerelease);
         out[project.id] = {releases: published.length, latestStable: stable ? stable.tag : null};
     } catch {

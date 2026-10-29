@@ -88,7 +88,7 @@
         "latestStable": null
     },
     "sisyphus": {
-        "releases": 2,
+        "releases": 4,
         "latestStable": null
     },
     "steading": {
@@ -96,8 +96,8 @@
         "latestStable": null
     },
     "strata": {
-        "releases": 9,
-        "latestStable": "v0.6.0"
+        "releases": 10,
+        "latestStable": "v0.7.0"
     },
     "usd-asset-gate": {
         "releases": 0,
