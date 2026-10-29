@@ -26,13 +26,13 @@ No special software is required to use the website — just a modern web browser
 2. Type in **Search projects** to match against each project's name, description, category, technology, and status.
 3. Click a chip to narrow the grid to one category, technology, or status; each row's **Any …** chip clears that filter again.
 4. Choose **A–Z** (the default) or **By category** to change the order of the icons within each group.
-5. While anything is filtered, the grid says how many projects are shown (e.g. "Showing 5 of 17 projects"). If nothing matches, click **Clear filters** to get every project back.
+5. While anything is filtered, the grid says how many projects are shown (e.g. "Showing 5 of 31 projects"). If nothing matches, click **Clear filters** to get every project back.
 
 ### Browsing Projects by Category
 
 1. Click **Projects** in the top navigation bar, or **Browse Projects** in the introduction below the home page's grid.
 2. The **/projects** page lists the same projects as cards, grouped under category headings (e.g. **Games**, **Simulations**, **Libraries**).
-3. The links under the page title name every category and how many projects it holds (e.g. **Games (7)**); click one to jump straight to it.
+3. The links under the page title name every category and how many projects it holds (e.g. **Games (9)**); click one to jump straight to it.
 4. Each card shows the same details, **GitHub**/**Visit Site** buttons, and status chip as the home page.
 
 ### Opening a Project's Source Code
