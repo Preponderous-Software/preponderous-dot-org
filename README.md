@@ -10,7 +10,7 @@ The Preponderous Software website is a [Next.js](https://nextjs.org/) web applic
 </p>
 <p align="center"><em>The live site at <a href="https://preponderous.org">preponderous.org</a>, desktop and phone width.</em></p>
 
-<sub>How these were captured: headless Chromium (Playwright) against the live public site on 2026-10-18 at 1280×800 and 390×844.</sub>
+<sub>How these were captured: headless Chromium against a production build of the site on 2026-10-29, at 1280×800 and at 390×844 (2× pixel density).</sub>
 
 ## Installation
 
