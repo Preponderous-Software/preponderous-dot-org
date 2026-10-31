@@ -242,6 +242,18 @@
       "tier": "complete"
     },
     {
+      "id": "pumpkin",
+      "title": "Pumpkin",
+      "description": "Carve a jack-o'-lantern in your browser: cut freehand with a finger or the mouse, or stamp on eyes, a nose and a mouth, then turn the lights out so the candle shines through. Share a carving as a link, save a picture, and line the family's pumpkins up on one porch. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/pumpkin",
+      "technology": "C++",
+      "websiteLink": "https://pumpkin.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "ContentCut",
+      "tier": "growing"
+    },
+    {
       "id": "familiar",
       "title": "Familiar",
       "description": "Halloween night in a small New England town: trick-or-treat, light lanterns for Samhain, and turn into a cat. Wren, twelve, is out trick-or-treating and helping her grandmother keep Samhain: lighting lanterns for the town's beloved dead, brewing her cider and bringing her old cat's spirit home by midnight. Built on the Strata engine.",

@@ -2,6 +2,7 @@ import type SvgIcon from '@mui/material/SvgIcon';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import BiotechIcon from '@mui/icons-material/Biotech';
 import CastleIcon from '@mui/icons-material/Castle';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import FireplaceIcon from '@mui/icons-material/Fireplace';
@@ -38,6 +39,7 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
     AcUnit: AcUnitIcon,
     Biotech: BiotechIcon,
     Castle: CastleIcon,
+    ContentCut: ContentCutIcon,
     DataArray: DataArrayIcon,
     Extension: ExtensionIcon,
     Fireplace: FireplaceIcon,
