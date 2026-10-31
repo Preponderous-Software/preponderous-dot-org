@@ -242,6 +242,18 @@
       "tier": "complete"
     },
     {
+      "id": "belfry-bats",
+      "title": "Belfry Bats",
+      "description": "A small Halloween game: guide a flock of bats home to the old church's bell tower before dawn. The flock follows your finger or mouse with boids-style flocking; swoop between trees and chimneys, keep clear of the owls and gather strays while the sky lightens. Five short nights, each longer and trickier. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/belfry-bats",
+      "technology": "C++",
+      "websiteLink": "https://belfry-bats.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "NightsStay",
+      "tier": "small"
+    },
+    {
       "id": "familiar",
       "title": "Familiar",
       "description": "Halloween night in a small New England town: trick-or-treat, light lanterns for Samhain, and turn into a cat. Wren, twelve, is out trick-or-treating and helping her grandmother keep Samhain: lighting lanterns for the town's beloved dead, brewing her cider and bringing her old cat's spirit home by midnight. Built on the Strata engine.",
