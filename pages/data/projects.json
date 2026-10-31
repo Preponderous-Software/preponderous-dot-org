@@ -254,6 +254,18 @@
       "tier": "small"
     },
     {
+      "id": "belfry-bats",
+      "title": "Belfry Bats",
+      "description": "A small Halloween game: guide a flock of bats home to the old church's bell tower before dawn. The flock follows your finger or mouse with boids-style flocking; swoop between trees and chimneys, keep clear of the owls and gather strays while the sky lightens. Five short nights, each longer and trickier. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/belfry-bats",
+      "technology": "C++",
+      "websiteLink": "https://belfry-bats.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "NightsStay",
+      "tier": "small"
+    },
+    {
       "id": "pumpkin",
       "title": "Pumpkin",
       "description": "Carve a jack-o'-lantern in your browser: cut freehand with a finger or the mouse, or stamp on eyes, a nose and a mouth, then turn the lights out so the candle shines through. Share a carving as a link, save a picture, and line the family's pumpkins up on one porch. Built on the Strata engine.",
