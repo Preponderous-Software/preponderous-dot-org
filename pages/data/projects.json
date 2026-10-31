@@ -254,6 +254,18 @@
       "tier": "growing"
     },
     {
+      "id": "ghost-lights",
+      "title": "Ghost Lights",
+      "description": "Lead lost little ghosts home across a foggy marsh by lantern light. Ghosts near your lantern follow you, hurrying makes them scatter, fog banks swallow the light and will-o'-the-wisps lure them away: five short Halloween nights, calm and spooky-cute. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/ghost-lights",
+      "technology": "C++",
+      "websiteLink": "https://ghost-lights.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "WbTwilight",
+      "tier": "small"
+    },
+    {
       "id": "haunted-hayride",
       "title": "Haunted Hayride",
       "description": "Ride a hay wagon through a cornfield at night and catch the friendly spooks with your flashlight. Ghosts, black cats, pumpkin-headed jacks and bats peek out of the corn, from behind scarecrows and over pumpkins; shine the light on them and they wave, giggle and pop. Three short rides end with a score card at the barn. Gentle and easy for little ones. Built on the Strata engine.",
