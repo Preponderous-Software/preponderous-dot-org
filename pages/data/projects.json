@@ -266,6 +266,18 @@
       "tier": "growing"
     },
     {
+      "id": "ghost-lights",
+      "title": "Ghost Lights",
+      "description": "Lead lost little ghosts home across a foggy marsh by lantern light. Ghosts near your lantern follow you, hurrying makes them scatter, fog banks swallow the light and will-o'-the-wisps lure them away: five short Halloween nights, calm and spooky-cute. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/ghost-lights",
+      "technology": "C++",
+      "websiteLink": "https://ghost-lights.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "WbTwilight",
+      "tier": "small"
+    },
+    {
       "id": "kindling",
       "title": "Kindling",
       "description": "A cozy first-person frontier homestead game: restore a ruined cabin for the settler coming to live in it. Survey the damage, sweep and scrub it clean, mend the floor, roof and window, furnish it to her wishes, and light the first fire in the hearth before the first frost. Built on the Strata engine.",
