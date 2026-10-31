@@ -67,6 +67,14 @@
         "releases": 0,
         "latestStable": null
     },
+    "ghost-lights": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "haunted-hayride": {
+        "releases": 0,
+        "latestStable": null
+    },
     "kindling": {
         "releases": 3,
         "latestStable": "0.1.2"
