@@ -266,6 +266,18 @@
       "tier": "small"
     },
     {
+      "id": "haunted-hayride",
+      "title": "Haunted Hayride",
+      "description": "Ride a hay wagon through a cornfield at night and catch the friendly spooks with your flashlight. Ghosts, black cats, pumpkin-headed jacks and bats peek out of the corn, from behind scarecrows and over pumpkins; shine the light on them and they wave, giggle and pop. Three short rides end with a score card at the barn. Gentle and easy for little ones. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/haunted-hayride",
+      "technology": "C++",
+      "websiteLink": "https://haunted-hayride.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Yard",
+      "tier": "small"
+    },
+    {
       "id": "kindling",
       "title": "Kindling",
       "description": "A cozy first-person frontier homestead game: restore a ruined cabin for the settler coming to live in it. Survey the damage, sweep and scrub it clean, mend the floor, roof and window, furnish it to her wishes, and light the first fire in the hearth before the first frost. Built on the Strata engine.",
