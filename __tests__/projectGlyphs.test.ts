@@ -13,7 +13,7 @@ describe('PROJECT_GLYPHS', () => {
 
     it('carries exactly the glyphs the bundle is meant to include', () => {
         expect(Object.keys(PROJECT_GLYPHS).sort()).toEqual([
-            'AcUnit', 'Biotech', 'Castle', 'DataArray', 'Extension', 'Fireplace', 'GridOn', 'Hub', 'Language', 'Layers', 'Map', 'NightsStay', 'Phishing', 'PhotoLibrary', 'Psychology', 'Public', 'Replay', 'Rule', 'SmartToy', 'Terminal', 'Terrain', 'Timeline', 'Videocam', 'ViewInAr', 'ViewQuilt', 'Waves', 'WbTwilight', 'Yard',
+            'AcUnit', 'Biotech', 'Castle', 'ContentCut', 'DataArray', 'Extension', 'Fireplace', 'GridOn', 'Hub', 'Language', 'Layers', 'Map', 'NightsStay', 'Phishing', 'PhotoLibrary', 'Psychology', 'Public', 'Replay', 'Rule', 'SmartToy', 'Terminal', 'Terrain', 'Timeline', 'Videocam', 'ViewInAr', 'ViewQuilt', 'Waves', 'WbTwilight', 'Yard',
         ]);
     });
 });
