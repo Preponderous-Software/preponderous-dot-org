@@ -63,6 +63,10 @@
         "releases": 5,
         "latestStable": null
     },
+    "cauldron": {
+        "releases": 0,
+        "latestStable": null
+    },
     "familiar": {
         "releases": 0,
         "latestStable": null
