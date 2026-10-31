@@ -242,6 +242,18 @@
       "tier": "complete"
     },
     {
+      "id": "cauldron",
+      "title": "Cauldron",
+      "description": "A cozy Halloween potion-brewing game. A recipe card asks for a potion: drop ingredients from the shelf into the bubbling cauldron in the right order and amounts, then stir. Right recipes make something delightful; mistakes make something silly (a frog hops out, the room goes polka-dot, the cauldron gets hiccups). Eight recipes, the last three riddles. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/cauldron",
+      "technology": "C++",
+      "websiteLink": "https://cauldron.play.danielstephenson.dev",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Fireplace",
+      "tier": "small"
+    },
+    {
       "id": "belfry-bats",
       "title": "Belfry Bats",
       "description": "A small Halloween game: guide a flock of bats home to the old church's bell tower before dawn. The flock follows your finger or mouse with boids-style flocking; swoop between trees and chimneys, keep clear of the owls and gather strays while the sky lightens. Five short nights, each longer and trickier. Built on the Strata engine.",
