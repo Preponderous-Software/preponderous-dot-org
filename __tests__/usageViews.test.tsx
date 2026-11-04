@@ -1,13 +1,15 @@
 // Renders the usage views in each of trace's states, to pin what they are
 // allowed to call an install.
+import type {GetServerSidePropsContext} from 'next';
 import React from 'react';
-import {describe, expect, it, vi} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {fireEvent, render, screen, within} from '@testing-library/react';
 import IconGrid from '../components/IconGrid';
-import Usage from '../pages/usage';
+import Usage, {getServerSideProps} from '../pages/usage';
 import projectData from '../pages/data/projects.json';
-import {usageRows} from '../utils/projectUsage';
+import {usageRows, type UsageRow} from '../utils/projectUsage';
 import type {Project} from '../utils/projects';
+import {clearTraceUsageCache, type ProgramUsage} from '../utils/traceUsage';
 import {usageWithInstalls, usageWithoutInstalls} from './fixtures/traceUsage';
 
 vi.mock('next/router', () => ({
@@ -89,5 +91,96 @@ describe('/usage', () => {
         render(<Usage rows={usageRows(projects, {})} renderedAt={NOW}/>);
         expect(screen.getByTestId('usage-unavailable')).toBeInTheDocument();
         expect(screen.queryAllByTestId('usage-row-last-used')).toHaveLength(0);
+    });
+
+    it('says the list is by active installs only when some project has an install count', () => {
+        const page = render(<Usage rows={usageRows(projects, {roam: usageWithInstalls('roam')})} renderedAt={NOW}/>);
+        expect(screen.getByText(/Projects are listed by active installs, then by how recently they were used\./)).toBeInTheDocument();
+        page.unmount();
+
+        render(<Usage rows={usageRows(projects, {roam: usageWithoutInstalls('roam')})} renderedAt={NOW}/>);
+        expect(screen.getByText(/Projects are listed by how recently they were used\./)).toBeInTheDocument();
+        expect(screen.queryByText(/listed by active installs/)).toBeNull();
+    });
+
+    // The row for Roam, with these figures on the page.
+    const roamRow = (usage: ProgramUsage) => {
+        render(<Usage rows={usageRows(projects, {roam: usage})} renderedAt={NOW}/>);
+        return screen.getAllByTestId('usage-row')
+            .find((row) => within(row).queryByRole('link', {name: 'Roam on GitHub'}))!;
+    };
+
+    it('tells a project trace knows but has no public use for from one with no figures', () => {
+        const row = roamRow({...usageWithoutInstalls('roam'), lastSeen: null, startups30d: 0, days: []});
+        expect(within(row).getByTestId('usage-row-last-used').textContent).toBe('No use reported yet');
+        expect(within(row).queryByTestId('usage-row-none')).toBeNull();
+        expect(within(row).queryByTestId('usage-row-starts')).toBeNull();
+        expect(screen.queryByTestId('usage-unavailable')).toBeNull();
+    });
+
+    it('draws the sparkline only for a project with starts and days to plot', () => {
+        expect(within(roamRow(usageWithoutInstalls('roam'))).getByTestId('starts-sparkline')).toBeInTheDocument();
+    });
+
+    it('draws no sparkline over a window of no starts', () => {
+        const row = roamRow({...usageWithoutInstalls('roam'), startups30d: 0});
+        expect(within(row).queryByTestId('starts-sparkline')).toBeNull();
+    });
+
+    it('draws no sparkline when starts arrive without their days', () => {
+        const row = roamRow({...usageWithoutInstalls('roam'), days: []});
+        expect(within(row).queryByTestId('starts-sparkline')).toBeNull();
+        expect(within(row).getByTestId('usage-row-starts').textContent).toBe('412 launches in the last 30 days');
+    });
+});
+
+describe('/usage on the server', () => {
+    const load = async () => {
+        const result = await getServerSideProps({} as GetServerSidePropsContext);
+        return (result as {props: {rows: UsageRow[]; renderedAt: number}}).props;
+    };
+
+    beforeEach(() => {
+        clearTraceUsageCache();
+        vi.spyOn(Date, 'now').mockReturnValue(NOW);
+        vi.spyOn(console, 'error').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        vi.restoreAllMocks();
+        vi.unstubAllGlobals();
+    });
+
+    it('hands the page a row per reporting project, in /usage order, and the clock it read', async () => {
+        vi.stubGlobal('fetch', vi.fn(async (url: string) => (
+            url.endsWith('/api/public/summary')
+                ? {ok: true, json: async () => [{application: 'roam', count: 1, lastSeen: '2026-10-01T14:00:00Z'}]}
+                : {ok: true, json: async () => usageWithoutInstalls('roam')}
+        ) as unknown as Response));
+
+        const {rows, renderedAt} = await load();
+
+        expect(renderedAt).toBe(NOW);
+        expect(rows).toHaveLength(7);
+        expect(rows[0].project.id).toBe('roam');
+        expect(rows[0].usage).toEqual(usageWithoutInstalls('roam'));
+        expect(rows.slice(1).every((row) => row.usage === null)).toBe(true);
+    });
+
+    it('still renders with trace down: every row is there, with no figures', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('down')));
+
+        const {rows} = await load();
+
+        expect(rows).toHaveLength(7);
+        expect(rows.every((row) => row.usage === null)).toBe(true);
+    });
+
+    it('returns props Next.js can serialize, with no undefined left in them', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('down')));
+
+        const props = await load();
+
+        expect(JSON.parse(JSON.stringify(props))).toStrictEqual(props);
     });
 });

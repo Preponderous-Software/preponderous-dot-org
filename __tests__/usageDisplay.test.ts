@@ -4,6 +4,7 @@ import {
     perDayHeading,
     percentLabel,
     rankUsage,
+    startsCount,
     startsLabel,
     usageHeadline,
     versionCountLabel,
@@ -38,6 +39,19 @@ describe('usageHeadline', () => {
     it('omits the starts line when there were none, and handles a project never seen', () => {
         const quiet: ProgramUsage = {...usageWithoutInstalls(), startups30d: 0, lastSeen: null, days: []};
         expect(usageHeadline(quiet, 'program', NOW)).toEqual({activeInstalls: null, lastUsed: null, starts: null});
+    });
+
+    it('says nothing about when a project was last used if the timestamp is unparseable', () => {
+        const garbled: ProgramUsage = {...usageWithoutInstalls(), lastSeen: 'not a date'};
+        expect(usageHeadline(garbled, 'game', NOW).lastUsed).toBeNull();
+    });
+
+    it('counts starts in the project\'s own unit, without the 30-day wording', () => {
+        expect(startsCount(1, 'game')).toBe('1 launch');
+        expect(startsCount(3, 'game')).toBe('3 launches');
+        expect(startsCount(1, 'plugin')).toBe('1 server start');
+        expect(startsCount(1234, 'plugin')).toBe('1,234 server starts');
+        expect(startsCount(0, 'program')).toBe('0 starts');
     });
 
     it('labels a single start in the singular', () => {
@@ -96,8 +110,51 @@ describe('versionShares', () => {
         expect(shares.rows.reduce((sum, r) => sum + r.share, 0)).toBeCloseTo(1);
     });
 
+    it('needs no other-versions row for exactly five versions', () => {
+        const five: ProgramUsage = {
+            ...usageWithoutInstalls(),
+            versions: [1, 2, 3, 4, 5].map((n) => ({version: `1.${n}`, installs: null, startups: n})),
+        };
+        expect(versionShares(five, 'program')!.rows.map((r) => r.label)).toEqual(['1.5', '1.4', '1.3', '1.2', '1.1']);
+    });
+
+    it('leaves out versions with nothing to count, and orders equal counts by label', () => {
+        const uneven: ProgramUsage = {
+            ...usageWithoutInstalls(),
+            versions: [
+                {version: '2.0', installs: null, startups: 5},
+                {version: '1.0', installs: null, startups: 5},
+                {version: '0.9', installs: null, startups: 0},
+            ],
+        };
+        const shares = versionShares(uneven, 'program')!;
+        expect(shares.rows.map((r) => r.label)).toEqual(['1.0', '2.0']);
+        expect(shares.rows.map((r) => r.share)).toEqual([0.5, 0.5]);
+    });
+
+    it('counts a version with no install figure as nothing when dividing by installs', () => {
+        const partial: ProgramUsage = {
+            ...usageWithInstalls(),
+            versions: [
+                {version: '0.14.0', installs: 8, startups: 10},
+                {version: '0.13.0', installs: null, startups: 900},
+            ],
+        };
+        const shares = versionShares(partial, 'game')!;
+        expect(shares.basis).toBe('installs');
+        expect(shares.rows.map((r) => r.label)).toEqual(['0.14.0']);
+    });
+
     it('is null when there is nothing to divide', () => {
         expect(versionShares({...usageWithoutInstalls(), versions: []}, 'game')).toBeNull();
+    });
+
+    it('is null when every version counts for nothing', () => {
+        const zeros: ProgramUsage = {
+            ...usageWithoutInstalls(),
+            versions: [{version: '1.0', installs: null, startups: 0}],
+        };
+        expect(versionShares(zeros, 'game')).toBeNull();
     });
 });
 
@@ -106,6 +163,12 @@ describe('percentLabel', () => {
         expect(percentLabel(0.7234)).toBe('72%');
         expect(percentLabel(0.001)).toBe('<1%');
         expect(percentLabel(0)).toBe('0%');
+    });
+
+    it('stops calling a share a sliver once it rounds to 1%', () => {
+        expect(percentLabel(0.0049)).toBe('<1%');
+        expect(percentLabel(0.006)).toBe('1%');
+        expect(percentLabel(1)).toBe('100%');
     });
 });
 
@@ -125,5 +188,34 @@ describe('rankUsage', () => {
             row('NeverSeen', {lastSeen: null}),
         ]);
         expect(ranked.map((r) => r.title)).toEqual(['ManyInstalls', 'FewInstalls', 'Recent', 'OldButBusy', 'NeverSeen', 'Nothing']);
+    });
+
+    it('breaks a tie on installs by recency', () => {
+        const ranked = rankUsage([
+            row('Older', {activeInstalls30d: 5, lastSeen: '2026-09-01T00:00:00Z'}),
+            row('Newer', {activeInstalls30d: 5, lastSeen: '2026-10-01T00:00:00Z'}),
+        ]);
+        expect(ranked.map((r) => r.title)).toEqual(['Newer', 'Older']);
+    });
+
+    it('breaks a tie on recency by title', () => {
+        const lastSeen = '2026-10-01T00:00:00Z';
+        const ranked = rankUsage([row('Beta', {lastSeen}), row('Alpha', {lastSeen})]);
+        expect(ranked.map((r) => r.title)).toEqual(['Alpha', 'Beta']);
+    });
+
+    it('treats an unparseable timestamp as never seen', () => {
+        const ranked = rankUsage([
+            row('Alpha', {lastSeen: 'not a date'}),
+            row('Beta', {lastSeen: null}),
+            row('Seen', {lastSeen: '2026-01-01T00:00:00Z'}),
+        ]);
+        expect(ranked.map((r) => r.title)).toEqual(['Seen', 'Alpha', 'Beta']);
+    });
+
+    it('leaves the list it was given in its own order', () => {
+        const rows = [row('Beta', null), row('Alpha', null)];
+        rankUsage(rows);
+        expect(rows.map((r) => r.title)).toEqual(['Beta', 'Alpha']);
     });
 });
