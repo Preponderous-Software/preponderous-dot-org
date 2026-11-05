@@ -23,6 +23,7 @@ const REPO_URL = 'https://github.com/Preponderous-Software/preponderous-dot-org'
 // which is kept out of the browser bundle.
 const TRACE_URL = 'https://trace.danielstephenson.dev';
 const USAGE_REPORTING_DETAILS_URL = 'https://danielstephenson.dev/usage-reporting';
+const GOOGLE_FONTS_PRIVACY_URL = 'https://developers.google.com/fonts/faq/privacy';
 
 const LegalSection: React.FC<{title: string; children: React.ReactNode}> = ({title, children}) => (
     <Box component="section" sx={{mb: 5}}>
@@ -47,6 +48,9 @@ const THIRD_PARTY = [
     {name: 'React', license: 'MIT', href: 'https://github.com/facebook/react/blob/main/LICENSE'},
     {name: 'Material UI', license: 'MIT', href: 'https://github.com/mui/material-ui/blob/master/LICENSE'},
     {name: 'Emotion', license: 'MIT', href: 'https://github.com/emotion-js/emotion/blob/main/LICENSE'},
+    {name: 'community-site-kit', license: 'MIT', href: 'https://github.com/kingdom-community/community-site-kit'},
+    {name: 'Inter', license: 'SIL Open Font', href: 'https://github.com/rsms/inter'},
+    {name: 'Space Grotesk', license: 'SIL Open Font', href: 'https://github.com/floriankarsten/space-grotesk'},
 ];
 
 const LegalPage: NextPage = () => (
@@ -136,6 +140,14 @@ const LegalPage: NextPage = () => (
                     your browser&apos;s local storage under the
                     key <code>{COLOR_MODE_STORAGE_KEY}</code>. It never leaves your browser, and
                     clearing your browser&apos;s site data removes it.
+                </Paragraph>
+                <Paragraph>
+                    The site&apos;s fonts come from Google Fonts: your browser fetches them from Google
+                    when a page loads, so Google receives your IP address and browser details, as it
+                    would for any request. No Google script runs on the page.{' '}
+                    <Link href={GOOGLE_FONTS_PRIVACY_URL} target="_blank" rel="noopener noreferrer">
+                        Google Fonts privacy
+                    </Link>.
                 </Paragraph>
                 <Paragraph>
                     Following a link away from this site — for example to GitHub — hands you over to

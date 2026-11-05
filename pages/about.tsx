@@ -86,9 +86,11 @@ const AboutPage: NextPage = () => (
                             No Accounts, No Tracking
                         </Typography>
                         <Paragraph>
-                            This website has no accounts, no advertising, and no analytics. See
-                            the Privacy section of the <InternalLink href="/legal">Legal</InternalLink> page
-                            for details.
+                            This website has no accounts, no advertising, and no tracking
+                            scripts. When usage reporting is on, the server counts the pages it
+                            serves, with nothing about who asked for them. See the Privacy section
+                            of the <InternalLink href="/legal">Legal</InternalLink> page for
+                            details.
                         </Paragraph>
                     </ListItem>
                 </List>
