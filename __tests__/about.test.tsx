@@ -22,6 +22,14 @@ describe('About page', () => {
         }
     });
 
+    // /legal discloses that the server can count page views, so this page must
+    // not promise there is no analytics at all.
+    it('agrees with /legal about page views being counted', () => {
+        const values = screen.getByRole('heading', { level: 3, name: 'No Accounts, No Tracking' }).parentElement;
+        expect(values).not.toHaveTextContent(/no analytics/i);
+        expect(values).toHaveTextContent(/the server counts the pages it serves/i);
+    });
+
     it('names who runs Preponderous Software', () => {
         // The footer's copyright notice also names the same holder.
         expect(screen.getAllByText(new RegExp(COPYRIGHT_HOLDER)).length).toBeGreaterThan(0);
