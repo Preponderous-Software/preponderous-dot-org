@@ -4,12 +4,14 @@ This document describes the configuration options for the Preponderous Software 
 
 ## Environment Variables
 
-The site requires **no environment variables** to build or run. Five optional ones are read by the server at runtime only: the first four control [usage reporting](README.md#usage-reporting) of the site's own page views, and `TRACE_PUBLIC_URL` sets where the projects' usage figures are read from:
+The site requires **no environment variables** to build or run. The optional ones below are read by the server at runtime only: all but the last control [usage reporting](README.md#usage-reporting) of the site's own page views, and the last, `TRACE_PUBLIC_URL`, sets where the projects' usage figures are read from:
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `USAGE_REPORTING_KEY` | unset — nothing is reported | The [trace](https://trace.danielstephenson.dev) write key for the `preponderous-dot-org` program. Read by `middleware.ts` only: never inlined into the browser bundle and never committed; keep it in the deployment's environment. |
 | `USAGE_REPORTING_ENABLED` | `true` | Set to `false` (or `0`, `no`, `off`; case and surrounding space do not matter) to stop reporting page views even when a key is set. `TRACE_USAGE_REPORTING=off` and `DO_NOT_TRACK=1` do the same and win over it. |
+| `TRACE_USAGE_REPORTING` | unset — no effect | Set to `off` (or `false`, `0`, `no`; case and surrounding space do not matter) to stop reporting page views even when a key is set. Shared by every program that reports to trace. Any other value, including an empty one, changes nothing. |
+| `DO_NOT_TRACK` | unset — no effect | Set to `1` (or `true`, `yes`; case and surrounding space do not matter) to stop reporting page views even when a key is set. See [consoledonottrack.com](https://consoledonottrack.com). Any other value, including an empty one, changes nothing. |
 | `USAGE_REPORTING_ENDPOINT` | `https://trace.danielstephenson.dev` | The trace server page views are sent to. |
 | `TRACE_INSTALL_ID` | unset — a random ID per server process | The installation ID every page view carries as the tag `install`, so trace can count installations rather than events. Unset, the trace client is pointed at `$XDG_DATA_HOME/preponderous-dot-org/trace-install-id` (or `$HOME/.local/share/...`), but the report runs in the Edge runtime, which has no file system, so the client makes a random ID that lasts until the server restarts. Set it to keep one ID across restarts and redeploys. Ignored when reporting is off. |
 | `TRACE_PUBLIC_URL` | `https://trace.danielstephenson.dev` | The trace server project usage is read from, server side, for `/usage` and `/api/usage` (the home grid's usage lines) — `utils/traceUsage.ts`. Only trace's public, unauthenticated endpoints are read, so no key is needed; point it at a local stub to try the pages against made-up figures. When trace can't be reached, or has no figures for a project, the usage line is left out and `/usage` says the figures are unavailable; no page fails. |
