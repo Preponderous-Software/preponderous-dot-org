@@ -84,9 +84,10 @@ Reporting is off unless a key is set, and any of these turns it off:
   [consoledonottrack.com](https://consoledonottrack.com))
 - leaving `USAGE_REPORTING_KEY` unset
 
-`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. With a key set, the
-server logs one line on its first request saying whether reporting is on and, if it is off, which
-switch turned it off. Details: https://danielstephenson.dev/usage-reporting
+`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. The server logs one line
+on its first page request saying whether reporting is on and, if a switch turned it off, which kind:
+`environment` for `TRACE_USAGE_REPORTING` or `DO_NOT_TRACK`, or `USAGE_REPORTING_ENABLED`. It logs
+nothing when the key is simply unset. Details: https://danielstephenson.dev/usage-reporting
 
 The other direction — how much the projects themselves are used — is read from trace's public
 figures and shown on `/usage` and in each reporting project's details on the home grid. Those
@@ -145,7 +146,7 @@ The site has no separate back end: the only server-side parts — the `/usage` p
    docker compose down
    ```
 
-The image is built from `package-lock.json` with `npm ci`, and `.dockerignore` keeps `node_modules`, `.next`, the tests, and the docs out of the build context.
+The image is built from `package-lock.json` with `npm ci`, and `.dockerignore` keeps `node_modules`, `.next`, the tests, and the Markdown docs out of the build context.
 
 ### Dev Container
 
