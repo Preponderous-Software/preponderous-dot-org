@@ -7,6 +7,7 @@ import DataArrayIcon from '@mui/icons-material/DataArray';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import FireplaceIcon from '@mui/icons-material/Fireplace';
 import GridOnIcon from '@mui/icons-material/GridOn';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import HubIcon from '@mui/icons-material/Hub';
 import LanguageIcon from '@mui/icons-material/Language';
 import LayersIcon from '@mui/icons-material/Layers';
@@ -44,6 +45,7 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
     Extension: ExtensionIcon,
     Fireplace: FireplaceIcon,
     GridOn: GridOnIcon,
+    HowToVote: HowToVoteIcon,
     Hub: HubIcon,
     Language: LanguageIcon,
     Layers: LayersIcon,

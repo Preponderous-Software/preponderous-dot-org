@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **Second Helping** in the Games list: a walkable 3D harvest fair on the Strata engine that teaches ranked choice voting, played at [second-helping.play.danielstephenson.dev](https://second-helping.play.danielstephenson.dev).
 - **Cauldron** in the Games list: a cozy Halloween potion-brewing game on the Strata engine (follow a recipe card, drop ingredients into the cauldron and stir; mistakes turn out silly), played at [cauldron.play.danielstephenson.dev](https://cauldron.play.danielstephenson.dev), with a `Fireplace` glyph and the *Small projects & early work* tier.
 - **Haunted Hayride** in the Games list: a gentle Halloween game on the Strata engine (ride a hay wagon through a night-time cornfield and catch friendly spooks with a flashlight), played at [haunted-hayride.play.danielstephenson.dev](https://haunted-hayride.play.danielstephenson.dev), with a `Yard` glyph and the *Small projects & early work* tier.
 - **Ghost Lights** in the Games list: a Halloween game on the Strata engine (lead lost ghosts home across a foggy marsh by lantern light), played at [ghost-lights.play.danielstephenson.dev](https://ghost-lights.play.danielstephenson.dev), with a `WbTwilight` glyph and the *Small projects & early work* tier.
