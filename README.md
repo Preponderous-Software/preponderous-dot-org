@@ -146,7 +146,7 @@ The site has no separate back end: the only server-side parts — the `/usage` p
    docker compose down
    ```
 
-The image is built from `package-lock.json` with `npm ci`, and `.dockerignore` keeps `node_modules`, `.next`, the tests, and the Markdown docs out of the build context.
+The image is built from `package-lock.json` with `npm ci`. The install step sees the manifests with their `version` set to a fixed value, so a version bump alone does not invalidate the cached dependency layer; the real `package.json` is copied in before `npm run build`. `.dockerignore` `.dockerignore` keeps `node_modules`, `.next`, the tests, and the Markdown docs out of the build context.
 
 ### Dev Container
 
