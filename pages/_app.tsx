@@ -74,7 +74,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 shape: {borderRadius: 10},
                 typography: {
                     fontFamily: '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
-                    h1: {fontFamily: headingFont, fontWeight: 700, letterSpacing: '-0.02em'},
+                    h1: {fontFamily: headingFont, fontWeight: 700, letterSpacing: '0.02em'},
                     h2: {fontFamily: headingFont, fontWeight: 700, letterSpacing: '-0.02em'},
                     h3: {fontFamily: headingFont, fontWeight: 600, letterSpacing: '-0.01em'},
                     h4: {fontFamily: headingFont, fontWeight: 600},
