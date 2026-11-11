@@ -95,7 +95,7 @@ const Blurb: React.FC = () => (
                 variant="h2"
                 component="h1"
                 gutterBottom
-                sx={(theme) => ({...blurbTitleStyle(theme), marginBottom: theme.spacing(2)})}
+                sx={(theme) => ({...blurbTitleStyle(theme), marginBottom: theme.spacing(2), letterSpacing: '0.5px'})}
             >
                 Preponderous Software
             </Typography>
