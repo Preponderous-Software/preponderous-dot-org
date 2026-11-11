@@ -56,6 +56,10 @@ npm run build
 
 Stop `npm run dev` before running `npm run build`: both write to `.next`, and the build breaks a running dev server.
 
+### Visual diff (advisory)
+
+Every pull request also runs **Visual diff** (`.github/workflows/visual-diff.yml`, from community-site-kit's `tools/visual-diff`, [RFC 0038](https://github.com/Preponderous-Software/rfcs/pull/171)). It builds and serves the pull request's base and head, takes the shots listed in `visual-diff.json` (each page at desktop and phone width, light and dark), and compares them with Strata's `strata-imgcmp`. The job summary lists every shot that changed, and the `visual-diff` artifact holds the base, head and diff images. A change does not fail the check, so read the summary: a pull request that should change nothing visible should report no change. The check fails only when a page does not load or the comparison cannot run. Add a page to `visual-diff.json` when a new top-level page is added.
+
 For manual testing, start the development server:
 
 ```bash
