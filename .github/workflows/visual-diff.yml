@@ -13,6 +13,6 @@ permissions:
 
 jobs:
   visual-diff:
-    uses: kingdom-community/community-site-kit/.github/workflows/visual-diff.yml@04fdfc8856c5fa40396a451336e99ffdddacc70e
+    uses: kingdom-community/community-site-kit/.github/workflows/visual-diff.yml@9b2b9d45c8e0e629e0cba62a6c5992893df86a62
     with:
-      kit-ref: 04fdfc8856c5fa40396a451336e99ffdddacc70e
+      kit-ref: 9b2b9d45c8e0e629e0cba62a6c5992893df86a62
