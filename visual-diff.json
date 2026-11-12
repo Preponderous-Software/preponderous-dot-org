@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/kingdom-community/community-site-kit/main/tools/visual-diff/schema.json",
-  "comment": "Shots for the advisory visual diff on pull requests (.github/workflows/visual-diff.yml, RFC 0038). Each page is shot at both viewports in light and dark.",
+  "comment": "Shots for the advisory visual diff on pull requests (.github/workflows/visual-diff.yml, RFC 0038). Each page is shot at both viewports in light and dark. /usage is left out on purpose: it is rendered per request from trace's live figures, so its shots would differ between base and head with no code change.",
   "node": "18",
   "install": "npm ci",
   "build": "npm run build",
   "serve": "npx next start -H 127.0.0.1 -p {port}",
   "env": { "NEXT_TELEMETRY_DISABLED": "1" },
-  "pages": ["/", "/projects", "/contact", "/legal"],
+  "pages": ["/", "/about", "/projects", "/contact", "/legal"],
   "viewports": {
     "desktop": { "width": 1280, "height": 800 },
     "phone": { "width": 390, "height": 844, "isMobile": true, "hasTouch": true }
