@@ -56,7 +56,7 @@ The file contains a single `projects` array. Each entry supports these fields:
 
 Entries may be listed in any order. The home page shows every project as an icon, grouped into tiers (most complete first; see `tier` above) and sorted alphabetically by title within each tier by default, with search, filter chips (category, technology and status), and an optional *By category* sort (see `projectFacets` and `projectSortOptions` in `utils/projects.ts`). Search, filters and sort span every tier; a sort orders projects within each tier. A `technology` value such as `TypeScript / Next.js` is split on ` / `, so each part is its own filter chip. `/projects` groups the same data by `category`, each category's projects sorted alphabetically within it.
 
-`pages/data/releases.json` maps a project `id` to `{"releases": <count of published releases>, "latestStable": "<tag>" | null}`. It is written by `node scripts/refresh-releases.mjs`, which reads each project's releases from GitHub with the `gh` CLI; run it by hand when releases have moved. A project missing from it counts as never released.
+`pages/data/releases.json` maps a project `id` to `{"releases": <count of published releases>, "latestStable": "<tag>" | null}`. It is written by `node scripts/refresh-releases.mjs`, which reads each project's releases from GitHub with the `gh` CLI. Drafts and the rolling `dev` prerelease are not counted, and `latestStable` is the newest release that is not a prerelease (`scripts/release-facts.mjs`). Run it by hand when releases have moved. A project missing from it counts as never released.
 
 **Example entry:**
 
