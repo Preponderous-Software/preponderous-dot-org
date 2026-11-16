@@ -9,18 +9,17 @@
 //     node scripts/refresh-releases.mjs
 import {execFileSync} from 'node:child_process';
 import {readFileSync, writeFileSync} from 'node:fs';
+import {releaseFacts, repoOfGithubLink} from './release-facts.mjs';
 
 const projects = JSON.parse(readFileSync('pages/data/projects.json', 'utf8')).projects;
 const out = {};
 for (const project of projects) {
-    const repo = project.githubLink.replace(/^https:\/\/github\.com\//, '').replace(/\/$/, '');
+    const repo = repoOfGithubLink(project.githubLink);
     try {
         const releases = JSON.parse(execFileSync('gh', [
             'api', `repos/${repo}/releases?per_page=100`, '-q', '[.[] | {tag: .tag_name, prerelease, draft}]',
         ], {encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']}));
-        const published = releases.filter((release) => !release.draft && release.tag !== 'dev');
-        const stable = published.find((release) => !release.prerelease);
-        out[project.id] = {releases: published.length, latestStable: stable ? stable.tag : null};
+        out[project.id] = releaseFacts(releases);
     } catch {
         console.error(`${project.id}: could not read releases of ${repo}; left out`);
     }

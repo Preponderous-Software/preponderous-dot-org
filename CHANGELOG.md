@@ -52,6 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- `scripts/refresh-releases.mjs` keeps its counting rules in `scripts/release-facts.mjs` (drafts and the rolling `dev` prerelease are not releases; the latest stable tag is the first non-prerelease), so `__tests__/release-facts.test.ts` can cover them without calling GitHub. What the script writes is unchanged.
 - The `Dockerfile` installs dependencies from copies of `package.json` and `package-lock.json` whose root `version` is set to `0.0.0`, then copies the real manifests in before `npm run build`. A version-only change, such as a release or `-SNAPSHOT` bump, no longer invalidates the cached `npm ci` layer, so the production host skips a full dependency install when no dependency changed (#188).
 - `USER_GUIDE.md` now covers the footer's **Source Code** link and its danielstephenson.dev and browser-arcade links, which had shipped undocumented, and the README's description names the tools and websites the site showcases alongside its games, simulations and libraries.
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js` 0.4.1 (tag `0.4.1`, commit 0bb9eb7). Its doc comment's usage-reporting link now points at the public https://danielstephenson.dev/usage-reporting instead of a private repository; apart from the version string, nothing else in the client changed, so what a page view sends is unchanged.
