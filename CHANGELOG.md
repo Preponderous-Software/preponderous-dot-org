@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - `USER_GUIDE.md`'s examples of the home grid's filter count and the `/projects` category links no longer quote real totals ("of 36 projects", "Games (14)"), which had gone stale again when the catalogue grew to 37 projects and 15 games; they show placeholders instead, so a new project no longer makes them wrong.
-- `CHANGELOG.md` has a section for each release from 0.2.0 to 0.3.5. Every entry had stayed under *Unreleased* because the release PRs bump only `package.json`. Each entry is now filed under the first tag that contains the change it describes, with its wording unchanged. 0.3.2 carried no changelog-worthy change.
+- `CHANGELOG.md` has a section for each release from 0.2.0 to 0.3.5. Every entry had stayed under *Unreleased* because the release PRs bump only `package.json`. Each entry is now filed under the first tag that contains the change it describes, with its wording unchanged. 0.3.2 has no entries.
 
 ## [0.3.5] – 2026-11-07
 
@@ -50,7 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.3.2] – 2026-10-29
 
-No entries were recorded for this release: it carried documentation and release-data upkeep only.
+No entries were recorded for this release. It carried #166 (documentation) and #168 (README screenshots, and the rolling `dev` prerelease no longer counted as a release; no project changed tier).
 
 ## [0.3.1] – 2026-10-28
 
