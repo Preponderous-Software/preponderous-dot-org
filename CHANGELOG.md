@@ -8,16 +8,123 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Test coverage for `pages/api/usage.ts`, the endpoint the home grid asks for trace's figures, which had no spec of its own while its sibling `/api/version` did: the usage map is answered with 200 for `GET` and `HEAD`, an empty map is still a 200, the answer carries `Cache-Control: public, max-age=60`, and any other method gets a 405 with `Allow: GET, HEAD` without trace being asked.
+- An advisory **visual diff** on every pull request (`.github/workflows/visual-diff.yml`, community-site-kit's `tools/visual-diff`, RFC 0038): the base and head are built and served, the pages listed in `visual-diff.json` (`/`, `/about`, `/projects`, `/contact` and `/legal`) are shot at desktop and phone width in light and dark, and changed shots are listed in the job summary without failing the check (#192). `/usage` is left out, because its live trace figures would differ on every run. `__tests__/visualDiff.test.ts` fails when a page under `pages/` is neither shot nor deliberately left out.
+
+### Changed
+
+- `scripts/refresh-releases.mjs` keeps its counting rules in `scripts/release-facts.mjs` (drafts and the rolling `dev` prerelease are not releases; the latest stable tag is the first non-prerelease), so `__tests__/release-facts.test.ts` can cover them without calling GitHub. What the script writes is unchanged.
+- The `Dockerfile` installs dependencies from copies of `package.json` and `package-lock.json` whose root `version` is set to `0.0.0`, then copies the real manifests in before `npm run build`. A version-only change, such as a release or `-SNAPSHOT` bump, no longer invalidates the cached `npm ci` layer, so the production host skips a full dependency install when no dependency changed (#188).
+
+### Fixed
+
+- `USER_GUIDE.md`'s examples of the home grid's filter count and the `/projects` category links no longer quote real totals ("of 36 projects", "Games (14)"), which had gone stale again when the catalogue grew to 37 projects and 15 games; they show placeholders instead, so a new project no longer makes them wrong.
+- `CHANGELOG.md` has a section for each release from 0.2.0 to 0.3.5. Every entry had stayed under *Unreleased* because the release PRs bump only `package.json`. Each entry is now filed under the first tag that contains the change it describes, with its wording unchanged. 0.3.2 carried no changelog-worthy change.
+
+## [0.3.5] – 2026-11-07
+
+### Added
+
 - **Second Helping** in the Games list: a walkable 3D harvest fair on the Strata engine that teaches ranked choice voting, played at [second-helping.play.danielstephenson.dev](https://second-helping.play.danielstephenson.dev).
+
+### Fixed
+
+- `CONFIG.md`'s environment-variable table now has rows for `TRACE_USAGE_REPORTING` and `DO_NOT_TRACK`, which the server reads but the guide's count of five left out, and no longer states a count. The README now says what the startup log line reports: the kind of switch that turned reporting off, and nothing when the key is simply unset. It also says that `.dockerignore` keeps out the Markdown docs, since `docs/images/` stays in the build context.
+- The privacy copy now matches what the site does. `/about` no longer says the site has "no analytics", which contradicted the page-view counting `/legal` discloses; `/legal` now says that the fonts are fetched from Google Fonts on every page, so Google receives the visitor's IP address and browser details; and its Third-Party Software list gains community-site-kit, Inter and Space Grotesk. `USER_GUIDE.md` is updated to match (#183).
+
+## [0.3.4] – 2026-11-04
+
+### Added
+
+- Test coverage for the `/usage` page and its wording: `getServerSideProps` (a row per reporting project in page order, trace being down, and props Next.js can serialize), the sentence saying how the list is ordered, *No use reported yet* as distinct from having no figures, when a row draws its sparkline, and `TraceAttribution`, which had no spec of its own and was only checked through the page, without its link's `target` and `rel`. `utils/usageDisplay.ts` gains `startsCount` directly, an unparseable `lastSeen`, `rankUsage`'s tie-breaks and its leaving the input unsorted, `percentLabel` either side of *<1%*, and `versionShares` at exactly five versions, with zero-count versions, with tied counts and with no install figure for a version.
+
+## [0.3.3] – 2026-10-31
+
+### Added
+
 - **Cauldron** in the Games list: a cozy Halloween potion-brewing game on the Strata engine (follow a recipe card, drop ingredients into the cauldron and stir; mistakes turn out silly), played at [cauldron.play.danielstephenson.dev](https://cauldron.play.danielstephenson.dev), with a `Fireplace` glyph and the *Small projects & early work* tier.
 - **Haunted Hayride** in the Games list: a gentle Halloween game on the Strata engine (ride a hay wagon through a night-time cornfield and catch friendly spooks with a flashlight), played at [haunted-hayride.play.danielstephenson.dev](https://haunted-hayride.play.danielstephenson.dev), with a `Yard` glyph and the *Small projects & early work* tier.
 - **Ghost Lights** in the Games list: a Halloween game on the Strata engine (lead lost ghosts home across a foggy marsh by lantern light), played at [ghost-lights.play.danielstephenson.dev](https://ghost-lights.play.danielstephenson.dev), with a `WbTwilight` glyph and the *Small projects & early work* tier.
 - **Belfry Bats** in the Games list: a small Halloween game on the Strata engine (guide a flock of bats home to the bell tower before dawn), playable at belfry-bats.play.danielstephenson.dev.
 - **Pumpkin** in the project grid: a jack-o'-lantern carving toy on the Strata engine (freehand cuts and face stamps, a candle-lit dark mode, share links and a porch of pumpkins), played at [pumpkin.play.danielstephenson.dev](https://pumpkin.play.danielstephenson.dev), with a `ContentCut` glyph and the *Active and growing* tier.
+
+## [0.3.2] – 2026-10-29
+
+No entries were recorded for this release: it carried documentation and release-data upkeep only.
+
+## [0.3.1] – 2026-10-28
+
+### Added
+
+- 18 Preponderous-Software projects that were missing from the site are listed: acsf-usd-env, asn1-viz, Atman, Familiar, Kindling, Orrery, Playtester, replay-player, roam-usd, Sisyphus, steading, Strata, usd-asset-gate, usd-recorder, usd-synth-data, usd-web, viron-strata and viron-usd. Each uses the wording, technology, category and glyph it has on danielstephenson.dev, and `utils/projectGlyphs.ts` gains the 16 Material icons they name (#162).
+
+### Removed
+
+- FishE, Overwinter, Tidewater and `tak` are taken off the site, with their trace mappings, their `pages/data/releases.json` entries and FishE's preview files. They are Stephenson-Software projects, already listed on danielstephenson.dev; preponderous.org keeps to Preponderous-Software projects plus its two sister-site links (#163).
+
+## [0.3.0] – 2026-10-28
+
+### Added
+
 - **Project tiers on the home page:** the grid is split into *Most complete*, *Active and growing*, and *Small projects & early work*, so the most complete projects come first. A project's tier is the optional `tier` field in `pages/data/projects.json` (set on the games, matching danielstephenson.dev/play), otherwise derived from its status and its release count in `pages/data/releases.json`, which `scripts/refresh-releases.mjs` refreshes from GitHub (`utils/projectTiers.ts`). Search, filters and sort still span every tier; a sort orders projects within each tier. community-site-kit is pinned to `d5945ac` for its `TieredCatalogueGrid`.
+
+## [0.2.6] – 2026-10-28
+
+### Added
+
 - **A 3D link-preview card:** `public/og-image.png` is now planets on their orbits, rendered in 3D with [Strata](https://github.com/Preponderous-Software/strata), with the name, tagline and address over it, in place of the flat "P" card. `components/Seo.tsx` also emits `og:image:type`, `og:image:width`, `og:image:height`, `og:image:alt` and `twitter:image:alt`. The card is drawn from `og-card/card.json` by community-site-kit's `tools/og-card` and is pre-rendered, so nothing 3D runs on the site.
+
+## [0.2.5] – 2026-10-24
+
+### Added
+
 - **FishE's places in 3D:** FishE's details carry a preview of the five location stills the game now shows above each place's menu, rendered from its own scene files by Strata's [strata-golden](https://github.com/Preponderous-Software/strata/tree/main/tools/strata-golden), with a link to play it in the browser.
+
+## [0.2.4] – 2026-10-24
+
+### Added
+
 - **3D previews in the project details:** Beyond Nations and Microbiome show replay clips drawn by [replay-player](https://github.com/Preponderous-Software/replay-player), env-lib-cpp its meadow drawn by its own Strata demo, the Artificial Consciousness Simulation Framework its Echo run drawn by acsf-usd-env's viewer, and Viron a live environment drawn by viron-strata. Each is a muted 16:10 loop that loads only when the details open (the still alone for a visitor who asks for reduced motion), with a pause button, a credit for the tool and, where there is one, a link to the interactive version on danielstephenson.dev. Documented as the `preview` field in `CONFIG.md`.
+- Test coverage for `UsageLine` and `ProjectDetails`, the details a home-grid tile reveals: which usage figure leads (active installs, otherwise when the project was last used), the caption beneath it per project kind, when the line is left out (no public use yet, the clock not yet read, a project that does not report to trace), the status and technology chips, and how the Visit Site and GitHub actions are ranked.
+- Test coverage for `utils/useNow.ts` (null in the server render, the visitor's clock once mounted, read once rather than on every render) and `utils/projectGlyphs.ts` (the Material icons it maps, and `glyphFor` returning nothing for a missing, empty, unknown or wrongly-cased name), two utilities that had no spec of their own.
+- Test coverage for `pagePath` and `isBot`, the two helpers `utils/page-view-policy.ts` takes from the vendored `utils/trace-client.ts`: the path a page view records (full URLs, query strings and fragments, slashes, the 200-character cut, unparseable and non-string input) and which user agents count as bots (blank ones, crawlers, link previews, headless browsers and HTTP libraries, but not ordinary desktop and phone browsers, in any case).
+- Test coverage for `projectFacets` and `projectSortOptions` in `utils/projects.ts`, the home page's search-and-filter configuration, which had only been exercised through the page against the live project list: each facet's value for a project (category and status, or none when unset; technology split on ` / ` and trimmed, but not on a bare `/`), the order of the facets and sort options, and the *By category* sort's case-insensitive category order, title tie-break and treatment of an uncategorised project as "Other".
+- Test coverage for `traceBaseUrl` and `parseSummary` in `utils/traceUsage.ts`, which had only been exercised through `getUsageSummary` and the fetch tests, plus the rest of `parseProgramUsage`'s rules: the default trace server when `TRACE_PUBLIC_URL` is empty and every trailing slash stripped from one that is set; the summary's non-array and malformed rows rejected, and an unusable `lastSeen` kept as null; a per-program payload's omitted `lastSeen`, window and version fields filled in, undocumented fields dropped, and an unparseable date, a non-string version or day, a non-object row or a non-finite count rejected. `activeInstallsLabel` in `utils/usageDisplay.ts` gains its singular, plural and thousands-separator cases.
+
+### Changed
+
+- `USER_GUIDE.md` now covers the footer's **Source Code** link and its danielstephenson.dev and browser-arcade links, which had shipped undocumented, and the README's description names the tools and websites the site showcases alongside its games, simulations and libraries.
+
+### Fixed
+
+- `glyphFor` in `utils/projectGlyphs.ts` now only answers the names mapped in `PROJECT_GLYPHS`, so a `glyph` that happens to name an inherited object property (`constructor`, `toString`, …) falls back to the project's initial, as `CONFIG.md` describes, instead of being rendered as the icon (#143).
+
+## [0.2.3] – 2026-10-16
+
+### Added
+
+- Test coverage for `StartsSparkline`, the 30-day line on `/usage`: its accessible summary and visible labels per project kind, the plotted path's scaling and height, labels turned off as `/usage` draws it, and edge cases (an empty window, a window of zeros, a single day, an unparseable day).
+
+## [0.2.2] – 2026-10-13
+
+### Added
+
+- Test coverage for `utils/relativeTime.ts` (the "3 days ago" wording behind the usage line, including its rounding at unit boundaries, future timestamps and unparseable input) and `utils/projectColors.ts` (the title-hashed avatar colour and the case-insensitive status-chip colour), the two pure utilities that had no spec of their own.
+
+### Fixed
+
+- The docs now cover the project usage figures: `USER_GUIDE.md` describes the usage line in a project's details and the `/usage` page it links to; `CONFIG.md` counts all five optional environment variables (it said three) and lists `/usage` among the sitemap's routes; and the README no longer calls the site a static showcase with no back end, naming the server-side parts that run inside the Next.js server instead.
+
+## [0.2.1] – 2026-10-07
+
+### Changed
+
+- The usage-reporting "Details"/"how it works" links (legal page, `/usage`, the README and code comments) now point at https://danielstephenson.dev/usage-reporting, a public page, instead of a link into a private repository that answered 404.
+
+## [0.2.0] – 2026-10-04
+
+### Added
+
 - `GET /version.json` answers `{"version": "<version>"}` with the `version` field of `package.json` as it stood when the site was built (`pages/api/version.ts`, bundled at build time and reached through a rewrite in `next.config.js`), sent with `Cache-Control: no-store`, so a deploy can be verified by the version it reports. It needs no login and is outside the page-view middleware's matcher.
 - **Project usage from trace:** each reporting project's details on the home grid (hover panel and phone bottom sheet alike) carry one usage line — "Last used 2 days ago", then "23 launches in the last 30 days, reported by trace" — and a new `/usage` page lists the 7 reporting projects, ranked by active installs, then by how recently they were used, never by raw starts. Figures come from trace's public endpoints (`utils/traceUsage.ts`: server side only, 3 s timeout, 10-minute cache including misses, last good answer kept through an outage) and reach the static home page through `GET /api/usage`. A game's starts are worded as launches, anything else's as starts (`utils/traceNames.ts`); "active installs" appears only once trace counts distinct installs (`utils/usageDisplay.ts`). Barony, Viron, the websites and the libraries are not mapped. The same files as danielstephenson.dev's, ported from dansplugins.com (Dans-Plugins/dansplugins-dot-com#353).
 - The footer carries a small "More by Daniel Stephenson → danielstephenson.dev" backlink, as dansplugins.com's does, plus a "Play his games in your browser" link to the browser-game arcade at [danielstephenson.dev/play](https://danielstephenson.dev/play).
@@ -26,8 +133,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `/projects` has a row of category jump links with counts (e.g. **Games (9)**) under its heading; the 404 page gains a **Browse projects** button and the 500 page a **Report the problem** button (#115).
 - Projects can name their own artwork (`icon`) or a Material symbol (`glyph`) in `pages/data/projects.json`, and every showcased project now has one or the other; the initial is only a last fallback. Both fields are documented in `CONFIG.md` (#113, #116).
 - `Games` gains FishE, Tidewater and Overwinter, the text games built on `tak`, each with a live link to its in-browser build on danielstephenson.dev, and `Libraries` gains `tak` itself.
-- 18 Preponderous-Software projects that were missing from the site are listed: acsf-usd-env, asn1-viz, Atman, Familiar, Kindling, Orrery, Playtester, replay-player, roam-usd, Sisyphus, steading, Strata, usd-asset-gate, usd-recorder, usd-synth-data, usd-web, viron-strata and viron-usd. Each uses the wording, technology, category and glyph it has on danielstephenson.dev, and `utils/projectGlyphs.ts` gains the 16 Material icons they name (#162).
-
 - Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
   `preponderous-dot-org`: one `page-view` event per HTML page served, tagged with the path and the site version
   only, sent server-side from `middleware.ts` (trace decision 0002). Crawlers, monitors,
@@ -35,28 +140,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   `USAGE_REPORTING_KEY` only, and reporting is off without it, with `USAGE_REPORTING_ENABLED=false`,
   `TRACE_USAGE_REPORTING=off` or `DO_NOT_TRACK=1`. The client is `trace-client.ts` 0.1.0 vendored
   unmodified from `Stephenson-Software/trace-client-js`.
-
 - `public/robots.txt` and `public/sitemap.xml`, listing every indexable route so search engines can discover all of them, documented in `CONFIG.md` (#83).
-- Test coverage for `utils/relativeTime.ts` (the "3 days ago" wording behind the usage line, including its rounding at unit boundaries, future timestamps and unparseable input) and `utils/projectColors.ts` (the title-hashed avatar colour and the case-insensitive status-chip colour), the two pure utilities that had no spec of their own.
-- Test coverage for `StartsSparkline`, the 30-day line on `/usage`: its accessible summary and visible labels per project kind, the plotted path's scaling and height, labels turned off as `/usage` draws it, and edge cases (an empty window, a window of zeros, a single day, an unparseable day).
-- Test coverage for `UsageLine` and `ProjectDetails`, the details a home-grid tile reveals: which usage figure leads (active installs, otherwise when the project was last used), the caption beneath it per project kind, when the line is left out (no public use yet, the clock not yet read, a project that does not report to trace), the status and technology chips, and how the Visit Site and GitHub actions are ranked.
-- Test coverage for `utils/useNow.ts` (null in the server render, the visitor's clock once mounted, read once rather than on every render) and `utils/projectGlyphs.ts` (the Material icons it maps, and `glyphFor` returning nothing for a missing, empty, unknown or wrongly-cased name), two utilities that had no spec of their own.
-- Test coverage for `pagePath` and `isBot`, the two helpers `utils/page-view-policy.ts` takes from the vendored `utils/trace-client.ts`: the path a page view records (full URLs, query strings and fragments, slashes, the 200-character cut, unparseable and non-string input) and which user agents count as bots (blank ones, crawlers, link previews, headless browsers and HTTP libraries, but not ordinary desktop and phone browsers, in any case).
-- Test coverage for `projectFacets` and `projectSortOptions` in `utils/projects.ts`, the home page's search-and-filter configuration, which had only been exercised through the page against the live project list: each facet's value for a project (category and status, or none when unset; technology split on ` / ` and trimmed, but not on a bare `/`), the order of the facets and sort options, and the *By category* sort's case-insensitive category order, title tie-break and treatment of an uncategorised project as "Other".
-- Test coverage for `traceBaseUrl` and `parseSummary` in `utils/traceUsage.ts`, which had only been exercised through `getUsageSummary` and the fetch tests, plus the rest of `parseProgramUsage`'s rules: the default trace server when `TRACE_PUBLIC_URL` is empty and every trailing slash stripped from one that is set; the summary's non-array and malformed rows rejected, and an unusable `lastSeen` kept as null; a per-program payload's omitted `lastSeen`, window and version fields filled in, undocumented fields dropped, and an unparseable date, a non-string version or day, a non-object row or a non-finite count rejected. `activeInstallsLabel` in `utils/usageDisplay.ts` gains its singular, plural and thousands-separator cases.
-- Test coverage for the `/usage` page and its wording: `getServerSideProps` (a row per reporting project in page order, trace being down, and props Next.js can serialize), the sentence saying how the list is ordered, *No use reported yet* as distinct from having no figures, when a row draws its sparkline, and `TraceAttribution`, which had no spec of its own and was only checked through the page, without its link's `target` and `rel`. `utils/usageDisplay.ts` gains `startsCount` directly, an unparseable `lastSeen`, `rankUsage`'s tie-breaks and its leaving the input unsorted, `percentLabel` either side of *<1%*, and `versionShares` at exactly five versions, with zero-count versions, with tied counts and with no install figure for a version.
 - Test coverage for `ColorModeToggleSwitch`, the last component without a test file, including a guard that the `public/colormode/*.svg` icons its styles reference still exist (#94).
 - Test coverage for `pages/_document.tsx`, pinning down the parts that would regress silently: the color-mode bootstrap script stays inline, render-blocking, and ahead of the page content; the icon links keep pointing at the assets shipped under `public/`; and the document keeps declaring `lang="en"` (#90).
-- Test coverage for `pages/api/usage.ts`, the endpoint the home grid asks for trace's figures, which had no spec of its own while its sibling `/api/version` did: the usage map is answered with 200 for `GET` and `HEAD`, an empty map is still a 200, the answer carries `Cache-Control: public, max-age=60`, and any other method gets a 405 with `Allow: GET, HEAD` without trace being asked.
-- An advisory **visual diff** on every pull request (`.github/workflows/visual-diff.yml`, community-site-kit's `tools/visual-diff`, RFC 0038): the base and head are built and served, the pages listed in `visual-diff.json` (`/`, `/about`, `/projects`, `/contact` and `/legal`) are shot at desktop and phone width in light and dark, and changed shots are listed in the job summary without failing the check (#192). `/usage` is left out, because its live trace figures would differ on every run. `__tests__/visualDiff.test.ts` fails when a page under `pages/` is neither shot nor deliberately left out.
 
 ### Changed
 
-- `scripts/refresh-releases.mjs` keeps its counting rules in `scripts/release-facts.mjs` (drafts and the rolling `dev` prerelease are not releases; the latest stable tag is the first non-prerelease), so `__tests__/release-facts.test.ts` can cover them without calling GitHub. What the script writes is unchanged.
-- The `Dockerfile` installs dependencies from copies of `package.json` and `package-lock.json` whose root `version` is set to `0.0.0`, then copies the real manifests in before `npm run build`. A version-only change, such as a release or `-SNAPSHOT` bump, no longer invalidates the cached `npm ci` layer, so the production host skips a full dependency install when no dependency changed (#188).
-- `USER_GUIDE.md` now covers the footer's **Source Code** link and its danielstephenson.dev and browser-arcade links, which had shipped undocumented, and the README's description names the tools and websites the site showcases alongside its games, simulations and libraries.
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js` 0.4.1 (tag `0.4.1`, commit 0bb9eb7). Its doc comment's usage-reporting link now points at the public https://danielstephenson.dev/usage-reporting instead of a private repository; apart from the version string, nothing else in the client changed, so what a page view sends is unchanged.
-- The usage-reporting "Details"/"how it works" links (legal page, `/usage`, the README and code comments) now point at https://danielstephenson.dev/usage-reporting, a public page, instead of a link into a private repository that answered 404.
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js` 0.4.0 (tag `0.4.0`, commit 1b4d0fb). Every page view now carries a random installation ID for the server as the tag `install`, so trace can count installations rather than events: `TRACE_INSTALL_ID` when set, otherwise the client's `installIdFile` option pointed at `$XDG_DATA_HOME/preponderous-dot-org/trace-install-id` (or `~/.local/share/...`). The report runs in the Edge runtime, which has no `node:fs`, so without `TRACE_INSTALL_ID` the ID lasts for the server process. The opt-outs stop it: a disabled client never makes, reads or writes one. `next build` now prints the client's expected "Node.js API is used (process.getBuiltinModule)" Edge warning; the client guards the call.
 - The home page now opens with every project as a captioned icon, its details shown in a panel on hover, focus or click; the introduction and *Get involved* cards move below the grid, and **Browse Projects** goes to `/projects`. `/projects` keeps its categorized cards (#113, #114). The grid and its search and filters come from `@kingdom-community/community-site-kit`, shared with dansplugins.com and danielstephenson.dev (#118).
 - The *Get involved* cards now lead somewhere distinct: **Contribute** opens every open issue across the organization, **Explore the Code** its repository list, and **Source Available** the license on `/legal` (#115).
@@ -72,17 +162,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   and site version), what it does not, that it is sent server-side to trace with no script in the
   browser, and a link to trace's details. It previously described the colour preference as the
   only data involved; `USER_GUIDE.md` is updated to match (#108).
-
 - The project-card grid shown on the home page and on `/projects` is now a single `ProjectGrid` component rather than a copy in each page, so a field added to a project card is wired up once and appears on both pages instead of having to be threaded through two identical call sites. What renders is unchanged (#101).
 - `README.md` now has a Development section, mirroring `dansplugins-dot-com`'s, covering every way the repository can be run: the hot-reloading dev server, the production build under Docker Compose (`compose.yaml`/`Dockerfile`), and the dev container under `.devcontainer/` — the latter two had shipped since #40 without being documented. `CONTRIBUTING.md` points at it.
 
 ### Fixed
 
-- `USER_GUIDE.md`'s examples of the home grid's filter count and the `/projects` category links no longer quote real totals ("of 36 projects", "Games (14)"), which had gone stale again when the catalogue grew to 37 projects and 15 games; they show placeholders instead, so a new project no longer makes them wrong.
-- `CONFIG.md`'s environment-variable table now has rows for `TRACE_USAGE_REPORTING` and `DO_NOT_TRACK`, which the server reads but the guide's count of five left out, and no longer states a count. The README now says what the startup log line reports: the kind of switch that turned reporting off, and nothing when the key is simply unset. It also says that `.dockerignore` keeps out the Markdown docs, since `docs/images/` stays in the build context.
-- The privacy copy now matches what the site does. `/about` no longer says the site has "no analytics", which contradicted the page-view counting `/legal` discloses; `/legal` now says that the fonts are fetched from Google Fonts on every page, so Google receives the visitor's IP address and browser details; and its Third-Party Software list gains community-site-kit, Inter and Space Grotesk. `USER_GUIDE.md` is updated to match (#183).
-- `glyphFor` in `utils/projectGlyphs.ts` now only answers the names mapped in `PROJECT_GLYPHS`, so a `glyph` that happens to name an inherited object property (`constructor`, `toString`, …) falls back to the project's initial, as `CONFIG.md` describes, instead of being rendered as the icon (#143).
-- The docs now cover the project usage figures: `USER_GUIDE.md` describes the usage line in a project's details and the `/usage` page it links to; `CONFIG.md` counts all five optional environment variables (it said three) and lists `/usage` among the sitemap's routes; and the README no longer calls the site a static showcase with no back end, naming the server-side parts that run inside the Next.js server instead.
 - The home page no longer scrolls sideways on a 390px phone: the hero title's fixed 3.75rem size rendered "Preponderous" wider than the content column, so it steps down to 2.5rem on xs. Project cards take a minimum rather than a fixed height, so a card whose title wraps (Artificial Consciousness Simulation Framework at 1280px) grows with its row instead of clipping its GitHub button.
 - `README.md` and `CONFIG.md` now list every value `USAGE_REPORTING_ENABLED` accepts to turn reporting off (`false`, `0`, `no`, `off`), not just `false`; `CONTRIBUTING.md` now asks contributors to run `npm run build` as well as lint and tests, matching the three steps CI runs on every pull request.
 - `.gitignore` now excludes `.env*.local` as well as `.env`, so the `.env.local` file that `CONFIG.md` has always described as "excluded from version control" actually is.
@@ -93,10 +177,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Category sections on `/projects` now derive their heading id from a slug of the category name, so a category containing a space (or punctuation) keeps its accessible name instead of pointing `aria-labelledby` at ids that do not exist (#93).
 - The top bar's link group is now a named `navigation` landmark ("Primary"), matching the footer's, so assistive technology can list the site's primary navigation and the skip link has a landmark to skip past (#89).
 - The color-mode bootstrap script no longer stamps `dark` on every visitor whose browser blocks site data: the stored-choice and `prefers-color-scheme` lookups are now guarded separately, so a light-preferring visitor with blocked storage gets a light page instead of MUI's light theme on a permanently dark background (#82).
-
-### Removed
-
-- FishE, Overwinter, Tidewater and `tak` are taken off the site, with their trace mappings, their `pages/data/releases.json` entries and FishE's preview files. They are Stephenson-Software projects, already listed on danielstephenson.dev; preponderous.org keeps to Preponderous-Software projects plus its two sister-site links (#163).
 
 ## [0.2.0-SNAPSHOT-8-8-2026] – 2026-08-08
 
