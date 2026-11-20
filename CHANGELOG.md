@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- **Patchwork** is no longer listed: its repository has been archived. Its project card and release entry are gone, `/usage` no longer has a row for it, and the `ViewQuilt` glyph, which only Patchwork used, is dropped from `utils/projectGlyphs.ts` (#203).
+
+## [0.3.7] – 2026-11-19
+
+### Fixed
+
+- Usage reporting stays off once it is turned off. `USAGE_REPORTING_ENABLED` now keeps page-view reporting on only when unset or an on-value (`true`, `on`, `yes`, `1`); any other value, such as empty, `disabled` or a typo, turns it off, where only `false`, `0`, `no` and `off` did before. The vendored trace client (`utils/trace-client.ts`) moves from 0.4.1 to 0.5.0, which does the same for `TRACE_USAGE_REPORTING` (anything but empty or an on-value is off) and `DO_NOT_TRACK` (anything but empty, `0`, `false`, `off` or `no` is off), and treats an environment it cannot read as an opt-out.
+
+## [0.3.6] – 2026-11-18
+
 ### Added
 
 - Test coverage for `pages/api/usage.ts`, the endpoint the home grid asks for trace's figures, which had no spec of its own while its sibling `/api/version` did: the usage map is answered with 200 for `GET` and `HEAD`, an empty map is still a 200, the answer carries `Cache-Control: public, max-age=60`, and any other method gets a 405 with `Allow: GET, HEAD` without trace being asked.
@@ -18,7 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- Usage reporting stays off once it is turned off. `USAGE_REPORTING_ENABLED` now keeps page-view reporting on only when unset or an on-value (`true`, `on`, `yes`, `1`); any other value, such as empty, `disabled` or a typo, turns it off, where only `false`, `0`, `no` and `off` did before. The vendored trace client (`utils/trace-client.ts`) moves from 0.4.1 to 0.5.0, which does the same for `TRACE_USAGE_REPORTING` (anything but empty or an on-value is off) and `DO_NOT_TRACK` (anything but empty, `0`, `false`, `off` or `no` is off), and treats an environment it cannot read as an opt-out.
 - `USER_GUIDE.md`'s examples of the home grid's filter count and the `/projects` category links no longer quote real totals ("of 36 projects", "Games (14)"), which had gone stale again when the catalogue grew to 37 projects and 15 games; they show placeholders instead, so a new project no longer makes them wrong.
 - `CHANGELOG.md` has a section for each release from 0.2.0 to 0.3.5. Every entry had stayed under *Unreleased* because the release PRs bump only `package.json`. Each entry is now filed under the first tag that contains the change it describes, with its wording unchanged. 0.3.2 has no entries.
 
