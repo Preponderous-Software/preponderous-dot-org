@@ -42,7 +42,6 @@ export const TRACE_PROGRAMS: Readonly<Record<string, TraceProgram>> = {
     'apex-ecosystem-simulator': program('apex'),
     'artificial-consciousness-simulation-framework': program('artificial-consciousness-simulation-framework'),
     'microbiome': program('microbiome'),
-    'patchwork': program('patchwork'),
 };
 
 /** The trace program a project reports as, or undefined for one that does not report. */

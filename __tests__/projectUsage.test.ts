@@ -64,7 +64,7 @@ describe('loadProjectUsage', () => {
     it('asks about every project when the summary is unavailable, and leaves out every 404', async () => {
         stub(undefined, {});
         expect(await loadProjectUsage()).toEqual({});
-        expect(programUrls()).toHaveLength(7);
+        expect(programUrls()).toHaveLength(6);
     });
 });
 
@@ -75,7 +75,7 @@ describe('usageRows', () => {
             roam: {...usageWithoutInstalls('roam'), lastSeen: '2026-09-12T20:00:00Z'},
             'apex-ecosystem-simulator': usageWithInstalls('apex'),
         });
-        expect(rows).toHaveLength(7);
+        expect(rows).toHaveLength(6);
         expect(rows.slice(0, 3).map((row) => [row.project.id, row.kind])).toEqual([
             ['apex-ecosystem-simulator', 'program'], ['ophidian', 'game'], ['roam', 'game'],
         ]);

@@ -51,7 +51,7 @@ describe('groupProjectsByCategory', () => {
         const groups = groupProjectsByCategory([
             make('Barony', 'Games'),
             make('env-lib-cpp', 'Libraries'),
-            make('Patchwork', 'assets'),
+            make('Ophidian', 'assets'),
         ]);
         expect(groups.map((g) => g.category)).toEqual(['assets', 'Games', 'Libraries']);
     });
@@ -180,9 +180,9 @@ describe('projectSortOptions', () => {
     });
 
     it('By category ignores case in category names', () => {
-        const sorted = [make('Viron', 'Libraries'), make('Patchwork', 'assets'), make('Roam', 'Games')]
+        const sorted = [make('Viron', 'Libraries'), make('Ophidian', 'assets'), make('Roam', 'Games')]
             .sort(option('category').compare);
-        expect(titles(sorted)).toEqual(['Patchwork', 'Roam', 'Viron']);
+        expect(titles(sorted)).toEqual(['Ophidian', 'Roam', 'Viron']);
     });
 
     it('By category sorts a project with no category as "Other"', () => {

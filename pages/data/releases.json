@@ -27,10 +27,6 @@
         "releases": 5,
         "latestStable": null
     },
-    "patchwork": {
-        "releases": 2,
-        "latestStable": "0.1.0"
-    },
     "py-env-lib": {
         "releases": 6,
         "latestStable": null

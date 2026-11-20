@@ -29,7 +29,7 @@ describe('ProjectIcon', () => {
 
     it('falls back to the initial for an unknown glyph or none at all', () => {
         expect(renderIcon({ title: 'Viron', glyph: 'NoSuchIcon' }).container).toHaveTextContent('V');
-        expect(renderIcon({ title: 'Patchwork' }).container).toHaveTextContent('P');
+        expect(renderIcon({ title: 'Ophidian' }).container).toHaveTextContent('O');
     });
 });
 

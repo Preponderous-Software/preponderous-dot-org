@@ -20,7 +20,6 @@ describe('trace programs', () => {
         expect(traceProgramFor('ophidian')).toEqual({name: 'ophidian', kind: 'game'});
         expect(traceProgramFor('roam')).toEqual({name: 'roam', kind: 'game'});
         expect(traceProgramFor('apex-ecosystem-simulator')).toEqual({name: 'apex', kind: 'program'});
-        expect(traceProgramFor('patchwork')).toEqual({name: 'patchwork', kind: 'program'});
     });
 
     it('leaves out services, websites and libraries, whose events trace keeps out of its public figures', () => {
@@ -33,6 +32,6 @@ describe('trace programs', () => {
     it('lists the reporting projects alphabetically', () => {
         const ids = traceReportingIds();
         expect(ids).toEqual([...ids].sort());
-        expect(ids).toHaveLength(7);
+        expect(ids).toHaveLength(6);
     });
 });
