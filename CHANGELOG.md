@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
-- **Patchwork** is no longer listed: its repository was archived on 2026-11-19. Its project card and release entry are gone, `/usage` no longer has a row for it, and the `ViewQuilt` glyph, which only Patchwork used, is dropped from `utils/projectGlyphs.ts` (#203).
+- **Patchwork** is no longer listed: its repository has been archived. Its project card and release entry are gone, `/usage` no longer has a row for it, and the `ViewQuilt` glyph, which only Patchwork used, is dropped from `utils/projectGlyphs.ts` (#203).
 
 ## [0.3.7] – 2026-11-19
 
