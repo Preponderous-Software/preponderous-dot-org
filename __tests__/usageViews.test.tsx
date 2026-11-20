@@ -71,7 +71,7 @@ describe('/usage', () => {
         render(<Usage rows={rows} renderedAt={NOW}/>);
 
         const items = screen.getAllByTestId('usage-row');
-        expect(items).toHaveLength(7);
+        expect(items).toHaveLength(6);
         expect(within(items[0]).getByTestId('usage-row-installs').textContent).toBe('57 active installs (30 days)');
         expect(within(items[0]).getByTestId('usage-row-starts').textContent).toBe('412 starts in the last 30 days');
         expect(within(items[1]).queryByTestId('usage-row-installs')).toBeNull();
@@ -161,7 +161,7 @@ describe('/usage on the server', () => {
         const {rows, renderedAt} = await load();
 
         expect(renderedAt).toBe(NOW);
-        expect(rows).toHaveLength(7);
+        expect(rows).toHaveLength(6);
         expect(rows[0].project.id).toBe('roam');
         expect(rows[0].usage).toEqual(usageWithoutInstalls('roam'));
         expect(rows.slice(1).every((row) => row.usage === null)).toBe(true);
@@ -172,7 +172,7 @@ describe('/usage on the server', () => {
 
         const {rows} = await load();
 
-        expect(rows).toHaveLength(7);
+        expect(rows).toHaveLength(6);
         expect(rows.every((row) => row.usage === null)).toBe(true);
     });
 

@@ -133,16 +133,6 @@
       "tier": "growing"
     },
     {
-      "id": "patchwork",
-      "title": "Patchwork",
-      "description": "Patchwork is a lightweight tool for visualizing 2D environments, built with Python.",
-      "githubLink": "https://github.com/Preponderous-Software/Patchwork",
-      "technology": "Python",
-      "category": "Tools",
-      "status": "Maintenance",
-      "glyph": "ViewQuilt"
-    },
-    {
       "id": "py-env-lib",
       "title": "py_env_lib",
       "description": "Provides base classes for creating two-dimensional virtual worlds.",

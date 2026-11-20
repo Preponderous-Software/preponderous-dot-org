@@ -25,7 +25,6 @@ import TerrainIcon from '@mui/icons-material/Terrain';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import WavesIcon from '@mui/icons-material/Waves';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import YardIcon from '@mui/icons-material/Yard';
@@ -63,7 +62,6 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
     Timeline: TimelineIcon,
     Videocam: VideocamIcon,
     ViewInAr: ViewInArIcon,
-    ViewQuilt: ViewQuiltIcon,
     Waves: WavesIcon,
     WbTwilight: WbTwilightIcon,
     Yard: YardIcon,
