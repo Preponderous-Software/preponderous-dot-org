@@ -1,0 +1,13 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/ophidian",
+ "commit": "9c4ffa36a2ee323d0a7385bb6614dceae2c026c2",
+ "tool": "ophidian tools/strata_snapshot.py (the 3D window, headless, on the game's autopilot; strata-engine 0.8.0, graphik 0.5.1)",
+ "tool_url": "https://github.com/Preponderous-Software/ophidian/blob/9c4ffa36a2ee323d0a7385bb6614dceae2c026c2/tools/strata_snapshot.py",
+ "commands": [
+  "python3 tools/strata_snapshot.py --out gif-full --level 4 --ticks $(seq 70 150) --width 960 --height 600",
+  "python3 tools/strata_snapshot.py --out gif-half --level 4 --slide 0.5 --ticks $(seq 70 150) --width 960 --height 600",
+  "frames interleaved (tick t at slide 0.5, then at slide 1) for ticks 71-150, 160 frames, scaled to 640x400 (Lanczos); clip.webm (VP9) and clip.mp4 (H.264) at 12 fps with darkroom 0.7.1's encoders",
+  "python3 tools/strata_snapshot.py --out hero --level 4 --ticks 150 --width 1280 --height 800; poster.jpg is that frame at 640x400"
+ ],
+ "notes": "The same frames make the README GIF proposed for ophidian (assets/3d-play.gif). Seed 7 (the tool's default); the two runs were checked to play identically (same length and score at every tick)."
+}

@@ -1,0 +1,12 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/apex",
+ "commit": "a22dfe7dd52e4afb50e025132eed4b8788087cc8",
+ "tool": "Apex's browser build (pygbag 0.9.3, graphik 0.5.1's grid3d page, Strata 0.9.0's grid relay), built as .github/workflows/browser.yml does and driven with Playwright in headless Chromium (WebGL 2 on SwiftShader)",
+ "tool_url": "https://github.com/Preponderous-Software/apex/blob/a22dfe7dd52e4afb50e025132eed4b8788087cc8/.github/workflows/browser.yml",
+ "commands": [
+  "local browser build of a22dfe7 (the CI steps), served on 127.0.0.1",
+  "Playwright, 1280x800: click to start, 'create new sim', 'start simulation' (20x20), screenshots taken as the simulation ran",
+  "frames cropped to the board, scaled to 640x400; clip.webm (VP9) and clip.mp4 (H.264), about 10 s, with darkroom 0.7.1's encoders; poster.jpg is a 28x28 run's first ticks"
+ ],
+ "notes": "A time-lapse, not real time: each screenshot of the software-rendered 3D view took seconds, so about 180 ticks are shown, a frame every few ticks. The same frames make the README GIF proposed for apex (pics/3d-play.gif)."
+}
