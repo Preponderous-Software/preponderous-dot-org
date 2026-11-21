@@ -3,13 +3,27 @@
     {
       "id": "apex-ecosystem-simulator",
       "title": "Apex-Ecosystem-Simulator",
-      "description": "Observe the activity of a virtual environment containing entities that depend on each other as sources of energy.",
+      "description": "Observe the activity of a virtual environment containing entities that depend on each other as sources of energy. Now in 3D, drawn by the Strata engine, on the desktop and in the browser (2D is a button away).",
       "githubLink": "https://github.com/Preponderous-Software/Apex-Ecosystem-Simulator",
       "technology": "Python",
       "category": "Simulations",
       "status": "Active",
       "icon": "/icons/apex.png",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/apex-ecosystem-simulator/poster.jpg",
+        "clip": {
+          "webm": "/previews/apex-ecosystem-simulator/clip.webm",
+          "mp4": "/previews/apex-ecosystem-simulator/clip.mp4"
+        },
+        "alt": "An Apex simulation in 3D, drawn by Strata in the browser build: grass and water tiles on a wooden board, with the animals moving between cells as the food chain plays out (a time-lapse).",
+        "madeWith": {
+          "name": "Apex's browser build",
+          "url": "https://github.com/Preponderous-Software/apex/blob/main/.github/workflows/browser.yml"
+        },
+        "more": "https://apex.play.danielstephenson.dev",
+        "moreLabel": "Run it in 3D"
+      }
     },
     {
       "id": "artificial-consciousness-simulation-framework",
@@ -124,13 +138,27 @@
     {
       "id": "ophidian",
       "title": "Ophidian",
-      "description": "Control an ever-increasingly growing ophidian in a virtual environment.",
+      "description": "Control an ever-increasingly growing ophidian in a virtual environment. Now in 3D, drawn by the Strata engine, on the desktop and in the browser (2D is a button away).",
       "githubLink": "https://github.com/Preponderous-Software/Ophidian",
       "technology": "Python",
       "category": "Games",
       "status": "Active",
       "icon": "/icons/ophidian.png",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/ophidian/poster.jpg",
+        "clip": {
+          "webm": "/previews/ophidian/clip.webm",
+          "mp4": "/previews/ophidian/clip.mp4"
+        },
+        "alt": "Ophidian in 3D, drawn by Strata: a red snake with a pale green head winds round a level-4 board of green tiles in a wooden frame, gliding from cell to cell and growing as it eats each pickup.",
+        "madeWith": {
+          "name": "ophidian's strata_snapshot.py",
+          "url": "https://github.com/Preponderous-Software/ophidian/blob/main/tools/strata_snapshot.py"
+        },
+        "more": "https://ophidian.play.danielstephenson.dev",
+        "moreLabel": "Play it in 3D"
+      }
     },
     {
       "id": "py-env-lib",
