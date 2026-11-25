@@ -1,6 +1,6 @@
 {
     "apex-ecosystem-simulator": {
-        "releases": 7,
+        "releases": 11,
         "latestStable": null
     },
     "artificial-consciousness-simulation-framework": {
@@ -12,7 +12,7 @@
         "latestStable": "1.0.1"
     },
     "beyond-nations": {
-        "releases": 10,
+        "releases": 13,
         "latestStable": null
     },
     "env-lib-cpp": {
@@ -20,11 +20,11 @@
         "latestStable": null
     },
     "microbiome": {
-        "releases": 2,
+        "releases": 5,
         "latestStable": null
     },
     "ophidian": {
-        "releases": 5,
+        "releases": 9,
         "latestStable": null
     },
     "py-env-lib": {
@@ -40,11 +40,11 @@
         "latestStable": "0.5.0"
     },
     "daniel-stephenson": {
-        "releases": 20,
+        "releases": 30,
         "latestStable": null
     },
     "dans-plugins-community": {
-        "releases": 20,
+        "releases": 21,
         "latestStable": "0.14.0"
     },
     "acsf-usd-env": {
@@ -56,19 +56,27 @@
         "latestStable": null
     },
     "atman": {
-        "releases": 5,
+        "releases": 6,
         "latestStable": null
     },
     "second-helping": {
-        "releases": 0,
-        "latestStable": null
+        "releases": 1,
+        "latestStable": "0.1.0"
     },
     "cauldron": {
         "releases": 0,
         "latestStable": null
     },
-    "familiar": {
+    "belfry-bats": {
         "releases": 0,
+        "latestStable": null
+    },
+    "pumpkin": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "familiar": {
+        "releases": 3,
         "latestStable": null
     },
     "ghost-lights": {
@@ -80,12 +88,12 @@
         "latestStable": null
     },
     "kindling": {
-        "releases": 3,
-        "latestStable": "0.1.2"
+        "releases": 4,
+        "latestStable": "0.2.0"
     },
     "orrery": {
-        "releases": 6,
-        "latestStable": "0.6.0"
+        "releases": 10,
+        "latestStable": "0.7.3"
     },
     "playtester": {
         "releases": 0,
@@ -100,32 +108,32 @@
         "latestStable": null
     },
     "sisyphus": {
-        "releases": 4,
+        "releases": 5,
         "latestStable": null
     },
     "steading": {
-        "releases": 1,
+        "releases": 5,
         "latestStable": null
     },
     "strata": {
-        "releases": 10,
-        "latestStable": "v0.7.0"
+        "releases": 14,
+        "latestStable": "v0.10.0"
     },
     "usd-asset-gate": {
         "releases": 0,
         "latestStable": null
     },
     "usd-recorder": {
-        "releases": 2,
-        "latestStable": "v0.2.0"
+        "releases": 5,
+        "latestStable": "v0.4.0"
     },
     "usd-synth-data": {
         "releases": 0,
         "latestStable": null
     },
     "usd-web": {
-        "releases": 4,
-        "latestStable": "v0.2.2"
+        "releases": 7,
+        "latestStable": "v0.2.5"
     },
     "viron-strata": {
         "releases": 0,
@@ -134,5 +142,37 @@
     "viron-usd": {
         "releases": 0,
         "latestStable": null
+    },
+    "casework": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "coastline": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "darkroom": {
+        "releases": 7,
+        "latestStable": "v0.7.1"
+    },
+    "forward-two": {
+        "releases": 3,
+        "latestStable": "0.2.1"
+    },
+    "frozen-star": {
+        "releases": 3,
+        "latestStable": "0.3.0"
+    },
+    "museum": {
+        "releases": 0,
+        "latestStable": null
+    },
+    "roam-website": {
+        "releases": 12,
+        "latestStable": null
+    },
+    "tangle": {
+        "releases": 2,
+        "latestStable": "v0.3.0"
     }
 }
