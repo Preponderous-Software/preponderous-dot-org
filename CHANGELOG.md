@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - A theme colour for light and dark mode (`<meta name="theme-color">` in `pages/_document.tsx`), matching the top bar, so a phone's address bar takes on the site's colours.
 - The home page carries schema.org structured data (JSON-LD): an `Organization` (name, address, logo, GitHub organization) and the `WebSite` it publishes, built by `utils/structuredData.ts` from facts the site already states.
 
+### Changed
+
+- **Project links and names are brought up to date.** GitHub links for Apex, Beyond Nations, Ophidian, Roam and Viron now use each repository's current name instead of relying on GitHub's rename redirects, and Apex and Beyond Nations are titled by their current names ("Apex", "Beyond Nations"). Apex, Beyond Nations, Ophidian and env-lib-cpp now link to their live browser builds on danielstephenson.dev's arcade. The descriptions of Beyond Nations, Roam and Viron now match their READMEs: Beyond Nations runs on the Strata engine and in the browser, Roam is about gathering, farming and building, and Viron is a REST spatial simulation service.
+
 ### Fixed
 
 - On a phone, the top bar no longer jumps from two rows to one when the web fonts finish loading. Inter and Space Grotesk now fall back to metric-matched stand-ins (`Inter Fallback`, `Space Grotesk Fallback` in `styles/globals.css`: local Arial or Liberation Sans resized to each font's measurements, as next/font would generate), named in the theme's font stacks in `utils/fonts.ts`. Lighthouse's mobile Cumulative Layout Shift on `/` and `/projects` drops from 0.32 to 0.

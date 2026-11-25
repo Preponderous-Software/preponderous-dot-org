@@ -42,7 +42,7 @@ describe('the usage line in a project\'s details', () => {
             usage={{'apex-ecosystem-simulator': usageWithInstalls('apex')}}
             now={new Date(NOW)}
         />);
-        openDetails('Apex-Ecosystem-Simulator');
+        openDetails('Apex');
 
         expect(screen.getByTestId('usage-line-main').textContent).toBe('57 active installs (30 days)');
         expect(screen.getByTestId('usage-line').textContent).toContain('Last used 2 hours ago, reported by trace.');
@@ -79,7 +79,7 @@ describe('/usage', () => {
         expect(within(items[1]).getByTestId('usage-row-starts').textContent).toBe('412 launches in the last 30 days');
         expect(within(items[2]).getByTestId('usage-row-none').textContent).toBe('No usage figures yet');
         expect(within(items[1]).getByRole('link', {name: 'Roam on GitHub'}).getAttribute('href'))
-            .toBe('https://github.com/Preponderous-Software/Roam');
+            .toBe('https://github.com/Preponderous-Software/roam');
         expect(screen.getByRole('link', {name: /how it works/}).getAttribute('href'))
             .toBe('https://danielstephenson.dev/usage-reporting');
         expect(screen.getByTestId('trace-attribution').textContent).toContain('Test and CI runs are excluded');
