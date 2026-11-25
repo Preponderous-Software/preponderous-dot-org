@@ -34,6 +34,10 @@ describe('fetchProjectUsage', () => {
         expect(await fetchProjectUsage(vi.fn().mockResolvedValue({ok: false}) as unknown as typeof fetch)).toEqual({});
         expect(await fetchProjectUsage(vi.fn().mockResolvedValue({ok: true, json: async () => 'x'}) as unknown as typeof fetch)).toEqual({});
     });
+
+    it('resolves to an empty map, without throwing, where the runtime has no fetch', async () => {
+        expect(await fetchProjectUsage(null as unknown as typeof fetch)).toEqual({});
+    });
 });
 
 describe('loadProjectUsageInBrowser', () => {

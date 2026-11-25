@@ -6,7 +6,7 @@ import React from 'react';
 import fs from 'fs';
 import path from 'path';
 import {afterEach, describe, expect, it, vi} from 'vitest';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
 import ProjectDetails from '../components/ProjectDetails';
 import projectData from '../pages/data/projects.json';
 import type {Project, ProjectPreviewData} from '../utils/projects';
@@ -65,6 +65,30 @@ describe('ProjectPreview', () => {
         expect(screen.queryByTestId('project-preview-video')).not.toBeInTheDocument();
         expect(screen.getByTestId('project-preview-poster')).toHaveAttribute('src', PREVIEW.poster);
         expect(screen.queryByRole('button', {name: /clip/})).not.toBeInTheDocument();
+    });
+
+    it('treats a browser that throws on the reduced-motion query as having no preference, and still renders', () => {
+        vi.stubGlobal('matchMedia', vi.fn(() => { throw new Error('not supported'); }));
+        render(<ProjectDetails project={project}/>);
+        expect(screen.getByTestId('project-preview-video')).toHaveAttribute('poster', PREVIEW.poster);
+        expect(screen.getByRole('button', {name: 'Pause the clip'})).toBeInTheDocument();
+    });
+
+    it('swaps the clip for the still when the visitor turns on reduced motion, and stops listening on unmount', () => {
+        let onChange: ((event: {matches: boolean}) => void) | undefined;
+        const removeEventListener = vi.fn();
+        vi.stubGlobal('matchMedia', vi.fn((query: string) => ({
+            matches: false, media: query,
+            addEventListener: (_type: string, listener: (event: {matches: boolean}) => void) => { onChange = listener; },
+            removeEventListener,
+        })));
+        const {unmount} = render(<ProjectDetails project={project}/>);
+        expect(screen.getByTestId('project-preview-video')).toBeInTheDocument();
+        act(() => onChange?.({matches: true}));
+        expect(screen.queryByTestId('project-preview-video')).not.toBeInTheDocument();
+        expect(screen.getByTestId('project-preview-poster')).toBeInTheDocument();
+        unmount();
+        expect(removeEventListener).toHaveBeenCalledWith('change', onChange);
     });
 
     it('credits the tool and links to more', () => {
