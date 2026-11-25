@@ -9,6 +9,7 @@ import {
     resolveInitialColorMode,
     storeColorMode
 } from '../utils/colorMode';
+import {BODY_FONT_STACK, HEADING_FONT_STACK} from '../utils/fonts';
 import '../styles/globals.css';
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -61,7 +62,7 @@ function MyApp({Component, pageProps}: AppProps) {
     const theme = useMemo(
         () => {
             const isDark = mode === 'dark';
-            const headingFont = '"Space Grotesk", system-ui, sans-serif';
+            const headingFont = HEADING_FONT_STACK;
             return createTheme({
                 palette: {
                     mode,
@@ -73,7 +74,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 },
                 shape: {borderRadius: 10},
                 typography: {
-                    fontFamily: '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+                    fontFamily: BODY_FONT_STACK,
                     h1: {fontFamily: headingFont, fontWeight: 700, letterSpacing: '-0.02em'},
                     h2: {fontFamily: headingFont, fontWeight: 700, letterSpacing: '-0.02em'},
                     h3: {fontFamily: headingFont, fontWeight: 600, letterSpacing: '-0.01em'},

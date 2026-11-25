@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- On a phone, the top bar no longer jumps from two rows to one when the web fonts finish loading. Inter and Space Grotesk now fall back to metric-matched stand-ins (`Inter Fallback`, `Space Grotesk Fallback` in `styles/globals.css`: local Arial or Liberation Sans resized to each font's measurements, as next/font would generate), named in the theme's font stacks in `utils/fonts.ts`. Lighthouse's mobile Cumulative Layout Shift on `/` and `/projects` drops from 0.32 to 0.
 - The shared 404/500 error page is marked `noindex`, so a search engine that follows a broken link no longer indexes the error under that URL.
 
 ### Removed

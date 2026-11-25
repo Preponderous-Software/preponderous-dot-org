@@ -46,6 +46,30 @@ html[data-color-mode='light'] body {
   }
 }
 
+/* Metric-matched stand-ins for the Google Fonts web fonts, named in the theme's
+   font stacks (utils/fonts.ts) right after the web font. Text paints in Arial
+   (or Liberation Sans, its metric twin on Linux) resized to the web font's
+   width and line metrics, so swapping in Inter / Space Grotesk does not
+   re-wrap lines and shift the page. The values are the ones next/font
+   computes for these families (its getFallbackFontOverrideMetrics). */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+  size-adjust: 107.06%;
+}
+
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  ascent-override: 89.71%;
+  descent-override: 26.62%;
+  line-gap-override: 0%;
+  size-adjust: 109.69%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
