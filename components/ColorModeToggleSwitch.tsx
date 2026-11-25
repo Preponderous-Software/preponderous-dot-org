@@ -1,4 +1,18 @@
 import {styled, Switch} from '@mui/material';
+import {COARSE_POINTER_QUERY, TOUCH_TARGET} from '../styles/styles';
+
+// On a touch screen the switch's tap area is 44px tall with the same look.
+// The root clips its children, so it grows by 10px with 5px more padding on
+// each side (the track stays 20px), the thumb moves down 5px to stay centred,
+// and the invisible input stretches over the full height. A mouse keeps the
+// 62x34 switch. Mirrors dansplugins.com#618.
+export const colorModeSwitchTouchStyle = {
+    height: TOUCH_TARGET,
+    paddingTop: 12,
+    paddingBottom: 12,
+    '& .MuiSwitch-switchBase': {top: 5},
+    '& .MuiSwitch-input': {top: -6, height: TOUCH_TARGET},
+};
 
 // A Switch restyled as a sun/moon color-mode toggle. The thumb shows a sun in
 // light mode and a moon when checked (dark mode); the icons live in
@@ -45,4 +59,5 @@ export const ColorModeToggleSwitch = styled(Switch)(({theme}) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
         borderRadius: 20 / 2,
     },
+    [COARSE_POINTER_QUERY]: colorModeSwitchTouchStyle,
 }));
