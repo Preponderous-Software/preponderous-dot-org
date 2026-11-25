@@ -6,7 +6,7 @@ import BottomBar from '../components/BottomBar'
 import Seo, {DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL} from '../components/Seo'
 import Blurb from '../components/Blurb'
 import IconGrid from '../components/IconGrid'
-import {CatalogueFilterBar} from '@kingdom-community/community-site-kit'
+import {CatalogueFilterBar, styles as kitStyles} from '@kingdom-community/community-site-kit'
 import {filterCatalogue, sortCatalogue, type CatalogueQuery} from '@kingdom-community/community-site-kit/catalogue'
 import {projectFacets, projectSortOptions, type Project} from '../utils/projects'
 import {useProjectUsage} from '../utils/useProjectUsage'
@@ -87,6 +87,10 @@ const Home: NextPage = () => {
             <Seo path="/" jsonLd={HOME_JSON_LD}/>
             <TopBar/>
             <Container component="main" id="main" maxWidth="xl" sx={{py: 4, flexGrow: 1}}>
+                {/* The icon grid comes first on purpose, so the page's h1 is
+                    here, visually hidden, ahead of the grid's h2s rather than
+                    with the Blurb at the bottom (WCAG 1.3.1, heading order). */}
+                <Typography variant="h1" sx={kitStyles.visuallyHiddenStyle}>Preponderous Software</Typography>
                 <ProjectsSection/>
                 <SectionDivider/>
                 <Blurb/>
