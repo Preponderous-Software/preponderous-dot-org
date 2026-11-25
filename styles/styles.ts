@@ -99,7 +99,10 @@ export const toggleSwitchBoxStyle = {
  */
 export const navDrawerPaperStyle = (theme: Theme) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#161b22' : theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    // Text for the panel's own background: primary's contrast text only on
+    // the light-mode primary fill (in dark mode that is near-black, picked
+    // for the light-blue primary, and would vanish on #161b22).
+    color: theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.primary.contrastText,
 });
 
 /**

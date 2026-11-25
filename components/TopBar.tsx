@@ -18,6 +18,9 @@ import {
     navDrawerPaperStyle,
 } from '../styles/styles';
 
+// Id of the phone drawer's panel, for the menu button's aria-controls.
+const NAV_DRAWER_ID = 'nav-drawer';
+
 // The primary navigation, shared by the inline bar and the phone drawer.
 const NAV_LINKS = [
     {href: '/', label: 'Home'},
@@ -88,7 +91,7 @@ const NavDrawer: React.FC<{open: boolean; onClose: () => void; pathname: string}
         onClose={onClose}
         // MUI's modal Drawer traps focus like a dialog but does not say so;
         // naming the panel as one tells assistive technology what opened.
-        PaperProps={{role: 'dialog', 'aria-label': 'Navigation menu', sx: (theme) => navDrawerPaperStyle(theme)}}
+        PaperProps={{id: NAV_DRAWER_ID, role: 'dialog', 'aria-label': 'Navigation menu', sx: (theme) => navDrawerPaperStyle(theme)}}
     >
         <Box component="nav" aria-label="Primary">
             <List sx={{width: 240}} onClick={onClose}>
@@ -163,6 +166,9 @@ const TopBar: React.FC = () => {
                         aria-label="Open navigation menu"
                         aria-haspopup="dialog"
                         aria-expanded={drawerOpen}
+                        // The drawer is only mounted while open, so point at
+                        // it only then rather than at an id that is not there.
+                        aria-controls={drawerOpen ? NAV_DRAWER_ID : undefined}
                         onClick={() => setDrawerOpen(true)}
                         sx={{display: {xs: 'inline-flex', md: 'none'}}}
                     >

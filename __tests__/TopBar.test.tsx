@@ -117,12 +117,14 @@ describe('TopBar on a phone', () => {
         expect(within(drawer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('target', '_blank');
     });
 
-    it('announces the menu button as opening a named dialog', () => {
+    it('announces the menu button as opening, and controlling, a named dialog', () => {
         render(<TopBar/>);
         const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });
         expect(menuButton).toHaveAttribute('aria-haspopup', 'dialog');
+        expect(menuButton).not.toHaveAttribute('aria-controls');
         fireEvent.click(menuButton);
-        expect(screen.getByRole('dialog', { name: 'Navigation menu' })).toBeInTheDocument();
+        const dialog = screen.getByRole('dialog', { name: 'Navigation menu' });
+        expect(menuButton).toHaveAttribute('aria-controls', dialog.id);
     });
 
     it('marks the current page in the drawer', () => {

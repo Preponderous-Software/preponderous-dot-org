@@ -120,7 +120,7 @@ function MyApp({Component, pageProps}: AppProps) {
                     // buttons). MUI's default focus cue is a faint ripple
                     // tint, which on the blue light-mode bar all but vanished.
                     // Primary reads at 4.7:1 or better on both modes' surfaces;
-                    // inside the top and bottom bars (below) it follows the
+                    // inside the top and bottom bars (MuiAppBar, above) it follows the
                     // bar's text colour instead.
                     MuiButtonBase: {
                         styleOverrides: {
