@@ -1,0 +1,11 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/roam-website",
+ "commit": "f5f11c6cb26913485d2940c9822db5c7308227d8",
+ "tool": "the live build at https://roam.preponderous.org, opened with Playwright in headless Chromium (WebGL on SwiftShader)",
+ "tool_url": "https://roam.preponderous.org",
+ "commands": [
+  "Playwright 1280x800, deviceScaleFactor 1: load https://roam.preponderous.org, wait for it to settle, screenshot",
+  "scaled to 640x400 with ImageMagick (convert -resize 640x400 -strip -quality 82) as poster.jpg"
+ ],
+ "notes": "Captured 2026-11-24 from the deployed site; the commit is the repository's main at capture time, which the site is deployed from. Live version 0.3.9 (from /version.json)."
+}

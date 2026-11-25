@@ -9,15 +9,20 @@ import FireplaceIcon from '@mui/icons-material/Fireplace';
 import GridOnIcon from '@mui/icons-material/GridOn';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import HubIcon from '@mui/icons-material/Hub';
+import KayakingIcon from '@mui/icons-material/Kayaking';
 import LanguageIcon from '@mui/icons-material/Language';
 import LayersIcon from '@mui/icons-material/Layers';
+import LoopIcon from '@mui/icons-material/Loop';
 import MapIcon from '@mui/icons-material/Map';
+import MuseumIcon from '@mui/icons-material/Museum';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import PhishingIcon from '@mui/icons-material/Phishing';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import PublicIcon from '@mui/icons-material/Public';
 import ReplayIcon from '@mui/icons-material/Replay';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import RuleIcon from '@mui/icons-material/Rule';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import TerminalIcon from '@mui/icons-material/Terminal';
@@ -46,15 +51,20 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
     GridOn: GridOnIcon,
     HowToVote: HowToVoteIcon,
     Hub: HubIcon,
+    Kayaking: KayakingIcon,
     Language: LanguageIcon,
     Layers: LayersIcon,
+    Loop: LoopIcon,
     Map: MapIcon,
+    Museum: MuseumIcon,
     NightsStay: NightsStayIcon,
     Phishing: PhishingIcon,
+    PhotoCamera: PhotoCameraIcon,
     PhotoLibrary: PhotoLibraryIcon,
     Psychology: PsychologyIcon,
     Public: PublicIcon,
     Replay: ReplayIcon,
+    RocketLaunch: RocketLaunchIcon,
     Rule: RuleIcon,
     SmartToy: SmartToyIcon,
     Terminal: TerminalIcon,

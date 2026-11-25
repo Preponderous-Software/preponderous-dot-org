@@ -495,6 +495,159 @@
       "category": "Simulations",
       "status": "Active",
       "glyph": "Timeline"
+    },
+    {
+      "id": "casework",
+      "title": "Casework",
+      "description": "A medical examiner game where the forensic science is real. Walk the county office in first person, ride out to the scene, examine the body, learn what each finding means at the moment you need it, and sign the death certificate: cause, manner, and a time-of-death window that scores best when it is both right and tight. A first week of three cases (a natural death, an accident and a homicide whose timeline doesn't match the story), plus an endless time-of-death drill. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/casework",
+      "websiteLink": "https://casework.play.danielstephenson.dev",
+      "technology": "TypeScript",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Biotech",
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/casework/poster.jpg",
+        "alt": "Casework's start page in the live build: the Play in first person button, the three classic-mode cases (Night shift, The kitchen floor, The basement stairs), the time-of-death drill and the skills it teaches.",
+        "madeWith": {
+          "name": "Casework's live build",
+          "url": "https://github.com/Preponderous-Software/casework/tree/b77ac7db917e63f7e6b157c9969dbd12d518aa39"
+        },
+        "more": "https://casework.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
+    },
+    {
+      "id": "coastline",
+      "title": "Coastline",
+      "description": "A walkable 3D island that teaches fractals, on desktop and phone. As a cartographer's apprentice you measure the coast with ever shorter chains and find its length never settles (the coastline paradox), grow a Koch snowflake islet whose area stops while its coast grows without end, and cast nets of shrinking mesh to find a coast's fractal dimension. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/coastline",
+      "websiteLink": "https://coastline.play.danielstephenson.dev",
+      "technology": "JavaScript",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Waves",
+      "tier": "small",
+      "preview": {
+        "poster": "/previews/coastline/poster.jpg",
+        "alt": "Coastline's title screen in the live build: the island's coast and a red flag on a pole, drawn in 3D, under the title and the Begin, Scene 2 and Scene 3 buttons.",
+        "madeWith": {
+          "name": "Coastline's live build",
+          "url": "https://github.com/Preponderous-Software/coastline/tree/d5617d3b9ae6565808c11cbd697cec15672916dd"
+        },
+        "more": "https://coastline.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
+    },
+    {
+      "id": "darkroom",
+      "title": "darkroom",
+      "description": "A small media-capture kit for READMEs, release notes and pull requests. Write a JSON shot list and darkroom drives a headless browser (with a deterministic clock for Strata web games) or runs your program, then makes budget-fitted stills, GIFs, MP4/WebM clips, contact sheets, before/after pairs, captioned grids and a markdown gallery.",
+      "githubLink": "https://github.com/Preponderous-Software/darkroom",
+      "technology": "Python",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "PhotoCamera"
+    },
+    {
+      "id": "forward-two",
+      "title": "Forward Two",
+      "description": "An open-world river game and the sequel to Jon McElyea's Forward One. Paddle the Long Water from a mountain spring, over the High Falls, through the meadows and the gorge, across Mirror Lake and out to the sea: run rapids on the guide's call, carry cargo between camps, race buoyed courses against other paddlers' ghosts, and share the river with whoever else is on it. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/forward-two",
+      "websiteLink": "https://forward-two.play.danielstephenson.dev",
+      "technology": "JavaScript",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Kayaking",
+      "tier": "growing"
+    },
+    {
+      "id": "frozen-star",
+      "title": "Frozen Star",
+      "description": "A first-person game about general relativity. Wake aboard a research ship holding station above a black hole and find out why nothing is ever seen to fall in, even though it falls in anyway. Everything outside the windows is a real light-ray trace through curved spacetime, at its true speed. Plays in the browser, with a Windows download.",
+      "githubLink": "https://github.com/Preponderous-Software/frozen-star",
+      "websiteLink": "https://frozen-star.play.danielstephenson.dev",
+      "technology": "JavaScript",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "RocketLaunch",
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/frozen-star/poster.jpg",
+        "alt": "Frozen Star's title menu in the live build, beside a ray-traced black hole with its bright accretion disc bent over and under the shadow.",
+        "madeWith": {
+          "name": "Frozen Star's live build",
+          "url": "https://github.com/Preponderous-Software/frozen-star/tree/a01e6e297a7512290d8d9bf7ce2fdd1f4995aeec"
+        },
+        "more": "https://frozen-star.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
+    },
+    {
+      "id": "museum",
+      "title": "Museum",
+      "description": "A walkable 3D museum of someone's software history, built from pluggable sources: a lobby timeline, one hall per year, and a pedestal for every project sized by its commits, with a wall of each period's activity. Walk up to a pedestal to read its placard. Drawn in the browser with the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/museum",
+      "websiteLink": "https://museum.play.danielstephenson.dev",
+      "technology": "Python / JavaScript",
+      "category": "Developer Tools",
+      "status": "Active",
+      "glyph": "Museum",
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/museum/poster.jpg",
+        "alt": "The museum's lobby in the live build: the aisle into the 2016 hall, with the plinths for 2021 and 2022 either side, sized by that year's activity.",
+        "madeWith": {
+          "name": "Museum's live build",
+          "url": "https://github.com/Preponderous-Software/museum/tree/a419eed767c9aeb332456b46b911f91c034ddf73"
+        },
+        "more": "https://museum.play.danielstephenson.dev",
+        "moreLabel": "Walk it"
+      }
+    },
+    {
+      "id": "roam-website",
+      "title": "Roam Website",
+      "description": "The home of Roam: download builds for Windows, macOS and Linux, learn how to play, and play the game in your browser.",
+      "githubLink": "https://github.com/Preponderous-Software/roam-website",
+      "websiteLink": "https://roam.preponderous.org",
+      "technology": "TypeScript / Next.js",
+      "category": "Websites",
+      "status": "Active",
+      "icon": "/icons/roam.png",
+      "preview": {
+        "poster": "/previews/roam-website/poster.jpg",
+        "alt": "The Roam website's home page: the Roam icon and tagline, the Play in browser, Download Roam and View Source buttons, and the same world in 2D and 3D below.",
+        "madeWith": {
+          "name": "Roam's website",
+          "url": "https://github.com/Preponderous-Software/roam-website/tree/f5f11c6cb26913485d2940c9822db5c7308227d8"
+        },
+        "more": "https://roam.preponderous.org",
+        "moreLabel": "Visit the site"
+      }
+    },
+    {
+      "id": "tangle",
+      "title": "Tangle",
+      "description": "A first-person game about strange loops, the idea at the heart of Douglas Hofstadter's Gödel, Escher, Bach, for players who have never read the book. Each of its six rooms is one kind of loop built as a puzzle you solve by understanding it, from an impossible triangle that closes from one spot to the MIU puzzle as a machine. Built on the Strata engine.",
+      "githubLink": "https://github.com/Preponderous-Software/tangle",
+      "websiteLink": "https://tangle.play.danielstephenson.dev",
+      "technology": "JavaScript",
+      "category": "Games",
+      "status": "Active",
+      "glyph": "Loop",
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/tangle/poster.jpg",
+        "alt": "Inside Tangle in the live build, just after Begin: the hub's welcome plaque explaining strange loops and the order of the six rooms, with the NEXT hint and a 0 of 6 rooms solved card.",
+        "madeWith": {
+          "name": "Tangle's live build",
+          "url": "https://github.com/Preponderous-Software/tangle/tree/d423cdaa0f7d8f56f7c9a50076a2cb2df46d963a"
+        },
+        "more": "https://tangle.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
     }
   ]
 }

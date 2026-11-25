@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - A theme colour for light and dark mode (`<meta name="theme-color">` in `pages/_document.tsx`), matching the top bar, so a phone's address bar takes on the site's colours.
 - The home page carries schema.org structured data (JSON-LD): an `Organization` (name, address, logo, GitHub organization) and the `WebSite` it publishes, built by `utils/structuredData.ts` from facts the site already states.
+- **Eight more projects are listed**, so every public Preponderous project is on the site: the games Casework, Coastline, Forward Two, Frozen Star and Tangle, the developer tools darkroom and Museum, and the Roam website. Each links its repository and, where it is live, the page to play or use it. Five new glyphs (`Kayaking`, `Loop`, `Museum`, `PhotoCamera`, `RocketLaunch`) are added to `utils/projectGlyphs.ts` for them, matching danielstephenson.dev's symbols for the same projects. Casework, Coastline, Frozen Star, Museum, Tangle and the Roam website also get a preview still, a screenshot of the live build under `public/previews/<id>/` with its `PROVENANCE.json`. `pages/data/releases.json` is refreshed, which also moves several existing projects' release counts up to date.
 
 ### Changed
 

@@ -1,0 +1,11 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/coastline",
+ "commit": "d5617d3b9ae6565808c11cbd697cec15672916dd",
+ "tool": "the live build at https://coastline.play.danielstephenson.dev, opened with Playwright in headless Chromium (WebGL on SwiftShader)",
+ "tool_url": "https://coastline.play.danielstephenson.dev",
+ "commands": [
+  "Playwright 1280x800, deviceScaleFactor 1: load https://coastline.play.danielstephenson.dev, wait for it to settle, screenshot",
+  "scaled to 640x400 with ImageMagick (convert -resize 640x400 -strip -quality 82) as poster.jpg"
+ ],
+ "notes": "Captured 2026-11-24 from the deployed site; the commit is the repository's main at capture time, which the site is deployed from."
+}

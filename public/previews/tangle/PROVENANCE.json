@@ -1,0 +1,11 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/tangle",
+ "commit": "d423cdaa0f7d8f56f7c9a50076a2cb2df46d963a",
+ "tool": "the live build at https://tangle.play.danielstephenson.dev, opened with Playwright in headless Chromium (WebGL on SwiftShader)",
+ "tool_url": "https://tangle.play.danielstephenson.dev",
+ "commands": [
+  "Playwright 1280x800, deviceScaleFactor 1: load https://tangle.play.danielstephenson.dev, wait for it to settle, screenshot, after clicking Begin",
+  "scaled to 640x400 with ImageMagick (convert -resize 640x400 -strip -quality 82) as poster.jpg"
+ ],
+ "notes": "Captured 2026-11-24 from the deployed site; the commit is the repository's main at capture time, which the site is deployed from."
+}
