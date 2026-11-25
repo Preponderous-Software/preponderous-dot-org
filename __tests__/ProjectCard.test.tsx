@@ -71,6 +71,34 @@ describe('ProjectCard', () => {
         expect(screen.getByText('Active')).toBeInTheDocument();
     });
 
+    it('colours a known status chip and outlines an unrecognised one, as on the home grid', () => {
+        const chipOf = (label: string) => screen.getByText(label).closest('.MuiChip-root');
+        const {unmount} = render(
+            <ProjectCard title="Roam" description="d" githubLink="https://github.com/Preponderous-Software/Roam" technology="Python" status="Active"/>
+        );
+        expect(chipOf('Active')).toHaveClass('MuiChip-filled', 'MuiChip-colorSuccess');
+        expect(chipOf('Python')).toHaveClass('MuiChip-outlined');
+        unmount();
+        render(
+            <ProjectCard title="Roam" description="d" githubLink="https://github.com/Preponderous-Software/Roam" technology="Python" status="Archived"/>
+        );
+        expect(chipOf('Archived')).toHaveClass('MuiChip-outlined');
+        expect(chipOf('Archived')).not.toHaveClass('MuiChip-filled');
+    });
+
+    it('shows the status chip alone when there is no technology, and no chips with neither', () => {
+        const {container, unmount} = render(
+            <ProjectCard title="Roam" description="d" githubLink="https://github.com/Preponderous-Software/Roam" technology="" status="Active"/>
+        );
+        expect(container.querySelectorAll('.MuiChip-root')).toHaveLength(1);
+        expect(screen.getByText('Active')).toBeInTheDocument();
+        unmount();
+        const empty = render(
+            <ProjectCard title="Roam" description="d" githubLink="https://github.com/Preponderous-Software/Roam" technology=""/>
+        );
+        expect(empty.container.querySelector('.MuiChip-root')).toBeNull();
+    });
+
     it('renders a Visit Site button linking to the live site in a new tab when websiteLink is set', () => {
         render(
             <ProjectCard

@@ -196,6 +196,8 @@ describe('the installation ID', () => {
     it('lives in <data dir>/<program>/trace-install-id', () => {
         expect(installIdFile({ XDG_DATA_HOME: '/data/' })).toBe(`/data/${PROGRAM_NAME}/trace-install-id`);
         expect(installIdFile({ HOME: '/home/app' })).toBe(`/home/app/.local/share/${PROGRAM_NAME}/trace-install-id`);
+        expect(installIdFile({ HOME: ' /home/app/ ' })).toBe(`/home/app/.local/share/${PROGRAM_NAME}/trace-install-id`);
+        expect(installIdFile({ XDG_DATA_HOME: '/data', HOME: '/home/app' })).toBe(`/data/${PROGRAM_NAME}/trace-install-id`);
         expect(installIdFile({ XDG_DATA_HOME: ' ', HOME: '' })).toBeNull();
         expect(installIdFile({})).toBeNull();
     });

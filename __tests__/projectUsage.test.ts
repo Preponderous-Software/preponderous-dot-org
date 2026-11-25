@@ -83,6 +83,12 @@ describe('usageRows', () => {
         expect(rest.every((row) => row.usage === null)).toBe(true);
         expect(rest.map((row) => row.title)).toEqual(rest.map((row) => row.title).sort((a, b) => a.localeCompare(b)));
     });
+
+    it('leaves out a reporting project that is not on the site', () => {
+        const rows = usageRows(projects.filter((project) => project.id !== 'roam'), {roam: usageWithoutInstalls('roam')});
+        expect(rows).toHaveLength(5);
+        expect(rows.map((row) => row.project.id)).not.toContain('roam');
+    });
 });
 
 describe('GET /api/usage', () => {

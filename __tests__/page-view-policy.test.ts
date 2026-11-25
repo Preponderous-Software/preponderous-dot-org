@@ -89,6 +89,12 @@ describe('isPagePath', () => {
         }
     });
 
+    it('rejects anything that is not an absolute path', () => {
+        for (const path of ['', 'about', 'https://preponderous.org/about', undefined as unknown as string, 42 as unknown as string]) {
+            expect(isPagePath(path), String(path)).toBe(false);
+        }
+    });
+
     it('keeps page paths, including ones that merely start like a skipped prefix', () => {
         for (const path of ['/', '/about', '/apiary', '/errors-and-omissions']) {
             expect(isPagePath(path), path).toBe(true);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { ThemeProvider, createTheme } from '@mui/material';
 import TopBar from '../components/TopBar';
 import { ColorModeContext } from '../utils/ColorModeContext';
@@ -123,5 +123,14 @@ describe('TopBar on a phone', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
         const drawer = screen.getByRole('presentation');
         expect(within(drawer).getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('closes the drawer on Escape and marks the menu button collapsed again', async () => {
+        render(<TopBar/>);
+        const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });
+        fireEvent.click(menuButton);
+        fireEvent.keyDown(screen.getByRole('presentation'), { key: 'Escape' });
+        expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+        await waitFor(() => expect(screen.queryByRole('presentation')).not.toBeInTheDocument());
     });
 });
