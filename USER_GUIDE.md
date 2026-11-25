@@ -12,6 +12,8 @@ No special software is required to use the website — just a modern web browser
 2. The home page opens with every project Preponderous Software develops shown as an icon — games, simulations, libraries, tools, and websites.
 3. Point at (or tap) an icon to see what the project is, then read the introduction below the grid.
 
+<p align="center"><img src="docs/images/home-desktop.png" alt="The home page: project icons in three tiers under the top navigation bar" width="640"></p>
+
 ## Common Scenarios
 
 ### Browsing the Projects
@@ -19,6 +21,12 @@ No special software is required to use the website — just a modern web browser
 1. Open the home page. The **Projects** grid at the top shows one icon per project, captioned with its name. The icons are grouped under three headings, most complete first: **Most complete**, **Active and growing**, and **Small projects & early work**; within each group they are in alphabetical order.
 2. Point at an icon, or move to it with the keyboard, to open a small panel with the project's details. On a touch screen, tap the icon instead: the details open in a sheet at the bottom of the screen, which closes from its close button or by tapping outside it.
 3. The details show the project's name, a short description, its primary technology, and — where set — a maintenance status (e.g. **Active**, **Maintenance**), along with a **GitHub** button and — for projects with a live version — a **Visit Site** button. Projects that report their usage also show a line such as "Last used 3 days ago" (see [Seeing How Much a Project Is Used](#seeing-how-much-a-project-is-used)).
+
+<p align="center">
+  <img src="docs/images/details-desktop.png" alt="Pointing at Ophidian on the home page opens a panel with a 3D clip of the game, its credit line and a Play it in 3D link" width="560">
+  <img src="docs/images/details-mobile-dark.png" alt="On a phone in dark mode, the same details open in a bottom sheet with a close button" width="180">
+</p>
+<p align="center"><em>A project's details: a hover panel on a desktop, a bottom sheet on a phone. Projects with a 3D preview show a muted looping clip with a pause button. If your system is set to reduce motion, only the still is shown. The usage line here shows made-up sample figures.</em></p>
 
 ### Searching and Filtering the Projects
 
@@ -28,12 +36,16 @@ No special software is required to use the website — just a modern web browser
 4. Choose **A–Z** (the default) or **By category** to change the order of the icons within each group.
 5. While anything is filtered, the grid says how many of all the projects are shown ("Showing *N* of *M* projects"). If nothing matches, click **Clear filters** to get every project back.
 
+<p align="center"><img src="docs/images/search-desktop.png" alt="Search &amp; filter opened above the grid, with &quot;sim&quot; typed in the search box, the category, technology and status chips, and &quot;Showing 13 of 44 projects&quot;" width="640"></p>
+
 ### Browsing Projects by Category
 
 1. Click **Projects** in the top navigation bar, or **Browse Projects** in the introduction below the home page's grid.
 2. The **/projects** page lists the same projects as cards, grouped under category headings (e.g. **Games**, **Simulations**, **Libraries**).
 3. The links under the page title name every category and how many projects it holds (e.g. **Games (*N*)**); click one to jump straight to it.
 4. Each card shows the same details, **GitHub**/**Visit Site** buttons, and status chip as the home page.
+
+<p align="center"><img src="docs/images/project-cards.png" alt="Project cards on /projects, each with an icon, title, description, technology and status chips, and GitHub and Visit Site buttons" width="640"></p>
 
 ### Opening a Project's Source Code
 
@@ -62,15 +74,29 @@ Many of the games, simulations and tools report when they start to [trace](https
 
 A start is not a person: one player launching a game every evening counts thirty times. If trace can't be reached, the usage lines are simply left out and **/usage** says the figures are unavailable.
 
+<p align="center">
+  <img src="docs/images/usage-line.png" alt="Roam's details with its usage line: Last used 1 day ago, launches in the last 30 days, reported by trace, and an About these figures link" width="300">
+  <img src="docs/images/usage-desktop.png" alt="The /usage page listing each reporting project with when it was last used, its starts in the last 30 days and a 30-day sparkline" width="460">
+</p>
+<p align="center"><em>The usage line in a project's details, and the <strong>/usage</strong> page with a 30-day sparkline per project. These screenshots use made-up sample figures, not real usage.</em></p>
+
 ### Navigating on a Phone
 
 On a narrow screen the top navigation bar's links are folded behind a menu button. Tap it to open a drawer with **Home**, **Projects**, **About**, **Contact**, and **GitHub**.
+
+<p align="center"><img src="docs/images/nav-drawer-mobile.png" alt="The navigation drawer open on a phone, listing Home, Projects, About, Contact and GitHub" width="220"></p>
 
 ### Switching Between Light and Dark Mode
 
 1. Use the sun/moon toggle in the top (or bottom) navigation bar.
 2. Your choice is remembered for future visits. If you've never chosen, the site follows your operating system's light/dark preference.
 3. If your browser is set to block site data, the toggle still switches the mode for as long as you're on the page — the choice simply isn't remembered.
+
+<p align="center">
+  <img src="docs/images/topbar.png" alt="The top navigation bar in light mode, with the sun toggle at the right" width="640"><br>
+  <img src="docs/images/topbar-dark.png" alt="The top navigation bar in dark mode, with the moon toggle at the right" width="640">
+</p>
+<p align="center"><em>The sun/moon toggle at the right of the top bar, in light and dark mode.</em></p>
 
 ### Reducing Motion
 
@@ -96,6 +122,8 @@ If you find a bug on the website itself:
 3. Describe the problem and include steps to reproduce it.
 
 You can also use the **Report a Bug** link in the footer, or visit the **/contact** page (reachable via **Contact** in the top navigation bar) for the same link plus where to go for project-specific questions. The footer's **Source Code** link opens the website's own repository in a new tab.
+
+<p align="center"><img src="docs/images/contact-desktop.png" alt="The /contact page, with a link for reporting a website bug and where to go for questions about a specific project" width="640"></p>
 
 ### Finding More by Daniel Stephenson
 

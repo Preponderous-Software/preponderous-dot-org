@@ -5,12 +5,93 @@
 The Preponderous Software website is a [Next.js](https://nextjs.org/) web application that serves as the public face of Preponderous Software. It showcases the projects — free, source-available games, simulations, libraries, tools, and websites — and links out to their source on GitHub. Built with React and [Material UI](https://mui.com/), it mirrors the structure of the [Dan's Plugins Community website](https://github.com/Dans-Plugins/dansplugins-dot-com).
 
 <p align="center">
-  <img src="docs/images/home-desktop.png" alt="The preponderous.org home page: the project icons in three tiers, Most complete (Atman, Beyond Nations, Roam, Strata and more), Active and growing, and Small projects &amp; early work" width="640">
+  <img src="docs/images/home-desktop.png" alt="The preponderous.org home page: the project icons in three tiers, Most complete, Active and growing, and Small projects &amp; early work" width="640">
   <img src="docs/images/home-mobile.png" alt="The same tiers at phone width, four icons per row" width="160">
 </p>
-<p align="center"><em>The live site at <a href="https://preponderous.org">preponderous.org</a>, desktop and phone width.</em></p>
+<p align="center"><em>The home page at desktop and phone width. More in <a href="#a-tour-of-the-site">A tour of the site</a> below.</em></p>
 
-<sub>How these were captured: headless Chromium against a production build of the site on 2026-10-29, at 1280×800 and at 390×844 (2× pixel density).</sub>
+## A tour of the site
+
+Every picture here is a real page from a production build of this repository (`npm run build` then `next start`), captured with headless Chromium. Desktop shots are 1280×800 at 1× pixel density. Phone shots are 390×844 at 2×. Light and dark mode follow the visitor's system setting until they pick one with the toggle.
+
+### Home: every project as an icon
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/home-desktop.png" alt="The home page in light mode: Most complete, Active and growing, and Small projects &amp; early work, one icon per project"></td>
+    <td width="50%"><img src="docs/images/home-desktop-dark.png" alt="The same home page in dark mode"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><em>Projects are grouped by how far along they are, most complete first. Search &amp; filter, top right, folds out a search box and category, technology and status chips.</em></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/home-mobile.png" alt="The home page on a phone in light mode" width="195">
+  <img src="docs/images/home-mobile-dark.png" alt="The home page on a phone in dark mode" width="195">
+</p>
+<p align="center"><em>On a phone, the top bar's links fold into a menu and the grid drops to four icons per row.</em></p>
+
+### A project's details, with its 3D preview
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/details-desktop.png" alt="Pointing at Ophidian opens a panel with a 3D clip of the game, a credit for the tool that drew it, and a link to play it in 3D"></td>
+    <td width="50%"><img src="docs/images/details-desktop-dark.png" alt="The same details panel in dark mode"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><em>Pointing at an icon, or moving to it with the keyboard, opens its details. Projects with a <code>preview</code> show a muted, looping 3D clip with a pause button, or only the still for visitors who ask for reduced motion. (The usage line in these panels uses the sample figures described under /usage below.)</em></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/details-mobile-dark.png" alt="On a phone, tapping Ophidian opens its details in a bottom sheet with the clip, description, chips and GitHub button" width="240">
+</p>
+<p align="center"><em>On a touch screen, a tap opens the same details in a bottom sheet.</em></p>
+
+### /projects: the same projects as cards, by category
+
+<table>
+  <tr>
+    <td width="40%"><img src="docs/images/projects-desktop.png" alt="The projects page in light mode: category links under the title, then project cards in a grid"></td>
+    <td width="40%"><img src="docs/images/projects-desktop-dark.png" alt="The projects page in dark mode"></td>
+    <td width="20%"><img src="docs/images/projects-mobile.png" alt="The projects page on a phone: one card per row"></td>
+  </tr>
+  <tr>
+    <td colspan="3"><em>Each category is its own section, and the links under the title jump straight to one. Every card has a GitHub button, plus Visit Site where the project is hosted.</em></td>
+  </tr>
+</table>
+
+### /usage: how much the projects are used
+
+<table>
+  <tr>
+    <td width="40%"><img src="docs/images/usage-desktop.png" alt="The usage page: each reporting project with when it was last used, its starts in the last 30 days and a 30-day sparkline"></td>
+    <td width="40%"><img src="docs/images/usage-desktop-dark.png" alt="The usage page in dark mode"></td>
+    <td width="20%"><img src="docs/images/usage-mobile.png" alt="The usage page on a phone"></td>
+  </tr>
+  <tr>
+    <td colspan="3"><em>Starts per project over 30 days, read server side from <a href="https://trace.danielstephenson.dev">trace</a>. <strong>These shots use made-up sample figures</strong> from a local stub (<code>TRACE_PUBLIC_URL</code>, see <a href="CONFIG.md">CONFIG.md</a>), so the numbers are not real usage. When trace can't be reached, the page says the figures are unavailable.</em></td>
+  </tr>
+</table>
+
+### /about and the 404 page
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/about-desktop.png" alt="The about page in light mode: mission, values and who runs Preponderous Software"></td>
+    <td width="50%"><img src="docs/images/about-desktop-dark.png" alt="The about page in dark mode"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/not-found-desktop.png" alt="The 404 page in light mode, with links back to the home and projects pages"></td>
+    <td width="50%"><img src="docs/images/not-found-desktop-dark.png" alt="The 404 page in dark mode"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><em>/about covers the mission, values and who runs Preponderous Software. A broken link lands on the shared error page, which is kept out of search results.</em></td>
+  </tr>
+</table>
+
+<sub>How these were captured: headless Chromium (Playwright) against <code>next start</code> on a local production build of <code>main</code> on 2026-11-24. The usage figures in the /usage and details shots come from a local trace stub, as noted above, because trace's public endpoints were not answering at capture time.</sub>
 
 ## Installation
 
