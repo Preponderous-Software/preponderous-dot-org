@@ -80,9 +80,10 @@ export const navButtonStyle = (theme: Theme) => ({
  */
 export const brandNameStyle = (theme: Theme) => ({
     display: 'inline',
-    marginRight: theme.spacing(2),
-    // At the h6 size the wordmark, the colour-mode switch and the menu button
-    // did not fit one row on a 360px phone, and the bar wrapped onto a second.
+    // At the h6 size, and with the gap kept for the inline links that phones
+    // hide, the wordmark, the colour-mode switch and the 44px menu button did
+    // not fit one row on a 360px phone, and the bar wrapped onto a second.
+    marginRight: {xs: 0, md: theme.spacing(2)},
     '& .MuiTypography-root': {fontSize: {xs: '1.05rem', sm: '1.25rem'}},
     fontWeight: 700,
     letterSpacing: '-0.01em',

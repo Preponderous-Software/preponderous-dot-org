@@ -116,6 +116,8 @@ describe('layout overflow guards', () => {
         const brand = brandNameStyle(theme) as StyleObject;
         const fontSize = (brand['& .MuiTypography-root'] as StyleObject).fontSize as { xs: string; sm: string };
         expect(parseFloat(fontSize.xs)).toBeLessThan(parseFloat(fontSize.sm));
+        // The gap before the inline links is dropped where they are hidden.
+        expect((brand.marginRight as { xs: number }).xs).toBe(0);
     });
 });
 

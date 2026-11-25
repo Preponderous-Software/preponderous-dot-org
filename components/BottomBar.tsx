@@ -63,7 +63,7 @@ const VersionNumber: React.FC<{ version: string }> = ({version}) => (
 const CopyrightNotice: React.FC = () => (
     // Full-strength white: dimmed to 85% it fell to 4.1:1 on the light-mode
     // blue bar, under WCAG AA's 4.5:1 for text this size.
-    <Typography variant="body2" color="inherit" component="div" sx={{textAlign: {xs: 'center', md: 'left'}}}>
+    <Typography variant="body2" color="inherit" component="div" sx={{textAlign: {xs: 'center', lg: 'left'}}}>
         {formatCopyright()}
         {' · '}
         <Link component={NextLink} href="/legal" color="inherit" underline="always">
@@ -83,11 +83,12 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
 
     return (
         <AppBar position="static" component="footer" sx={(theme) => bottomAppBarStyle(theme)}>
-            {/* Below md the rows wrap, and left-aligned they left the
+            {/* Below lg the rows wrap, and left-aligned they left the
                 colour-mode switch stranded under the links while the credit
-                line beneath sat centred; there every row is centred instead. */}
-            <Toolbar sx={(theme) => ({...toolbarStyle(theme), justifyContent: {xs: 'center', md: 'space-between'}, rowGap: 1})}>
-                <Box sx={(theme) => ({...flexContainerStyle(theme), justifyContent: {xs: 'center', md: 'flex-start'}})}>
+                line beneath sat centred; there every row is centred instead.
+                From lg up the switch keeps to the right of the row. */}
+            <Toolbar sx={(theme) => ({...toolbarStyle(theme), justifyContent: {xs: 'center', lg: 'space-between'}, flexWrap: {xs: 'wrap', lg: 'nowrap'}, rowGap: 1})}>
+                <Box sx={(theme) => ({...flexContainerStyle(theme), justifyContent: {xs: 'center', lg: 'flex-start'}})}>
                     <Box sx={(theme) => ({...flexContainerStyle(theme, {gap: 2}), justifyContent: 'center'})}>
                         <VersionNumber version={version}/>
                         <CopyrightNotice/>
