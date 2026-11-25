@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { createTheme } from '@mui/material';
+import { getContrastRatio } from '@mui/material/styles';
 import { describe, expect, it } from 'vitest';
 import {
     REDUCED_MOTION_QUERY,
@@ -10,6 +11,7 @@ import {
     gridItemStyle,
     infoCardStyle,
     navButtonStyle,
+    navDrawerPaperStyle,
     projectCardStyle,
     toggleSwitchBoxStyle,
     versionNumberStyle,
@@ -105,5 +107,19 @@ describe('layout overflow guards', () => {
         const fontSize = title.fontSize as { xs: string; sm: string };
         expect(parseFloat(fontSize.xs)).toBeLessThan(parseFloat(fontSize.sm));
         expect(title.overflowWrap).toBe('break-word');
+    });
+});
+
+// The site's theme raises contrastThreshold to 4.5, which turns the dark-mode
+// primary's contrast text near-black; the drawer must not inherit that on its
+// own dark panel.
+describe('navDrawerPaperStyle', () => {
+    it.each([
+        ['light', '#4263eb'],
+        ['dark', '#5c7cfa'],
+    ] as const)('keeps the drawer text at AA contrast in %s mode', (mode, primary) => {
+        const siteTheme = createTheme({ palette: { mode, contrastThreshold: 4.5, primary: { main: primary } } });
+        const style = navDrawerPaperStyle(siteTheme);
+        expect(getContrastRatio(style.color, style.backgroundColor)).toBeGreaterThanOrEqual(4.5);
     });
 });

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useTheme } from '@mui/material';
+import { getContrastRatio } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import MyApp from '../pages/_app';
 import { ColorModeContext } from '../utils/ColorModeContext';
@@ -15,6 +16,8 @@ const ProbePage = () => {
     return (
         <main id="main">
             <span data-testid="mode">{theme.palette.mode}</span>
+            <span data-testid="primary">{theme.palette.primary.main}|{theme.palette.primary.contrastText}</span>
+            <span data-testid="warning">{theme.palette.warning.main}|{theme.palette.warning.contrastText}</span>
             <button onClick={toggleColorMode}>Toggle</button>
         </main>
     );
@@ -180,5 +183,22 @@ describe('MyApp', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Toggle' }));
 
         expect(currentMode()).toBe('light');
+    });
+
+    // White text on the dark-mode primary was 3.7:1 and on the light-mode
+    // warning chip 3.1:1; every filled surface's text must reach WCAG AA.
+    const textContrast = (testId: string) => {
+        const [main, contrastText] = (screen.getByTestId(testId).textContent ?? '').split('|');
+        return getContrastRatio(main, contrastText);
+    };
+
+    it.each([
+        ['dark', true],
+        ['light', false],
+    ])('gives filled primary and warning surfaces AA text contrast in %s mode', (_mode, prefersDark) => {
+        stubPrefersDark(prefersDark);
+        renderApp();
+        expect(textContrast('primary')).toBeGreaterThanOrEqual(4.5);
+        expect(textContrast('warning')).toBeGreaterThanOrEqual(4.5);
     });
 });

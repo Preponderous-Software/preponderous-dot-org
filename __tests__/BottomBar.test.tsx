@@ -69,11 +69,11 @@ describe('BottomBar', () => {
     });
 
     it('renders the color-mode toggle', () => {
-        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).toBeInTheDocument();
+        expect(screen.getByRole('switch', { name: /toggle dark mode/i })).toBeInTheDocument();
     });
 
     it('leaves the color-mode toggle unchecked in light mode', () => {
-        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).not.toBeChecked();
+        expect(screen.getByRole('switch', { name: /toggle dark mode/i })).not.toBeChecked();
     });
 });
 
@@ -107,7 +107,7 @@ describe('BottomBar color mode', () => {
                 <BottomBar version="1.2.3"/>
             </ThemeProvider>
         );
-        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).toBeChecked();
+        expect(screen.getByRole('switch', { name: /toggle dark mode/i })).toBeChecked();
     });
 
     it('toggles the color mode when the switch is clicked', () => {
@@ -117,7 +117,7 @@ describe('BottomBar color mode', () => {
                 <BottomBar version="1.2.3"/>
             </ColorModeContext.Provider>
         );
-        fireEvent.click(screen.getByRole('checkbox', { name: /toggle dark mode/i }));
+        fireEvent.click(screen.getByRole('switch', { name: /toggle dark mode/i }));
         expect(toggleColorMode).toHaveBeenCalledTimes(1);
     });
 });

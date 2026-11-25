@@ -31,6 +31,12 @@ describe('Blurb', () => {
         expect(screen.getByRole('heading', { level: 3, name: 'Source Available' })).toBeInTheDocument();
     });
 
+    it('renders the tagline as a paragraph rather than a heading', () => {
+        render(<Blurb />);
+        expect(screen.getByText(/Free, source-available games and assets/).tagName).toBe('P');
+        expect(screen.queryByRole('heading', { level: 6 })).not.toBeInTheDocument();
+    });
+
     it('renders the linking info cards as real anchors that open in a new tab', () => {
         render(<Blurb />);
         for (const [name, href] of [[/^contribute/i, OPEN_ISSUES_URL], [/^explore the code/i, REPOSITORIES_URL]] as const) {

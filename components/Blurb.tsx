@@ -91,8 +91,11 @@ const Blurb: React.FC = () => (
             >
                 Preponderous Software
             </Typography>
+            {/* A tagline, not a heading: styled as h6 but rendered as a
+                paragraph so it does not break the heading outline. */}
             <Typography
                 variant="h6"
+                component="p"
                 color="text.secondary"
                 sx={{maxWidth: 640, mx: 'auto', fontWeight: 400}}
             >
