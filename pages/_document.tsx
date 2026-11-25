@@ -2,6 +2,9 @@ import React from 'react';
 import {Html, Head, Main, NextScript} from 'next/document';
 import {COLOR_MODE_BOOTSTRAP_SCRIPT} from '../utils/colorMode';
 
+export const THEME_COLOR_LIGHT = '#4263eb';
+export const THEME_COLOR_DARK = '#161b22';
+
 // Load the brand fonts (Inter for body, Space Grotesk for headings) from Google
 // Fonts. They are linked here in the document head, with preconnect hints to
 // keep the extra round-trip cheap. next/font is available now that the site is
@@ -31,6 +34,15 @@ export default function Document() {
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
                 <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32"/>
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+                {/*
+                  Tints the mobile browser's address bar to match the TopBar:
+                  the light theme's primary blue, or the dark theme's paper
+                  (see the MuiAppBar override in pages/_app.tsx). Keyed off the
+                  OS setting, which is what the page boots with unless a choice
+                  was stored.
+                */}
+                <meta name="theme-color" media="(prefers-color-scheme: light)" content={THEME_COLOR_LIGHT}/>
+                <meta name="theme-color" media="(prefers-color-scheme: dark)" content={THEME_COLOR_DARK}/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
                 <link

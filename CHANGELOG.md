@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- A theme colour for light and dark mode (`<meta name="theme-color">` in `pages/_document.tsx`), matching the top bar, so a phone's address bar takes on the site's colours.
+- The home page carries schema.org structured data (JSON-LD): an `Organization` (name, address, logo, GitHub organization) and the `WebSite` it publishes, built by `utils/structuredData.ts` from facts the site already states.
+
+### Fixed
+
+- The shared 404/500 error page is marked `noindex`, so a search engine that follows a broken link no longer indexes the error under that URL.
+
 ### Removed
 
 - **Patchwork** is no longer listed: its repository has been archived. Its project card and release entry are gone, `/usage` no longer has a row for it, and the `ViewQuilt` glyph, which only Patchwork used, is dropped from `utils/projectGlyphs.ts` (#203).

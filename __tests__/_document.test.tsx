@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from '@testing-library/react';
-import Document from '../pages/_document';
+import Document, { THEME_COLOR_DARK, THEME_COLOR_LIGHT } from '../pages/_document';
 import { COLOR_MODE_BOOTSTRAP_SCRIPT } from '../utils/colorMode';
 
 // next/document's primitives only work inside Next's own document renderer, so
@@ -89,5 +89,17 @@ describe('Document', () => {
         const { getByTestId } = renderDocument();
         expect(getByTestId('main')).toBeInTheDocument();
         expect(getByTestId('next-script')).toBeInTheDocument();
+    });
+
+    it('sets a theme color for each color scheme, matching the TopBar', () => {
+        const { getByTestId } = renderDocument();
+        const colors = Array.from(getByTestId('head').querySelectorAll('meta[name="theme-color"]'))
+            .map((meta) => [meta.getAttribute('media'), meta.getAttribute('content')]);
+        expect(colors).toEqual([
+            ['(prefers-color-scheme: light)', THEME_COLOR_LIGHT],
+            ['(prefers-color-scheme: dark)', THEME_COLOR_DARK],
+        ]);
+        expect(THEME_COLOR_LIGHT).toMatch(/^#[0-9a-f]{6}$/i);
+        expect(THEME_COLOR_DARK).toMatch(/^#[0-9a-f]{6}$/i);
     });
 });
