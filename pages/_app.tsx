@@ -66,6 +66,12 @@ function MyApp({Component, pageProps}: AppProps) {
             return createTheme({
                 palette: {
                     mode,
+                    // MUI picks white or near-black text for every filled
+                    // surface (contained buttons, filled chips) by contrast.
+                    // Its default threshold of 3:1 let white through on the
+                    // dark-mode primary (3.7:1) and on the light-mode warning
+                    // chip (3.1:1); 4.5:1 is WCAG AA for body-size text.
+                    contrastThreshold: 4.5,
                     primary: {main: isDark ? '#5c7cfa' : '#4263eb'},
                     secondary: {main: '#f59f00'},
                     background: isDark
@@ -91,6 +97,9 @@ function MyApp({Component, pageProps}: AppProps) {
                                 backgroundImage: 'none',
                                 backgroundColor: isDark ? '#161b22' : theme.palette.primary.main,
                                 borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.16)'}`,
+                                // The primary-coloured focus ring would be
+                                // blue on blue here, so use the bar's own text colour.
+                                '& .MuiButtonBase-root.Mui-focusVisible': {outlineColor: 'currentColor'},
                             }),
                         },
                     },
@@ -105,6 +114,23 @@ function MyApp({Component, pageProps}: AppProps) {
                     MuiButton: {
                         defaultProps: {disableElevation: true},
                         styleOverrides: {root: {borderRadius: 8}},
+                    },
+                    // A keyboard focus ring on every MUI control (buttons,
+                    // icon buttons, chips, list items, the catalogue's own
+                    // buttons). MUI's default focus cue is a faint ripple
+                    // tint, which on the blue light-mode bar all but vanished.
+                    // Primary reads at 4.7:1 or better on both modes' surfaces;
+                    // inside the top and bottom bars (below) it follows the
+                    // bar's text colour instead.
+                    MuiButtonBase: {
+                        styleOverrides: {
+                            root: ({theme}) => ({
+                                '&.Mui-focusVisible': {
+                                    outline: `2px solid ${theme.palette.primary.main}`,
+                                    outlineOffset: 2,
+                                },
+                            }),
+                        },
                     },
                 },
             });

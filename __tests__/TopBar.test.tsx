@@ -79,7 +79,7 @@ describe('TopBar', () => {
 
     it('leaves the color-mode toggle unchecked in light mode', () => {
         render(<TopBar/>);
-        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).not.toBeChecked();
+        expect(screen.getByRole('switch', { name: /toggle dark mode/i })).not.toBeChecked();
     });
 
     it('checks the color-mode toggle in dark mode', () => {
@@ -88,7 +88,7 @@ describe('TopBar', () => {
                 <TopBar/>
             </ThemeProvider>
         );
-        expect(screen.getByRole('checkbox', { name: /toggle dark mode/i })).toBeChecked();
+        expect(screen.getByRole('switch', { name: /toggle dark mode/i })).toBeChecked();
     });
 
     it('toggles the color mode when the switch is clicked', () => {
@@ -98,7 +98,7 @@ describe('TopBar', () => {
                 <TopBar/>
             </ColorModeContext.Provider>
         );
-        fireEvent.click(screen.getByRole('checkbox', { name: /toggle dark mode/i }));
+        fireEvent.click(screen.getByRole('switch', { name: /toggle dark mode/i }));
         expect(toggleColorMode).toHaveBeenCalledTimes(1);
     });
 });
@@ -115,6 +115,14 @@ describe('TopBar on a phone', () => {
             expect(within(drawer).getByRole('link', { name })).toHaveAttribute('href', href);
         }
         expect(within(drawer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('target', '_blank');
+    });
+
+    it('announces the menu button as opening a named dialog', () => {
+        render(<TopBar/>);
+        const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });
+        expect(menuButton).toHaveAttribute('aria-haspopup', 'dialog');
+        fireEvent.click(menuButton);
+        expect(screen.getByRole('dialog', { name: 'Navigation menu' })).toBeInTheDocument();
     });
 
     it('marks the current page in the drawer', () => {

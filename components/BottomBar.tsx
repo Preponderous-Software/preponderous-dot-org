@@ -61,7 +61,9 @@ const VersionNumber: React.FC<{ version: string }> = ({version}) => (
 // Copyright holder plus the license the site is published under, with the
 // license name linking to the fuller explanation on /legal.
 const CopyrightNotice: React.FC = () => (
-    <Typography variant="body2" color="inherit" component="div" sx={{opacity: 0.85}}>
+    // Full-strength white: dimmed to 85% it fell to 4.1:1 on the light-mode
+    // blue bar, under WCAG AA's 4.5:1 for text this size.
+    <Typography variant="body2" color="inherit" component="div">
         {formatCopyright()}
         {' · '}
         <Link component={NextLink} href="/legal" color="inherit" underline="always">
@@ -114,11 +116,11 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                     <ColorModeToggleSwitch
                         checked={theme.palette.mode === 'dark'}
                         onChange={colorMode.toggleColorMode}
-                        inputProps={{'aria-label': 'Toggle dark mode'}}
+                        inputProps={{'aria-label': 'Toggle dark mode', role: 'switch'}}
                     />
                 </Box>
             </Toolbar>
-            <Typography variant="caption" component="p" color="inherit" sx={{textAlign: 'center', opacity: 0.8, pb: 1, px: 2, m: 0}}>
+            <Typography variant="caption" component="p" color="inherit" sx={{textAlign: 'center', pb: 1, px: 2, m: 0}}>
                 More by Daniel Stephenson →{' '}
                 <Link href="https://danielstephenson.dev" color="inherit" underline="hover">
                     danielstephenson.dev

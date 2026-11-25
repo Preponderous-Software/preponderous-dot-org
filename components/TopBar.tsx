@@ -82,7 +82,14 @@ const BrandName: React.FC = () => (
 // took a quarter of a phone's first screen, so there they collapse behind a
 // hamburger that opens this drawer — the same pattern as dansplugins.com.
 const NavDrawer: React.FC<{open: boolean; onClose: () => void; pathname: string}> = ({open, onClose, pathname}) => (
-    <Drawer anchor="right" open={open} onClose={onClose} PaperProps={{sx: (theme) => navDrawerPaperStyle(theme)}}>
+    <Drawer
+        anchor="right"
+        open={open}
+        onClose={onClose}
+        // MUI's modal Drawer traps focus like a dialog but does not say so;
+        // naming the panel as one tells assistive technology what opened.
+        PaperProps={{role: 'dialog', 'aria-label': 'Navigation menu', sx: (theme) => navDrawerPaperStyle(theme)}}
+    >
         <Box component="nav" aria-label="Primary">
             <List sx={{width: 240}} onClick={onClose}>
                 {NAV_LINKS.map((link) => {
@@ -146,13 +153,15 @@ const TopBar: React.FC = () => {
                         <ColorModeToggleSwitch
                             checked={theme.palette.mode === 'dark'}
                             onChange={colorMode.toggleColorMode}
-                            inputProps={{'aria-label': 'Toggle dark mode'}}
+                            // role="switch" so it is announced as an on/off control
+                            // rather than a checkbox.
+                            inputProps={{'aria-label': 'Toggle dark mode', role: 'switch'}}
                         />
                     </Box>
                     <IconButton
                         color="inherit"
                         aria-label="Open navigation menu"
-                        aria-haspopup="true"
+                        aria-haspopup="dialog"
                         aria-expanded={drawerOpen}
                         onClick={() => setDrawerOpen(true)}
                         sx={{display: {xs: 'inline-flex', md: 'none'}}}
