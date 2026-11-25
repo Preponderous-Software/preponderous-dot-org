@@ -506,7 +506,17 @@
       "category": "Games",
       "status": "Active",
       "glyph": "Biotech",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/casework/poster.jpg",
+        "alt": "Casework's start page in the live build: the Play in first person button, the three classic-mode cases (Night shift, The kitchen floor, The basement stairs), the time-of-death drill and the skills it teaches.",
+        "madeWith": {
+          "name": "Casework's live build",
+          "url": "https://github.com/Preponderous-Software/casework/tree/b77ac7db917e63f7e6b157c9969dbd12d518aa39"
+        },
+        "more": "https://casework.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
     },
     {
       "id": "coastline",
@@ -518,7 +528,17 @@
       "category": "Games",
       "status": "Active",
       "glyph": "Waves",
-      "tier": "small"
+      "tier": "small",
+      "preview": {
+        "poster": "/previews/coastline/poster.jpg",
+        "alt": "Coastline's title screen in the live build: the island's coast and a red flag on a pole, drawn in 3D, under the title and the Begin, Scene 2 and Scene 3 buttons.",
+        "madeWith": {
+          "name": "Coastline's live build",
+          "url": "https://github.com/Preponderous-Software/coastline/tree/d5617d3b9ae6565808c11cbd697cec15672916dd"
+        },
+        "more": "https://coastline.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
     },
     {
       "id": "darkroom",
@@ -552,7 +572,17 @@
       "category": "Games",
       "status": "Active",
       "glyph": "RocketLaunch",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/frozen-star/poster.jpg",
+        "alt": "Frozen Star's title menu in the live build, beside a ray-traced black hole with its bright accretion disc bent over and under the shadow.",
+        "madeWith": {
+          "name": "Frozen Star's live build",
+          "url": "https://github.com/Preponderous-Software/frozen-star/tree/a01e6e297a7512290d8d9bf7ce2fdd1f4995aeec"
+        },
+        "more": "https://frozen-star.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
     },
     {
       "id": "museum",
@@ -564,7 +594,17 @@
       "category": "Developer Tools",
       "status": "Active",
       "glyph": "Museum",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/museum/poster.jpg",
+        "alt": "The museum's lobby in the live build: the aisle into the 2016 hall, with the plinths for 2021 and 2022 either side, sized by that year's activity.",
+        "madeWith": {
+          "name": "Museum's live build",
+          "url": "https://github.com/Preponderous-Software/museum/tree/a419eed767c9aeb332456b46b911f91c034ddf73"
+        },
+        "more": "https://museum.play.danielstephenson.dev",
+        "moreLabel": "Walk it"
+      }
     },
     {
       "id": "roam-website",
@@ -575,7 +615,17 @@
       "technology": "TypeScript / Next.js",
       "category": "Websites",
       "status": "Active",
-      "icon": "/icons/roam.png"
+      "icon": "/icons/roam.png",
+      "preview": {
+        "poster": "/previews/roam-website/poster.jpg",
+        "alt": "The Roam website's home page: the Roam icon and tagline, the Play in browser, Download Roam and View Source buttons, and the same world in 2D and 3D below.",
+        "madeWith": {
+          "name": "Roam's website",
+          "url": "https://github.com/Preponderous-Software/roam-website/tree/f5f11c6cb26913485d2940c9822db5c7308227d8"
+        },
+        "more": "https://roam.preponderous.org",
+        "moreLabel": "Visit the site"
+      }
     },
     {
       "id": "tangle",
@@ -587,7 +637,17 @@
       "category": "Games",
       "status": "Active",
       "glyph": "Loop",
-      "tier": "growing"
+      "tier": "growing",
+      "preview": {
+        "poster": "/previews/tangle/poster.jpg",
+        "alt": "Inside Tangle in the live build, just after Begin: the hub's welcome plaque explaining strange loops and the order of the six rooms, with the NEXT hint and a 0 of 6 rooms solved card.",
+        "madeWith": {
+          "name": "Tangle's live build",
+          "url": "https://github.com/Preponderous-Software/tangle/tree/d423cdaa0f7d8f56f7c9a50076a2cb2df46d963a"
+        },
+        "more": "https://tangle.play.danielstephenson.dev",
+        "moreLabel": "Play it"
+      }
     }
   ]
 }

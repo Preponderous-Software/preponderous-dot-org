@@ -1,0 +1,11 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/frozen-star",
+ "commit": "a01e6e297a7512290d8d9bf7ce2fdd1f4995aeec",
+ "tool": "the live build at https://frozen-star.play.danielstephenson.dev, opened with Playwright in headless Chromium (WebGL on SwiftShader)",
+ "tool_url": "https://frozen-star.play.danielstephenson.dev",
+ "commands": [
+  "Playwright 1280x800, deviceScaleFactor 1: load https://frozen-star.play.danielstephenson.dev, wait for it to settle, screenshot",
+  "scaled to 640x400 with ImageMagick (convert -resize 640x400 -strip -quality 82) as poster.jpg"
+ ],
+ "notes": "Captured 2026-11-24 from the deployed site; the commit is the repository's main at capture time, which the site is deployed from."
+}
