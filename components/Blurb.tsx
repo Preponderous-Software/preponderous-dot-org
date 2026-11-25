@@ -31,17 +31,17 @@ const InfoCard: React.FC<{
     icon: React.ReactNode;
     title: string;
     content: string;
-    href?: string
+    href: string;
 }> = ({icon, title, content, href}) => {
     // Off-site cards open in a new tab and carry the external-link icon; an
     // in-site card (e.g. /legal) navigates in place like the top bar's links.
-    const isExternal = !!href && href.startsWith('http');
+    const isExternal = href.startsWith('http');
     const body = (
         <>
             <Box sx={(theme) => infoCardIconStyle(theme)}>
                 {icon}
             </Box>
-            <Typography variant="h6" component="h3" gutterBottom sx={(theme) => infoCardTitleStyle()}>
+            <Typography variant="h6" component="h3" gutterBottom sx={infoCardTitleStyle()}>
                 {title}
                 {isExternal ? <OpenInNewIcon sx={infoCardExternalIconStyle}/> : null}
             </Typography>
@@ -66,20 +66,12 @@ const InfoCard: React.FC<{
                 >
                     {body}
                 </Paper>
-            ) : href ? (
+            ) : (
                 <Paper
                     elevation={0}
                     component={NextLink}
                     href={href}
                     sx={(theme) => ({...infoCardStyle(theme), ...infoCardLinkStyle})}
-                >
-                    {body}
-                </Paper>
-            ) : (
-                // Nothing to activate here, so no pointer and no hover lift.
-                <Paper
-                    elevation={0}
-                    sx={(theme) => ({...infoCardStyle(theme), cursor: 'default', '&:hover': {}})}
                 >
                     {body}
                 </Paper>
