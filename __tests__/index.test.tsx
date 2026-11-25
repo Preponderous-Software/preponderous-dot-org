@@ -40,6 +40,13 @@ describe('Home page', () => {
         projectsSection = container.querySelector('#projects') as HTMLElement;
     });
 
+    it('opens the heading outline with the page\'s only h1, ahead of the icon grid', () => {
+        const headings = screen.getAllByRole('heading');
+        expect(headings[0]).toHaveTextContent('Preponderous Software');
+        expect(headings[0].tagName).toBe('H1');
+        expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+    });
+
     it('gives the Projects section its #projects id and a Projects heading', () => {
         expect(projectsSection).not.toBeNull();
         expect(within(projectsSection).getByRole('heading', { level: 2, name: 'Projects' })).toBeInTheDocument();

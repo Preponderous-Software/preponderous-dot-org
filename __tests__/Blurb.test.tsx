@@ -10,7 +10,7 @@ const OPEN_ISSUES_URL = 'https://github.com/search?q=org%3APreponderous-Software
 describe('Blurb', () => {
     it('renders the hero heading and call-to-action links', () => {
         render(<Blurb />);
-        expect(screen.getByRole('heading', { name: 'Preponderous Software' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 2, name: 'Preponderous Software' })).toBeInTheDocument();
         expect(screen.getByRole('link', { name: /browse projects/i })).toBeInTheDocument();
         const github = screen.getByRole('link', { name: /view on github/i });
         expect(github).toHaveAttribute('href', ORG_URL);

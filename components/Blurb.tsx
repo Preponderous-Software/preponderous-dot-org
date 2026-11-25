@@ -83,9 +83,11 @@ const InfoCard: React.FC<{
 const Blurb: React.FC = () => (
     <Box sx={(theme) => blurbBoxStyle(theme)}>
         <Box sx={{textAlign: 'center', py: {xs: 4, md: 8}}}>
+            {/* An h2: the page's h1 is the visually hidden one at the top of
+                pages/index.tsx, ahead of the icon grid. */}
             <Typography
                 variant="h2"
-                component="h1"
+                component="h2"
                 gutterBottom
                 sx={(theme) => ({...blurbTitleStyle(theme), marginBottom: theme.spacing(2)})}
             >
