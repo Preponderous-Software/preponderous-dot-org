@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app';
 import MyApp from '../pages/_app';
 import { ColorModeContext } from '../utils/ColorModeContext';
 import { COLOR_MODE_STORAGE_KEY } from '../utils/colorMode';
+import { COARSE_POINTER_QUERY, TOUCH_TARGET } from '../styles/styles';
 
 // A stand-in page that reports the palette mode MyApp resolved and exposes the
 // toggle, so the tests can observe and drive the color-mode wiring.
@@ -21,6 +22,13 @@ const ProbePage = () => {
             <button onClick={toggleColorMode}>Toggle</button>
         </main>
     );
+};
+
+// Records the theme MyApp provides, so a test can read its overrides.
+let providedTheme: ReturnType<typeof useTheme> | null = null;
+const ThemeProbePage = () => {
+    providedTheme = useTheme();
+    return <main id="main"/>;
 };
 
 const renderApp = () =>
@@ -200,5 +208,21 @@ describe('MyApp', () => {
         renderApp();
         expect(textContrast('primary')).toBeGreaterThanOrEqual(4.5);
         expect(textContrast('warning')).toBeGreaterThanOrEqual(4.5);
+    });
+
+    // A fingertip needs about 44px; the compact MUI sizes (31px buttons,
+    // 30px icon buttons, 24px chips) were hard to hit on a phone.
+    it('raises controls to a 44px touch target on a coarse pointer only', () => {
+        stubPrefersDark(true);
+        render(<MyApp {...({ Component: ThemeProbePage, pageProps: {} } as unknown as AppProps)}/>);
+        const overrides = providedTheme?.components as Record<string, { styleOverrides?: Record<string, Record<string, unknown>> }>;
+        expect(overrides.MuiButton.styleOverrides?.root[COARSE_POINTER_QUERY]).toMatchObject({ minHeight: TOUCH_TARGET });
+        expect(overrides.MuiIconButton.styleOverrides?.root[COARSE_POINTER_QUERY]).toMatchObject({ minWidth: TOUCH_TARGET, minHeight: TOUCH_TARGET });
+        expect(overrides.MuiToggleButton.styleOverrides?.root[COARSE_POINTER_QUERY]).toMatchObject({ minHeight: TOUCH_TARGET });
+        const chip = overrides.MuiChip.styleOverrides?.clickable[COARSE_POINTER_QUERY] as Record<string, unknown>;
+        // Visible height plus the invisible hit area above and below it.
+        expect((chip.height as number) + 8).toBe(TOUCH_TARGET);
+        expect(chip['&::after']).toMatchObject({ inset: '-4px 0' });
+        expect(overrides.MuiButton.styleOverrides?.root.minHeight).toBeUndefined();
     });
 });

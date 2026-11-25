@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - **Project links and names are brought up to date.** GitHub links for Apex, Beyond Nations, Ophidian, Roam and Viron now use each repository's current name instead of relying on GitHub's rename redirects, and Apex and Beyond Nations are titled by their current names ("Apex", "Beyond Nations"). Apex, Beyond Nations, Ophidian and env-lib-cpp now link to their live browser builds on danielstephenson.dev's arcade. The descriptions of Beyond Nations, Roam and Viron now match their READMEs: Beyond Nations runs on the Strata engine and in the browser, Roam is about gathering, farming and building, and Viron is a REST spatial simulation service.
+- **Phone layout.** On a touch screen (a coarse pointer) buttons, icon buttons and the sort toggle are at least 44px tall, and clickable chips (the home page's filters, the `/projects` category links) are 36px with an invisible hit area reaching 44px; a mouse keeps the compact sizes (`pages/_app.tsx`). The top bar's wordmark is a step smaller below the `sm` breakpoint, so the wordmark, the colour-mode switch and the menu button fit one row on a 360px phone instead of wrapping onto two. Below `md` the footer's rows are centred, so the colour-mode switch no longer sits stranded under the links. A project card's technology and status chips wrap instead of running past the card edge.
 
 ### Fixed
 

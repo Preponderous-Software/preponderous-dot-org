@@ -10,6 +10,7 @@ import {
     storeColorMode
 } from '../utils/colorMode';
 import {BODY_FONT_STACK, HEADING_FONT_STACK} from '../utils/fonts';
+import {COARSE_POINTER_QUERY, TOUCH_TARGET} from '../styles/styles';
 import '../styles/globals.css';
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -111,9 +112,31 @@ function MyApp({Component, pageProps}: AppProps) {
                             }),
                         },
                     },
+                    // On a touch screen (a coarse pointer) every control is
+                    // at least 44px tall, the size a fingertip needs; a mouse
+                    // keeps the compact sizes. Chips stay visually slim and
+                    // get the rest as an invisible hit area, so a wrapped row
+                    // of filter chips does not double in height.
                     MuiButton: {
                         defaultProps: {disableElevation: true},
-                        styleOverrides: {root: {borderRadius: 8}},
+                        styleOverrides: {root: {borderRadius: 8, [COARSE_POINTER_QUERY]: {minHeight: TOUCH_TARGET}}},
+                    },
+                    MuiIconButton: {
+                        styleOverrides: {root: {[COARSE_POINTER_QUERY]: {minWidth: TOUCH_TARGET, minHeight: TOUCH_TARGET}}},
+                    },
+                    MuiToggleButton: {
+                        styleOverrides: {root: {[COARSE_POINTER_QUERY]: {minHeight: TOUCH_TARGET}}},
+                    },
+                    MuiChip: {
+                        styleOverrides: {
+                            clickable: {
+                                [COARSE_POINTER_QUERY]: {
+                                    height: 36,
+                                    position: 'relative',
+                                    '&::after': {content: '""', position: 'absolute', inset: '-4px 0'},
+                                },
+                            },
+                        },
                     },
                     // A keyboard focus ring on every MUI control (buttons,
                     // icon buttons, chips, list items, the catalogue's own

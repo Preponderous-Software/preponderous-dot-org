@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
     REDUCED_MOTION_QUERY,
     blurbTitleStyle,
+    brandNameStyle,
     cardWrapperStyle,
     footerButtonStyle,
     gridItemStyle,
@@ -107,6 +108,14 @@ describe('layout overflow guards', () => {
         const fontSize = title.fontSize as { xs: string; sm: string };
         expect(parseFloat(fontSize.xs)).toBeLessThan(parseFloat(fontSize.sm));
         expect(title.overflowWrap).toBe('break-word');
+    });
+
+    // The wordmark, the colour-mode switch and the menu button wrapped the
+    // top bar onto two rows on a 360px phone at the h6 size.
+    it('steps the wordmark down on the smallest breakpoint', () => {
+        const brand = brandNameStyle(theme) as StyleObject;
+        const fontSize = (brand['& .MuiTypography-root'] as StyleObject).fontSize as { xs: string; sm: string };
+        expect(parseFloat(fontSize.xs)).toBeLessThan(parseFloat(fontSize.sm));
     });
 });
 
