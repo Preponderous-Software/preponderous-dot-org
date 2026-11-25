@@ -59,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
             </CardContent>
 
             {technology || status ? (
-                <Stack direction="row" spacing={1} sx={{px: 2, pb: 1}}>
+                <Stack direction="row" spacing={1} useFlexGap sx={{px: 2, pb: 1, flexWrap: 'wrap'}}>
                     {technology ? (
                         <Chip
                             size="small"

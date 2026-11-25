@@ -8,6 +8,18 @@ import {Theme} from '@mui/material/styles';
 export const REDUCED_MOTION_QUERY = '@media (prefers-reduced-motion: reduce)';
 
 /**
+ * Media query matching a touch screen: a pointer too coarse to aim at small
+ * controls. The theme in pages/_app.tsx raises buttons and chips to
+ * TOUCH_TARGET under it, leaving mouse users the compact sizes.
+ */
+export const COARSE_POINTER_QUERY = '@media (pointer: coarse)';
+
+/**
+ * Smallest height, in px, of a control a finger has to hit.
+ */
+export const TOUCH_TARGET = 44;
+
+/**
  * Cancels a hover effect's movement for reduced-motion visitors, leaving the
  * colour and shadow feedback of that same hover intact — those are feedback
  * rather than motion, and dropping them would cost the affordance without
@@ -68,7 +80,11 @@ export const navButtonStyle = (theme: Theme) => ({
  */
 export const brandNameStyle = (theme: Theme) => ({
     display: 'inline',
-    marginRight: theme.spacing(2),
+    // At the h6 size, and with the gap kept for the inline links that phones
+    // hide, the wordmark, the colour-mode switch and the 44px menu button did
+    // not fit one row on a 360px phone, and the bar wrapped onto a second.
+    marginRight: {xs: 0, md: theme.spacing(2)},
+    '& .MuiTypography-root': {fontSize: {xs: '1.05rem', sm: '1.25rem'}},
     fontWeight: 700,
     letterSpacing: '-0.01em',
     color: 'inherit',
