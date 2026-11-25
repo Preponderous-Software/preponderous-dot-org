@@ -9,15 +9,34 @@ vi.mock('next/router', () => ({
     useRouter: () => ({ pathname: '/404' }),
 }));
 
+// next/head only writes into document.head through Next's head manager; render
+// its children inline so the page's metadata can be queried (as in Seo.test).
+vi.mock('next/head', async () => {
+    const { Children, createElement, Fragment } = await import('react');
+    return {
+        default: (props: { children?: React.ReactNode }) =>
+            createElement(Fragment, null, Children.toArray(props.children)),
+    };
+});
+
 describe('ErrorPage', () => {
+    let container: HTMLElement;
+
     beforeEach(() => {
-        render(
+        ({ container } = render(
             <ErrorPage
                 code="404"
                 title="Page not found"
                 message="We could not find the page you were looking for."
             />
-        );
+        ));
+    });
+
+    // The error page is served at whatever URL failed, so it must stay out of
+    // search results and never claim a canonical URL of its own.
+    it('is marked noindex and has no canonical link', () => {
+        expect(container.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
+        expect(container.querySelector('link[rel="canonical"]')).toBeNull();
     });
 
     it('renders the code, title, and message it was given', () => {

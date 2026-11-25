@@ -50,7 +50,7 @@ const ErrorPage: React.FC<{code: string; title: string; message: string; seconda
     secondaryAction,
 }) => (
     <Box sx={(theme) => pageStyle(theme)}>
-        <Seo title={`${code} — ${title}`} description={message}/>
+        <Seo title={`${code} — ${title}`} description={message} noindex/>
         <TopBar/>
         <Container component="main" id="main" maxWidth="sm" sx={{py: 8, textAlign: 'center', flexGrow: 1}}>
             <Typography variant="h1" component="p" color="primary" sx={{fontWeight: 700}}>

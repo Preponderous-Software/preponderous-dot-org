@@ -99,4 +99,26 @@ describe('Seo', () => {
         expect(spec.output).toBe(`../public${OG_IMAGE_PATH}`);
         expect(OG_IMAGE_ALT).toBe(spec.alt);
     });
+
+    it('is indexable unless told otherwise', () => {
+        const { container } = render(<Seo title="Legal" path="/legal"/>);
+        expect(container.querySelector('meta[name="robots"]')).toBeNull();
+    });
+
+    it('asks search engines not to index the page when noindex is set', () => {
+        const { container } = render(<Seo title="404 — Page not found" noindex/>);
+        expect(metaContent(container, 'meta[name="robots"]')).toBe('noindex');
+    });
+
+    it('emits the given JSON-LD as one application/ld+json script', () => {
+        const { container } = render(<Seo jsonLd='{"@type":"WebSite"}'/>);
+        const scripts = container.querySelectorAll('script[type="application/ld+json"]');
+        expect(scripts).toHaveLength(1);
+        expect(scripts[0].innerHTML).toBe('{"@type":"WebSite"}');
+    });
+
+    it('emits no JSON-LD script when none is given', () => {
+        const { container } = render(<Seo title="Legal"/>);
+        expect(container.querySelector('script[type="application/ld+json"]')).toBeNull();
+    });
 });

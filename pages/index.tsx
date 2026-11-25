@@ -3,7 +3,7 @@ import {Box, Button, Container, Typography} from '@mui/material'
 import React from 'react'
 import TopBar from '../components/TopBar'
 import BottomBar from '../components/BottomBar'
-import Seo from '../components/Seo'
+import Seo, {DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL} from '../components/Seo'
 import Blurb from '../components/Blurb'
 import IconGrid from '../components/IconGrid'
 import {CatalogueFilterBar} from '@kingdom-community/community-site-kit'
@@ -12,6 +12,7 @@ import {projectFacets, projectSortOptions, type Project} from '../utils/projects
 import {useProjectUsage} from '../utils/useProjectUsage'
 import {useNow} from '../utils/useNow'
 import {pageStyle, sectionDividerStyle} from '../styles/styles'
+import {homeStructuredData, serializeJsonLd} from '../utils/structuredData'
 
 interface ProjectData {
     projects: Project[];
@@ -21,6 +22,10 @@ const projectData = require('./data/projects.json') as ProjectData
 
 // pull the displayed version from package.json so the footer stays in sync
 const version = require('../package.json').version
+
+const HOME_JSON_LD = serializeJsonLd(
+    homeStructuredData({siteUrl: SITE_URL, siteName: SITE_NAME, description: DEFAULT_DESCRIPTION})
+)
 
 const SectionDivider: React.FC = () => (
     <Box sx={(theme) => sectionDividerStyle(theme)}/>
@@ -79,7 +84,7 @@ const ProjectsSection: React.FC = () => {
 const Home: NextPage = () => {
     return (
         <Box sx={(theme) => pageStyle(theme)}>
-            <Seo path="/"/>
+            <Seo path="/" jsonLd={HOME_JSON_LD}/>
             <TopBar/>
             <Container component="main" id="main" maxWidth="xl" sx={{py: 4, flexGrow: 1}}>
                 <ProjectsSection/>

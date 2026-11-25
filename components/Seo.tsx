@@ -5,13 +5,13 @@ import React from 'react';
 // Open Graph / Twitter card tags so browser tabs, search engines, and shared
 // links (Discord, social) all show meaningful information. Render once near
 // the top of each page.
-const SITE_NAME = 'Preponderous Software';
-const DEFAULT_DESCRIPTION =
+export const SITE_NAME = 'Preponderous Software';
+export const DEFAULT_DESCRIPTION =
     'Free, source-available games and assets — built in the open and free to use.';
 
 // Injected at build time by next.config.js, same as NEXT_PUBLIC_BUILD_YEAR; the
 // fallback here only matters under Vitest, which does not load next.config.js.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://preponderous.org';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://preponderous.org';
 // The share card: public/og-image.png, a 1200x630 PNG drawn from
 // og-card/card.json (planets on their orbits rendered with Strata, the name over
 // it; see og-card/README.md). OG_IMAGE_ALT is the card spec's alt text, word for
@@ -34,9 +34,16 @@ interface SeoProps {
     // canonical URL, such as the shared 404/500 error page, which then skip the
     // canonical link and og:url tag rather than pointing at a URL of their own.
     path?: string;
+    // Keeps the page out of search results (<meta name="robots"
+    // content="noindex">). Set by the shared 404/500 error page, which is
+    // served at whatever URL failed and so must never be indexed under it.
+    noindex?: boolean;
+    // schema.org structured data, emitted as one application/ld+json script.
+    // Build it with utils/structuredData.ts, which also serializes it safely.
+    jsonLd?: string;
 }
 
-const Seo: React.FC<SeoProps> = ({title, description, path}) => {
+const Seo: React.FC<SeoProps> = ({title, description, path, noindex, jsonLd}) => {
     const fullTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
     const desc = description ?? DEFAULT_DESCRIPTION;
     const url = path ? `${SITE_URL}${path}` : undefined;
@@ -44,6 +51,7 @@ const Seo: React.FC<SeoProps> = ({title, description, path}) => {
         <Head>
             <title>{fullTitle}</title>
             <meta name="description" content={desc}/>
+            {noindex && <meta name="robots" content="noindex"/>}
             {url && <link rel="canonical" href={url}/>}
             <meta property="og:title" content={fullTitle}/>
             <meta property="og:description" content={desc}/>
@@ -60,6 +68,9 @@ const Seo: React.FC<SeoProps> = ({title, description, path}) => {
             <meta name="twitter:description" content={desc}/>
             <meta name="twitter:image" content={OG_IMAGE_URL}/>
             <meta name="twitter:image:alt" content={OG_IMAGE_ALT}/>
+            {jsonLd && (
+                <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd}}/>
+            )}
         </Head>
     );
 };
