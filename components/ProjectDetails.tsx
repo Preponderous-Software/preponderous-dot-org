@@ -42,7 +42,9 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleA
                 {description}
             </Typography>
             {technology || status ? (
-                <Stack direction="row" spacing={1} sx={{mb: 1.5, flexWrap: 'wrap', rowGap: 1}}>
+                // useFlexGap: with margin-based spacing, a wrapped chip was
+                // indented by the margin meant to separate it from its neighbour.
+                <Stack direction="row" spacing={1} useFlexGap sx={{mb: 1.5, flexWrap: 'wrap'}}>
                     {technology ? (
                         <Chip size="small" variant="outlined" icon={<CodeIcon/>} label={technology}/>
                     ) : null}

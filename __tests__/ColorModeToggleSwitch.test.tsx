@@ -3,7 +3,8 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ColorModeToggleSwitch } from '../components/ColorModeToggleSwitch';
+import { ColorModeToggleSwitch, colorModeSwitchTouchStyle } from '../components/ColorModeToggleSwitch';
+import { TOUCH_TARGET } from '../styles/styles';
 
 // TopBar and BottomBar drive the switch the same way — a `checked` prop taken
 // from the active theme and an `onChange` from ColorModeContext — so the
@@ -57,5 +58,26 @@ describe('ColorModeToggleSwitch', () => {
         for (const asset of ['light.svg', 'dark.svg']) {
             expect(existsSync(join(process.cwd(), 'public', 'colormode', asset))).toBe(true);
         }
+    });
+});
+
+// On a touch screen the switch was a 32px-tall target; it must reach 44px
+// without changing how it looks.
+describe('ColorModeToggleSwitch on a touch screen', () => {
+    const touch = colorModeSwitchTouchStyle;
+    const base = touch['& .MuiSwitch-switchBase'];
+    const input = touch['& .MuiSwitch-input'];
+
+    it('is a 44px tap area', () => {
+        expect(touch.height).toBe(TOUCH_TARGET);
+        expect(input.height).toBe(TOUCH_TARGET);
+    });
+
+    it('keeps the 20px track and centres the 32px thumb in the taller root', () => {
+        expect(touch.height - touch.paddingTop - touch.paddingBottom).toBe(20);
+        // switchBase margin is 1px; the thumb's centre lands on the root's centre.
+        expect(base.top + 1 + 32 / 2).toBe(TOUCH_TARGET / 2);
+        // The input, positioned inside switchBase, starts at the root's top edge.
+        expect(base.top + 1 + input.top).toBe(0);
     });
 });
