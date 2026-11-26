@@ -64,6 +64,12 @@ describe('BottomBar', () => {
         expect(play).not.toHaveAttribute('target');
     });
 
+    it('underlines the danielstephenson.dev links, which share the sentence colour (WCAG 1.4.1)', () => {
+        for (const name of ['danielstephenson.dev', 'Play his games in your browser']) {
+            expect(screen.getByRole('link', { name })).toHaveClass('MuiLink-underlineAlways');
+        }
+    });
+
     it('labels the footer link group as navigation', () => {
         expect(screen.getByRole('navigation', { name: /footer/i })).toBeInTheDocument();
     });

@@ -16,6 +16,7 @@ import {
     toggleSwitchBoxStyle,
     flexContainerStyle,
     navDrawerPaperStyle,
+    activeDrawerLinkStyle,
 } from '../styles/styles';
 
 // Id of the phone drawer's panel, for the menu button's aria-controls.
@@ -109,6 +110,7 @@ const NavDrawer: React.FC<{open: boolean; onClose: () => void; pathname: string}
                             href={link.href}
                             selected={isActiveNavLink(pathname, link.href)}
                             aria-current={isActiveNavLink(pathname, link.href) ? 'page' : undefined}
+                            sx={isActiveNavLink(pathname, link.href) ? activeDrawerLinkStyle : undefined}
                         >
                             <ListItemText primary={link.label}/>
                         </ListItemButton>

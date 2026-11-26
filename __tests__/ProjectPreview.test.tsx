@@ -56,7 +56,16 @@ describe('ProjectPreview', () => {
         media();
         render(<ProjectDetails project={project}/>);
         fireEvent.click(screen.getByRole('button', {name: 'Pause the clip'}));
-        expect(screen.getByRole('button', {name: 'Play the clip'})).toHaveAttribute('aria-pressed', 'true');
+        expect(screen.getByRole('button', {name: 'Play the clip'})).toBeInTheDocument();
+    });
+
+    it('names the pause button by its next action alone, without aria-pressed', () => {
+        // A changing name plus aria-pressed read as "Play the clip, pressed".
+        media();
+        render(<ProjectDetails project={project}/>);
+        expect(screen.getByRole('button', {name: 'Pause the clip'})).not.toHaveAttribute('aria-pressed');
+        fireEvent.click(screen.getByRole('button', {name: 'Pause the clip'}));
+        expect(screen.getByRole('button', {name: 'Play the clip'})).not.toHaveAttribute('aria-pressed');
     });
 
     it('shows only the still for a visitor who asks for reduced motion', () => {
@@ -67,11 +76,12 @@ describe('ProjectPreview', () => {
         expect(screen.queryByRole('button', {name: /clip/})).not.toBeInTheDocument();
     });
 
-    it('treats a browser that throws on the reduced-motion query as having no preference, and still renders', () => {
+    it('keeps the still when the browser throws on the reduced-motion query', () => {
         vi.stubGlobal('matchMedia', vi.fn(() => { throw new Error('not supported'); }));
         render(<ProjectDetails project={project}/>);
-        expect(screen.getByTestId('project-preview-video')).toHaveAttribute('poster', PREVIEW.poster);
-        expect(screen.getByRole('button', {name: 'Pause the clip'})).toBeInTheDocument();
+        expect(screen.getByTestId('project-preview-poster')).toHaveAttribute('src', PREVIEW.poster);
+        expect(screen.queryByTestId('project-preview-video')).not.toBeInTheDocument();
+        expect(screen.queryByRole('button', {name: /clip/})).not.toBeInTheDocument();
     });
 
     it('swaps the clip for the still when the visitor turns on reduced motion, and stops listening on unmount', () => {

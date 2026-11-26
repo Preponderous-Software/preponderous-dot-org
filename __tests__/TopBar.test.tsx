@@ -135,6 +135,22 @@ describe('TopBar on a phone', () => {
         expect(within(drawer).getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
     });
 
+    it('styles only the current page\'s drawer link as the active one', () => {
+        router.pathname = '/about';
+        render(<TopBar/>);
+        fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
+        const drawer = screen.getByRole('presentation');
+        const about = within(drawer).getByRole('link', { name: 'About' });
+        const projects = within(drawer).getByRole('link', { name: 'Projects' });
+        const contact = within(drawer).getByRole('link', { name: 'Contact' });
+        // MUI's selected state is only a tint, keyed on the Mui-selected
+        // class over the same emotion class; the weight-and-underline style
+        // gives the current page's link an emotion class of its own.
+        const emotionClass = (link: HTMLElement) => [...link.classList].find((c) => c.startsWith('css-'));
+        expect(emotionClass(about)).not.toBe(emotionClass(projects));
+        expect(projects.className).toBe(contact.className);
+    });
+
     it('closes the drawer on Escape and marks the menu button collapsed again', async () => {
         render(<TopBar/>);
         const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });

@@ -124,13 +124,16 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                     />
                 </Box>
             </Toolbar>
+            {/* Underlined, not on hover only: the links are the same colour
+                as the sentence around them, so nothing else tells them apart
+                (WCAG 1.4.1). */}
             <Typography variant="caption" component="p" color="inherit" sx={{textAlign: 'center', pb: 1, px: 2, m: 0}}>
                 More by Daniel Stephenson →{' '}
-                <Link href="https://danielstephenson.dev" color="inherit" underline="hover">
+                <Link href="https://danielstephenson.dev" color="inherit" underline="always">
                     danielstephenson.dev
                 </Link>
                 {' · '}
-                <Link href="https://danielstephenson.dev/play" color="inherit" underline="hover">
+                <Link href="https://danielstephenson.dev/play" color="inherit" underline="always">
                     Play his games in your browser
                 </Link>
             </Typography>
