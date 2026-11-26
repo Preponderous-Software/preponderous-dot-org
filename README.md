@@ -45,7 +45,7 @@ Every picture here is a real page from a production build of this repository (`n
 </table>
 
 <p align="center">
-  <img src="docs/images/details-mobile-dark.png" alt="On a phone, tapping Ophidian opens its details in a bottom sheet with the clip, description, chips and GitHub button" width="240">
+  <img src="docs/images/details-mobile-dark.png" alt="On a phone, tapping Ophidian opens its details in a bottom sheet with the clip, description, chips, and Visit Site and GitHub buttons" width="240">
 </p>
 <p align="center"><em>On a touch screen, a tap opens the same details in a bottom sheet.</em></p>
 
@@ -58,7 +58,7 @@ Every picture here is a real page from a production build of this repository (`n
     <td width="20%"><img src="docs/images/projects-mobile.png" alt="The projects page on a phone: one card per row"></td>
   </tr>
   <tr>
-    <td colspan="3"><em>Each category is its own section, and the links under the title jump straight to one. Every card has a GitHub button, plus Visit Site where the project is hosted.</em></td>
+    <td colspan="3"><em>Each category is its own section, and the links under the title jump straight to one. A card has a GitHub button, plus Visit Site where the project is hosted; a site whose source is private (Daniel Stephenson) has Visit Site only.</em></td>
   </tr>
 </table>
 
@@ -91,7 +91,7 @@ Every picture here is a real page from a production build of this repository (`n
   </tr>
 </table>
 
-<sub>How these were captured: headless Chromium (Playwright) against <code>next start</code> on a local production build of <code>main</code> on 2026-11-24. The usage figures in the /usage and details shots come from a local trace stub, as noted above, because trace's public endpoints were not answering at capture time.</sub>
+<sub>How these were captured: headless Chromium (Playwright) against <code>next start</code> on a local production build of <code>main</code> on 2026-11-25, after the self-hosted fonts and darker tile colours landed. The usage figures in the /usage and details shots come from a local trace stub, as noted above, because trace's public endpoints were not answering at capture time.</sub>
 
 ## Installation
 

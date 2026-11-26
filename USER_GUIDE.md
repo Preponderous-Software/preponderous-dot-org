@@ -36,7 +36,7 @@ No special software is required to use the website — just a modern web browser
 4. Choose **A–Z** (the default) or **By category** to change the order of the icons within each group.
 5. While anything is filtered, the grid says how many of all the projects are shown ("Showing *N* of *M* projects"). If nothing matches, click **Clear filters** to get every project back.
 
-<p align="center"><img src="docs/images/search-desktop.png" alt="Search &amp; filter opened above the grid, with &quot;sim&quot; typed in the search box, the category, technology and status chips, and &quot;Showing 13 of 44 projects&quot;" width="640"></p>
+<p align="center"><img src="docs/images/search-desktop.png" alt="Search &amp; filter opened above the grid, with &quot;sim&quot; typed in the search box, the category, technology and status chips, and &quot;Showing 14 of 46 projects&quot;" width="640"></p>
 
 ### Browsing Projects by Category
 
