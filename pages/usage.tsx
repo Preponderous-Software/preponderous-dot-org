@@ -56,12 +56,12 @@ const UsageListRow: React.FC<{row: UsageRow; now: number}> = ({row, now}) => {
             />
             <Box sx={{minWidth: 0, flex: '1 1 12rem'}}>
                 <Link
-                    href={row.project.githubLink}
+                    href={row.project.githubLink ?? row.project.websiteLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="subtitle1"
                     sx={{fontWeight: 600, overflowWrap: 'anywhere'}}
-                    aria-label={`${row.title} on GitHub`}
+                    aria-label={row.project.githubLink ? `${row.title} on GitHub` : `${row.title}: Visit Site`}
                 >
                     {row.title}
                     <OpenInNewIcon sx={{fontSize: '0.9rem', ml: 0.5, verticalAlign: 'middle'}} aria-hidden/>

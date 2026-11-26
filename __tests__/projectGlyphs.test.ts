@@ -13,7 +13,7 @@ describe('PROJECT_GLYPHS', () => {
 
     it('carries exactly the glyphs the bundle is meant to include', () => {
         expect(Object.keys(PROJECT_GLYPHS).sort()).toEqual([
-            'AcUnit', 'Biotech', 'Castle', 'ContentCut', 'DataArray', 'Extension', 'Fireplace', 'GridOn', 'HowToVote', 'Hub', 'Kayaking', 'Language', 'Layers', 'Loop', 'Map', 'Museum', 'NightsStay', 'Phishing', 'PhotoCamera', 'PhotoLibrary', 'Psychology', 'Public', 'Replay', 'RocketLaunch', 'Rule', 'SmartToy', 'Terminal', 'Terrain', 'Timeline', 'Videocam', 'ViewInAr', 'Waves', 'WbTwilight', 'Yard',
+            'AcUnit', 'Biotech', 'Castle', 'ContentCut', 'DataArray', 'Extension', 'Fireplace', 'GridOn', 'HowToVote', 'Hub', 'Kayaking', 'Language', 'Layers', 'LocationCity', 'Loop', 'Map', 'Museum', 'NightsStay', 'Phishing', 'PhotoCamera', 'PhotoLibrary', 'Psychology', 'Public', 'Replay', 'RocketLaunch', 'Rule', 'SmartToy', 'Terminal', 'Terrain', 'Timeline', 'Videocam', 'ViewInAr', 'Waves', 'WbTwilight', 'Yard',
         ]);
     });
 });

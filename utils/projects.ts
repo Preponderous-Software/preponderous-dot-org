@@ -7,7 +7,9 @@ export interface Project {
     id: string;
     title: string;
     description: string;
-    githubLink: string;
+    // Source repository. Optional: a project whose code is private (such as a
+    // personal site) is listed by its websiteLink alone, with no GitHub action.
+    githubLink?: string;
     technology: string;
     // Optional link to a live/hosted version of the project.
     websiteLink?: string;

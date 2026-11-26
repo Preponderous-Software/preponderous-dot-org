@@ -58,8 +58,8 @@ describe('repoOfGithubLink', () => {
     });
 
     it('turns every showcased project link into an owner/name pair', () => {
-        for (const project of projectData.projects) {
-            expect(repoOfGithubLink(project.githubLink), project.id).toMatch(/^[\w.-]+\/[\w.-]+$/);
+        for (const project of projectData.projects.filter((p) => p.githubLink)) {
+            expect(repoOfGithubLink(project.githubLink!), project.id).toMatch(/^[\w.-]+\/[\w.-]+$/);
         }
     });
 });

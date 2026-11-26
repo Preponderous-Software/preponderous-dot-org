@@ -15,14 +15,12 @@ vi.mock('next/router', () => ({
 const projects = projectData.projects as Project[];
 const categories = groupProjectsByCategory(projects);
 
-// Each card's only stable, class-free handle on which project it is showing is
-// its "GitHub" action, so read those in DOM order to recover the card order.
-const renderedTitlesInOrder = (section: HTMLElement): string[] => {
-    const byGithubLink = new Map(projects.map((p) => [p.githubLink, p.title]));
-    return within(section)
-        .getAllByRole('link', { name: /github/i })
-        .map((link) => byGithubLink.get(link.getAttribute('href') ?? '') ?? '<unknown>');
-};
+// Each card titles itself with an <h3>, so read those in DOM order to recover
+// the card order. (Not the "GitHub" actions: a website-only project has none.)
+const renderedTitlesInOrder = (section: HTMLElement): string[] =>
+    within(section)
+        .getAllByRole('heading', { level: 3 })
+        .map((heading) => heading.textContent ?? '<unknown>');
 
 describe('Projects page', () => {
     let container: HTMLElement;
@@ -54,11 +52,19 @@ describe('Projects page', () => {
     });
 
     it('renders a card for every project in projects.json', () => {
-        // Scoped to <main>, not the whole page — TopBar has its own "GitHub"
-        // nav link that would otherwise inflate this count by one.
+        // Scoped to <main>, so TopBar and footer headings are not counted.
         const main = container.querySelector('main') as HTMLElement;
-        const allCards = within(main).getAllByRole('link', { name: /github/i });
+        const allCards = within(main).getAllByRole('heading', { level: 3 });
         expect(allCards.length).toBe(projects.length);
+    });
+
+    it('gives a GitHub action to every project with a repository, and none to the rest', () => {
+        const main = container.querySelector('main') as HTMLElement;
+        const githubActions = within(main).getAllByRole('link', { name: / on GitHub$/ });
+        expect(githubActions.length).toBe(projects.filter((p) => p.githubLink).length);
+        expect(within(main).queryByRole('link', { name: 'Daniel Stephenson on GitHub' })).toBeNull();
+        expect(within(main).getByRole('link', { name: 'Daniel Stephenson: Visit Site' }))
+            .toHaveAttribute('href', 'https://danielstephenson.dev');
     });
 
     it('lists each category\'s projects alphabetically by title', () => {

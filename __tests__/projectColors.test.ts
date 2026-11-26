@@ -41,3 +41,20 @@ describe('statusChipColor', () => {
         expect(statusChipColor('')).toBeUndefined();
     });
 });
+
+// WCAG relative luminance and contrast ratio, for the white initials and
+// glyphs drawn on these colours.
+const luminance = (hex: string): number => {
+    const [r, g, b] = [1, 3, 5].map((i) => {
+        const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrastWithWhite = (hex: string): number => 1.05 / (luminance(hex) + 0.05);
+
+describe('AVATAR_COLORS', () => {
+    it.each(AVATAR_COLORS)('%s keeps white initials and glyphs at 4.5:1 or better', (hex) => {
+        expect(contrastWithWhite(hex)).toBeGreaterThanOrEqual(4.5);
+    });
+});
