@@ -1,5 +1,6 @@
-// The theme's font stacks. Inter (body) and Space Grotesk (headings) load from
-// Google Fonts with display=swap, so text first paints in a local font and
+// The theme's font stacks. Inter (body) and Space Grotesk (headings) are
+// self-hosted (public/fonts/, @font-face in styles/globals.css) with
+// font-display: swap, so text first paints in a local font and
 // re-flows when the web font arrives. On a phone that re-flow wrapped the top
 // bar's wordmark onto a second row and pushed the page down (a layout shift
 // Lighthouse scored at 0.32). Each stack therefore names, right after the web

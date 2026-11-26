@@ -1,7 +1,9 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from '@testing-library/react';
-import Document, { THEME_COLOR_DARK, THEME_COLOR_LIGHT } from '../pages/_document';
+import { existsSync, readFileSync } from 'fs';
+import { join } from 'path';
+import Document, { FONT_PRELOADS, THEME_COLOR_DARK, THEME_COLOR_LIGHT } from '../pages/_document';
 import { COLOR_MODE_BOOTSTRAP_SCRIPT } from '../utils/colorMode';
 
 // next/document's primitives only work inside Next's own document renderer, so
@@ -66,23 +68,40 @@ describe('Document', () => {
         expect(head.querySelector('link[href="/favicon.png"]')).toHaveAttribute('sizes', '32x32');
     });
 
-    it('preconnects to the Google Fonts origins the stylesheet is loaded from', () => {
+    // The fonts are self-hosted, so nothing in the head may reach Google.
+    it('loads no stylesheet or connection from Google Fonts', () => {
         const { getByTestId } = renderDocument();
         const head = getByTestId('head');
-        const preconnects = Array.from(head.querySelectorAll('link[rel="preconnect"]'))
-            .map((link) => link.getAttribute('href'));
-        expect(preconnects).toEqual(
-            expect.arrayContaining(['https://fonts.googleapis.com', 'https://fonts.gstatic.com'])
-        );
-        expect(head.querySelector('link[rel="stylesheet"]'))
-            .toHaveAttribute('href', expect.stringContaining('fonts.googleapis.com'));
+        expect(head.querySelector('link[rel="stylesheet"]')).toBeNull();
+        expect(head.querySelector('link[rel="preconnect"]')).toBeNull();
+        expect(head.innerHTML).not.toContain('fonts.googleapis.com');
+        expect(head.innerHTML).not.toContain('fonts.gstatic.com');
     });
 
-    it('loads both brand font families', () => {
+    it('preloads both self-hosted brand fonts as CORS woff2 font requests', () => {
         const { getByTestId } = renderDocument();
-        const stylesheet = getByTestId('head').querySelector('link[rel="stylesheet"]');
-        expect(stylesheet?.getAttribute('href')).toContain('Inter');
-        expect(stylesheet?.getAttribute('href')).toContain('Space+Grotesk');
+        const preloads = Array.from(getByTestId('head').querySelectorAll('link[rel="preload"][as="font"]'));
+        expect(preloads.map((link) => link.getAttribute('href'))).toEqual(FONT_PRELOADS);
+        expect(FONT_PRELOADS).toEqual([
+            expect.stringMatching(/^\/fonts\/inter-.*\.woff2$/),
+            expect.stringMatching(/^\/fonts\/space-grotesk-.*\.woff2$/),
+        ]);
+        for (const link of preloads) {
+            expect(link).toHaveAttribute('type', 'font/woff2');
+            // Fonts are always fetched in CORS mode; a preload without
+            // crossorigin is not reused and the file downloads twice.
+            expect(link).toHaveAttribute('crossorigin', 'anonymous');
+        }
+    });
+
+    // Each preloaded file must exist under public/ and be declared in
+    // styles/globals.css, or the preload is wasted bandwidth.
+    it('preloads only files that ship in public/ and are declared in globals.css', () => {
+        const css = readFileSync(join(__dirname, '..', 'styles', 'globals.css'), 'utf8');
+        for (const href of FONT_PRELOADS) {
+            expect(existsSync(join(__dirname, '..', 'public', href))).toBe(true);
+            expect(css).toContain(`url('${href}') format('woff2')`);
+        }
     });
 
     it('renders the app content and the Next.js scripts', () => {
