@@ -14,7 +14,7 @@ import ProjectIcon from './ProjectIcon';
 interface ProjectCardProps {
     title: string;
     description: string;
-    githubLink: string;
+    githubLink?: string;
     technology: string;
     // Optional link to a live/hosted version of the project; when set, the card
     // shows a "Visit Site" button as the primary action.
@@ -104,19 +104,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({title, description, githubLink
                         Visit Site
                     </Button>
                 ) : null}
-                <Button
-                    variant={websiteLink ? 'outlined' : 'contained'}
-                    size="small"
-                    startIcon={<GitHubIcon/>}
-                    endIcon={<OpenInNewIcon fontSize="small"/>}
-                    component={Link}
-                    href={githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${title} on GitHub`}
-                >
-                    GitHub
-                </Button>
+                {githubLink ? (
+                    <Button
+                        variant={websiteLink ? 'outlined' : 'contained'}
+                        size="small"
+                        startIcon={<GitHubIcon/>}
+                        endIcon={<OpenInNewIcon fontSize="small"/>}
+                        component={Link}
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${title} on GitHub`}
+                    >
+                        GitHub
+                    </Button>
+                ) : null}
             </CardActions>
         </Card>
     );

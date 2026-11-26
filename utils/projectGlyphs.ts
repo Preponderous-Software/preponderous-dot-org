@@ -13,6 +13,7 @@ import KayakingIcon from '@mui/icons-material/Kayaking';
 import LanguageIcon from '@mui/icons-material/Language';
 import LayersIcon from '@mui/icons-material/Layers';
 import LoopIcon from '@mui/icons-material/Loop';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import MapIcon from '@mui/icons-material/Map';
 import MuseumIcon from '@mui/icons-material/Museum';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
@@ -55,6 +56,7 @@ export const PROJECT_GLYPHS: Record<string, typeof SvgIcon> = {
     Language: LanguageIcon,
     Layers: LayersIcon,
     Loop: LoopIcon,
+    LocationCity: LocationCityIcon,
     Map: MapIcon,
     Museum: MuseumIcon,
     NightsStay: NightsStayIcon,

@@ -2,7 +2,10 @@
 // colour derived from its title so it has a bit of visual identity without
 // being random on every render. Shared by ProjectCard's avatar and the home
 // page's ProjectTile icon, so a project reads as the same colour on both pages.
-export const AVATAR_COLORS = ['#4263eb', '#7048e8', '#1098ad', '#f59f00', '#e8590c', '#0ca678'];
+// The initials and glyphs on these are white, so every colour keeps at least
+// 4.5:1 contrast with white (a test checks it); the teal, cyan, amber and
+// orange were darkened from 2.1–3.6:1 to reach that.
+export const AVATAR_COLORS = ['#4263eb', '#7048e8', '#0b7285', '#b35900', '#c2410c', '#087f5b'];
 
 export const colorForTitle = (title: string): string => {
     let hash = 0;

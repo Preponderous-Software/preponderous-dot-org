@@ -84,7 +84,13 @@ export const brandNameStyle = (theme: Theme) => ({
     // hide, the wordmark, the colour-mode switch and the 44px menu button did
     // not fit one row on a 360px phone, and the bar wrapped onto a second.
     marginRight: {xs: 0, md: theme.spacing(2)},
-    '& .MuiTypography-root': {fontSize: {xs: '1.05rem', sm: '1.25rem'}},
+    '& .MuiTypography-root': {
+        fontSize: {xs: '1.05rem', sm: '1.25rem'},
+        // On the narrowest phones (under 360px, e.g. a 320px iPhone SE) even
+        // that wrapped the bar; a smaller wordmark keeps it on one row
+        // (toolbarStyle also trims the side padding there).
+        '@media (max-width: 359.95px)': {fontSize: '0.95rem'},
+    },
     fontWeight: 700,
     letterSpacing: '-0.01em',
     color: 'inherit',
@@ -98,6 +104,7 @@ export const toolbarStyle = (theme: Theme, options?: { justifyContent?: string; 
     display: 'flex',
     justifyContent: options?.justifyContent || 'space-between',
     flexWrap: options?.flexWrap || 'wrap',
+    '@media (max-width: 359.95px)': {paddingLeft: theme.spacing(1.5), paddingRight: theme.spacing(1)},
 });
 
 /**

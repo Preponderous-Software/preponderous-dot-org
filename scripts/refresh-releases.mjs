@@ -14,6 +14,7 @@ import {releaseFacts, repoOfGithubLink} from './release-facts.mjs';
 const projects = JSON.parse(readFileSync('pages/data/projects.json', 'utf8')).projects;
 const out = {};
 for (const project of projects) {
+    if (!project.githubLink) continue; // listed by website only, no repo to read
     const repo = repoOfGithubLink(project.githubLink);
     try {
         const releases = JSON.parse(execFileSync('gh', [

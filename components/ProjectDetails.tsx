@@ -79,19 +79,21 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({project, titleId, titleA
                         Visit Site
                     </Button>
                 ) : null}
-                <Button
-                    variant={websiteLink ? 'outlined' : 'contained'}
-                    size="small"
-                    startIcon={<GitHubIcon/>}
-                    endIcon={<OpenInNewIcon fontSize="small"/>}
-                    component={Link}
-                    href={githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${title} on GitHub`}
-                >
-                    GitHub
-                </Button>
+                {githubLink ? (
+                    <Button
+                        variant={websiteLink ? 'outlined' : 'contained'}
+                        size="small"
+                        startIcon={<GitHubIcon/>}
+                        endIcon={<OpenInNewIcon fontSize="small"/>}
+                        component={Link}
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${title} on GitHub`}
+                    >
+                        GitHub
+                    </Button>
+                ) : null}
             </Stack>
         </>
     );

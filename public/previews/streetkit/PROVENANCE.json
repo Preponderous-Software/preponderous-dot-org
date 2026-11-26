@@ -1,0 +1,11 @@
+{
+ "source_repo": "https://github.com/Preponderous-Software/ponderosa",
+ "commit": "460ea25e7094e5762e83eb598d60b1b100ba9115",
+ "tool": "Ponderosa's viewer (built on streetkit and Strata), rendering a citywide build; the image is the repository's committed docs/images/downtown.png",
+ "tool_url": "https://github.com/Preponderous-Software/ponderosa/blob/460ea25e7094e5762e83eb598d60b1b100ba9115/docs/images/downtown.png",
+ "commands": [
+  "gh api repos/Preponderous-Software/ponderosa/contents/docs/images/downtown.png (1600x900 PNG, raw)",
+  "centre-cropped to 16:10 and scaled to 640x400 with Pillow (LANCZOS), saved as JPEG quality 82, optimized"
+ ],
+ "notes": "Copied 2026-11-25 from the README image at the commit above. Map data © OpenStreetMap contributors (ODbL); elevation courtesy of the USGS."
+}
