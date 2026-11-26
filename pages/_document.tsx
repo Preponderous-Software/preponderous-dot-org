@@ -5,10 +5,16 @@ import {COLOR_MODE_BOOTSTRAP_SCRIPT} from '../utils/colorMode';
 export const THEME_COLOR_LIGHT = '#4263eb';
 export const THEME_COLOR_DARK = '#161b22';
 
-// Load the brand fonts (Inter for body, Space Grotesk for headings) from Google
-// Fonts. They are linked here in the document head, with preconnect hints to
-// keep the extra round-trip cheap. next/font is available now that the site is
-// on Next 14; moving to it is a separate change.
+// The brand fonts (Inter for body, Space Grotesk for headings) are self-hosted
+// under public/fonts/ and declared with @font-face in styles/globals.css, so no
+// request leaves for a third party and no font stylesheet blocks rendering.
+// Both files are preloaded here so they arrive alongside the CSS rather than
+// after it has been parsed. Each is one variable font with the latin subset.
+export const FONT_PRELOADS = [
+    '/fonts/inter-latin-v20.woff2',
+    '/fonts/space-grotesk-latin-v22.woff2',
+];
+
 export default function Document() {
     return (
         <Html lang="en">
@@ -43,12 +49,9 @@ export default function Document() {
                 */}
                 <meta name="theme-color" media="(prefers-color-scheme: light)" content={THEME_COLOR_LIGHT}/>
                 <meta name="theme-color" media="(prefers-color-scheme: dark)" content={THEME_COLOR_DARK}/>
-                <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-                    rel="stylesheet"
-                />
+                {FONT_PRELOADS.map((href) => (
+                    <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous"/>
+                ))}
             </Head>
             <body>
                 <Main/>

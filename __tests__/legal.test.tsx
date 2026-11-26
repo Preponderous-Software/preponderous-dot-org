@@ -56,14 +56,12 @@ describe('Legal page', () => {
         expect(details).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
-    // pages/_document.tsx loads the fonts from Google on every page, so this
-    // reaches a third party without the visitor following any link.
-    it('discloses that fonts are fetched from Google Fonts', () => {
-        expect(screen.getByText(/Google receives your IP address and browser details/i)).toBeInTheDocument();
-        const policy = screen.getByRole('link', { name: /google fonts privacy/i });
-        expect(policy).toHaveAttribute('href', 'https://developers.google.com/fonts/faq/privacy');
-        expect(policy).toHaveAttribute('target', '_blank');
-        expect(policy).toHaveAttribute('rel', 'noopener noreferrer');
+    // The fonts are self-hosted (public/fonts/), so the page no longer reaches
+    // Google; the privacy copy must not claim otherwise.
+    it('says the fonts are served from the site, not fetched from Google', () => {
+        expect(screen.getByText(/fonts \(Inter and Space Grotesk\) are served from this site itself/i)).toBeInTheDocument();
+        expect(screen.queryByText(/Google receives your IP address/i)).not.toBeInTheDocument();
+        expect(screen.queryByRole('link', { name: /google fonts privacy/i })).not.toBeInTheDocument();
     });
 
     it('credits the third-party components the site is built on', () => {
