@@ -13,6 +13,7 @@ import {
     infoCardStyle,
     navButtonStyle,
     navDrawerPaperStyle,
+    activeDrawerLinkStyle,
     projectCardStyle,
     toggleSwitchBoxStyle,
     versionNumberStyle,
@@ -132,5 +133,17 @@ describe('navDrawerPaperStyle', () => {
         const siteTheme = createTheme({ palette: { mode, contrastThreshold: 4.5, primary: { main: primary } } });
         const style = navDrawerPaperStyle(siteTheme);
         expect(getContrastRatio(style.color, style.backgroundColor)).toBeGreaterThanOrEqual(4.5);
+    });
+
+    it.each(['light', 'dark'] as const)('draws the focus ring in the drawer text colour, inside the row, in %s mode', (mode) => {
+        // The theme-wide ring is primary, which vanished on the blue light-mode panel.
+        const style = navDrawerPaperStyle(createTheme({ palette: { mode } })) as StyleObject;
+        expect(style['& .MuiButtonBase-root.Mui-focusVisible']).toEqual({ outlineColor: 'currentColor', outlineOffset: -2 });
+    });
+});
+
+describe('activeDrawerLinkStyle', () => {
+    it('marks the drawer\'s current page by weight and underline, like the inline bar, not only by the selected tint', () => {
+        expect(activeDrawerLinkStyle['& .MuiListItemText-primary']).toMatchObject({ fontWeight: 700, textDecoration: 'underline' });
     });
 });

@@ -126,7 +126,22 @@ export const navDrawerPaperStyle = (theme: Theme) => ({
     // the light-mode primary fill (in dark mode that is near-black, picked
     // for the light-blue primary, and would vanish on #161b22).
     color: theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.primary.contrastText,
+    // The drawer is a modal in a portal, outside the AppBar whose focus-ring
+    // override follows the bar's text colour, so it carries its own: the
+    // theme's primary ring was blue on the blue light-mode panel. Drawn
+    // inside the item, since the panel's edge would clip half of a ring
+    // drawn outside a full-width row.
+    '& .MuiButtonBase-root.Mui-focusVisible': {outlineColor: 'currentColor', outlineOffset: -2},
 });
+
+/**
+ * The drawer's link for the current page, marked by weight and underline like
+ * the inline bar's NavButton: the selected row's tint alone was invisible on
+ * the blue light-mode panel and barely there on the dark one.
+ */
+export const activeDrawerLinkStyle = {
+    '& .MuiListItemText-primary': {fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: '6px'},
+};
 
 /**
  * Bottom app bar with a top border and bottom positioning.

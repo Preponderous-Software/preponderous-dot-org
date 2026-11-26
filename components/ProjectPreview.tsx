@@ -28,7 +28,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({preview}) => {
         try {
             query = window.matchMedia?.(REDUCED_MOTION_QUERY) ?? null;
         } catch {
-            query = null;
+            return undefined; // no answer from the browser: keep the still
         }
         setReduced(Boolean(query?.matches));
         if (!query) return undefined;
@@ -79,8 +79,10 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({preview}) => {
                     <IconButton
                         size="small"
                         onClick={() => setPaused((was) => !was)}
+                        // The name says what a press does next, so no
+                        // aria-pressed as well: together they announced
+                        // "Play the clip, pressed".
                         aria-label={paused ? 'Play the clip' : 'Pause the clip'}
-                        aria-pressed={paused}
                         sx={{position: 'absolute', right: 6, bottom: 6, width: 40, height: 40, color: '#fff',
                             bgcolor: 'rgba(0, 0, 0, 0.55)', '&:hover': {bgcolor: 'rgba(0, 0, 0, 0.75)'}}}
                     >
